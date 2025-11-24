@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily MedQuiz - Medical Student Practice Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary: #1a2a6c;
+            --secondary: #b21f1f;
+            --accent: #fdbb2d;
+            --light: #f8f9fa;
+            --dark: #333;
+            --success: #28a745;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Loading Animation */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loader {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-top: 8px solid white;
+            animation: spin 1.5s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        .loading-text {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Header Styling */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+        }
+        
+        .logo {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        h1 {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .tagline {
+            font-size: 1.4rem;
+            color: #555;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .intro {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            color: #444;
+        }
+        
+        /* Main Content Layout */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        
+        .card h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .start-btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-decoration: none;
+            margin: 20px 0;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .start-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .start-btn:hover::before {
+            left: 100%;
+        }
+        
+        .start-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .parts-container {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .part-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .part-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+        }
+        
+        .part-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .part-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .part-link {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .part-link:hover {
+            background: var(--secondary);
+            transform: scale(1.05);
+        }
+        
+        /* Features Section */
+        .features-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #555;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .feature-card p {
+            color: #555;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        .feature-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .feature-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stats-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stats-title {
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat-item {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        /* Contact and Footer */
+        .contact-info {
+            text-align: center;
+            margin: 20px 0;
+            color: white;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: var(--transition);
+        }
+        
+        .contact-info a:hover {
+            color: var(--accent);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+            transform: scale(0.9);
+            opacity: 0;
+            animation: modalAppear 0.3s ease forwards;
+        }
+        
+        @keyframes modalAppear {
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .modal h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 42, 108, 0.2);
+            outline: none;
+        }
+        
+        .form-notice {
+            background: #fff9e6;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 0.9rem;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+        
+        .submit-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+            transition: var(--transition);
+        }
+        
+        .close-btn:hover {
+            color: var(--secondary);
+            transform: rotate(90deg);
+        }
+        
+        .verified-student {
+            display: none;
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid var(--success);
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        /* Form Styling */
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 42, 108, 0.2);
+            outline: none;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .logo {
+                font-size: 3.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            header {
+                padding: 30px 15px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .logo {
+                font-size: 3rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .parts-container {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .feature-card {
+                padding: 20px;
+            }
+            
+            .feature-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 1.7rem;
+            }
+            
+            .stats-section {
+                padding: 30px 20px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+        <div class="loading-text">Loading Daily MedQuiz...</div>
+    </div>
+    
+    <div class="container">
+        <!-- Registration Modal -->
+        <div class="modal" id="registrationModal">
+            <div class="modal-content">
+                <span class="close-btn" id="closeModal">&times;</span>
+                <h2>Register for Daily MedQuiz</h2>
+                <p>Please provide your details to access the practice questions.</p>
+                
+                <div class="form-notice">
+                    <strong>Important:</strong> Please enter correct information as you will use these details to access the platform in the future.
+                </div>
+                
+                <form id="registrationForm">
+                    <div class="form-group">
+                        <label for="regName">Full Name</label>
+                        <input type="text" id="regName" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="regPhone">Phone Number</label>
+                        <input type="tel" id="regPhone" name="phone" placeholder="09xxxx /07xxxx" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="accessCode">Access Code</label>
+                        <input type="text" id="accessCode" name="accessCode" placeholder="Use your access code from the MedQuiz team" required>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Register & Start Questions</button>
+                    <p id="registrationError" style="color:red; display:none; margin-top: 15px; text-align: center;"></p>
+                </form>
+            </div>
+        </div>
+
+        <header>
+            <div class="logo">🩺</div>
+            <h1>Daily MedQuiz</h1>
+            <p class="tagline">Medical Practice Platform for Health Students</p>
+            <p class="intro">Developed by Medstudents for Medstudents. Prepare for your exams with our comprehensive question banks covering all major medical disciplines.</p>
+            
+            <div class="verified-student" id="verifiedStudent">
+                <strong>Verified Student:</strong> <span id="studentDisplayName"></span> | 
+                <a href="#" id="logoutLink" style="color: var(--primary); margin-left: 10px;">Logout</a>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="card">
+                <h2>Practice Questions</h2>
+                <p>Begin your medical practice journey today. Access hundreds of questions designed to challenge and prepare you for your exams.</p>
+                <button class="start-btn" id="startBtn">Start Today's Questions</button>
+                
+                <div class="parts-container" id="partsContainer">
+                    <div class="part-card">
+                        <h3>Part 1</h3>
+                        <a href="part1.html" class="partlink" data-part="1">Start Part 1</a>
+                    </div>
+                    <div class="part-card">
+                        <h3>Part 2</h3>
+                        <a href="part2.html" class="partlink" data-part="2">Start Part 2</a>
+                    </div>
+                    <div class="part-card">
+                        <h3>Part 3</h3>
+                        <a href="part3.html" class="partlink" data-part="3">Start Part 3</a>
+                    </div>
+                    <div class="part-card">
+                        <h3>Part 4</h3>
+                        <a href="part4.html" class="partlink" data-part="4">Start Part 4</a>
+                    </div>
+                    <div class="part-card">
+                        <h3>Part 5</h3>
+                        <a href="part5.html" class="partlink" data-part="5">Start Part 5</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Evaluation Form</h2>
+                <p>Help us improve Daily MedQuiz by sharing your feedback. Let us know about your experience and any suggestions you might have.</p>
+                
+                <form id="evaluationForm" action="https://formspree.io/f/mjkjkedv" method="POST">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedback">Your Feedback</label>
+                        <textarea id="feedback" name="feedback" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Submit Evaluation</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="features-container">
+            <div class="section-title">
+                <h2>Why Choose Daily MedQuiz?</h2>
+                <p>Our platform is designed specifically for medical students to excel in their exams</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-book-medical"></i>
+                    </div>
+                    <h3>Comprehensive Content</h3>
+                    <p>Access thousands of questions covering all major medical subjects and specialties.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Telegram Channel</h3>
+                    <p>Get Daily MedQuiz information and updates directly through our Telegram channel.</p>
+                    <a href="https://t.me/yerotechno" class="feature-btn">Join Channel</a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-external-link-alt"></i>
+                    </div>
+                    <h3>Main Exam Platform</h3>
+                    <p>Visit our main website for more study materials and comprehensive guides.</p>
+                    <a href="https://medquizz1.netlify.app" target="_blank" class="feature-btn">Visit Platform</a>
+                </div>
+            </div>
+            
+            <div class="stats-section">
+                <h3 class="stats-title">Daily MedQuiz in Numbers</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">2,000+</span>
+                        <span class="stat-label">Active Students</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">95%</span>
+                        <span class="stat-label">Success Rate</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Available</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-info">
+            <p>Contact us: 
+                <a href="mailto:MEDQUIZ@GMAIL.COM"><i class="fas fa-envelope"></i> MEDQUIZ@GMAIL.COM</a> | 
+                <a href="tel:+251953341632"><i class="fas fa-phone"></i> +251953341632</a> | 
+                <a href="https://t.me/yerotechno" target="_blank"><i class="fab fa-telegram"></i> Telegram Channel</a>
+            </p>
+        </div>
+        
+        <footer>
+            <p>Developed by Medstudent for Medstudents</p>
+            <p>Daily MedQuiz &copy; 2026- All rights reserved</p>
+        </footer>
+    </div>
+
+    <script>
+        // Valid one-time access codes
+        const validCodes = [
+            "Z4Q1M8", "W3A8L5", "H7N2S4", "M9F4U1", "T6E3P9", "C2R7D5", "B1L5Q8", 
+            "V3K9W2", "K5M8C1", "S9H4G2", "D7Q3E6", "F8T1A4", "J2P6V8", "L4C8M7", 
+            "A8W5B3", "E9S2F6", "P1G7R9", "R5V3J8", "N7A1T4", "G4U9S1", "U6D1H9", 
+            "Q3F9K5", "O5S2L7", "Y8B4W6", "X3K7Z1", "W1N6Q4", "M2D9F7", "C7H3P5", 
+            "T2A9G4", "H6W2B8", "L8Q5R2", "F4C1M6", "B9T4J1", "D1R8E3", "V7P6L3", 
+            "J4M2F9", "E3S7K1", "A5N3P9", "G1V5T8", "R8L1W7", "N3P8H6", "K1S4B7", 
+            "S2C6M4", "H9T3D2", "M5F7Q1", "P7W3L5", "C8A2V9", "L6E4G2", "U5Q1H7", 
+            "W4B8K2", "T9M5R2", "F2G7A6", "Z1D6X8", "Y5L2U9", "J9K4N2", "Q2W9P5", 
+            "G3S1C7", "B6U5F1", "R9N4J7", "O8D3H1", "X8C7M5", "S4G2E8", "H3A5W1", 
+            "V1P6K8", "D5M8L4", "E7Q6B1", "A4N7R3", "K9T2J6", "P6F1A7", "C5V3S9", 
+            "L2H9M8", "F7K2N1", "W2B9C6", "U9D4G3", "Y7S6X1", "M1R5P8", "Z4T3W6", 
+            "R2J8K4", "X9N1F4", "T7G5E1", "B2L8D7", "C1S5H4", "H8E1R6", "A3J4V9", 
+            "G7Q2C5", "E9M3K7", "W8F1T5", "U3P7L8", "D4V6M2", "N1A3G6", "J5U9S3", 
+            "P2K7B9", "X7C5G8", "T1R3W9", "K6N2D5", "Y4P1J6", "L3B7Q4", "R6M8H5", 
+            "S8K4F1", "H1W6E3", "V5T7C1", "F9Q4L2", "A7P5R8", "O4S2M9", "Z5G8K2", 
+            "W7M4Q9", "M8R6J4", "C9U2B5", "L1T8A6", "F3S9W1", "J8B2L5", "R3N5E8", 
+            "S1H4P7", "H7F6D3", "Q4C8M6", "T9A3K8", "N6L4S2", "P1V7J3", "G8E3H9", 
+            "B4Q9D6", "U2M9F5", "E8G5R1", "D1K8W3", "W9S4C7", "K3P6Q2", "T5J8A1", 
+            "F6L7B4", "X2H1G5", "M4C9E7", "A9D6R8", "V8B1W9", "Y3F4J6", "G2K5M8", 
+            "R7H2E6", "Z1W3U7", "B8S6T2"
+        ];
+
+        // DOM Elements
+        const startBtn = document.getElementById('startBtn');
+        const registrationModal = document.getElementById('registrationModal');
+        const closeModal = document.getElementById('closeModal');
+        const registrationForm = document.getElementById('registrationForm');
+        const partsContainer = document.getElementById('partsContainer');
+        const verifiedStudent = document.getElementById('verifiedStudent');
+        const studentDisplayName = document.getElementById('studentDisplayName');
+        const logoutLink = document.getElementById('logoutLink');
+        const registrationError = document.getElementById('registrationError');
+        const loadingScreen = document.getElementById('loadingScreen');
+        
+        // Hide loading screen after page loads
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                loadingScreen.classList.add('hidden');
+            }, 1500);
+        });
+        
+        // Check if user is already registered
+        function checkRegistration() {
+            const registeredUser = localStorage.getItem('medquizRegisteredUser');
+            if (registeredUser) {
+                const userData = JSON.parse(registeredUser);
+                studentDisplayName.textContent = userData.name;
+                verifiedStudent.style.display = 'block';
+                partsContainer.style.display = 'grid';
+                startBtn.style.display = 'none';
+            }
+        }
+        
+        // Initialize page
+        checkRegistration();
+        
+        // Event Listeners
+        startBtn.addEventListener('click', function() {
+            registrationModal.style.display = 'flex';
+        });
+        
+        closeModal.addEventListener('click', function() {
+            registrationModal.style.display = 'none';
+            registrationError.style.display = 'none';
+        });
+        
+        window.addEventListener('click', function(e) {
+            if (e.target === registrationModal) {
+                registrationModal.style.display = 'none';
+                registrationError.style.display = 'none';
+            }
+        });
+        
+        // Registration form submission
+        registrationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('regName').value;
+            const phone = document.getElementById('regPhone').value;
+            const accessCode = document.getElementById('accessCode').value.toUpperCase();
+            
+            // Validate access code
+            if (!validCodes.includes(accessCode)) {
+                registrationError.textContent = 'Invalid access code. Please try again.';
+                registrationError.style.display = 'block';
+                return;
+            }
+            
+            // Check if code has already been used
+            const usedCodes = JSON.parse(localStorage.getItem('medquizUsedCodes') || '[]');
+            if (usedCodes.includes(accessCode)) {
+                registrationError.textContent = 'This access code has already been used.';
+                registrationError.style.display = 'block';
+                return;
+            }
+            
+            // Save registration data
+            const userData = {
+                name: name,
+                phone: phone,
+                accessCode: accessCode,
+                registrationDate: new Date().toISOString()
+            };
+            
+            localStorage.setItem('medquizRegisteredUser', JSON.stringify(userData));
+            
+            // Mark code as used
+            usedCodes.push(accessCode);
+            localStorage.setItem('medquizUsedCodes', JSON.stringify(usedCodes));
+            
+            // Update UI
+            studentDisplayName.textContent = name;
+            verifiedStudent.style.display = 'block';
+            partsContainer.style.display = 'grid';
+            startBtn.style.display = 'none';
+            registrationModal.style.display = 'none';
+            
+            // Submit to Formspree
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('phone', phone);
+            formData.append('accessCode', accessCode);
+            
+            fetch('https://formspree.io/f/mkgknpde', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Registration submitted successfully');
+                } else {
+                    console.error('Registration submission failed');
+                }
+            });
+        });
+        
+        // Logout functionality
+        logoutLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('medquizRegisteredUser');
+            verifiedStudent.style.display = 'none';
+            partsContainer.style.display = 'none';
+            startBtn.style.display = 'inline-block';
+        });
+        
+        // Part links - in a real implementation these would link to external pages
+        const partLinks = document.querySelectorAll('.part-link');
+        partLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const part = this.getAttribute('data-part');
+                alert('In the full implementation, this would redirect to the external question page for Part ' + part);
+            });
+        });
+        
+        // Evaluation form submission
+        const evaluationForm = document.getElementById('evaluationForm');
+        
+        evaluationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(evaluationForm);
+            const name = formData.get('name');
+            
+            // Show success message
+            alert(`Thank you ${name} for your feedback!`);
+            
+            // In a real implementation, you would submit the form to Formspree
+            // For demo purposes, we'll submit the form after the alert
+            fetch(evaluationForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Evaluation form submitted successfully');
+                    evaluationForm.reset();
+                } else {
+                    console.error('Evaluation form submission failed');
+                    alert('There was an error submitting your feedback. Please try again.');
+                    evaluationForm.reset();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

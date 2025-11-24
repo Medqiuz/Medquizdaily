@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trematodes (Flukes) Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .options {
+            margin-left: 20px;
+        }
+        .option {
+            margin-bottom: 5px;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        .correct {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .incorrect {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .tip {
+            background-color: #e2e3e5;
+            border-left: 4px solid #6c757d;
+            padding: 10px;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .score {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Trematodes (Flukes) Quiz</h1>
+        <div class="score">Score: <span id="score">0</span>/<span id="total">0</span></div>
+        
+        <!-- Questions will be inserted here by JavaScript -->
+        <div id="questions-container"></div>
+    </div>
+
+    <script>
+        // Questions data
+        const questions = [
+            {
+                question: "What are the four main groups of trematodes classified by?",
+                options: [
+                    "The type of intermediate host they use",
+                    "The geographical location where they're found",
+                    "The site they inhabit in the human body",
+                    "The shape of their eggs"
+                ],
+                correct: 2,
+                explanation: "Trematodes are classified into four groups according to the site they inhabit in the human body: blood flukes, liver flukes, lung flukes, and intestinal flukes.",
+                tip: "Remember: Classification is by LOCATION in the body, not by shape or geography."
+            },
+            {
+                question: "Which of the following is NOT a characteristic of blood flukes (Schistosomes)?",
+                options: [
+                    "Cylindrical shaped adults",
+                    "Sexes are separate",
+                    "Hermaphroditic reproduction",
+                    "Freshwater snails as intermediate hosts"
+                ],
+                correct: 2,
+                explanation: "Unlike other trematodes, blood flukes have separate sexes (dioecious), while most other flukes are hermaphroditic.",
+                tip: "Key difference: Blood flukes = separate sexes; Other flukes = hermaphrodites."
+            },
+            {
+                question: "What is the infective stage of Schistosomes for humans?",
+                options: [
+                    "Miracidium",
+                    "Sporocyst",
+                    "Cercaria",
+                    "Adult worm"
+                ],
+                correct: 2,
+                explanation: "Cercaria is the infective stage that penetrates human skin. Miracidium infects snails, and sporocyst is a developmental stage inside snails.",
+                tip: "Cercaria → Cercaria can penetrate skin directly (think: 'C' for cutaneous penetration)."
+            },
+            {
+                question: "How is Schistosoma transmitted to humans?",
+                options: [
+                    "Ingestion of contaminated water",
+                    "Transcutaneous penetration",
+                    "Inhalation of airborne particles",
+                    "Mosquito bite"
+                ],
+                correct: 1,
+                explanation: "Schistosoma is transmitted transcutaneously when cercariae in contaminated water penetrate intact human skin.",
+                tip: "Think: Swimming or wading in contaminated water → skin penetration."
+            },
+            {
+                question: "Which species of Schistosoma causes urinary schistosomiasis?",
+                options: [
+                    "Schistosoma mansoni",
+                    "Schistosoma haematobium",
+                    "Schistosoma japonicum",
+                    "Schistosoma mekongi"
+                ],
+                correct: 1,
+                explanation: "Schistosoma haematobium resides in the veins around the urinary bladder and causes urinary schistosomiasis.",
+                tip: "Haematobium → H for hematuria (blood in urine)."
+            },
+            {
+                question: "Where do adult Schistosoma mansoni worms typically reside?",
+                options: [
+                    "Veins of the small intestine",
+                    "Veins of the large intestine",
+                    "Veins of the urinary bladder",
+                    "Portal vein in the liver"
+                ],
+                correct: 1,
+                explanation: "Schistosoma mansoni adults reside in the veins of the large intestine (inferior mesenteric veins).",
+                tip: "Mansoni → M for Mesenteric veins of Large intestine."
+            },
+            {
+                question: "What is the characteristic feature of Schistosoma mansoni eggs?",
+                options: [
+                    "Terminal spine",
+                    "Lateral spine",
+                    "No spine",
+                    "Multiple spines"
+                ],
+                correct: 1,
+                explanation: "Schistosoma mansoni eggs have a prominent lateral spine, which helps distinguish them from other species.",
+                tip: "Mansoni → M for Middle (lateral spine is in the middle/side of the egg)."
+            },
+            {
+                question: "What is the characteristic feature of Schistosoma haematobium eggs?",
+                options: [
+                    "Terminal spine",
+                    "Lateral spine",
+                    "No spine",
+                    "Multiple spines"
+                ],
+                correct: 0,
+                explanation: "Schistosoma haematobium eggs have a terminal spine at one end.",
+                tip: "Haematobium → H for Head (terminal spine at the head/end of the egg)."
+            },
+            {
+                question: "Which snail species serves as the intermediate host for Schistosoma mansoni?",
+                options: [
+                    "Bulinus spp.",
+                    "Biomphalaria spp.",
+                    "Oncomelania spp.",
+                    "Lymnaea spp."
+                ],
+                correct: 1,
+                explanation: "Biomphalaria snails are the intermediate hosts for Schistosoma mansoni.",
+                tip: "Mansoni → M for Biomphalaria (both have 'M' sound)."
+            },
+            {
+                question: "Which snail species serves as the intermediate host for Schistosoma haematobium?",
+                options: [
+                    "Bulinus spp.",
+                    "Biomphalaria spp.",
+                    "Oncomelania spp.",
+                    "Lymnaea spp."
+                ],
+                correct: 0,
+                explanation: "Bulinus snails are the intermediate hosts for Schistosoma haematobium.",
+                tip: "Haematobium → H for Bulinus (no direct mnemonic, but remember Bulinus for Bladder fluke)."
+            },
+            {
+                question: "What is the first stage that emerges from Schistosoma eggs in water?",
+                options: [
+                    "Cercaria",
+                    "Miracidium",
+                    "Sporocyst",
+                    "Redia"
+                ],
+                correct: 1,
+                explanation: "When Schistosoma eggs reach freshwater, they hatch releasing ciliated miracidia.",
+                tip: "Miracidium is MOTILE and ciliated - think 'M' for motile miracidium."
+            },
+            {
+                question: "What develops inside the snail intermediate host after miracidium penetration?",
+                options: [
+                    "Cercaria",
+                    "Sporocyst",
+                    "Adult worm",
+                    "Metacercaria"
+                ],
+                correct: 1,
+                explanation: "Inside the snail, miracidium transforms into sporocyst, which then produces cercariae.",
+                tip: "Sequence: Miracidium → Sporocyst (in snail) → Cercariae."
+            },
+            {
+                question: "After skin penetration, what is the name given to the larval stage of Schistosoma?",
+                options: [
+                    "Cercaria",
+                    "Miracidium",
+                    "Schistosomula",
+                    "Sporocyst"
+                ],
+                correct: 2,
+                explanation: "After penetrating human skin, cercariae lose their tails and become schistosomula.",
+                tip: "Schistosomula = 'little schistosomes' - the stage between cercaria and adult."
+            },
+            {
+                question: "What is the migratory pathway of schistosomula in the human body?",
+                options: [
+                    "Liver → lungs → heart → mesenteric veins",
+                    "Lungs → heart → liver → mesenteric veins",
+                    "Heart → lungs → liver → mesenteric veins",
+                    "Lungs → liver → heart → mesenteric veins"
+                ],
+                correct: 1,
+                explanation: "Schistosomula migrate via venous circulation to lungs, then to heart, develop in liver, and finally to mesenteric or vesicular veins.",
+                tip: "Remember the sequence: Skin → Veins → Lungs → Heart → Liver → Final location."
+            },
+            {
+                question: "What is the primary cause of pathology in schistosomiasis?",
+                options: [
+                    "Adult worms feeding on blood",
+                    "Toxins released by adult worms",
+                    "Immune response to eggs",
+                    "Direct tissue damage by migrating larvae"
+                ],
+                correct: 2,
+                explanation: "The host immune response against the eggs, leading to granuloma formation, is the primary cause of pathology in schistosomiasis.",
+                tip: "Eggs are the problem, not the adults! Granulomas form around eggs."
+            },
+            {
+                question: "What type of inflammatory cells typically surround Schistosoma eggs in granulomas?",
+                options: [
+                    "Neutrophils and basophils",
+                    "Eosinophils, macrophages and lymphocytes",
+                    "Platelets and erythrocytes",
+                    "Mast cells and plasma cells"
+                ],
+                correct: 1,
+                explanation: "Granulomas consist of eggs at the center surrounded by eosinophils, macrophages, and lymphocytes.",
+                tip: "Think: Eosinophils are typically elevated in parasitic infections."
+            },
+            {
+                question: "What is 'swimmer's itch' in the context of schistosomiasis?",
+                options: [
+                    "Allergic reaction to adult worms",
+                    "Cercarial dermatitis from skin penetration",
+                    "Itching caused by eggs in the skin",
+                    "Reaction to toxins in contaminated water"
+                ],
+                correct: 1,
+                explanation: "Cercarial dermatitis or 'swimmer's itch' is a transient dermatitis caused by penetration of skin by cercariae.",
+                tip: "Swimmer's itch = initial skin penetration by cercariae."
+            },
+            {
+                question: "What is Katayama's fever?",
+                options: [
+                    "Chronic liver failure due to schistosomiasis",
+                    "Acute schistosomiasis occurring weeks after initial infection",
+                    "Allergic reaction to praziquantel treatment",
+                    "Fever caused by secondary bacterial infection"
+                ],
+                correct: 1,
+                explanation: "Katayama's fever is acute schistosomiasis that may occur weeks after initial infection, associated with heavy primary infection and initiation of egg production.",
+                tip: "Katayama fever = Acute phase when eggs start being produced."
+            },
+            {
+                question: "Which complication is specifically associated with chronic Schistosoma haematobium infection?",
+                options: [
+                    "Portal hypertension",
+                    "Colonic polyposis",
+                    "Bladder cancer",
+                    "Pulmonary hypertension"
+                ],
+                correct: 2,
+                explanation: "Chronic S. haematobium infection can lead to cystitis, ureteritis, hematuria, and can progress to bladder cancer.",
+                tip: "Haematobium → Hematuria → Bladder pathology → Cancer risk."
+            },
+            {
+                question: "Which complication is associated with Schistosoma mansoni and S. japonicum infections?",
+                options: [
+                    "Bladder cancer",
+                    "Portal hypertension",
+                    "Renal failure",
+                    "Pulmonary fibrosis"
+                ],
+                correct: 1,
+                explanation: "S. mansoni and S. japonicum can cause portal hypertension with hematemesis and splenomegaly due to egg deposition in liver.",
+                tip: "Mansoni & Japonicum → Mesenteric veins → Liver involvement → Portal hypertension."
+            },
+            {
+                question: "What is the most practical method for diagnosing schistosomiasis?",
+                options: [
+                    "Serological antibody tests",
+                    "PCR detection of parasite DNA",
+                    "Microscopic identification of eggs in stool or urine",
+                    "Imaging studies like ultrasound"
+                ],
+                correct: 2,
+                explanation: "Microscopic identification of eggs in stool or urine is the most practical and direct method for diagnosis.",
+                tip: "Direct visualization of eggs is the gold standard for diagnosis."
+            },
+            {
+                question: "Which specimen should be examined if S. haematobium infection is suspected?",
+                options: [
+                    "Stool only",
+                    "Urine only",
+                    "Both stool and urine",
+                    "Sputum"
+                ],
+                correct: 1,
+                explanation: "For S. haematobium, urine examination is appropriate since eggs are passed in urine.",
+                tip: "Haematobium → Hematuria → Check urine for eggs."
+            },
+            {
+                question: "What is the drug of choice for treating all species of Schistosoma?",
+                options: [
+                    "Albendazole",
+                    "Ivermectin",
+                    "Praziquantel",
+                    "Metronidazole"
+                ],
+                correct: 2,
+                explanation: "Praziquantel is effective against all Schistosoma species and is the treatment of choice.",
+                tip: "Praziquantel for ALL flukes (trematodes)."
+            },
+            {
+                question: "Which of the following is NOT a prevention and control measure for schistosomiasis?",
+                options: [
+                    "Avoiding contamination of water with human waste",
+                    "Destroying snail intermediate hosts",
+                    "Using insecticide-treated bed nets",
+                    "Providing safe recreational bathing sites"
+                ],
+                correct: 2,
+                explanation: "Insecticide-treated bed nets are used for mosquito-borne diseases like malaria, not for water-borne schistosomiasis.",
+                tip: "Schistosomiasis is water-borne, not vector-borne like malaria."
+            },
+            {
+                question: "How do liver, lung, and intestinal flukes differ from blood flukes in terms of transmission?",
+                options: [
+                    "They are transmitted by mosquito bites",
+                    "They are transmitted via contaminated food",
+                    "They are transmitted by direct contact",
+                    "They are transmitted by inhalation"
+                ],
+                correct: 1,
+                explanation: "Liver, lung, and intestinal flukes are food-borne, transmitted via ingestion of infected fish, crabs, or aquatic vegetation.",
+                tip: "Key difference: Blood flukes = skin penetration; Other flukes = ingestion."
+            },
+            {
+                question: "What is the infective stage for liver, lung, and intestinal flukes?",
+                options: [
+                    "Miracidium",
+                    "Sporocyst",
+                    "Cercaria",
+                    "Metacercaria"
+                ],
+                correct: 3,
+                explanation: "For food-borne flukes, metacercaria is the infective stage that is ingested with contaminated food.",
+                tip: "Metacercaria = the encysted stage in food sources."
+            },
+            {
+                question: "Which of the following is a characteristic of liver, lung, and intestinal flukes but NOT blood flukes?",
+                options: [
+                    "They use snails as intermediate hosts",
+                    "They have complex life cycles",
+                    "They are hermaphroditic",
+                    "They cause granulomatous inflammation"
+                ],
+                correct: 2,
+                explanation: "Liver, lung, and intestinal flukes are hermaphroditic, while blood flukes have separate sexes.",
+                tip: "Blood flukes = separate sexes; Other flukes = hermaphrodites."
+            },
+            {
+                question: "What additional developmental stage is present in liver, lung, and intestinal flukes but not typically emphasized in blood flukes?",
+                options: [
+                    "Miracidium",
+                    "Sporocyst",
+                    "Redia",
+                    "Cercaria"
+                ],
+                correct: 2,
+                explanation: "Redia is an additional developmental stage in the snail intermediate host for food-borne flukes.",
+                tip: "Food flukes have more complex development in snails: Sporocyst → Redia → Cercaria."
+            },
+            {
+                question: "In which geographical region is Schistosoma mansoni NOT commonly found?",
+                options: [
+                    "Africa",
+                    "South America",
+                    "Middle East",
+                    "Southeast Asia"
+                ],
+                correct: 3,
+                explanation: "S. mansoni is found in Africa, South America, and the Middle East, but not typically in Southeast Asia where S. japonicum is more common.",
+                tip: "Mansoni = Africa, Americas, Middle East; Japonicum = Asia."
+            },
+            {
+                question: "In Ethiopia, where has Schistosoma haematobium been reported?",
+                options: [
+                    "Only in highland areas",
+                    "Only in urban centers",
+                    "Awash, Wabeshebele, Asossa",
+                    "All administrative regions"
+                ],
+                correct: 2,
+                explanation: "In Ethiopia, S. haematobium has been reported specifically from Awash, Wabeshebele, and Asossa regions.",
+                tip: "Remember the three Ethiopian regions for S. haematobium: AWA (Awash, Wabeshebele, Asossa)."
+            },
+            {
+                question: "What happens to Schistosoma eggs after they are deposited in tissues?",
+                options: [
+                    "They hatch into miracidia inside the human body",
+                    "They are destroyed by the immune system without consequence",
+                    "They produce enzymes that aid tissue destruction and passage to lumen",
+                    "They calcify and become harmless"
+                ],
+                correct: 2,
+                explanation: "Larvae inside eggs produce enzymes that aid in tissue destruction and allow eggs to pass through mucosa into the lumen of bowel or bladder.",
+                tip: "Eggs need to exit the body to continue the life cycle - enzymes help them reach the lumen."
+            },
+            {
+                question: "Which species of Schistosoma has the most widespread distribution in Ethiopia?",
+                options: [
+                    "Schistosoma mansoni",
+                    "Schistosoma haematobium",
+                    "Schistosoma japonicum",
+                    "All have equal distribution"
+                ],
+                correct: 0,
+                explanation: "S. mansoni has been reported from all administrative regions in Ethiopia, making it the most widespread.",
+                tip: "Mansoni is the most common human schistosome globally and in Ethiopia."
+            },
+            {
+                question: "What is the shape of adult blood flukes?",
+                options: [
+                    "Leaf-like and flat",
+                    "Cylindrical",
+                    "Spherical",
+                    "Tape-like and segmented"
+                ],
+                correct: 1,
+                explanation: "Adult blood flukes are cylindrical in shape, unlike other flukes that are typically leaf-like and flat.",
+                tip: "Blood flukes are cylindrical; other flukes are flat and leaf-like."
+            },
+            {
+                question: "What facilitates the penetration of cercariae through human skin?",
+                options: [
+                    "Mechanical drilling action",
+                    "Lytic substances from penetration glands",
+                    "Enzymes from bacteria on the skin",
+                    "Heat activation from body temperature"
+                ],
+                correct: 1,
+                explanation: "Skin penetration is facilitated by lytic substances secreted by penetration glands present in the cercaria.",
+                tip: "Cercariae have special penetration glands that secrete lytic enzymes."
+            },
+            {
+                question: "How long can cercariae survive in water waiting for a host?",
+                options: [
+                    "A few hours",
+                    "1-3 days",
+                    "1-2 weeks",
+                    "Several months"
+                ],
+                correct: 1,
+                explanation: "Cercariae can swim about in water for 1-3 days while searching for a human host.",
+                tip: "Cercariae have limited survival time in water - usually 1-3 days."
+            },
+            {
+                question: "Which organ do schistosomulae primarily develop in before migrating to their final location?",
+                options: [
+                    "Lungs",
+                    "Heart",
+                    "Liver",
+                    "Intestines"
+                ],
+                correct: 2,
+                explanation: "Schistosomulae develop in the liver before exiting via the portal vein system when mature.",
+                tip: "Liver is the development site for schistosomulae before final migration."
+            },
+            {
+                question: "What is the primary manifestation of chronic intestinal schistosomiasis?",
+                options: [
+                    "Severe dehydration",
+                    "Neurological symptoms",
+                    "Mild, chronic bloody stools",
+                    "Respiratory distress"
+                ],
+                correct: 2,
+                explanation: "Chronic intestinal schistosomiasis may present with mild, chronic bloody stools due to passage of eggs through the intestinal wall.",
+                tip: "Chronic intestinal schisto = blood in stool from eggs passing through intestinal wall."
+            },
+            {
+                question: "Which species of Schistosoma is associated with colonic polyposis?",
+                options: [
+                    "S. haematobium only",
+                    "S. mansoni mostly",
+                    "S. japonicum only",
+                    "All species equally"
+                ],
+                correct: 1,
+                explanation: "Colonic polyposis with bloody diarrhea is mostly associated with S. mansoni infection.",
+                tip: "Mansoni → Mesenteric veins of Large intestine → Colonic pathology."
+            },
+            {
+                question: "In what percentage of cases can granulomas cause significant blockage of blood flow in the liver?",
+                options: [
+                    "Less than 10%",
+                    "About 25%",
+                    "About 50%",
+                    "More than 75%"
+                ],
+                correct: 0,
+                explanation: "In less than 10% of cases, granulomas can cause blockage of blood flow in the liver leading to splenomegaly and ascites.",
+                tip: "Severe liver complications occur in <10% of cases - most infections are milder."
+            },
+            {
+                question: "Which diagnostic method is NOT typically used for routine diagnosis of schistosomiasis?",
+                options: [
+                    "Microscopic examination of stool",
+                    "Microscopic examination of urine",
+                    "Rectal biopsy for egg identification",
+                    "Blood culture"
+                ],
+                correct: 3,
+                explanation: "Blood culture is used for bacterial infections, not for parasitic infections like schistosomiasis.",
+                tip: "Schistosomiasis diagnosis relies on finding eggs in excreta or tissue biopsies, not blood cultures."
+            },
+            {
+                question: "What is the primary purpose of latrine construction in schistosomiasis control?",
+                options: [
+                    "To provide comfortable facilities",
+                    "To prevent contamination of water with feces/urine",
+                    "To reduce mosquito breeding sites",
+                    "To improve overall community hygiene"
+                ],
+                correct: 1,
+                explanation: "Latrine construction helps prevent contamination of water sources with feces and urine containing Schistosoma eggs.",
+                tip: "Proper sanitation breaks the transmission cycle by preventing egg contamination of water."
+            },
+            {
+                question: "Which of the following is a source of human infection for liver, lung, and intestinal flukes?",
+                options: [
+                    "Contaminated drinking water",
+                    "Freshwater fish, crustaceans, or aquatic vegetation",
+                    "Undercooked meat",
+                    "Soil contaminated with feces"
+                ],
+                correct: 1,
+                explanation: "Liver, lung, and intestinal flukes are food-borne, with freshwater fish, crustaceans (crabs), and aquatic vegetation as sources of infection.",
+                tip: "Food-borne flukes = infected aquatic foods (fish, crabs, plants)."
+            },
+            {
+                question: "What is the role of snails in the Schistosoma life cycle?",
+                options: [
+                    "Definitive host",
+                    "Intermediate host",
+                    "Paratenic host",
+                    "Reservoir host"
+                ],
+                correct: 1,
+                explanation: "Freshwater snails serve as intermediate hosts where asexual reproduction and development occur.",
+                tip: "Snails are INTERMEDIATE hosts - essential for parasite development but not the final host."
+            },
+            {
+                question: "What is the role of humans in the Schistosoma life cycle?",
+                options: [
+                    "Intermediate host",
+                    "Definitive host",
+                    "Accidental host",
+                    "Paratenic host"
+                ],
+                correct: 1,
+                explanation: "Humans are the most significant definitive host where sexual reproduction occurs.",
+                tip: "Humans are DEFINITIVE hosts - where sexual reproduction and egg production occur."
+            },
+            {
+                question: "Which developmental stage of Schistosoma is responsible for infecting snails?",
+                options: [
+                    "Cercaria",
+                    "Miracidium",
+                    "Sporocyst",
+                    "Adult worm"
+                ],
+                correct: 1,
+                explanation: "Miracidium is the stage that infects snails after emerging from eggs in water.",
+                tip: "Miracidium infects snails; Cercaria infects humans."
+            },
+            {
+                question: "What happens to cercariae after they penetrate human skin?",
+                options: [
+                    "They immediately develop into adult worms",
+                    "They become schistosomulae (losing their tails)",
+                    "They migrate to the lungs as cercariae",
+                    "They encyst in the skin"
+                ],
+                correct: 1,
+                explanation: "After skin penetration, cercariae lose their tails and become schistosomulae.",
+                tip: "Cercariae → lose tails → become schistosomulae → begin migration."
+            },
+            {
+                question: "Which species of Schistosoma resides in the veins of the small intestine?",
+                options: [
+                    "S. mansoni",
+                    "S. haematobium",
+                    "S. japonicum",
+                    "S. intercalatum"
+                ],
+                correct: 2,
+                explanation: "S. japonicum adults reside in the veins of the small intestine (superior mesenteric veins).",
+                tip: "Japonicum → J for Jejunum (part of small intestine)."
+            },
+            {
+                question: "What is a key morphological difference between blood flukes and other flukes?",
+                options: [
+                    "Blood flukes are larger",
+                    "Blood flukes have separate sexes",
+                    "Blood flukes have more complex life cycles",
+                    "Blood flukes are more resistant to treatment"
+                ],
+                correct: 1,
+                explanation: "Blood flukes have separate sexes (dioecious), while other flukes are typically hermaphroditic.",
+                tip: "Key distinction: Blood flukes = separate sexes; Other flukes = hermaphrodites."
+            },
+            {
+                question: "Which species of Schistosoma uses Oncomelania snails as intermediate hosts?",
+                options: [
+                    "S. mansoni",
+                    "S. haematobium",
+                    "S. japonicum",
+                    "All Schistosoma species"
+                ],
+                correct: 2,
+                explanation: "S. japonicum uses Oncomelania snails as intermediate hosts.",
+                tip: "Japonicum in Japan → Oncomelania snails."
+            },
+            {
+                question: "What is the typical appearance of liver, lung, and intestinal flukes?",
+                options: [
+                    "Cylindrical",
+                    "Leaf-like and flat",
+                    "Spherical",
+                    "Segmented like tapeworms"
+                ],
+                correct: 1,
+                explanation: "Liver, lung, and intestinal flukes are typically flat and leaf-like in appearance.",
+                tip: "Most flukes are flat and leaf-like; only blood flukes are cylindrical."
+            },
+            {
+                question: "What is the primary method to control schistosomiasis transmission?",
+                options: [
+                    "Vaccination",
+                    "Mass drug administration only",
+                    "Integrated approach including sanitation, snail control, and treatment",
+                    "Insecticide spraying"
+                ],
+                correct: 2,
+                explanation: "Control requires an integrated approach including preventing water contamination, destroying snail hosts, treating infected individuals, and health education.",
+                tip: "Integrated control targets multiple points in the transmission cycle."
+            },
+            {
+                question: "Which symptom is characteristic of urinary schistosomiasis?",
+                options: [
+                    "Bloody diarrhea",
+                    "Hematuria (blood in urine)",
+                    "Chronic cough",
+                    "Jaundice"
+                ],
+                correct: 1,
+                explanation: "Hematuria (blood in urine) is the characteristic symptom of urinary schistosomiasis caused by S. haematobium.",
+                tip: "Urinary schisto = blood in urine; Intestinal schisto = blood in stool."
+            },
+            {
+                question: "What is the significance of the spine on Schistosoma eggs?",
+                options: [
+                    "It helps in tissue penetration",
+                    "It provides structural support",
+                    "It aids in species identification",
+                    "It contains digestive enzymes"
+                ],
+                correct: 2,
+                explanation: "The location and shape of the spine (lateral in S. mansoni, terminal in S. haematobium) helps in species identification.",
+                tip: "Spine location is key for species identification: Lateral for Mansoni, Terminal for Haematobium."
+            },
+            {
+                question: "Which of the following is NOT a typical manifestation of acute schistosomiasis (Katayama fever)?",
+                options: [
+                    "Fever and abdominal pain",
+                    "Hepatosplenomegaly",
+                    "Lymphadenopathy and eosinophilia",
+                    "Neurological deficits"
+                ],
+                correct: 3,
+                explanation: "Neurological deficits are not typical of acute schistosomiasis; they may occur in rare cases of ectopic egg deposition but are not part of the classic Katayama fever presentation.",
+                tip: "Katayama fever = fever, abdominal pain, hepatosplenomegaly, lymphadenopathy, eosinophilia."
+            }
+        ];
+
+        // Initialize variables
+        let currentScore = 0;
+        let questionsAnswered = 0;
+
+        // Function to shuffle array (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Function to display questions
+        function displayQuestions() {
+            const container = document.getElementById('questions-container');
+            
+            // Shuffle questions to randomize order
+            const shuffledQuestions = shuffleArray([...questions]);
+            
+            shuffledQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.id = `question-${index}`;
+                
+                // Create question text
+                const questionText = document.createElement('div');
+                questionText.className = 'question-text';
+                questionText.textContent = `${index + 1}. ${q.question}`;
+                questionDiv.appendChild(questionText);
+                
+                // Create options container
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                
+                // Shuffle options but keep track of correct answer
+                const optionsWithIndex = q.options.map((option, i) => ({ option, originalIndex: i }));
+                const shuffledOptions = shuffleArray(optionsWithIndex);
+                let correctOptionLetter = '';
+                
+                shuffledOptions.forEach((opt, optIndex) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'option';
+                    
+                    const letter = String.fromCharCode(65 + optIndex); // A, B, C, D
+                    if (opt.originalIndex === q.correct) {
+                        correctOptionLetter = letter;
+                    }
+                    
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = `q${index}`;
+                    input.id = `q${index}-${letter}`;
+                    input.value = letter;
+                    
+                    const label = document.createElement('label');
+                    label.htmlFor = `q${index}-${letter}`;
+                    label.textContent = `${letter}. ${opt.option}`;
+                    
+                    optionDiv.appendChild(input);
+                    optionDiv.appendChild(label);
+                    optionsDiv.appendChild(optionDiv);
+                });
+                
+                questionDiv.appendChild(optionsDiv);
+                
+                // Create check button
+                const button = document.createElement('button');
+                button.textContent = 'Check Answer';
+                button.onclick = function() {
+                    checkAnswer(index, correctOptionLetter, q.explanation, q.tip);
+                };
+                questionDiv.appendChild(button);
+                
+                // Create feedback div
+                const feedback = document.createElement('div');
+                feedback.id = `feedback-${index}`;
+                feedback.className = 'feedback';
+                questionDiv.appendChild(feedback);
+                
+                container.appendChild(questionDiv);
+            });
+            
+            // Update total questions count
+            document.getElementById('total').textContent = questions.length;
+        }
+
+        // Function to check answer
+        function checkAnswer(questionIndex, correctLetter, explanation, tip) {
+            const questionDiv = document.getElementById(`question-${questionIndex}`);
+            const selectedOption = questionDiv.querySelector(`input[name="q${questionIndex}"]:checked`);
+            const feedback = document.getElementById(`feedback-${questionIndex}`);
+            
+            if (!selectedOption) {
+                feedback.textContent = 'Please select an answer.';
+                feedback.className = 'feedback incorrect';
+                feedback.style.display = 'block';
+                return;
+            }
+            
+            const userAnswer = selectedOption.value;
+            questionsAnswered++;
+            
+            if (userAnswer === correctLetter) {
+                currentScore++;
+                feedback.innerHTML = `<div class="correct">Correct! ${explanation}</div>`;
+            } else {
+                feedback.innerHTML = `<div class="incorrect">Incorrect. The correct answer is ${correctLetter}. ${explanation}</div>`;
+            }
+            
+            // Add memorization tip
+            const tipDiv = document.createElement('div');
+            tipDiv.className = 'tip';
+            tipDiv.textContent = `Memorization Tip: ${tip}`;
+            feedback.appendChild(tipDiv);
+            
+            feedback.style.display = 'block';
+            
+            // Update score
+            document.getElementById('score').textContent = currentScore;
+            
+            // Disable all options for this question
+            const options = questionDiv.querySelectorAll('input[type="radio"]');
+            options.forEach(opt => {
+                opt.disabled = true;
+            });
+            
+            // Disable the check button
+            const button = questionDiv.querySelector('button');
+            button.disabled = true;
+        }
+
+        // Initialize the quiz when page loads
+        window.onload = function() {
+            displayQuestions();
+        };
+    </script>
+</body>
+</html>

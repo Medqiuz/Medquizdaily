@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Helminthology - Nematodes Quiz</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a73e8, #0d47a1);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            margin-left: 15px;
+            font-size: 24px;
+        }
+        
+        .logo-icon {
+            font-size: 32px;
+            background: white;
+            color: #1a73e8;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quiz-info {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .quiz-info h2 {
+            color: #1a73e8;
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: #1a73e8;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .question-container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .question-number {
+            font-size: 18px;
+            color: #1a73e8;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .options-container {
+            margin-bottom: 20px;
+        }
+        
+        .option {
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .option:hover {
+            background: #f0f7ff;
+            border-color: #1a73e8;
+        }
+        
+        .option.selected {
+            background: #e3f2fd;
+            border-color: #1a73e8;
+        }
+        
+        .option.correct {
+            background: #e8f5e9;
+            border-color: #4caf50;
+        }
+        
+        .option.incorrect {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+        
+        .feedback {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .correct-feedback {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+        }
+        
+        .incorrect-feedback {
+            background: #ffebee;
+            border-left: 5px solid #f44336;
+        }
+        
+        .feedback-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .memorization-tip {
+            background: #fff3e0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border-left: 3px solid #ff9800;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+        
+        button:hover {
+            background: #0d47a1;
+        }
+        
+        button:disabled {
+            background: #bdbdbd;
+            cursor: not-allowed;
+        }
+        
+        .results-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            display: none;
+        }
+        
+        .results-container h2 {
+            color: #1a73e8;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            font-size: 48px;
+            font-weight: bold;
+            color: #1a73e8;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+            }
+            
+            button {
+                margin-bottom: 10px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">℞</div>
+                <h1>MedQuiz Helminthology</h1>
+            </div>
+            <div>Nematodes (Roundworms)</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="quiz-info">
+            <h2>Medical Helminthology - Nematodes Quiz</h2>
+            <p>Test your knowledge of nematodes, their morphology, life cycles, pathogenesis, and diagnosis.</p>
+            <p><strong>Instructions:</strong> Select the best answer for each question. After submitting your answer, you'll receive feedback with explanations and memorization tips.</p>
+            
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            <div id="progress-text">Question 1 of 55</div>
+        </div>
+        
+        <div id="quiz-container">
+            <!-- Questions will be inserted here by JavaScript -->
+        </div>
+        
+        <div class="results-container" id="results-container">
+            <h2>Quiz Completed!</h2>
+            <p>You have completed the Nematodes Quiz</p>
+            <div class="score" id="score">0%</div>
+            <p id="result-message"></p>
+            <button onclick="location.reload()">Take Quiz Again</button>
+        </div>
+    </div>
+
+    <script>
+        // Quiz questions data for Nematodes
+        const questions = [
+            {
+                question: "What is medical helminthology?",
+                options: [
+                    "The study of bacterial infections",
+                    "The study of viral diseases",
+                    "The scientific study of parasitic worms and their medical consequences",
+                    "The study of fungal infections"
+                ],
+                correctAnswer: 2,
+                explanation: "Medical helminthology is the scientific study of parasitic worms and their medical consequences.",
+                tip: "Helminth = worm, so helminthology = study of worms"
+            },
+            {
+                question: "What is the primary method for laboratory diagnosis of helminth infections?",
+                options: [
+                    "Blood culture",
+                    "PCR testing",
+                    "Detection and identification of eggs, larvae, or rarely adults",
+                    "Serological tests only"
+                ],
+                correctAnswer: 2,
+                explanation: "Laboratory diagnosis of helminth infections mainly depends on detection and identification of eggs, larvae, and rarely adults.",
+                tip: "Microscopic identification of parasite stages is key for helminth diagnosis"
+            },
+            {
+                question: "What is the general shape of nematodes?",
+                options: [
+                    "Flat and leaf-like",
+                    "Cylindrical/worm-like",
+                    "Spherical",
+                    "Irregular"
+                ],
+                correctAnswer: 1,
+                explanation: "Nematodes have a cylindrical or worm-like shape.",
+                tip: "Nematodes = roundworms = cylindrical shape"
+            },
+            {
+                question: "What is the body cavity of nematodes called?",
+                options: [
+                    "Coelom",
+                    "Pseudocoel",
+                    "Hemocoel",
+                    "No body cavity"
+                ],
+                correctAnswer: 1,
+                explanation: "Nematodes have a pseudocoel, which is a false body cavity containing the viscera.",
+                tip: "Pseudo = false, so pseudocoel = false body cavity"
+            },
+            {
+                question: "Which of the following describes sexual dimorphism in nematodes?",
+                options: [
+                    "Males and females look identical",
+                    "Females are generally larger; males have a ventrally curved posterior end",
+                    "Males are larger than females",
+                    "Only females exist; they reproduce asexually"
+                ],
+                correctAnswer: 1,
+                explanation: "In nematodes, females are generally larger than males, and males have a ventrally curved or coiled posterior end.",
+                tip: "Male nematodes have curved tails for copulation"
+            },
+            {
+                question: "What type of digestive system do nematodes have?",
+                options: [
+                    "Incomplete digestive system",
+                    "Complete digestive system with mouth and anus",
+                    "No digestive system",
+                    "Only a mouth, no anus"
+                ],
+                correctAnswer: 1,
+                explanation: "Nematodes have a complete digestive system: mouth → esophagus → intestine → rectum → anus.",
+                tip: "Complete digestive system = separate mouth and anus"
+            },
+            {
+                question: "What does oviparous mean?",
+                options: [
+                    "Laying eggs that hatch inside the body",
+                    "Giving birth to live larvae",
+                    "Laying fertilized eggs that develop outside the body",
+                    "Reproducing asexually"
+                ],
+                correctAnswer: 2,
+                explanation: "Oviparous nematodes lay fertilized eggs that develop outside the body.",
+                tip: "Ovi = egg, parous = bearing, so oviparous = egg-bearing"
+            },
+            {
+                question: "Which nematode is oviparous?",
+                options: [
+                    "Strongyloides stercoralis",
+                    "Trichinella species",
+                    "Ascaris lumbricoides",
+                    "Dracunculus medinensis"
+                ],
+                correctAnswer: 2,
+                explanation: "Ascaris lumbricoides is oviparous, laying fertilized eggs that develop outside the body.",
+                tip: "Most intestinal nematodes are oviparous"
+            },
+            {
+                question: "What does viviparous mean?",
+                options: [
+                    "Laying eggs",
+                    "Giving birth to live larvae with no egg stage",
+                    "Laying eggs that hatch immediately",
+                    "Reproducing by budding"
+                ],
+                correctAnswer: 1,
+                explanation: "Viviparous nematodes give birth to live larvae; there is no egg stage.",
+                tip: "Vivi = live, parous = bearing, so viviparous = live-bearing"
+            },
+            {
+                question: "Which nematode is viviparous?",
+                options: [
+                    "Ascaris lumbricoides",
+                    "Trichuris trichiura",
+                    "Enterobius vermicularis",
+                    "Trichinella species"
+                ],
+                correctAnswer: 3,
+                explanation: "Trichinella species are viviparous, giving birth to live larvae with no egg stage.",
+                tip: "Filarial worms and Trichinella are viviparous"
+            },
+            {
+                question: "What is the common name for Ascaris lumbricoides?",
+                options: [
+                    "Pinworm",
+                    "Whipworm",
+                    "Giant intestinal roundworm",
+                    "Hookworm"
+                ],
+                correctAnswer: 2,
+                explanation: "Ascaris lumbricoides is commonly known as the giant intestinal roundworm.",
+                tip: "Ascaris is the largest intestinal nematode, hence 'giant'"
+            },
+            {
+                question: "Where do adult Ascaris lumbricoides worms live in the human body?",
+                options: [
+                    "Large intestine",
+                    "Small intestine",
+                    "Lungs",
+                    "Liver"
+                ],
+                correctAnswer: 1,
+                explanation: "Adult Ascaris lumbricoides worms live in the small intestine.",
+                tip: "Most intestinal nematodes reside in the small intestine"
+            },
+            {
+                question: "What is the infective stage of Ascaris lumbricoides?",
+                options: [
+                    "Adult worm",
+                    "Rhabditiform larva",
+                    "Embryonated egg",
+                    "Filariform larva"
+                ],
+                correctAnswer: 2,
+                explanation: "The embryonated egg is the infective stage of Ascaris lumbricoides.",
+                tip: "Soil-transmitted helminths typically have embryonated eggs as infective stages"
+            },
+            {
+                question: "What is the migratory pathway of Ascaris larvae in the human body?",
+                options: [
+                    "Intestine → blood → liver → heart → lungs → trachea → intestine",
+                    "Skin → blood → lungs → intestine",
+                    "Intestine → lymphatics → blood → lungs",
+                    "Direct development in intestine"
+                ],
+                correctAnswer: 0,
+                explanation: "Ascaris larvae migrate: intestine → blood → liver → heart → lungs → trachea → swallowed → back to intestine.",
+                tip: "Remember the 'hepatotracheal migration' of Ascaris larvae"
+            },
+            {
+                question: "What is Loeffler's syndrome?",
+                options: [
+                    "Intestinal obstruction by adult worms",
+                    "Respiratory symptoms during larval migration through lungs",
+                    "Anemia caused by hookworms",
+                    "Perianal itching from pinworms"
+                ],
+                correctAnswer: 1,
+                explanation: "Loeffler's syndrome refers to respiratory symptoms (cough, wheezing, fever) caused by larval migration of Ascaris through the lungs.",
+                tip: "Loeffler's syndrome = pulmonary symptoms during larval migration"
+            },
+            {
+                question: "What is the pre-patent period for Ascaris lumbricoides?",
+                options: [
+                    "1-2 weeks",
+                    "2-4 weeks",
+                    "60-75 days",
+                    "6 months"
+                ],
+                correctAnswer: 2,
+                explanation: "The pre-patent period for Ascaris lumbricoides (from infection to egg laying) is about 60-75 days.",
+                tip: "Pre-patent period = time from infection to detectable stages in specimens"
+            },
+            {
+                question: "How is Ascaris lumbricoides typically diagnosed?",
+                options: [
+                    "Blood smear",
+                    "Urine examination",
+                    "Stool examination for characteristic eggs",
+                    "Skin snip"
+                ],
+                correctAnswer: 2,
+                explanation: "Ascaris lumbricoides is typically diagnosed by microscopic detection of characteristic eggs in stool.",
+                tip: "Most intestinal nematodes are diagnosed by stool examination"
+            },
+            {
+                question: "What is the drug of choice for uncomplicated intestinal ascariasis?",
+                options: [
+                    "Ivermectin",
+                    "Albendazole or mebendazole",
+                    "Praziquantel",
+                    "Metronidazole"
+                ],
+                correctAnswer: 1,
+                explanation: "Albendazole or mebendazole are the first-line drugs for uncomplicated intestinal ascariasis.",
+                tip: "Benzimidazoles (albendazole, mebendazole) are broad-spectrum anthelmintics"
+            },
+            {
+                question: "What is the common name for Trichuris trichiura?",
+                options: [
+                    "Pinworm",
+                    "Whipworm",
+                    "Hookworm",
+                    "Threadworm"
+                ],
+                correctAnswer: 1,
+                explanation: "Trichuris trichiura is commonly known as whipworm.",
+                tip: "Trichuris = 'hair tail', referring to its whip-like appearance"
+            },
+            {
+                question: "Where do adult Trichuris trichiura worms reside in the human body?",
+                options: [
+                    "Small intestine",
+                    "Cecum and ascending colon",
+                    "Jejunum",
+                    "Rectum"
+                ],
+                correctAnswer: 1,
+                explanation: "Adult Trichuris trichiura worms reside in the cecum and ascending colon.",
+                tip: "Whipworms inhabit the large intestine, particularly the cecum"
+            },
+            {
+                question: "What is the characteristic shape of Trichuris trichiura eggs?",
+                options: [
+                    "Round with thin shell",
+                    "Barrel-shaped with bipolar plugs",
+                    "Oval and flattened on one side",
+                    "Lemon-shaped"
+                ],
+                correctAnswer: 1,
+                explanation: "Trichuris trichiura eggs are barrel-shaped with bipolar plugs.",
+                tip: "Think of 'football-shaped' eggs with plugs at both ends for Trichuris"
+            },
+            {
+                question: "What complication can occur in heavy Trichuris trichiura infections?",
+                options: [
+                    "Liver abscess",
+                    "Rectal prolapse",
+                    "Intestinal obstruction",
+                    "Biliary obstruction"
+                ],
+                correctAnswer: 1,
+                explanation: "Heavy Trichuris trichiura infections can cause rectal prolapse, especially in children.",
+                tip: "Chronic inflammation and straining can lead to rectal prolapse in heavy whipworm infections"
+            },
+            {
+                question: "What is the common name for Enterobius vermicularis?",
+                options: [
+                    "Whipworm",
+                    "Pinworm",
+                    "Hookworm",
+                    "Threadworm"
+                ],
+                correctAnswer: 1,
+                explanation: "Enterobius vermicularis is commonly known as pinworm.",
+                tip: "Enterobius = 'intestinal life', vermicularis = 'worm-like'"
+            },
+            {
+                question: "Which diagnostic method is specific for Enterobius vermicularis?",
+                options: [
+                    "Stool examination",
+                    "Scotch tape test",
+                    "Blood smear",
+                    "Urine examination"
+                ],
+                correctAnswer: 1,
+                explanation: "The Scotch tape test is the specific diagnostic method for Enterobius vermicularis.",
+                tip: "Pinworms lay eggs on perianal skin, not in stool, so Scotch tape test is best"
+            },
+            {
+                question: "When is the best time to perform the Scotch tape test for pinworms?",
+                options: [
+                    "After meals",
+                    "In the morning before bathing or defecation",
+                    "At noon",
+                    "Before bedtime"
+                ],
+                correctAnswer: 1,
+                explanation: "The Scotch tape test should be performed in the morning before bathing or defecation when eggs are most likely to be present on perianal skin.",
+                tip: "Pinworms lay eggs at night, so morning is the best time for detection"
+            },
+            {
+                question: "What is the most common symptom of Enterobius vermicularis infection?",
+                options: [
+                    "Abdominal pain",
+                    "Nocturnal perianal itching",
+                    "Cough",
+                    "Diarrhea"
+                ],
+                correctAnswer: 1,
+                explanation: "Nocturnal perianal itching is the most common symptom of Enterobius vermicularis infection.",
+                tip: "Female pinworms migrate to perianal area at night to lay eggs, causing itching"
+            },
+            {
+                question: "Why is it recommended to treat all household members for pinworm infection?",
+                options: [
+                    "To save money on medication",
+                    "Due to high reinfection rate within households",
+                    "Because it's required by law",
+                    "To prevent drug resistance"
+                ],
+                correctAnswer: 1,
+                explanation: "All household members should be treated due to the high reinfection rate within households.",
+                tip: "Pinworms spread easily in close contacts, so treat everyone to prevent reinfection"
+            },
+            {
+                question: "What is the common name for Strongyloides stercoralis?",
+                options: [
+                    "Pinworm",
+                    "Whipworm",
+                    "Threadworm",
+                    "Hookworm"
+                ],
+                correctAnswer: 2,
+                explanation: "Strongyloides stercoralis is commonly known as threadworm.",
+                tip: "Strongyloides = 'round form', stercoralis = 'of feces'"
+            },
+            {
+                question: "What is unique about Strongyloides stercoralis compared to other nematodes?",
+                options: [
+                    "It has both free-living and parasitic cycles",
+                    "It only infects animals",
+                    "It is the largest nematode",
+                    "It only reproduces sexually"
+                ],
+                correctAnswer: 0,
+                explanation: "Strongyloides stercoralis is unique because it has both free-living and parasitic cycles.",
+                tip: "Strongyloides can complete its life cycle either inside or outside the host"
+            },
+            {
+                question: "What is autoinfection in Strongyloides stercoralis?",
+                options: [
+                    "Infection from another person",
+                    "Reinfection by larvae that develop within the same host",
+                    "Infection from contaminated soil",
+                    "Infection from insect bites"
+                ],
+                correctAnswer: 1,
+                explanation: "Autoinfection occurs when rhabditiform larvae transform into filariform larvae within the host and cause reinfection.",
+                tip: "Autoinfection allows Strongyloides to persist for decades without external reinfection"
+            },
+            {
+                question: "What is the infective stage of Strongyloides stercoralis?",
+                options: [
+                    "Egg",
+                    "Rhabditiform larva",
+                    "Filariform larva",
+                    "Adult worm"
+                ],
+                correctAnswer: 2,
+                explanation: "The filariform larva is the infective stage of Strongyloides stercoralis.",
+                tip: "Skin-penetrating nematodes typically have filariform larvae as infective stages"
+            },
+            {
+                question: "What is hyperinfection syndrome in Strongyloides stercoralis?",
+                options: [
+                    "Mild intestinal symptoms",
+                    "Massive proliferation and dissemination of larvae in immunocompromised hosts",
+                    "Allergic reaction to the parasite",
+                    "Formation of granulomas around larvae"
+                ],
+                correctAnswer: 1,
+                explanation: "Hyperinfection syndrome is the massive proliferation and dissemination of larvae that can occur in immunocompromised hosts, which can be fatal.",
+                tip: "Hyperinfection = excessive multiplication within the host, often in immunocompromised individuals"
+            },
+            {
+                question: "What is the drug of choice for Strongyloides stercoralis?",
+                options: [
+                    "Albendazole",
+                    "Mebendazole",
+                    "Ivermectin",
+                    "Pyrantel pamoate"
+                ],
+                correctAnswer: 2,
+                explanation: "Ivermectin is the drug of choice for Strongyloides stercoralis.",
+                tip: "Ivermectin is particularly effective against Strongyloides"
+            },
+            {
+                question: "How is Strongyloides stercoralis typically diagnosed?",
+                options: [
+                    "Detection of eggs in stool",
+                    "Detection of rhabditiform larvae in stool",
+                    "Detection of adult worms in stool",
+                    "Blood smear"
+                ],
+                correctAnswer: 1,
+                explanation: "Strongyloides stercoralis is typically diagnosed by detection of rhabditiform larvae in stool.",
+                tip: "Strongyloides larvae, not eggs, are typically found in stool"
+            },
+            {
+                question: "Which two species are the main human hookworms?",
+                options: [
+                    "Ascaris lumbricoides and Trichuris trichiura",
+                    "Ancylostoma duodenale and Necator americanus",
+                    "Enterobius vermicularis and Strongyloides stercoralis",
+                    "Trichinella spiralis and Dracunculus medinensis"
+                ],
+                correctAnswer: 1,
+                explanation: "Ancylostoma duodenale (Old World hookworm) and Necator americanus (New World hookworm) are the main human hookworms.",
+                tip: "Ancylostoma = 'curved mouth', Necator = 'killer'"
+            },
+            {
+                question: "Where do adult hookworms reside in the human body?",
+                options: [
+                    "Large intestine",
+                    "Jejunum of small intestine",
+                    "Lungs",
+                    "Skin"
+                ],
+                correctAnswer: 1,
+                explanation: "Adult hookworms reside in the jejunum of the small intestine.",
+                tip: "Hookworms attach to the intestinal mucosa and feed on blood"
+            },
+            {
+                question: "What is the infective stage of hookworms?",
+                options: [
+                    "Egg",
+                    "Rhabditiform larva",
+                    "Filariform larva",
+                    "Adult worm"
+                ],
+                correctAnswer: 2,
+                explanation: "The filariform larva is the infective stage of hookworms.",
+                tip: "Like Strongyloides, hookworms have filariform larvae that penetrate skin"
+            },
+            {
+                question: "What is 'ground itch'?",
+                options: [
+                    "Itching caused by pinworms",
+                    "Skin reaction at the site of hookworm larval penetration",
+                    "Allergy to soil",
+                    "Fungal infection of the feet"
+                ],
+                correctAnswer: 1,
+                explanation: "'Ground itch' is the skin reaction (erythema, papules) at the site of hookworm larval penetration.",
+                tip: "Hookworm larvae penetrate skin, causing 'ground itch'"
+            },
+            {
+                question: "What is the main pathology caused by adult hookworms?",
+                options: [
+                    "Liver damage",
+                    "Intestinal obstruction",
+                    "Blood loss leading to iron deficiency anemia",
+                    "Respiratory distress"
+                ],
+                correctAnswer: 2,
+                explanation: "The main pathology caused by adult hookworms is blood loss leading to iron deficiency anemia.",
+                tip: "Hookworms are hematophagous (blood-feeding), causing anemia"
+            },
+            {
+                question: "How much blood can one Ancylostoma duodenale worm consume per day?",
+                options: [
+                    "0.01 ml",
+                    "0.03 ml",
+                    "0.26 ml",
+                    "1.0 ml"
+                ],
+                correctAnswer: 2,
+                explanation: "One Ancylostoma duodenale worm can consume approximately 0.26 ml of blood per day.",
+                tip: "Ancylostoma duodenale causes more blood loss than Necator americanus"
+            },
+            {
+                question: "What is the drug of choice for hookworm infections?",
+                options: [
+                    "Ivermectin",
+                    "Albendazole",
+                    "Praziquantel",
+                    "Metronidazole"
+                ],
+                correctAnswer: 1,
+                explanation: "Albendazole is the drug of choice for hookworm infections.",
+                tip: "Albendazole is effective against most soil-transmitted helminths"
+            },
+            {
+                question: "Which nematode is known for its unique free-living cycle?",
+                options: [
+                    "Ascaris lumbricoides",
+                    "Trichuris trichiura",
+                    "Strongyloides stercoralis",
+                    "Enterobius vermicularis"
+                ],
+                correctAnswer: 2,
+                explanation: "Strongyloides stercoralis is known for its unique free-living cycle where it can reproduce outside the host.",
+                tip: "Only Strongyloides has a free-living generation that can reproduce in soil"
+            },
+            {
+                question: "Which nematode infection is diagnosed using the Baermann technique?",
+                options: [
+                    "Ascaris lumbricoides",
+                    "Strongyloides stercoralis",
+                    "Enterobius vermicularis",
+                    "Trichuris trichiura"
+                ],
+                correctAnswer: 1,
+                explanation: "The Baermann technique is used to concentrate and detect Strongyloides stercoralis larvae in stool.",
+                tip: "Baermann technique uses warm water to attract motile larvae"
+            },
+            {
+                question: "What is the main prevention measure for hookworm infections?",
+                options: [
+                    "Wearing shoes",
+                    "Washing hands",
+                    "Cooking meat thoroughly",
+                    "Using insect repellent"
+                ],
+                correctAnswer: 0,
+                explanation: "Wearing shoes is the main prevention measure for hookworm infections to prevent skin contact with contaminated soil.",
+                tip: "Hookworm larvae penetrate bare skin, so shoes provide protection"
+            },
+            {
+                question: "Which nematode is most commonly associated with Loeffler's syndrome?",
+                options: [
+                    "Enterobius vermicularis",
+                    "Ascaris lumbricoides",
+                    "Trichuris trichiura",
+                    "Strongyloides stercoralis"
+                ],
+                correctAnswer: 1,
+                explanation: "Ascaris lumbricoides is most commonly associated with Loeffler's syndrome during its larval migration through the lungs.",
+                tip: "Loeffler's syndrome = pulmonary symptoms during Ascaris larval migration"
+            },
+            {
+                question: "Which nematode infection typically shows eosinophilia?",
+                options: [
+                    "Only Ascaris infection",
+                    "Only hookworm infection",
+                    "Only Strongyloides infection",
+                    "Most tissue-migrating nematode infections"
+                ],
+                correctAnswer: 3,
+                explanation: "Most tissue-migrating nematode infections typically show eosinophilia.",
+                tip: "Eosinophilia is common in helminth infections, especially during tissue migration"
+            },
+            {
+                question: "What is the most common helminth infection in children in temperate regions?",
+                options: [
+                    "Ascariasis",
+                    "Trichuriasis",
+                    "Enterobiasis (pinworm)",
+                    "Strongyloidiasis"
+                ],
+                correctAnswer: 2,
+                explanation: "Enterobiasis (pinworm infection) is the most common helminth infection in children in temperate regions.",
+                tip: "Pinworms spread easily in crowded settings like schools and families"
+            },
+            {
+                question: "Which nematode can cause vulvovaginitis in young girls?",
+                options: [
+                    "Ascaris lumbricoides",
+                    "Enterobius vermicularis",
+                    "Trichuris trichiura",
+                    "Strongyloides stercoralis"
+                ],
+                correctAnswer: 1,
+                explanation: "Enterobius vermicularis (pinworm) can cause vulvovaginitis in young girls when female worms migrate to the perianal area.",
+                tip: "Pinworm migration to perianal area can lead to vulvovaginitis"
+            },
+            {
+                question: "What is the treatment strategy for intestinal obstruction caused by Ascaris lumbricoides?",
+                options: [
+                    "Immediate anthelmintic therapy",
+                    "Surgery only",
+                    "Conservative management first, then anthelmintic once obstruction resolves",
+                    "No treatment needed"
+                ],
+                correctAnswer: 2,
+                explanation: "For intestinal obstruction caused by Ascaris, conservative management (NPO, nasogastric suction, IV fluids) is used first, followed by anthelmintic therapy once the acute obstruction resolves.",
+                tip: "Treat the obstruction first, then the infection"
+            },
+            {
+                question: "Which nematode infection requires screening before immunosuppressive therapy?",
+                options: [
+                    "Ascaris lumbricoides",
+                    "Strongyloides stercoralis",
+                    "Enterobius vermicularis",
+                    "Trichuris trichiura"
+                ],
+                correctAnswer: 1,
+                explanation: "Strongyloides stercoralis requires screening before immunosuppressive therapy due to the risk of hyperinfection syndrome.",
+                tip: "Strongyloides hyperinfection can be fatal in immunocompromised patients"
+            },
+            {
+                question: "What is the primary difference between Ancylostoma duodenale and Necator americanus mouthparts?",
+                options: [
+                    "Ancylostoma has cutting plates, Necator has teeth",
+                    "Ancylostoma has teeth, Necator has cutting plates",
+                    "Both have identical mouthparts",
+                    "Ancylostoma has no mouthparts, Necator has teeth"
+                ],
+                correctAnswer: 1,
+                explanation: "Ancylostoma duodenale has teeth, while Necator americanus has cutting plates.",
+                tip: "Ancylostoma = teeth, Necator = cutting plates"
+            },
+            {
+                question: "Which nematode is also known as the 'guinea worm'?",
+                options: [
+                    "Dracunculus medinensis",
+                    "Onchocerca volvulus",
+                    "Loa loa",
+                    "Wuchereria bancrofti"
+                ],
+                correctAnswer: 0,
+                explanation: "Dracunculus medinensis is also known as the guinea worm.",
+                tip: "Dracunculus medinensis causes dracunculiasis (guinea worm disease)"
+            },
+            {
+                question: "Which of the following is a filarial nematode?",
+                options: [
+                    "Ascaris lumbricoides",
+                    "Trichuris trichiura",
+                    "Wuchereria bancrofti",
+                    "Strongyloides stercoralis"
+                ],
+                correctAnswer: 2,
+                explanation: "Wuchereria bancrofti is a filarial nematode that causes lymphatic filariasis.",
+                tip: "Filarial nematodes are tissue-dwelling worms transmitted by insects"
+            }
+        ];
+
+        // Initialize quiz
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        
+        // Display question
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            const questionElement = document.getElementById(`question-${currentQuestion}`);
+            
+            // Update progress
+            document.getElementById('progress').style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+            document.getElementById('progress-text').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            
+            // Show current question
+            document.querySelectorAll('.question-container').forEach(q => q.classList.remove('active'));
+            questionElement.classList.add('active');
+            
+            // Reset options
+            questionElement.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Hide feedback
+            questionElement.querySelector('.feedback').style.display = 'none';
+        }
+
+        // Create quiz HTML
+        function createQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            
+            questions.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = `question-container ${index === 0 ? 'active' : ''}`;
+                questionDiv.id = `question-${index}`;
+                
+                let optionsHTML = '';
+                question.options.forEach((option, optIndex) => {
+                    optionsHTML += `
+                        <div class="option" data-index="${optIndex}">
+                            ${option}
+                        </div>
+                    `;
+                });
+                
+                questionDiv.innerHTML = `
+                    <div class="question-number">Question ${index + 1}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options-container">
+                        ${optionsHTML}
+                    </div>
+                    <div class="feedback">
+                        <div class="feedback-title">Explanation:</div>
+                        <div class="explanation"></div>
+                        <div class="memorization-tip">
+                            <strong>Memorization Tip:</strong> <span class="tip-text"></span>
+                        </div>
+                    </div>
+                    <div class="navigation">
+                        <button class="prev-btn" ${index === 0 ? 'disabled' : ''}>Previous</button>
+                        <button class="next-btn" ${index === questions.length - 1 ? 'disabled' : ''}>Next</button>
+                        ${index === questions.length - 1 ? '<button class="submit-btn">Submit Quiz</button>' : ''}
+                    </div>
+                `;
+                
+                quizContainer.appendChild(questionDiv);
+                
+                // Add event listeners to options
+                questionDiv.querySelectorAll('.option').forEach(option => {
+                    option.addEventListener('click', function() {
+                        if (userAnswers[index] !== null) return; // Already answered
+                        
+                        const selectedIndex = parseInt(this.getAttribute('data-index'));
+                        userAnswers[index] = selectedIndex;
+                        
+                        // Mark selected option
+                        questionDiv.querySelectorAll('.option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        this.classList.add('selected');
+                        
+                        // Check if correct
+                        const isCorrect = selectedIndex === question.correctAnswer;
+                        if (isCorrect) {
+                            this.classList.add('correct');
+                            score++;
+                        } else {
+                            this.classList.add('incorrect');
+                            // Mark correct answer
+                            questionDiv.querySelectorAll('.option')[question.correctAnswer].classList.add('correct');
+                        }
+                        
+                        // Show feedback
+                        const feedback = questionDiv.querySelector('.feedback');
+                        feedback.querySelector('.explanation').textContent = question.explanation;
+                        feedback.querySelector('.tip-text').textContent = question.tip;
+                        feedback.className = `feedback ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}`;
+                        feedback.style.display = 'block';
+                    });
+                });
+                
+                // Navigation buttons
+                if (index > 0) {
+                    questionDiv.querySelector('.prev-btn').addEventListener('click', function() {
+                        currentQuestion--;
+                        displayQuestion();
+                    });
+                }
+                
+                if (index < questions.length - 1) {
+                    questionDiv.querySelector('.next-btn').addEventListener('click', function() {
+                        currentQuestion++;
+                        displayQuestion();
+                    });
+                } else {
+                    questionDiv.querySelector('.submit-btn').addEventListener('click', function() {
+                        showResults();
+                    });
+                }
+            });
+        }
+
+        // Show results
+        function showResults() {
+            document.getElementById('quiz-container').style.display = 'none';
+            const resultsContainer = document.getElementById('results-container');
+            const scoreElement = document.getElementById('score');
+            const resultMessage = document.getElementById('result-message');
+            
+            const percentage = Math.round((score / questions.length) * 100);
+            scoreElement.textContent = `${percentage}%`;
+            
+            if (percentage >= 90) {
+                resultMessage.textContent = "Excellent! You have a strong understanding of nematodes and helminthology.";
+            } else if (percentage >= 80) {
+                resultMessage.textContent = "Very good! You have a solid grasp of nematode concepts with some room for improvement.";
+            } else if (percentage >= 70) {
+                resultMessage.textContent = "Good effort! Review the areas where you had difficulty to strengthen your knowledge.";
+            } else if (percentage >= 60) {
+                resultMessage.textContent = "You passed, but consider reviewing the material again to improve your understanding.";
+            } else {
+                resultMessage.textContent = "You need more study time. Review the Nematodes chapter carefully and try again.";
+            }
+            
+            resultsContainer.style.display = 'block';
+        }
+
+        // Initialize quiz
+        document.addEventListener('DOMContentLoaded', function() {
+            createQuiz();
+        });
+    </script>
+</body>
+</html>

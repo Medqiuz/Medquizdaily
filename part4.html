@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cestodes Knowledge Assessment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #1a2a6c;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        .quiz-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .quiz-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .question-number {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1a2a6c;
+            display: flex;
+            align-items: center;
+        }
+
+        .question-number i {
+            margin-right: 10px;
+            color: #fdbb2d;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #222;
+            line-height: 1.5;
+        }
+
+        .options {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .option {
+            padding: 18px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        .option:hover {
+            background-color: #f8f9fa;
+            border-color: #b21f1f;
+        }
+
+        .option.selected {
+            background-color: #e3f2fd;
+            border-color: #2196f3;
+        }
+
+        .option.correct {
+            background-color: #e8f5e9;
+            border-color: #4caf50;
+        }
+
+        .option.incorrect {
+            background-color: #ffebee;
+            border-color: #f44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: #e0e0e0;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .option.selected .option-letter {
+            background-color: #2196f3;
+            color: white;
+        }
+
+        .option.correct .option-letter {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .feedback {
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .feedback.correct {
+            background-color: #e8f5e9;
+            border-left: 5px solid #4caf50;
+        }
+
+        .feedback.incorrect {
+            background-color: #ffebee;
+            border-left: 5px solid #f44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+
+        .feedback-title i {
+            margin-right: 10px;
+        }
+
+        .explanation, .memorization-tip {
+            margin-top: 15px;
+        }
+
+        .memorization-tip {
+            padding: 15px;
+            background-color: #fff3cd;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .tip-title {
+            font-weight: bold;
+            color: #856404;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .tip-title i {
+            margin-right: 8px;
+        }
+
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .info-label {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1a2a6c;
+        }
+
+        .progress-container {
+            margin-bottom: 30px;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 14px 30px;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        button i {
+            margin-right: 8px;
+        }
+
+        .results {
+            text-align: center;
+            padding: 50px 30px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        .results h2 {
+            color: #1a2a6c;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+
+        .score {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #b21f1f;
+            margin: 30px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .performance-message {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .restart-btn {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-info {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .option {
+                padding: 15px;
+                font-size: 1rem;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-microscope"></i> Cestodes (Tapeworms) Knowledge Assessment</h1>
+            <p class="subtitle">Test your understanding of intestinal and tissue cestodes</p>
+        </header>
+        
+        <div class="quiz-info">
+            <div class="info-item">
+                <div class="info-label">Questions</div>
+                <div class="info-value" id="question-count">0/0</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Correct Answers</div>
+                <div class="info-value" id="correct-count">0</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Score</div>
+                <div class="info-value" id="score">0%</div>
+            </div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress" id="progress-bar"></div>
+            </div>
+        </div>
+        
+        <div id="quiz-container">
+            <!-- Questions will be dynamically inserted here -->
+        </div>
+        
+        <div class="navigation">
+            <button id="prev-btn" disabled><i class="fas fa-arrow-left"></i> Previous</button>
+            <button id="next-btn">Next <i class="fas fa-arrow-right"></i></button>
+        </div>
+        
+        <div class="results" id="results">
+            <h2><i class="fas fa-trophy"></i> Quiz Completed!</h2>
+            <p>You have finished the Cestodes Knowledge Assessment</p>
+            <div class="score" id="final-score">0%</div>
+            <p class="performance-message" id="performance-message"></p>
+            <button class="restart-btn" id="restart-btn"><i class="fas fa-redo"></i> Restart Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        // Questions data - 50+ questions with varied correct answers
+        const questions = [
+            {
+                question: "Which of the following is a general characteristic of cestodes (tapeworms)?",
+                options: [
+                    "They are cylindrical in shape",
+                    "They have separate sexes",
+                    "They are segmented, tape-like worms",
+                    "They obtain nutrients by ingestion through a mouth"
+                ],
+                correctAnswer: 2, // C
+                explanation: "Cestodes are characterized as segmented, tape-like worms. They are hermaphroditic (monoecious) and obtain nutrients by absorption through their body surface.",
+                memorizationTip: "Remember the 3 S's: Segmented, Scolex, Strobila."
+            },
+            {
+                question: "What are the three main body regions of a cestode?",
+                options: [
+                    "Head, thorax, abdomen",
+                    "Scolex, neck, strobila",
+                    "Anterior, middle, posterior",
+                    "Cephalic, cervical, caudal"
+                ],
+                correctAnswer: 1, // B
+                explanation: "The three main body regions of cestodes are: scolex (head for attachment), neck (growth region), and strobila (a collection of proglottids).",
+                memorizationTip: "SNS: Scolex, Neck, Strobila - remember this sequence."
+            },
+            {
+                question: "What is the function of the scolex in tapeworms?",
+                options: [
+                    "Reproduction",
+                    "Absorption of nutrients",
+                    "Attachment to host",
+                    "Production of eggs"
+                ],
+                correctAnswer: 2, // C
+                explanation: "The scolex is the head region of the tapeworm and functions as an attachment organ, allowing the worm to anchor itself to the host's intestinal wall.",
+                memorizationTip: "Scolex = Suckers and sometimes hooks = Attachment."
+            },
+            {
+                question: "Which of the following cestodes is known as the beef tapeworm?",
+                options: [
+                    "Taenia solium",
+                    "Taenia saginata",
+                    "Hymenolepis nana",
+                    "Echinococcus granulosus"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Taenia saginata is commonly known as the beef tapeworm, while Taenia solium is the pork tapeworm.",
+                memorizationTip: "Saginata = Beef (both have 'S' and 'B' sounds)."
+            },
+            {
+                question: "Where does the adult form of Taenia saginata reside in humans?",
+                options: [
+                    "Liver",
+                    "Small intestine",
+                    "Large intestine",
+                    "Muscles"
+                ],
+                correctAnswer: 1, // B
+                explanation: "The adult form of Taenia saginata resides in the small intestine of humans, where it can grow 4-12 meters long.",
+                memorizationTip: "Adult tapeworms live in the intestine; larval forms live in tissues."
+            },
+            {
+                question: "What is the larval form of Taenia saginata called?",
+                options: [
+                    "Cysticercus cellulosae",
+                    "Cysticercus bovis",
+                    "Hydatid cyst",
+                    "Cysticercoid"
+                ],
+                correctAnswer: 1, // B
+                explanation: "The larval form of Taenia saginata is called Cysticercus bovis, which develops in the musculature of cattle.",
+                memorizationTip: "Bovis = cattle; Saginata = beef tapeworm."
+            },
+            {
+                question: "How is Taenia saginata typically transmitted to humans?",
+                options: [
+                    "Ingestion of eggs in contaminated water",
+                    "Ingestion of cysticerci in undercooked beef",
+                    "Skin penetration by larvae",
+                    "Inhalation of eggs"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Humans are infected with T. saginata by consuming raw or undercooked beef containing cysticerci (Cysticercus bovis).",
+                memorizationTip: "Beef tapeworm = infected beef = cysticercus bovis."
+            },
+            {
+                question: "What is a distinguishing feature of the Taenia saginata scolex?",
+                options: [
+                    "It has 4 suckers and a rostellum with hooks",
+                    "It has 4 suckers but no hooks or rostellum",
+                    "It has 2 suckers and a rostellum",
+                    "It has no suckers but has hooks"
+                ],
+                correctAnswer: 1, // B
+                explanation: "The T. saginata scolex has 4 suckers but no hooks or rostellum, distinguishing it from T. solium which has hooks.",
+                memorizationTip: "Saginata = Smooth (no hooks); Solium = Spiny (has hooks)."
+            },
+            {
+                question: "What is the most common clinical feature of Taenia saginata infection?",
+                options: [
+                    "Seizures",
+                    "Passage of proglottids",
+                    "Liver cysts",
+                    "Skin nodules"
+                ],
+                correctAnswer: 1, // B
+                explanation: "The most striking feature of T. saginata infection is the passage (active and passive) of proglottids. Infections are often otherwise asymptomatic.",
+                memorizationTip: "Saginata = Segments passing visibly."
+            },
+            {
+                question: "How many lateral branches does the uterus have in gravid Taenia saginata proglottids?",
+                options: [
+                    "5-10",
+                    "7-13",
+                    "15-30",
+                    "30-50"
+                ],
+                correctAnswer: 2, // C
+                explanation: "Gravid T. saginata proglottids have a uterus with 15-30 lateral branches, which is more than T. solium (7-13 branches).",
+                memorizationTip: "Saginata has more branches (15-30) than solium (7-13)."
+            },
+            {
+                question: "Which drug is considered first-line treatment for Taenia saginata infection?",
+                options: [
+                    "Albendazole",
+                    "Mebendazole",
+                    "Praziquantel",
+                    "Niclosamide"
+                ],
+                correctAnswer: 2, // C
+                explanation: "Praziquantel is the first-line treatment for T. saginata infection, typically given as a single dose of 5-10 mg/kg.",
+                memorizationTip: "Praziquantel is the 'P' drug for Parasitic tapeworms."
+            },
+            {
+                question: "What is the common name for Taenia solium?",
+                options: [
+                    "Beef tapeworm",
+                    "Pork tapeworm",
+                    "Dwarf tapeworm",
+                    "Hydatid tapeworm"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Taenia solium is commonly known as the pork tapeworm.",
+                memorizationTip: "Solium = Swine = Pork tapeworm."
+            },
+            {
+                question: "Which of the following diseases can be caused by Taenia solium?",
+                options: [
+                    "Taeniasis only",
+                    "Cysticercosis only",
+                    "Both taeniasis and cysticercosis",
+                    "Hydatid disease"
+                ],
+                correctAnswer: 2, // C
+                explanation: "Taenia solium can cause both intestinal taeniasis (adult worm) and cysticercosis (larval form in tissues).",
+                memorizationTip: "Solium is dangerous because it can cause both intestinal and tissue infections."
+            },
+            {
+                question: "What is the key morphological difference between Taenia solium and Taenia saginata?",
+                options: [
+                    "T. solium is longer than T. saginata",
+                    "T. solium has a rostellum with hooks, T. saginata does not",
+                    "T. solium has more uterine branches",
+                    "T. solium eggs are smaller"
+                ],
+                correctAnswer: 1, // B
+                explanation: "The key difference is that T. solium has a rostellum with a double row of hooks, while T. saginata has no hooks.",
+                memorizationTip: "Solium = Spiny (hooks); Saginata = Smooth (no hooks)."
+            },
+            {
+                question: "How do humans become accidental intermediate hosts for Taenia solium?",
+                options: [
+                    "By eating undercooked pork",
+                    "By ingesting T. solium eggs",
+                    "By skin contact with infected pigs",
+                    "By drinking contaminated milk"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Humans become accidental intermediate hosts (developing cysticercosis) by ingesting T. solium eggs from contaminated food/water or through autoinfection.",
+                memorizationTip: "Eggs → cysticercosis; Cysticerci → intestinal tapeworm."
+            },
+            {
+                question: "What is the most serious form of cysticercosis?",
+                options: [
+                    "Subcutaneous cysticercosis",
+                    "Muscular cysticercosis",
+                    "Neurocysticercosis",
+                    "Ocular cysticercosis"
+                ],
+                correctAnswer: 2, // C
+                explanation: "Neurocysticercosis (cysticerci in the brain) is the most serious form, causing seizures, headaches, and hydrocephalus.",
+                memorizationTip: "Neurocysticercosis = neurological symptoms = most dangerous."
+            },
+            {
+                question: "Which diagnostic method is most appropriate for neurocysticercosis?",
+                options: [
+                    "Stool examination for eggs",
+                    "Serology tests",
+                    "CT or MRI imaging",
+                    "Biopsy of subcutaneous nodules"
+                ],
+                correctAnswer: 2, // C
+                explanation: "CT or MRI imaging is most appropriate for diagnosing neurocysticercosis, as it can visualize cysts in the brain.",
+                memorizationTip: "Brain cysts need brain imaging (CT/MRI)."
+            },
+            {
+                question: "What is unique about Hymenolepis nana among tapeworms?",
+                options: [
+                    "It is the largest tapeworm",
+                    "It can complete its life cycle in a single host",
+                    "It has separate sexes",
+                    "It does not produce eggs"
+                ],
+                correctAnswer: 1, // B
+                explanation: "H. nana is unique among tapeworms because it can complete its life cycle in a single host (humans), without requiring an intermediate host.",
+                memorizationTip: "H. nana = No intermediate host needed (usually)."
+            },
+            {
+                question: "What is the common name for Hymenolepis nana?",
+                options: [
+                    "Beef tapeworm",
+                    "Pork tapeworm",
+                    "Dwarf tapeworm",
+                    "Hydatid tapeworm"
+                ],
+                correctAnswer: 2, // C
+                explanation: "Hymenolepis nana is commonly known as the dwarf tapeworm, as it is the smallest tapeworm that infects humans (15-40 mm long).",
+                memorizationTip: "Nana = small = dwarf tapeworm."
+            },
+            {
+                question: "Which population is most commonly affected by Hymenolepis nana?",
+                options: [
+                    "Elderly",
+                    "Adults",
+                    "Children",
+                    "Pregnant women"
+                ],
+                correctAnswer: 2, // C
+                explanation: "Hymenolepis nana is more common in children, likely due to poorer hygiene practices.",
+                memorizationTip: "Dwarf tapeworm = common in small (children) hosts."
+            },
+            {
+                question: "How is Hymenolepis nana typically diagnosed?",
+                options: [
+                    "Imaging studies",
+                    "Serological tests",
+                    "Finding eggs in feces",
+                    "Biopsy of intestinal tissue"
+                ],
+                correctAnswer: 2, // C
+                explanation: "H. nana infection is diagnosed by finding characteristic eggs in the feces.",
+                memorizationTip: "Intestinal tapeworms = eggs in stool."
+            },
+            {
+                question: "What is the treatment of choice for Hymenolepis nana?",
+                options: [
+                    "Albendazole",
+                    "Mebendazole",
+                    "Praziquantel",
+                    "Niclosamide"
+                ],
+                correctAnswer: 2, // C
+                explanation: "Praziquantel is the treatment of choice for H. nana, typically given as a single dose of 25 mg/kg.",
+                memorizationTip: "Praziquantel works against both adult and larval forms of H. nana."
+            },
+            {
+                question: "Which cestode causes hydatid disease?",
+                options: [
+                    "Taenia saginata",
+                    "Taenia solium",
+                    "Hymenolepis nana",
+                    "Echinococcus granulosus"
+                ],
+                correctAnswer: 3, // D
+                explanation: "Echinococcus granulosus causes hydatid disease (hydatidosis), characterized by the formation of hydatid cysts in various organs.",
+                memorizationTip: "Echinococcus = Hydatid cysts."
+            },
+            {
+                question: "What is the definitive host for Echinococcus granulosus?",
+                options: [
+                    "Humans",
+                    "Cattle",
+                    "Sheep",
+                    "Dogs and other canines"
+                ],
+                correctAnswer: 3, // D
+                explanation: "The definitive host for E. granulosus is dogs and other canines, where the adult worm resides in the small intestine.",
+                memorizationTip: "Dogs = Definitive host (both start with 'D')."
+            },
+            {
+                question: "Which organ is most commonly affected in human hydatid disease?",
+                options: [
+                    "Brain",
+                    "Lungs",
+                    "Liver",
+                    "Kidneys"
+                ],
+                correctAnswer: 2, // C
+                explanation: "The liver is the most common site for hydatid cysts (about 70% of cases), followed by the lungs (about 20%).",
+                memorizationTip: "Liver is the largest internal organ = most common site for hydatid cysts."
+            },
+            {
+                question: "What is the main risk associated with rupture of a hydatid cyst?",
+                options: [
+                    "Bleeding",
+                    "Anaphylactic shock",
+                    "Intestinal obstruction",
+                    "Neurological damage"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Rupture of a hydatid cyst can cause anaphylactic shock due to the release of cyst fluid, which is highly antigenic.",
+                memorizationTip: "Cyst rupture = anaphylaxis risk."
+            },
+            {
+                question: "Which diagnostic method is most specific for confirming hydatid disease?",
+                options: [
+                    "Stool examination",
+                    "Serology (ELISA for antibodies)",
+                    "Complete blood count",
+                    "Urine analysis"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Serological tests like ELISA for antibody detection are most specific for confirming hydatid disease.",
+                memorizationTip: "Hydatid disease = serological diagnosis (not stool examination)."
+            },
+            {
+                question: "What is the primary treatment for hydatid cysts?",
+                options: [
+                    "Medication only",
+                    "Surgical removal",
+                    "Radiation therapy",
+                    "No treatment needed"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Surgery is the main treatment for hydatid cysts, especially for large or complicated cysts.",
+                memorizationTip: "Large cysts = surgery; small cysts = medication (albendazole)."
+            },
+            {
+                question: "What does PAIR stand for in the context of hydatid disease treatment?",
+                options: [
+                    "Puncture, Aspiration, Injection, Reaspiration",
+                    "Procedure for Aspiration of Internal Rupture",
+                    "Permanent Aspiration of Infected Region",
+                    "Primary Approach to Internal Removal"
+                ],
+                correctAnswer: 0, // A
+                explanation: "PAIR stands for Puncture, Aspiration, Injection, Reaspiration - a minimally invasive procedure for treating hydatid cysts.",
+                memorizationTip: "PAIR: Puncture, Aspiration, Injection, Reaspiration."
+            },
+            {
+                question: "Which animal is the most common intermediate host for Echinococcus granulosus?",
+                options: [
+                    "Dogs",
+                    "Humans",
+                    "Sheep",
+                    "Pigs"
+                ],
+                correctAnswer: 2, // C
+                explanation: "Sheep are the most common intermediate host for E. granulosus, harboring the larval form (hydatid cysts) in their organs.",
+                memorizationTip: "Sheep are herbivores that graze where dogs defecate = common intermediate hosts."
+            },
+            {
+                question: "How can human infection with Echinococcus granulosus be prevented?",
+                options: [
+                    "Cooking pork thoroughly",
+                    "Washing hands after handling dogs",
+                    "Using insect repellent",
+                    "Avoiding swimming in freshwater"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Human infection can be prevented by thorough hand washing after handling dogs, periodic deworming of dogs, and preventing dogs from eating infected organs.",
+                memorizationTip: "Dogs are the definitive host = hygiene with dogs is key to prevention."
+            },
+            {
+                question: "Which cestode has the smallest adult form but the largest larval form?",
+                options: [
+                    "Taenia saginata",
+                    "Taenia solium",
+                    "Hymenolepis nana",
+                    "Echinococcus granulosus"
+                ],
+                correctAnswer: 3, // D
+                explanation: "Echinococcus granulosus has the smallest adult form (only a few mm) but the largest larval form (hydatid cysts can grow very large).",
+                memorizationTip: "Echinococcus adults are tiny but cysts are huge."
+            },
+            {
+                question: "What is the typical growth rate of hydatid cysts?",
+                options: [
+                    "1-5 cm per month",
+                    "1-5 cm per year",
+                    "5-10 cm per month",
+                    "5-10 cm per year"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Hydatid cysts typically grow at a rate of 1-5 cm per year, which is why infections can be asymptomatic for years.",
+                memorizationTip: "Hydatid cysts grow slowly (1-5 cm/year)."
+            },
+            {
+                question: "Which of the following is NOT a typical symptom of heavy Hymenolepis nana infection?",
+                options: [
+                    "Abdominal pain",
+                    "Diarrhea",
+                    "Weakness and headaches",
+                    "Seizures"
+                ],
+                correctAnswer: 3, // D
+                explanation: "Heavy H. nana infections can cause abdominal pain, diarrhea, weakness, and headaches, but not typically seizures (which are associated with neurocysticercosis).",
+                memorizationTip: "Seizures = neurocysticercosis (T. solium), not H. nana."
+            },
+            {
+                question: "What is the infective stage of Taenia solium for humans in cysticercosis?",
+                options: [
+                    "Cysticercus cellulosae",
+                    "Eggs",
+                    "Adult worm",
+                    "Proglottids"
+                ],
+                correctAnswer: 1, // B
+                explanation: "In cysticercosis, the infective stage for humans is the egg, which contains the oncosphere that develops into cysticerci in tissues.",
+                memorizationTip: "Eggs → cysticercosis; Cysticerci → intestinal tapeworm."
+            },
+            {
+                question: "Which feature distinguishes Hymenolepis nana eggs from other tapeworm eggs?",
+                options: [
+                    "They have a terminal spine",
+                    "They have a lateral spine",
+                    "They have polar filaments",
+                    "They are triangular in shape"
+                ],
+                correctAnswer: 2, // C
+                explanation: "H. nana eggs have polar filaments between the oncosphere and the eggshell, which is a distinguishing feature.",
+                memorizationTip: "H. nana eggs have polar filaments - a unique characteristic."
+            },
+            {
+                question: "What is the most common way that autoinfection occurs with Hymenolepis nana?",
+                options: [
+                    "Through skin penetration",
+                    "By inhalation of eggs",
+                    "By retrograde movement of eggs in the intestine",
+                    "Through blood transfusion"
+                ],
+                correctAnswer: 2, // C
+                explanation: "Autoinfection with H. nana can occur when eggs hatch in the intestine and the oncospheres penetrate the intestinal villi without being passed in feces.",
+                memorizationTip: "H. nana can autoinfect - eggs hatch in same host without leaving body."
+            },
+            {
+                question: "Which cestode infection is associated with the highest risk of severe complications in humans?",
+                options: [
+                    "Taenia saginata",
+                    "Hymenolepis nana",
+                    "Taenia solium (cysticercosis)",
+                    "Diphyllobothrium latum"
+                ],
+                correctAnswer: 2, // C
+                explanation: "Taenia solium cysticercosis, particularly neurocysticercosis, is associated with the most severe complications including seizures, hydrocephalus, and death.",
+                memorizationTip: "Cysticercosis in brain = most dangerous cestode infection."
+            },
+            {
+                question: "What is the typical length of an adult Taenia solium worm?",
+                options: [
+                    "15-40 mm",
+                    "2-3 meters",
+                    "4-10 meters",
+                    "A few mm only"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Adult Taenia solium worms are typically 2-3 meters long, shorter than T. saginata (4-10 meters).",
+                memorizationTip: "Solium (pork) is shorter (2-3m) than saginata (beef, 4-10m)."
+            },
+            {
+                question: "Which of the following is a key prevention measure for Taenia solium infection?",
+                options: [
+                    "Cooking beef thoroughly",
+                    "Cooking pork thoroughly",
+                    "Washing hands after handling dogs",
+                    "Avoiding contaminated water"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Thoroughly cooking pork destroys the cysticerci, preventing intestinal taeniasis. Preventing fecal-oral transmission of eggs is also important to prevent cysticercosis.",
+                memorizationTip: "Pork tapeworm = cook pork thoroughly."
+            },
+            {
+                question: "What is the primary pathological mechanism in cysticercosis?",
+                options: [
+                    "Toxin production by adult worms",
+                    "Mechanical obstruction by adult worms",
+                    "Inflammation around dying larvae in tissues",
+                    "Allergic reaction to eggs"
+                ],
+                correctAnswer: 2, // C
+                explanation: "The primary pathology in cysticercosis results from inflammation around the cysticerci, particularly when they begin to degenerate and die.",
+                memorizationTip: "Cysticercosis pathology = inflammation around dying larvae."
+            },
+            {
+                question: "Which drug is often used in combination with albendazole for neurocysticercosis treatment?",
+                options: [
+                    "Praziquantel",
+                    "Corticosteroids",
+                    "Niclosamide",
+                    "Antibiotics"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Corticosteroids (like prednisolone) are often used with albendazole or praziquantel in neurocysticercosis to control inflammation caused by dying cysticerci.",
+                memorizationTip: "Neurocysticercosis treatment = antiparasitic + steroids to reduce inflammation."
+            },
+            {
+                question: "How long does it take for cysticerci to develop in tissues after egg ingestion?",
+                options: [
+                    "24-48 hours",
+                    "1-2 weeks",
+                    "2-3 months",
+                    "6-12 months"
+                ],
+                correctAnswer: 2, // C
+                explanation: "It takes about 2-3 months for cysticerci to fully develop in tissues after ingestion of T. solium eggs.",
+                memorizationTip: "Cysticerci develop in 2-3 months - similar to gestation period."
+            },
+            {
+                question: "Which cestode is also known as the dog tapeworm?",
+                options: [
+                    "Taenia saginata",
+                    "Taenia solium",
+                    "Hymenolepis nana",
+                    "Echinococcus granulosus"
+                ],
+                correctAnswer: 3, // D
+                explanation: "Echinococcus granulosus is also known as the dog tapeworm, as dogs are the definitive host.",
+                memorizationTip: "Dog tapeworm = Echinococcus (dogs are definitive host)."
+            },
+            {
+                question: "What is the most common symptom of cerebral cysticercosis?",
+                options: [
+                    "Headaches",
+                    "Seizures",
+                    "Visual disturbances",
+                    "Memory loss"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Seizures are the most common symptom of cerebral cysticercosis (neurocysticercosis).",
+                memorizationTip: "Neurocysticercosis = seizures as hallmark symptom."
+            },
+            {
+                question: "Which diagnostic finding is pathognomonic for hydatid disease?",
+                options: [
+                    "Eosinophilia",
+                    "Hydatid sand in cyst fluid",
+                    "Elevated liver enzymes",
+                    "Positive stool for eggs"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Hydatid sand (brood capsules and protoscolices) in cyst fluid is pathognomonic for hydatid disease.",
+                memorizationTip: "Hydatid sand = diagnostic for hydatid disease."
+            },
+            {
+                question: "What is the typical appearance of Taenia eggs under microscopy?",
+                options: [
+                    "Triangular with lateral spine",
+                    "Oval with terminal spine",
+                    "Round with radially striated shell",
+                    "Lemon-shaped with opercula"
+                ],
+                correctAnswer: 2, // C
+                explanation: "Taenia eggs are round with a thick, radially striated shell containing an oncosphere (hexacanth embryo).",
+                memorizationTip: "Taenia eggs are round and radially striated - cannot distinguish species by eggs alone."
+            },
+            {
+                question: "Which of the following is a key difference between intestinal taeniasis and cysticercosis?",
+                options: [
+                    "Intestinal taeniasis is caused by larvae, cysticercosis by adults",
+                    "Intestinal taeniasis is caused by adults, cysticercosis by larvae",
+                    "Both are caused by adult worms but in different locations",
+                    "Both are caused by larval forms but in different hosts"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Intestinal taeniasis is caused by adult worms in the intestine, while cysticercosis is caused by larval forms (cysticerci) in various tissues.",
+                memorizationTip: "Adults in gut = taeniasis; Larvae in tissues = cysticercosis."
+            },
+            {
+                question: "What is the most important public health measure for controlling Taenia solium transmission?",
+                options: [
+                    "Vaccination of pigs",
+                    "Improved sanitation and pig management",
+                    "Mass treatment of humans with praziquantel",
+                    "Meat inspection only"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Improved sanitation (to prevent contamination of environment with human feces) and proper pig management (preventing pigs from accessing human feces) are key to controlling T. solium transmission.",
+                memorizationTip: "Break the cycle: prevent pigs from eating human feces."
+            },
+            {
+                question: "Which characteristic is used to differentiate between Taenia saginata and Taenia solium proglottids?",
+                options: [
+                    "Number of uterine branches",
+                    "Presence of eggs",
+                    "Size of the proglottid",
+                    "Color of the proglottid"
+                ],
+                correctAnswer: 0, // A
+                explanation: "The number of uterine branches is used to differentiate: T. saginata has 15-30 lateral branches, while T. solium has 7-13.",
+                memorizationTip: "Saginata has more uterine branches (15-30) than solium (7-13)."
+            },
+            {
+                question: "What is the most serious potential complication of ocular cysticercosis?",
+                options: [
+                    "Conjunctivitis",
+                    "Visual loss",
+                    "Ocular pain",
+                    "Periorbital edema"
+                ],
+                correctAnswer: 1, // B
+                explanation: "The most serious complication of ocular cysticercosis is visual loss, which can be permanent if not treated promptly.",
+                memorizationTip: "Ocular cysticercosis → visual impairment/loss."
+            },
+            {
+                question: "Which of the following is NOT a typical feature of cestodes?",
+                options: [
+                    "Hermaphroditic",
+                    "Segmented body",
+                    "Complete digestive system",
+                    "Absorptive nutrition"
+                ],
+                correctAnswer: 2, // C
+                explanation: "Cestodes lack a digestive system entirely; they absorb nutrients directly through their tegument.",
+                memorizationTip: "Tapeworms have no gut - they absorb nutrients through their skin."
+            },
+            {
+                question: "What is the primary method for diagnosing intestinal taeniasis?",
+                options: [
+                    "Serology",
+                    "Imaging",
+                    "Microscopic examination of stool",
+                    "Biopsy"
+                ],
+                correctAnswer: 2, // C
+                explanation: "Intestinal taeniasis is primarily diagnosed by microscopic examination of stool for eggs or proglottids.",
+                memorizationTip: "Intestinal parasites = stool examination."
+            },
+            {
+                question: "Which medication is NOT typically used for cestode infections?",
+                options: [
+                    "Praziquantel",
+                    "Niclosamide",
+                    "Albendazole",
+                    "Ivermectin"
+                ],
+                correctAnswer: 3, // D
+                explanation: "Ivermectin is used for some nematode infections and ectoparasites, but not typically for cestode infections. Praziquantel, niclosamide, and albendazole are used for cestodes.",
+                memorizationTip: "Ivermectin = for roundworms, not tapeworms."
+            },
+            {
+                question: "What is the most effective way to prevent Hymenolepis nana infection?",
+                options: [
+                    "Cooking meat thoroughly",
+                    "Proper hand hygiene",
+                    "Avoiding contact with dogs",
+                    "Using insect repellent"
+                ],
+                correctAnswer: 1, // B
+                explanation: "Proper hand hygiene is the most effective way to prevent H. nana infection, as it is primarily transmitted through the fecal-oral route.",
+                memorizationTip: "Dwarf tapeworm = hand hygiene (fecal-oral transmission)."
+            },
+            {
+                question: "Which cestode has the shortest prepatent period (time from infection to egg production)?",
+                options: [
+                    "Taenia saginata",
+                    "Taenia solium",
+                    "Hymenolepis nana",
+                    "Echinococcus granulosus"
+                ],
+                correctAnswer: 2, // C
+                explanation: "Hymenolepis nana has the shortest prepatent period of about 2-4 weeks, compared to 2-3 months for Taenia species.",
+                memorizationTip: "Dwarf tapeworm = short life cycle = short prepatent period."
+            },
+            {
+                question: "What is the typical treatment duration for albendazole in hydatid disease?",
+                options: [
+                    "Single dose",
+                    "3 days",
+                    "4 weeks",
+                    "Several months"
+                ],
+                correctAnswer: 3, // D
+                explanation: "Albendazole is typically given for several months in hydatid disease, either as primary treatment for inoperable cysts or adjunctively after surgery.",
+                memorizationTip: "Hydatid disease requires prolonged treatment (months)."
+            }
+        ];
+
+        // Quiz state
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+
+        // DOM elements
+        const quizContainer = document.getElementById('quiz-container');
+        const questionCountElement = document.getElementById('question-count');
+        const correctCountElement = document.getElementById('correct-count');
+        const scoreElement = document.getElementById('score');
+        const progressBar = document.getElementById('progress-bar');
+        const prevButton = document.getElementById('prev-btn');
+        const nextButton = document.getElementById('next-btn');
+        const resultsContainer = document.getElementById('results');
+        const finalScoreElement = document.getElementById('final-score');
+        const performanceMessageElement = document.getElementById('performance-message');
+        const restartButton = document.getElementById('restart-btn');
+
+        // Initialize quiz
+        function initQuiz() {
+            displayQuestion();
+            updateProgress();
+            updateQuizInfo();
+        }
+
+        // Display current question
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            
+            let optionsHTML = '';
+            question.options.forEach((option, index) => {
+                const isSelected = userAnswers[currentQuestion] === index;
+                const optionClass = isSelected ? 'option selected' : 'option';
+                const letter = String.fromCharCode(65 + index); // A, B, C, D
+                
+                optionsHTML += `
+                    <li class="${optionClass}" onclick="selectOption(${index})">
+                        <span class="option-letter">${letter}</span>
+                        ${option}
+                    </li>
+                `;
+            });
+            
+            const questionHTML = `
+                <div class="quiz-card">
+                    <div class="question-header">
+                        <div class="question-number"><i class="fas fa-question-circle"></i> Question ${currentQuestion + 1} of ${questions.length}</div>
+                    </div>
+                    <div class="question-text">${question.question}</div>
+                    <ul class="options">${optionsHTML}</ul>
+                    ${userAnswers[currentQuestion] !== null ? getFeedbackHTML() : ''}
+                </div>
+            `;
+            
+            quizContainer.innerHTML = questionHTML;
+            updateNavigationButtons();
+        }
+
+        // Select an option
+        function selectOption(optionIndex) {
+            userAnswers[currentQuestion] = optionIndex;
+            displayQuestion();
+            
+            // If this is the first time answering this question, check if correct
+            const question = questions[currentQuestion];
+            if (optionIndex === question.correctAnswer) {
+                score++;
+            }
+            
+            updateQuizInfo();
+        }
+
+        // Get feedback HTML
+        function getFeedbackHTML() {
+            const question = questions[currentQuestion];
+            const userAnswerIndex = userAnswers[currentQuestion];
+            const isCorrect = userAnswerIndex === question.correctAnswer;
+            const feedbackClass = isCorrect ? 'feedback correct' : 'feedback incorrect';
+            const feedbackTitle = isCorrect ? 'Correct!' : 'Incorrect!';
+            const correctAnswerLetter = String.fromCharCode(65 + question.correctAnswer);
+            const correctAnswerText = question.options[question.correctAnswer];
+            
+            return `
+                <div class="${feedbackClass}">
+                    <div class="feedback-title">
+                        <i class="fas ${isCorrect ? 'fa-check-circle' : 'fa-times-circle'}"></i>
+                        ${feedbackTitle}
+                    </div>
+                    <div class="explanation">
+                        <strong>Explanation:</strong> ${question.explanation}
+                    </div>
+                    ${!isCorrect ? `
+                        <div class="correct-answer">
+                            <strong>Correct Answer:</strong> ${correctAnswerLetter}. ${correctAnswerText}
+                        </div>
+                    ` : ''}
+                    <div class="memorization-tip">
+                        <div class="tip-title"><i class="fas fa-lightbulb"></i> Memorization Tip:</div>
+                        ${question.memorizationTip}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Update navigation buttons
+        function updateNavigationButtons() {
+            prevButton.disabled = currentQuestion === 0;
+            nextButton.disabled = userAnswers[currentQuestion] === null;
+            
+            if (currentQuestion === questions.length - 1) {
+                nextButton.textContent = 'Finish Quiz';
+                nextButton.innerHTML = 'Finish Quiz <i class="fas fa-flag-checkered"></i>';
+            } else {
+                nextButton.textContent = 'Next';
+                nextButton.innerHTML = 'Next <i class="fas fa-arrow-right"></i>';
+            }
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Update quiz info
+        function updateQuizInfo() {
+            questionCountElement.textContent = `${currentQuestion + 1}/${questions.length}`;
+            correctCountElement.textContent = score;
+            const currentScore = Math.round((score / questions.length) * 100);
+            scoreElement.textContent = `${currentScore}%`;
+        }
+
+        // Next question
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+                updateProgress();
+            } else {
+                showResults();
+            }
+        }
+
+        // Previous question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+                updateProgress();
+            }
+        }
+
+        // Show results
+        function showResults() {
+            const finalScore = Math.round((score / questions.length) * 100);
+            finalScoreElement.textContent = `${finalScore}%`;
+            
+            let performanceMessage = '';
+            if (finalScore >= 90) {
+                performanceMessage = 'Excellent! You have mastered the topic of Cestodes.';
+            } else if (finalScore >= 80) {
+                performanceMessage = 'Very good! You have a solid understanding of Cestodes.';
+            } else if (finalScore >= 70) {
+                performanceMessage = 'Good job! You have a good grasp of the material.';
+            } else if (finalScore >= 60) {
+                performanceMessage = 'Not bad! Review the material to improve your knowledge.';
+            } else {
+                performanceMessage = 'Keep studying! Review the material and try again.';
+            }
+            
+            performanceMessageElement.textContent = performanceMessage;
+            resultsContainer.style.display = 'block';
+            quizContainer.style.display = 'none';
+            document.querySelector('.navigation').style.display = 'none';
+            document.querySelector('.progress-container').style.display = 'none';
+            document.querySelector('.quiz-info').style.display = 'none';
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            
+            resultsContainer.style.display = 'none';
+            quizContainer.style.display = 'block';
+            document.querySelector('.navigation').style.display = 'flex';
+            document.querySelector('.progress-container').style.display = 'block';
+            document.querySelector('.quiz-info').style.display = 'flex';
+            
+            initQuiz();
+        }
+
+        // Event listeners
+        prevButton.addEventListener('click', prevQuestion);
+        nextButton.addEventListener('click', nextQuestion);
+        restartButton.addEventListener('click', restartQuiz);
+
+        // Make functions available globally for onclick events
+        window.selectOption = selectOption;
+
+        // Initialize the quiz
+        initQuiz();
+    </script>
+</body>
+</html>

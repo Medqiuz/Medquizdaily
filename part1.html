@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Parasitology Quiz | MedQuiz</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a73e8, #0d47a1);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            margin-left: 15px;
+            font-size: 24px;
+        }
+        
+        .logo-icon {
+            font-size: 32px;
+            background: white;
+            color: #1a73e8;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quiz-info {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .quiz-info h2 {
+            color: #1a73e8;
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: #1a73e8;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .question-container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .question-number {
+            font-size: 18px;
+            color: #1a73e8;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .options-container {
+            margin-bottom: 20px;
+        }
+        
+        .option {
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .option:hover {
+            background: #f0f7ff;
+            border-color: #1a73e8;
+        }
+        
+        .option.selected {
+            background: #e3f2fd;
+            border-color: #1a73e8;
+        }
+        
+        .option.correct {
+            background: #e8f5e9;
+            border-color: #4caf50;
+        }
+        
+        .option.incorrect {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+        
+        .feedback {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .correct-feedback {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+        }
+        
+        .incorrect-feedback {
+            background: #ffebee;
+            border-left: 5px solid #f44336;
+        }
+        
+        .feedback-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .memorization-tip {
+            background: #fff3e0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border-left: 3px solid #ff9800;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+        
+        button:hover {
+            background: #0d47a1;
+        }
+        
+        button:disabled {
+            background: #bdbdbd;
+            cursor: not-allowed;
+        }
+        
+        .results-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            display: none;
+        }
+        
+        .results-container h2 {
+            color: #1a73e8;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            font-size: 48px;
+            font-weight: bold;
+            color: #1a73e8;
+            margin: 20px 0;
+        }
+        
+        .evaluation-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-top: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .rating {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .star {
+            font-size: 30px;
+            color: #ddd;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: color 0.2s;
+        }
+        
+        .star:hover, .star.active {
+            color: #ffc107;
+        }
+        
+        .submit-btn {
+            background: #4caf50;
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+        }
+        
+        .submit-btn:hover {
+            background: #388e3c;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+            }
+            
+            button {
+                margin-bottom: 10px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">℞</div>
+                <h1>MedQuiz Parasitology</h1>
+            </div>
+            <div>Introduction to Medical Parasitology</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="quiz-info">
+            <h2>Medical Parasitology Quiz</h2>
+            <p>Test your knowledge of parasites, their life cycles, transmission, and diagnosis.</p>
+            <p><strong>Instructions:</strong> Select the best answer for each question. After submitting your answer, you'll receive feedback with explanations and memorization tips.</p>
+            
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            <div id="progress-text">Question 1 of 55</div>
+        </div>
+        
+        <div id="quiz-container">
+            <!-- Questions will be inserted here by JavaScript -->
+        </div>
+        
+        <div class="results-container" id="results-container">
+            <h2>Quiz Completed!</h2>
+            <p>You have completed the Medical Parasitology Quiz</p>
+            <div class="score" id="score">0%</div>
+            <p id="result-message"></p>
+            
+            <div class="evaluation-form">
+                <h3>Please Evaluate Our Quiz ♥️</h3>
+                <p>Your feedback helps us improve the learning experience.</p>
+                
+                <form id="evaluation-form" action="https://formspree.io/f/mjkjkedv" method="POST">
+                    <div class="form-group">
+                        <label for="name">Your Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number:</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="rating">Rating:</label>
+                        <div class="rating" id="star-rating">
+                            <span class="star" data-value="1">★</span>
+                            <span class="star" data-value="2">★</span>
+                            <span class="star" data-value="3">★</span>
+                            <span class="star" data-value="4">★</span>
+                            <span class="star" data-value="5">★</span>
+                        </div>
+                        <input type="hidden" id="rating-value" name="rating" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="percent">Score Percentage:</label>
+                        <input type="text" id="percent" name="percent" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="comments">Comments/Suggestions:</label>
+                        <textarea id="comments" name="comments" rows="4" placeholder="What did you like? How can we improve?"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Submit Evaluation</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz questions data for Medical Parasitology
+        const questions = [
+            {
+                question: "What is the definition of a parasite?",
+                options: [
+                    "An organism that lives in a symbiotic relationship with its host",
+                    "An organism that lives on or in a host and gets nourishment at the host's expense",
+                    "An organism that provides benefits to its host",
+                    "An organism that only temporarily associates with another species"
+                ],
+                correctAnswer: 1,
+                explanation: "A parasite is defined as an organism that lives on (ectoparasite) or in (endoparasite) a host and gets its nourishment at the host's expense.",
+                tip: "Remember: Parasites benefit at the expense of their hosts."
+            },
+            {
+                question: "What is the difference between an ectoparasite and an endoparasite?",
+                options: [
+                    "Ectoparasites are larger than endoparasites",
+                    "Ectoparasites live on the surface of the host, while endoparasites live inside the host",
+                    "Ectoparasites are always insects, while endoparasites are always worms",
+                    "Ectoparasites cause more severe diseases than endoparasites"
+                ],
+                correctAnswer: 1,
+                explanation: "Ectoparasites live on the surface of the host (e.g., fleas, ticks), while endoparasites live inside the host's body (e.g., intestinal worms).",
+                tip: "Ecto = external, Endo = internal"
+            },
+            {
+                question: "Which term describes an association where both organisms benefit?",
+                options: [
+                    "Parasitism",
+                    "Commensalism",
+                    "Mutualism",
+                    "Symbiosis"
+                ],
+                correctAnswer: 2,
+                explanation: "Mutualism is a type of symbiosis where both organisms derive benefit from the association.",
+                tip: "Think of mutual benefit in mutualism."
+            },
+            {
+                question: "What is the diagnostic stage of a parasite?",
+                options: [
+                    "The stage that causes the most damage to the host",
+                    "The stage that can be detected in biological specimens",
+                    "The stage capable of entering the host",
+                    "The reproductive stage of the parasite"
+                ],
+                correctAnswer: 1,
+                explanation: "The diagnostic stage is the developmental stage of a parasite that can be detected in biological specimens like stool, blood, or urine.",
+                tip: "Diagnostic stage = detectable stage"
+            },
+            {
+                question: "What is the infective stage of a parasite?",
+                options: [
+                    "The stage that causes symptoms in the host",
+                    "The stage that can be detected in laboratory tests",
+                    "The stage capable of entering the host and continuing development",
+                    "The stage where the parasite reproduces"
+                ],
+                correctAnswer: 2,
+                explanation: "The infective stage is the stage of the parasite capable of entering the host and continuing development within the host.",
+                tip: "Infective stage = stage that initiates infection"
+            },
+            {
+                question: "What is a zoonosis?",
+                options: [
+                    "A parasite that only infects animals",
+                    "An infectious disease that can be transmitted between animals and humans",
+                    "A parasite with a complex life cycle",
+                    "A disease that only affects zoos"
+                ],
+                correctAnswer: 1,
+                explanation: "A zoonosis is an infectious disease that can be transmitted between vertebrate animals and humans.",
+                tip: "Zoo = animal, nosos = disease"
+            },
+            {
+                question: "What is the incubation period?",
+                options: [
+                    "The time between infection and appearance of symptoms",
+                    "The time between exposure and infection",
+                    "The time when the parasite is most infectious",
+                    "The time needed for laboratory diagnosis"
+                ],
+                correctAnswer: 0,
+                explanation: "The incubation period is the time elapsing between infection with the organisms of a disease and the appearance of symptoms.",
+                tip: "Incubation = development of infection before symptoms appear"
+            },
+            {
+                question: "What is autoinfection?",
+                options: [
+                    "Infection from another person",
+                    "Infection from an animal reservoir",
+                    "Reinfection by an organism already present in the body",
+                    "Infection through contaminated food"
+                ],
+                correctAnswer: 2,
+                explanation: "Autoinfection occurs when an infected individual acts as a source of infection to themselves.",
+                tip: "Auto = self, so autoinfection = self-infection"
+            },
+            {
+                question: "Which of the following is an example of a protozoan parasite?",
+                options: [
+                    "Ascaris lumbricoides",
+                    "Taenia saginata",
+                    "Entamoeba histolytica",
+                    "Schistosoma mansoni"
+                ],
+                correctAnswer: 2,
+                explanation: "Entamoeba histolytica is a protozoan parasite that causes amoebic dysentery.",
+                tip: "Protozoa are single-celled organisms, while helminths are worms."
+            },
+            {
+                question: "What is an obligate parasite?",
+                options: [
+                    "A parasite that can exist independently of a host",
+                    "A parasite that is entirely dependent on a host for survival",
+                    "A parasite that only infects certain hosts",
+                    "A parasite that causes severe disease"
+                ],
+                correctAnswer: 1,
+                explanation: "An obligate parasite is entirely dependent upon a host for its survival.",
+                tip: "Obligate = required, so obligate parasite requires a host"
+            },
+            {
+                question: "What is a facultative parasite?",
+                options: [
+                    "A parasite that can exist independently but may be parasitic",
+                    "A parasite that is always parasitic",
+                    "A parasite that only infects immunocompromised hosts",
+                    "A parasite with a simple life cycle"
+                ],
+                correctAnswer: 0,
+                explanation: "A facultative parasite may be parasitic upon another organism but can exist independently.",
+                tip: "Facultative = optional, so facultative parasite doesn't always need a host"
+            },
+            {
+                question: "What are opportunistic parasites?",
+                options: [
+                    "Parasites that always cause disease",
+                    "Parasites that only infect animals",
+                    "Parasites that cause disease when the host's immune system is suppressed",
+                    "Parasites with direct life cycles"
+                ],
+                correctAnswer: 2,
+                explanation: "Opportunistic parasites can cause diseases when the immune system of the host is suppressed.",
+                tip: "Opportunistic parasites take advantage of opportunities (like weakened immunity)"
+            },
+            {
+                question: "What is a monoxenous parasite?",
+                options: [
+                    "A parasite that requires multiple hosts",
+                    "A parasite that requires only a single host",
+                    "A parasite that causes mononucleosis",
+                    "A parasite found only in monkeys"
+                ],
+                correctAnswer: 1,
+                explanation: "A monoxenous parasite requires only a single host to complete its life cycle.",
+                tip: "Mono = one, xenos = host"
+            },
+            {
+                question: "What is a heteroxenous parasite?",
+                options: [
+                    "A parasite that requires multiple hosts",
+                    "A parasite that requires only a single host",
+                    "A parasite that infects heterogeneous populations",
+                    "A parasite with an unknown life cycle"
+                ],
+                correctAnswer: 0,
+                explanation: "A heteroxenous parasite requires two or more hosts to complete its life cycle.",
+                tip: "Hetero = different, xenos = host"
+            },
+            {
+                question: "What is the definitive host?",
+                options: [
+                    "The host that harbors the larval stage",
+                    "The host that harbors the adult/sexual stage",
+                    "The host that acts as a reservoir",
+                    "The host that transmits the parasite"
+                ],
+                correctAnswer: 1,
+                explanation: "The definitive host is the host which usually harbors the adult/sexual stage of the parasite.",
+                tip: "Definitive = final, where sexual reproduction occurs"
+            },
+            {
+                question: "What is the intermediate host?",
+                options: [
+                    "The host that harbors the adult stage",
+                    "The host that harbors the larval/asexual stage",
+                    "The host that acts as a reservoir",
+                    "The host that transmits the parasite"
+                ],
+                correctAnswer: 1,
+                explanation: "The intermediate host is the host which usually harbors the larval/asexual stage of the parasite.",
+                tip: "Intermediate = in-between, where asexual development occurs"
+            },
+            {
+                question: "What is a reservoir host?",
+                options: [
+                    "The host where the parasite reproduces sexually",
+                    "The host where larval development occurs",
+                    "Any animal that carries a parasite that can infect humans",
+                    "The host that transmits the parasite to humans"
+                ],
+                correctAnswer: 2,
+                explanation: "A reservoir host is any animal that carries a parasite that can cause infections in humans.",
+                tip: "Reservoir = source, where the parasite is maintained in nature"
+            },
+            {
+                question: "What is a biological vector?",
+                options: [
+                    "An organism that mechanically transmits parasites",
+                    "An organism that transmits parasites after development or multiplication occurs within it",
+                    "An organism that only temporarily carries parasites",
+                    "An organism that is not affected by the parasite"
+                ],
+                correctAnswer: 1,
+                explanation: "A biological vector is an organism (usually an arthropod) in which the parasite undergoes development or multiplication before being transmitted to a new host.",
+                tip: "Biological vector = parasite develops/multiplies in the vector"
+            },
+            {
+                question: "What is a mechanical vector?",
+                options: [
+                    "A vector where the parasite develops",
+                    "A vector where the parasite multiplies",
+                    "A vector that transmits parasites without development or multiplication",
+                    "A vector that is essential for the parasite's life cycle"
+                ],
+                correctAnswer: 2,
+                explanation: "A mechanical vector transmits infective organisms from one host to another without any development or reproduction of the parasite occurring within it.",
+                tip: "Mechanical vector = simple transport of parasites"
+            },
+            {
+                question: "Which of the following is a direct mode of transmission?",
+                options: [
+                    "Transmission through a mosquito bite",
+                    "Transmission through contaminated water",
+                    "Feco-oral transmission",
+                    "Transmission through an intermediate host"
+                ],
+                correctAnswer: 2,
+                explanation: "Direct transmission includes routes like feco-oral transmission, sexual intercourse, and direct skin penetration without intermediate hosts or vectors.",
+                tip: "Direct transmission = host-to-host without intermediaries"
+            },
+            {
+                question: "Which parasite is typically transmitted through the feco-oral route?",
+                options: [
+                    "Plasmodium species",
+                    "Entamoeba histolytica",
+                    "Trypanosoma species",
+                    "Schistosoma species"
+                ],
+                correctAnswer: 1,
+                explanation: "Entamoeba histolytica is typically transmitted through the feco-oral route via contaminated food or water.",
+                tip: "Intestinal parasites like E. histolytica often use feco-oral transmission"
+            },
+            {
+                question: "Which parasite is transmitted through insect bites?",
+                options: [
+                    "Enterobius vermicularis",
+                    "Taenia saginata",
+                    "Plasmodium species",
+                    "Trichomonas vaginalis"
+                ],
+                correctAnswer: 2,
+                explanation: "Plasmodium species, which cause malaria, are transmitted through the bite of infected Anopheles mosquitoes.",
+                tip: "Mosquito-borne parasites include Plasmodium (malaria) and filarial worms"
+            },
+            {
+                question: "Which parasite is transmitted through sexual contact?",
+                options: [
+                    "Giardia lamblia",
+                    "Trichomonas vaginalis",
+                    "Entamoeba histolytica",
+                    "Ascaris lumbricoides"
+                ],
+                correctAnswer: 1,
+                explanation: "Trichomonas vaginalis is a protozoan parasite transmitted primarily through sexual contact.",
+                tip: "Trichomonas vaginalis causes a common STI (trichomoniasis)"
+            },
+            {
+                question: "Which parasite can be transmitted transplacentally?",
+                options: [
+                    "Strongyloides stercoralis",
+                    "Toxoplasma gondii",
+                    "Enterobius vermicularis",
+                    "Schistosoma species"
+                ],
+                correctAnswer: 1,
+                explanation: "Toxoplasma gondii can be transmitted transplacentally from mother to fetus.",
+                tip: "Toxoplasma gondii is dangerous during pregnancy due to transplacental transmission"
+            },
+            {
+                question: "Which parasite can be transmitted through blood transfusion?",
+                options: [
+                    "Enterobius vermicularis",
+                    "Plasmodium species",
+                    "Taenia saginata",
+                    "Trichomonas vaginalis"
+                ],
+                correctAnswer: 1,
+                explanation: "Plasmodium species, which cause malaria, can be transmitted through blood transfusion.",
+                tip: "Blood-borne parasites like Plasmodium can be transmitted via transfusion"
+            },
+            {
+                question: "What is the primary purpose of studying parasite morphology?",
+                options: [
+                    "To understand parasite evolution",
+                    "To identify different developmental stages for diagnosis",
+                    "To determine treatment options",
+                    "To study parasite genetics"
+                ],
+                correctAnswer: 1,
+                explanation: "Studying parasite morphology is important for laboratory diagnosis as it helps identify different developmental stages of parasites.",
+                tip: "Morphology = form/structure, which helps in identification"
+            },
+            {
+                question: "What is a direct life cycle?",
+                options: [
+                    "A life cycle that requires multiple hosts",
+                    "A life cycle that requires only one host",
+                    "A life cycle that includes a vector",
+                    "A life cycle with both sexual and asexual reproduction"
+                ],
+                correctAnswer: 1,
+                explanation: "A direct life cycle requires only one host to complete the parasite's development.",
+                tip: "Direct life cycle = one host only"
+            },
+            {
+                question: "Which parasite has a direct life cycle?",
+                options: [
+                    "Plasmodium species",
+                    "Schistosoma species",
+                    "Ascaris lumbricoides",
+                    "Leishmania species"
+                ],
+                correctAnswer: 2,
+                explanation: "Ascaris lumbricoides has a direct life cycle, requiring only a human host.",
+                tip: "Many intestinal nematodes like Ascaris have direct life cycles"
+            },
+            {
+                question: "What is an indirect life cycle?",
+                options: [
+                    "A life cycle that requires multiple hosts",
+                    "A life cycle that requires only one host",
+                    "A life cycle without sexual reproduction",
+                    "A life cycle without larval stages"
+                ],
+                correctAnswer: 0,
+                explanation: "An indirect life cycle requires two or more hosts to complete the parasite's development.",
+                tip: "Indirect life cycle = multiple hosts required"
+            },
+            {
+                question: "Which parasite has an indirect life cycle?",
+                options: [
+                    "Enterobius vermicularis",
+                    "Ascaris lumbricoides",
+                    "Plasmodium species",
+                    "Trichomonas vaginalis"
+                ],
+                correctAnswer: 2,
+                explanation: "Plasmodium species have an indirect life cycle, requiring both human and mosquito hosts.",
+                tip: "Malaria parasites (Plasmodium) require both human and mosquito hosts"
+            },
+            {
+                question: "Why is studying parasite life cycles important?",
+                options: [
+                    "To understand parasite evolution only",
+                    "For diagnosis, treatment, prevention, and control of parasitic diseases",
+                    "To identify parasite morphology only",
+                    "To study parasite genetics only"
+                ],
+                correctAnswer: 1,
+                explanation: "Studying parasite life cycles is crucial for diagnosis, treatment, prevention, and control of parasitic diseases.",
+                tip: "Understanding life cycles helps break transmission chains"
+            },
+            {
+                question: "Which factor is NOT a parasitic factor in pathogenesis?",
+                options: [
+                    "Parasite strain",
+                    "Parasite load",
+                    "Site occupied in the body",
+                    "Host genetic factors"
+                ],
+                correctAnswer: 3,
+                explanation: "Host genetic factors are host factors, not parasitic factors in pathogenesis.",
+                tip: "Parasitic factors relate to the parasite itself, not the host"
+            },
+            {
+                question: "Which of the following is a host factor in pathogenesis?",
+                options: [
+                    "Parasite metabolic processes",
+                    "Genetic factors of the host",
+                    "Parasite load",
+                    "Site occupied by the parasite"
+                ],
+                correctAnswer: 1,
+                explanation: "Host genetic factors are host factors that influence pathogenesis.",
+                tip: "Host factors relate to the host's characteristics"
+            },
+            {
+                question: "How does Diphyllobothrium latum affect its host?",
+                options: [
+                    "By destroying liver tissue",
+                    "By blocking lymphatic vessels",
+                    "By absorbing vitamin B-12",
+                    "By causing RBCs to stick together"
+                ],
+                correctAnswer: 2,
+                explanation: "Diphyllobothrium latum (fish tapeworm) absorbs vitamin B-12 from the host, potentially causing deficiency.",
+                tip: "D. latum competes for vitamin B-12, leading to potential deficiency"
+            },
+            {
+                question: "How do hookworms affect their host?",
+                options: [
+                    "By producing toxins",
+                    "By ingesting blood",
+                    "By blocking intestines",
+                    "By destroying liver tissue"
+                ],
+                correctAnswer: 1,
+                explanation: "Hookworms attach to the intestinal wall and ingest blood, potentially causing anemia.",
+                tip: "Hookworms are blood-feeders that can cause iron-deficiency anemia"
+            },
+            {
+                question: "How does Entamoeba histolytica cause tissue damage?",
+                options: [
+                    "By producing toxins",
+                    "By causing necrosis of tissues like the liver",
+                    "By blocking blood vessels",
+                    "By inducing allergic reactions"
+                ],
+                correctAnswer: 1,
+                explanation: "Trophozoites of Entamoeba histolytica can cause necrosis of tissues, particularly in the liver (amoebic liver abscess).",
+                tip: "E. histolytica trophozoites can invade tissues and cause necrosis"
+            },
+            {
+                question: "How can filarial worms cause pathology?",
+                options: [
+                    "By competing for nutrients",
+                    "By blocking lymphatic vessels",
+                    "By destroying intestinal mucosa",
+                    "By producing neurotoxins"
+                ],
+                correctAnswer: 1,
+                explanation: "Filarial worms can block lymphatic vessels, leading to conditions like elephantiasis.",
+                tip: "Lymphatic filariasis is caused by worms blocking lymphatic vessels"
+            },
+            {
+                question: "What is the most common method for diagnosing intestinal parasites?",
+                options: [
+                    "Blood tests",
+                    "Microscopic examination of stool",
+                    "PCR",
+                    "Culture"
+                ],
+                correctAnswer: 1,
+                explanation: "Microscopic examination of stool specimens is the most common method for diagnosing intestinal parasites.",
+                tip: "Stool examination is primary for intestinal parasites"
+            },
+            {
+                question: "What does immunodiagnosis typically detect?",
+                options: [
+                    "Parasite DNA",
+                    "Parasite morphology",
+                    "Antibodies or antigens to parasites",
+                    "Parasite culture characteristics"
+                ],
+                correctAnswer: 2,
+                explanation: "Immunodiagnosis detects either antibodies produced by the host in response to infection or antigens from the parasite itself.",
+                tip: "Immunodiagnosis = detection of immune response or parasite antigens"
+            },
+            {
+                question: "Which technique is used to detect parasite DNA?",
+                options: [
+                    "Microscopy",
+                    "Culture",
+                    "PCR",
+                    "Xenodiagnosis"
+                ],
+                correctAnswer: 2,
+                explanation: "PCR (polymerase chain reaction) is a molecular technique used to detect and identify parasite DNA.",
+                tip: "PCR amplifies DNA for detection of specific parasites"
+            },
+            {
+                question: "What is xenodiagnosis used for?",
+                options: [
+                    "Diagnosing malaria",
+                    "Diagnosing intestinal worms",
+                    "Diagnosing Chagas disease",
+                    "Diagnosing amoebiasis"
+                ],
+                correctAnswer: 2,
+                explanation: "Xenodiagnosis is used to diagnose Chagas disease by allowing uninfected reduviid bugs to feed on a patient's blood, then examining the bugs for T. cruzi.",
+                tip: "Xenodiagnosis uses vectors to detect infection"
+            },
+            {
+                question: "Which specimen is NOT typically used for parasitological examination?",
+                options: [
+                    "Feces",
+                    "Blood",
+                    "Urine",
+                    "Saliva"
+                ],
+                correctAnswer: 3,
+                explanation: "While feces, blood, and urine are commonly examined for parasites, saliva is not a standard specimen for parasitological diagnosis.",
+                tip: "Standard specimens: stool, blood, urine, tissue biopsies, etc."
+            },
+            {
+                question: "What is the correct binomial nomenclature format?",
+                options: [
+                    "Genus (lowercase) species (uppercase)",
+                    "Genus (uppercase) species (lowercase)",
+                    "Both genus and species in uppercase",
+                    "Both genus and species in lowercase"
+                ],
+                correctAnswer: 1,
+                explanation: "In binomial nomenclature, the genus is capitalized and the species is not capitalized, and the full name is italicized or underlined.",
+                tip: "Genus capitalized, species lowercase, italicized/underlined"
+            },
+            {
+                question: "Which of the following represents correct binomial nomenclature?",
+                options: [
+                    "ascaris lumbricoides",
+                    "Ascaris Lumbricoides",
+                    "Ascaris lumbricoides",
+                    "ASCARIS LUMBRICOIDES"
+                ],
+                correctAnswer: 2,
+                explanation: "Ascaris lumbricoides is correctly written with genus capitalized, species lowercase, and italicized or underlined.",
+                tip: "Correct format: Genus species (italicized)"
+            },
+            {
+                question: "Which group includes single-celled parasites?",
+                options: [
+                    "Helminths",
+                    "Protozoa",
+                    "Arthropods",
+                    "Nematodes"
+                ],
+                correctAnswer: 1,
+                explanation: "Protozoa are single-celled eukaryotic organisms, many of which are parasitic.",
+                tip: "Protozoa = single-celled, Helminths = worms"
+            },
+            {
+                question: "Which group includes parasitic worms?",
+                options: [
+                    "Protozoa",
+                    "Helminths",
+                    "Arthropods",
+                    "Fungi"
+                ],
+                correctAnswer: 1,
+                explanation: "Helminths are parasitic worms that include nematodes (roundworms), cestodes (tapeworms), and trematodes (flukes).",
+                tip: "Helminths = parasitic worms"
+            },
+            {
+                question: "Which of the following is an example of a helminth?",
+                options: [
+                    "Entamoeba histolytica",
+                    "Plasmodium falciparum",
+                    "Ascaris lumbricoides",
+                    "Trichomonas vaginalis"
+                ],
+                correctAnswer: 2,
+                explanation: "Ascaris lumbricoides is a helminth (specifically a nematode or roundworm).",
+                tip: "Ascaris is a common intestinal roundworm (helminth)"
+            },
+            {
+                question: "What is the primary route of transmission for Schistosoma species?",
+                options: [
+                    "Feco-oral route",
+                    "Insect bites",
+                    "Skin penetration in water",
+                    "Sexual contact"
+                ],
+                correctAnswer: 2,
+                explanation: "Schistosoma species are transmitted when cercariae in water penetrate the skin of humans.",
+                tip: "Schistosomes have fork-tailed cercariae that penetrate skin"
+            },
+            {
+                question: "Which parasite is known for causing autoinfection?",
+                options: [
+                    "Ascaris lumbricoides",
+                    "Strongyloides stercoralis",
+                    "Taenia saginata",
+                    "Plasmodium vivax"
+                ],
+                correctAnswer: 1,
+                explanation: "Strongyloides stercoralis is known for its ability to cause autoinfection, where larvae develop within the host and reinfect without leaving the body.",
+                tip: "Strongyloides can complete its life cycle within a single host through autoinfection"
+            },
+            {
+                question: "What type of vector is an Anopheles mosquito for malaria?",
+                options: [
+                    "Mechanical vector",
+                    "Biological vector (propagative)",
+                    "Biological vector (cyclodevelopmental)",
+                    "Biological vector (cyclopropagative)"
+                ],
+                correctAnswer: 3,
+                explanation: "Anopheles mosquitoes are biological vectors for malaria where both multiplication and developmental change (cyclopropagative) of Plasmodium occur.",
+                tip: "Malaria parasites undergo both development and multiplication in mosquitoes"
+            },
+            {
+                question: "Which diagnostic method is most appropriate for detecting malaria parasites?",
+                options: [
+                    "Stool examination",
+                    "Blood smear microscopy",
+                    "Urine antigen test",
+                    "Sputum culture"
+                ],
+                correctAnswer: 1,
+                explanation: "Blood smear microscopy is the gold standard for detecting malaria parasites in the blood.",
+                tip: "Malaria parasites infect red blood cells, so blood smears are diagnostic"
+            },
+            {
+                question: "What is the primary host factor that determines resistance to Plasmodium vivax?",
+                options: [
+                    "ABO blood group",
+                    "Duffy antigen status",
+                    "HLA type",
+                    "Glucose-6-phosphate dehydrogenase deficiency"
+                ],
+                correctAnswer: 1,
+                explanation: "Individuals who lack the Duffy antigen on their red blood cells are resistant to infection with Plasmodium vivax.",
+                tip: "Duffy-negative individuals are resistant to P. vivax malaria"
+            }
+        ];
+
+        // Initialize quiz
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        
+        // Display question
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            const questionElement = document.getElementById(`question-${currentQuestion}`);
+            
+            // Update progress
+            document.getElementById('progress').style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+            document.getElementById('progress-text').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            
+            // Show current question
+            document.querySelectorAll('.question-container').forEach(q => q.classList.remove('active'));
+            questionElement.classList.add('active');
+            
+            // Reset options
+            questionElement.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Hide feedback
+            questionElement.querySelector('.feedback').style.display = 'none';
+        }
+
+        // Create quiz HTML
+        function createQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            
+            questions.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = `question-container ${index === 0 ? 'active' : ''}`;
+                questionDiv.id = `question-${index}`;
+                
+                let optionsHTML = '';
+                question.options.forEach((option, optIndex) => {
+                    optionsHTML += `
+                        <div class="option" data-index="${optIndex}">
+                            ${option}
+                        </div>
+                    `;
+                });
+                
+                questionDiv.innerHTML = `
+                    <div class="question-number">Question ${index + 1}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options-container">
+                        ${optionsHTML}
+                    </div>
+                    <div class="feedback">
+                        <div class="feedback-title">Explanation:</div>
+                        <div class="explanation"></div>
+                        <div class="memorization-tip">
+                            <strong>Memorization Tip:</strong> <span class="tip-text"></span>
+                        </div>
+                    </div>
+                    <div class="navigation">
+                        <button class="prev-btn" ${index === 0 ? 'disabled' : ''}>Previous</button>
+                        <button class="next-btn" ${index === questions.length - 1 ? 'disabled' : ''}>Next</button>
+                        ${index === questions.length - 1 ? '<button class="submit-btn">Submit Quiz</button>' : ''}
+                    </div>
+                `;
+                
+                quizContainer.appendChild(questionDiv);
+                
+                // Add event listeners to options
+                questionDiv.querySelectorAll('.option').forEach(option => {
+                    option.addEventListener('click', function() {
+                        if (userAnswers[index] !== null) return; // Already answered
+                        
+                        const selectedIndex = parseInt(this.getAttribute('data-index'));
+                        userAnswers[index] = selectedIndex;
+                        
+                        // Mark selected option
+                        questionDiv.querySelectorAll('.option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        this.classList.add('selected');
+                        
+                        // Check if correct
+                        const isCorrect = selectedIndex === question.correctAnswer;
+                        if (isCorrect) {
+                            this.classList.add('correct');
+                            score++;
+                        } else {
+                            this.classList.add('incorrect');
+                            // Mark correct answer
+                            questionDiv.querySelectorAll('.option')[question.correctAnswer].classList.add('correct');
+                        }
+                        
+                        // Show feedback
+                        const feedback = questionDiv.querySelector('.feedback');
+                        feedback.querySelector('.explanation').textContent = question.explanation;
+                        feedback.querySelector('.tip-text').textContent = question.tip;
+                        feedback.className = `feedback ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}`;
+                        feedback.style.display = 'block';
+                    });
+                });
+                
+                // Navigation buttons
+                if (index > 0) {
+                    questionDiv.querySelector('.prev-btn').addEventListener('click', function() {
+                        currentQuestion--;
+                        displayQuestion();
+                    });
+                }
+                
+                if (index < questions.length - 1) {
+                    questionDiv.querySelector('.next-btn').addEventListener('click', function() {
+                        currentQuestion++;
+                        displayQuestion();
+                    });
+                } else {
+                    questionDiv.querySelector('.submit-btn').addEventListener('click', function() {
+                        showResults();
+                    });
+                }
+            });
+        }
+
+        // Show results
+        function showResults() {
+            document.getElementById('quiz-container').style.display = 'none';
+            const resultsContainer = document.getElementById('results-container');
+            const scoreElement = document.getElementById('score');
+            const resultMessage = document.getElementById('result-message');
+            const percentElement = document.getElementById('percent');
+            
+            const percentage = Math.round((score / questions.length) * 100);
+            scoreElement.textContent = `${percentage}%`;
+            percentElement.value = `${percentage}%`;
+            
+            if (percentage >= 90) {
+                resultMessage.textContent = "Excellent! You have a strong understanding of medical parasitology.";
+            } else if (percentage >= 80) {
+                resultMessage.textContent = "Very good! You have a solid grasp of parasitology concepts with some room for improvement.";
+            } else if (percentage >= 70) {
+                resultMessage.textContent = "Good effort! Review the areas where you had difficulty to strengthen your knowledge.";
+            } else if (percentage >= 60) {
+                resultMessage.textContent = "You passed, but consider reviewing the material again to improve your understanding.";
+            } else {
+                resultMessage.textContent = "You need more study time. Review the Introduction to Medical Parasitology carefully and try again.";
+            }
+            
+            resultsContainer.style.display = 'block';
+        }
+
+        // Star rating functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.querySelectorAll('.star');
+            const ratingValue = document.getElementById('rating-value');
+            
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const value = this.getAttribute('data-value');
+                    ratingValue.value = value;
+                    
+                    stars.forEach(s => {
+                        if (s.getAttribute('data-value') <= value) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Initialize quiz
+            createQuiz();
+        });
+    </script>
+</body>
+</html>
