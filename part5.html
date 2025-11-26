@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parasitology Mid-Exam</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .exam-title {
+            text-align: center;
+            margin: 20px 0;
+            color: var(--primary);
+        }
+        
+        .exam-info {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .instructions {
+            background-color: var(--light);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .exam-form {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .question-text {
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .options {
+            margin-left: 20px;
+        }
+        
+        .option {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .option input {
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+        
+        .explanation {
+            background-color: var(--light);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .correct {
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .incorrect {
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #219955;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+            color: white;
+        }
+        
+        .btn-warning:hover {
+            background-color: #e67e22;
+        }
+        
+        .user-info {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .user-info input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            flex: 1;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--secondary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .results {
+            display: none;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .score {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .retake-btn {
+            display: block;
+            margin: 20px auto;
+        }
+        
+        .timer {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="https://t.me/yerotechno"><h1 style="color:pink;">MedQuiz</h1></a>
+                <div class="logo">Parasitology Exam</div>
+                <div>Mid-Examination</div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <h1 class="exam-title">Parasitology Mid-Term Examination</h1>
+        
+        <div class="exam-info">
+            <div class="instructions">
+                <h3>Instructions:</h3>
+                <ul>
+                    <li>This exam consists of 55 multiple-choice questions.</li>
+                    <li>Select the best answer for each question.</li>
+                    <li>You can only submit your answers once.</li>
+                    <li>After submission, you will see your score and can review the correct answers with explanations.</li>
+                    <li>The exam has a time limit of 90 minutes.</li>
+                </ul>
+            </div>
+            
+            <div class="user-info">
+                <input type="text" id="student-name" placeholder="Enter your name" required>
+                <input type="email" id="student-email" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="timer" id="timer">Time Remaining: 90:00</div>
+            
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+        </div>
+        
+        <form id="exam-form" class="exam-form">
+            <!-- Questions will be inserted here by JavaScript -->
+        </form>
+        
+        <div class="buttons">
+            <button type="button" id="prev-btn" class="btn-primary">Previous</button>
+            <button type="button" id="next-btn" class="btn-primary">Next</button>
+            <button type="button" id="submit-btn" class="btn-success">Submit Exam</button>
+        </div>
+        
+        <div id="results" class="results">
+            <h2 class="score">Your Score: <span id="score-value">0</span>/55</h2>
+            <div id="results-content">
+                <!-- Results will be inserted here by JavaScript -->
+            </div>
+            <button type="button" id="retake-btn" class="btn-warning retake-btn">Retake Exam (Practice Mode)</button>
+        </div>
+    </div>
+
+    <script>
+        // Questions array - 55 questions covering all topics from the provided materials
+        const questions = [
+            {
+                question: "What is the definitive host for Taenia saginata?",
+                options: [
+                    "A. Human",
+                    "B. Cow",
+                    "C. Pig",
+                    "D. Dog"
+                ],
+                correctAnswer: 0,
+                explanation: "Humans are the definitive host for Taenia saginata, as the adult worm resides in the human intestine."
+            },
+            {
+                question: "Which parasite causes 'swimmer's itch'?",
+                options: [
+                    "A. Ascaris lumbricoides",
+                    "B. Schistosoma species",
+                    "C. Enterobius vermicularis",
+                    "D. Trichuris trichiura"
+                ],
+                correctAnswer: 1,
+                explanation: "Schistosoma species cause cercarial dermatitis, also known as swimmer's itch, when their cercariae penetrate human skin."
+            },
+            {
+                question: "What is the infective stage of Strongyloides stercoralis?",
+                options: [
+                    "A. Egg",
+                    "B. Rhabditiform larva",
+                    "C. Filariform larva",
+                    "D. Adult worm"
+                ],
+                correctAnswer: 2,
+                explanation: "The filariform larva is the infective stage of Strongyloides stercoralis, which penetrates the skin."
+            },
+            {
+                question: "Which diagnostic method is used for Enterobius vermicularis?",
+                options: [
+                    "A. Stool microscopy",
+                    "B. Blood film",
+                    "C. Scotch tape test",
+                    "D. Urine microscopy"
+                ],
+                correctAnswer: 2,
+                explanation: "The Scotch tape test is used to detect Enterobius vermicularis eggs from the perianal region."
+            },
+            {
+                question: "What complication can occur if a hydatid cyst ruptures during surgery?",
+                options: [
+                    "A. Portal hypertension",
+                    "B. Anaphylactic shock",
+                    "C. Secondary bacterial infection",
+                    "D. Hydatid sand release"
+                ],
+                correctAnswer: 1,
+                explanation: "Rupture of a hydatid cyst can release antigens that may cause anaphylactic shock."
+            },
+            {
+                question: "Which drug is the first-line treatment for neurocysticercosis?",
+                options: [
+                    "A. Praziquantel alone",
+                    "B. Niclosamide",
+                    "C. Albendazole + corticosteroids",
+                    "D. Mebendazole"
+                ],
+                correctAnswer: 2,
+                explanation: "Albendazole combined with corticosteroids is the recommended treatment for neurocysticercosis to reduce inflammation."
+            },
+            {
+                question: "What is the characteristic feature of Trichuris trichiura eggs?",
+                options: [
+                    "A. Barrel-shaped with bipolar plugs",
+                    "B. Oval with thin shell",
+                    "C. Triangular lateral spine",
+                    "D. Terminal spine"
+                ],
+                correctAnswer: 0,
+                explanation: "Trichuris trichiura eggs are barrel-shaped with bipolar plugs, which is a distinctive characteristic."
+            },
+            {
+                question: "Which parasite is known for its autoinfection cycle?",
+                options: [
+                    "A. Ascaris lumbricoides",
+                    "B. Strongyloides stercoralis",
+                    "C. Trichuris trichiura",
+                    "D. Enterobius vermicularis"
+                ],
+                correctAnswer: 1,
+                explanation: "Strongyloides stercoralis has an autoinfection cycle where larvae can reinfect the same host without leaving the body."
+            },
+            {
+                question: "What is the intermediate host for Schistosoma mansoni?",
+                options: [
+                    "A. Bulinus spp. snail",
+                    "B. Biomphalaria spp. snail",
+                    "C. Oncomelania spp. snail",
+                    "D. Freshwater fish"
+                ],
+                correctAnswer: 1,
+                explanation: "Biomphalaria spp. snails are the intermediate hosts for Schistosoma mansoni."
+            },
+            {
+                question: "Which of the following is a blood fluke?",
+                options: [
+                    "A. Taenia saginata",
+                    "B. Schistosoma haematobium",
+                    "C. Hymenolepis nana",
+                    "D. Echinococcus granulosus"
+                ],
+                correctAnswer: 1,
+                explanation: "Schistosoma haematobium is a blood fluke that resides in the venous plexus of the urinary bladder."
+            },
+            {
+                question: "What is the primary mode of transmission for hookworms?",
+                options: [
+                    "A. Ingestion of eggs",
+                    "B. Mosquito bite",
+                    "C. Skin penetration",
+                    "D. Sexual contact"
+                ],
+                correctAnswer: 2,
+                explanation: "Hookworm infection occurs when filariform larvae penetrate the skin, usually of the feet."
+            },
+            {
+                question: "Which parasite is associated with Loeffler's syndrome?",
+                options: [
+                    "A. Trichuris trichiura",
+                    "B. Enterobius vermicularis",
+                    "C. Ascaris lumbricoides",
+                    "D. Strongyloides stercoralis"
+                ],
+                correctAnswer: 2,
+                explanation: "Ascaris lumbricoides larval migration through the lungs can cause Loeffler's syndrome, characterized by respiratory symptoms and eosinophilia."
+            },
+            {
+                question: "What is the drug of choice for treating schistosomiasis?",
+                options: [
+                    "A. Mebendazole",
+                    "B. Praziquantel",
+                    "C. Albendazole",
+                    "D. Ivermectin"
+                ],
+                correctAnswer: 1,
+                explanation: "Praziquantel is the drug of choice for treating all species of Schistosoma."
+            },
+            {
+                question: "Which cestode has eggs that are immediately infective when passed in feces?",
+                options: [
+                    "A. Taenia saginata",
+                    "B. Taenia solium",
+                    "C. Hymenolepis nana",
+                    "D. Echinococcus granulosus"
+                ],
+                correctAnswer: 2,
+                explanation: "Hymenolepis nana eggs are immediately infective when passed in feces and can cause autoinfection."
+            },
+            {
+                question: "What is the definitive host for Echinococcus granulosus?",
+                options: [
+                    "A. Human",
+                    "B. Sheep",
+                    "C. Dog",
+                    "D. Cow"
+                ],
+                correctAnswer: 2,
+                explanation: "Dogs and other canines are the definitive hosts for Echinococcus granulosus, harboring the adult worm."
+            },
+            {
+                question: "Which nematode is transmitted by the fecal-oral route?",
+                options: [
+                    "A. Hookworm",
+                    "B. Strongyloides stercoralis",
+                    "C. Ascaris lumbricoides",
+                    "D. Wuchereria bancrofti"
+                ],
+                correctAnswer: 2,
+                explanation: "Ascaris lumbricoides is transmitted via the fecal-oral route through ingestion of embryonated eggs."
+            },
+            {
+                question: "What is the infective stage of Taenia saginata for humans?",
+                options: [
+                    "A. Egg",
+                    "B. Cysticercus bovis",
+                    "C. Oncosphere",
+                    "D. Proglottid"
+                ],
+                correctAnswer: 1,
+                explanation: "Cysticercus bovis, the larval stage in cattle muscle, is the infective stage for humans who consume undercooked beef."
+            },
+            {
+                question: "Which parasite causes Katayama fever?",
+                options: [
+                    "A. Plasmodium falciparum",
+                    "B. Schistosoma species",
+                    "C. Trypanosoma cruzi",
+                    "D. Leishmania donovani"
+                ],
+                correctAnswer: 1,
+                explanation: "Katayama fever is an acute form of schistosomiasis that occurs weeks after initial infection with Schistosoma species."
+            },
+            {
+                question: "What is the most common site for hydatid cysts in humans?",
+                options: [
+                    "A. Brain",
+                    "B. Lungs",
+                    "C. Liver",
+                    "D. Kidney"
+                ],
+                correctAnswer: 2,
+                explanation: "The liver is the most common site (about 70% of cases) for hydatid cysts caused by Echinococcus granulosus."
+            },
+            {
+                question: "Which diagnostic stage is characteristic of Schistosoma haematobium?",
+                options: [
+                    "A. Eggs with lateral spine",
+                    "B. Eggs with terminal spine",
+                    "C. Rhabditiform larvae",
+                    "D. Cysticerci"
+                ],
+                correctAnswer: 1,
+                explanation: "Schistosoma haematobium eggs have a characteristic terminal spine and are found in urine."
+            },
+            {
+                question: "What is the treatment of choice for strongyloidiasis?",
+                options: [
+                    "A. Praziquantel",
+                    "B. Ivermectin",
+                    "C. Albendazole",
+                    "D. Mebendazole"
+                ],
+                correctAnswer: 1,
+                explanation: "Ivermectin is the drug of choice for treating Strongyloides stercoralis infections."
+            },
+            {
+                question: "Which parasite is known as the 'whipworm'?",
+                options: [
+                    "A. Trichuris trichiura",
+                    "B. Enterobius vermicularis",
+                    "C. Ascaris lumbricoides",
+                    "D. Strongyloides stercoralis"
+                ],
+                correctAnswer: 0,
+                explanation: "Trichuris trichiura is commonly known as the whipworm due to its whip-like shape."
+            },
+            {
+                question: "What is the primary pathological mechanism in schistosomiasis?",
+                options: [
+                    "A. Adult worms blocking blood vessels",
+                    "B. Larval migration through tissues",
+                    "C. Granuloma formation around eggs",
+                    "D. Toxin production by adult worms"
+                ],
+                correctAnswer: 2,
+                explanation: "The primary pathology in schistosomiasis is granuloma formation around eggs trapped in tissues, leading to fibrosis and organ damage."
+            },
+            {
+                question: "Which of the following is a filarial nematode?",
+                options: [
+                    "A. Trichinella spiralis",
+                    "B. Wuchereria bancrofti",
+                    "C. Strongyloides stercoralis",
+                    "D. Necator americanus"
+                ],
+                correctAnswer: 1,
+                explanation: "Wuchereria bancrofti is a filarial nematode that causes lymphatic filariasis."
+            },
+            {
+                question: "What is the infective stage of Plasmodium species to humans?",
+                options: [
+                    "A. Sporozoite",
+                    "B. Merozoite",
+                    "C. Trophozoite",
+                    "D. Gametocyte"
+                ],
+                correctAnswer: 0,
+                explanation: "Sporozoites are the infective stage of Plasmodium species, injected into humans during a mosquito bite."
+            },
+            {
+                question: "Which parasite causes Chagas disease?",
+                options: [
+                    "A. Trypanosoma brucei",
+                    "B. Trypanosoma cruzi",
+                    "C. Leishmania donovani",
+                    "D. Plasmodium vivax"
+                ],
+                correctAnswer: 1,
+                explanation: "Trypanosoma cruzi causes Chagas disease, which is transmitted by reduviid bugs."
+            },
+            {
+                question: "What is the definitive host for Toxoplasma gondii?",
+                options: [
+                    "A. Human",
+                    "B. Cat",
+                    "C. Dog",
+                    "D. Rodent"
+                ],
+                correctAnswer: 1,
+                explanation: "Cats are the definitive host for Toxoplasma gondii, where sexual reproduction occurs."
+            },
+            {
+                question: "Which diagnostic method is used for African sleeping sickness?",
+                options: [
+                    "A. Blood smear",
+                    "B. Lymph node aspirate",
+                    "C. CSF examination",
+                    "D. All of the above"
+                ],
+                correctAnswer: 3,
+                explanation: "Diagnosis of African sleeping sickness (Trypanosoma brucei) involves blood smears, lymph node aspirates, and CSF examination in later stages."
+            },
+            {
+                question: "What is the vector for Leishmania species?",
+                options: [
+                    "A. Mosquito",
+                    "B. Tsetse fly",
+                    "C. Sandfly",
+                    "D. Reduviid bug"
+                ],
+                correctAnswer: 2,
+                explanation: "Sandflies are the vectors for Leishmania species, transmitting the promastigote stage during blood meals."
+            },
+            {
+                question: "Which protozoan causes amoebic dysentery?",
+                options: [
+                    "A. Giardia lamblia",
+                    "B. Entamoeba histolytica",
+                    "C. Cryptosporidium parvum",
+                    "D. Balantidium coli"
+                ],
+                correctAnswer: 1,
+                explanation: "Entamoeba histolytica causes amoebic dysentery, characterized by bloody diarrhea and flask-shaped ulcers in the colon."
+            },
+            {
+                question: "What is the treatment for giardiasis?",
+                options: [
+                    "A. Metronidazole",
+                    "B. Chloroquine",
+                    "C. Praziquantel",
+                    "D. Ivermectin"
+                ],
+                correctAnswer: 0,
+                explanation: "Metronidazole is the drug of choice for treating Giardia lamblia infections."
+            },
+            {
+                question: "Which parasite is associated with 'river blindness'?",
+                options: [
+                    "A. Onchocerca volvulus",
+                    "B. Loa loa",
+                    "C. Wuchereria bancrofti",
+                    "D. Brugia malayi"
+                ],
+                correctAnswer: 0,
+                explanation: "Onchocerca volvulus causes onchocerciasis or 'river blindness', transmitted by black flies."
+            },
+            {
+                question: "What is the characteristic lesion in cutaneous leishmaniasis?",
+                options: [
+                    "A. Chancre",
+                    "B. Ulcer with raised border",
+                    "C. Verrucous plaque",
+                    "D. All of the above"
+                ],
+                correctAnswer: 3,
+                explanation: "Cutaneous leishmaniasis can present as a chancre, ulcer with raised border, or verrucous plaque depending on the species and host immune response."
+            },
+            {
+                question: "Which diagnostic stage is found in the stool of patients with hookworm infection?",
+                options: [
+                    "A. Eggs",
+                    "B. Rhabditiform larvae",
+                    "C. Filariform larvae",
+                    "D. Adult worms"
+                ],
+                correctAnswer: 0,
+                explanation: "Hookworm eggs are found in the stool of infected individuals and are used for diagnosis."
+            },
+            {
+                question: "What is the primary mode of transmission for Trichomonas vaginalis?",
+                options: [
+                    "A. Fecal-oral",
+                    "B. Sexual contact",
+                    "C. Blood transfusion",
+                    "D. Insect bite"
+                ],
+                correctAnswer: 1,
+                explanation: "Trichomonas vaginalis is primarily transmitted through sexual contact."
+            },
+            {
+                question: "Which parasite causes 'beef tapeworm' infection?",
+                options: [
+                    "A. Taenia solium",
+                    "B. Taenia saginata",
+                    "C. Hymenolepis nana",
+                    "D. Diphyllobothrium latum"
+                ],
+                correctAnswer: 1,
+                explanation: "Taenia saginata is known as the beef tapeworm as humans acquire infection by eating undercooked beef containing cysticerci."
+            },
+            {
+                question: "What is the infective stage of Leishmania species?",
+                options: [
+                    "A. Amastigote",
+                    "B. Promastigote",
+                    "C. Epimastigote",
+                    "D. Trypomastigote"
+                ],
+                correctAnswer: 1,
+                explanation: "The promastigote stage of Leishmania is the infective form, injected into humans during sandfly blood meals."
+            },
+            {
+                question: "Which parasite is associated with 'ground itch'?",
+                options: [
+                    "A. Strongyloides stercoralis",
+                    "B. Hookworm",
+                    "C. Schistosoma species",
+                    "D. Enterobius vermicularis"
+                ],
+                correctAnswer: 1,
+                explanation: "Hookworm infection causes 'ground itch' at the site of larval penetration, usually on the feet."
+            },
+            {
+                question: "What is the treatment for lymphatic filariasis?",
+                options: [
+                    "A. Diethylcarbamazine",
+                    "B. Ivermectin",
+                    "C. Albendazole",
+                    "D. All of the above"
+                ],
+                correctAnswer: 3,
+                explanation: "Lymphatic filariasis is treated with diethylcarbamazine, ivermectin, or albendazole, often in combination."
+            },
+            {
+                question: "Which parasite causes 'sleeping sickness'?",
+                options: [
+                    "A. Trypanosoma cruzi",
+                    "B. Trypanosoma brucei",
+                    "C. Plasmodium falciparum",
+                    "D. Toxoplasma gondii"
+                ],
+                correctAnswer: 1,
+                explanation: "Trypanosoma brucei causes African sleeping sickness, transmitted by tsetse flies."
+            },
+            {
+                question: "What is the diagnostic stage for malaria?",
+                options: [
+                    "A. Sporozoites",
+                    "B. Merozoites",
+                    "C. Trophozoites",
+                    "D. Gametocytes"
+                ],
+                correctAnswer: 2,
+                explanation: "Trophozoites (ring forms) are the diagnostic stage for malaria, visible in blood smears."
+            },
+            {
+                question: "Which parasite is associated with 'red urine'?",
+                options: [
+                    "A. Schistosoma mansoni",
+                    "B. Schistosoma haematobium",
+                    "C. Schistosoma japonicum",
+                    "D. Fasciola hepatica"
+                ],
+                correctAnswer: 1,
+                explanation: "Schistosoma haematobium causes urinary schistosomiasis, which can present with hematuria ('red urine')."
+            },
+            {
+                question: "What is the vector for dengue virus?",
+                options: [
+                    "A. Anopheles mosquito",
+                    "B. Aedes mosquito",
+                    "C. Culex mosquito",
+                    "D. Sandfly"
+                ],
+                correctAnswer: 1,
+                explanation: "Aedes mosquitoes, primarily Aedes aegypti, are the vectors for dengue virus."
+            },
+            {
+                question: "Which parasite causes 'elephantiasis'?",
+                options: [
+                    "A. Wuchereria bancrofti",
+                    "B. Onchocerca volvulus",
+                    "C. Loa loa",
+                    "D. Dracunculus medinensis"
+                ],
+                correctAnswer: 0,
+                explanation: "Wuchereria bancrofti causes lymphatic filariasis, which can lead to elephantiasis (massive swelling of limbs)."
+            },
+            {
+                question: "What is the treatment for enterobiasis (pinworm infection)?",
+                options: [
+                    "A. Mebendazole",
+                    "B. Albendazole",
+                    "C. Pyrantel pamoate",
+                    "D. All of the above"
+                ],
+                correctAnswer: 3,
+                explanation: "Enterobius vermicularis (pinworm) infection is treated with mebendazole, albendazole, or pyrantel pamoate."
+            },
+            {
+                question: "Which parasite is transmitted by consuming undercooked pork?",
+                options: [
+                    "A. Taenia saginata",
+                    "B. Taenia solium",
+                    "C. Trichinella spiralis",
+                    "D. Both B and C"
+                ],
+                correctAnswer: 3,
+                explanation: "Both Taenia solium (pork tapeworm) and Trichinella spiralis (trichinosis) are transmitted by consuming undercooked pork."
+            },
+            {
+                question: "What is the diagnostic method for trichinellosis?",
+                options: [
+                    "A. Stool examination",
+                    "B. Muscle biopsy",
+                    "C. Serology",
+                    "D. Both B and C"
+                ],
+                correctAnswer: 3,
+                explanation: "Trichinellosis is diagnosed by muscle biopsy showing larvae or by serological tests."
+            },
+            {
+                question: "Which parasite causes 'visceral larva migrans'?",
+                options: [
+                    "A. Toxocara canis",
+                    "B. Ancylostoma braziliense",
+                    "C. Strongyloides stercoralis",
+                    "D. Ascaris lumbricoides"
+                ],
+                correctAnswer: 0,
+                explanation: "Toxocara canis, the dog roundworm, causes visceral larva migrans when humans ingest its eggs."
+            },
+            {
+                question: "What is the treatment for cutaneous larva migrans?",
+                options: [
+                    "A. Albendazole",
+                    "B. Ivermectin",
+                    "C. Thiabendazole cream",
+                    "D. All of the above"
+                ],
+                correctAnswer: 3,
+                explanation: "Cutaneous larva migrans (creeping eruption) is treated with albendazole, ivermectin, or topical thiabendazole."
+            },
+            {
+                question: "Which parasite is associated with 'Calabar swellings'?",
+                options: [
+                    "A. Loa loa",
+                    "B. Onchocerca volvulus",
+                    "C. Wuchereria bancrofti",
+                    "D. Brugia malayi"
+                ],
+                correctAnswer: 0,
+                explanation: "Loa loa infection causes Calabar swellings, which are transient, localized angioedema."
+            },
+            {
+                question: "What is the primary prevention method for malaria?",
+                options: [
+                    "A. Bed nets",
+                    "B. Chemoprophylaxis",
+                    "C. Vector control",
+                    "D. All of the above"
+                ],
+                correctAnswer: 3,
+                explanation: "Malaria prevention includes bed nets, chemoprophylaxis, and vector control measures."
+            },
+            {
+                question: "Which parasite causes 'brain abscess' in immunocompromised patients?",
+                options: [
+                    "A. Toxoplasma gondii",
+                    "B. Entamoeba histolytica",
+                    "C. Naegleria fowleri",
+                    "D. Acanthamoeba species"
+                ],
+                correctAnswer: 0,
+                explanation: "Toxoplasma gondii can cause brain abscesses in immunocompromised patients, particularly those with AIDS."
+            },
+            {
+                question: "What is the treatment for acanthamoeba keratitis?",
+                options: [
+                    "A. Topical polyhexamethylene biguanide",
+                    "B. Topical chlorhexidine",
+                    "C. Oral miltefosine",
+                    "D. All of the above"
+                ],
+                correctAnswer: 3,
+                explanation: "Acanthamoeba keratitis is treated with topical polyhexamethylene biguanide, chlorhexidine, and sometimes oral miltefosine."
+            },
+            {
+                question: "Which parasite causes 'primary amebic meningoencephalitis' (PAM)?",
+                options: [
+                    "A. Naegleria fowleri",
+                    "B. Acanthamoeba species",
+                    "C. Balamuthia mandrillaris",
+                    "D. Entamoeba histolytica"
+                ],
+                correctAnswer: 0,
+                explanation: "Naegleria fowleri causes primary amebic meningoencephalitis (PAM), a rare but often fatal brain infection."
+            },
+            {
+                question: "What is the diagnostic stage for cryptosporidiosis?",
+                options: [
+                    "A. Trophozoites",
+                    "B. Oocysts",
+                    "C. Sporozoites",
+                    "D. Merozoites"
+                ],
+                correctAnswer: 1,
+                explanation: "Cryptosporidium oocysts are the diagnostic stage found in stool samples of infected individuals."
+            },
+            {
+                question: "Which parasite is associated with 'traveler's diarrhea'?",
+                options: [
+                    "A. Giardia lamblia",
+                    "B. Cryptosporidium parvum",
+                    "C. Cyclospora cayetanensis",
+                    "D. All of the above"
+                ],
+                correctAnswer: 3,
+                explanation: "Giardia lamblia, Cryptosporidium parvum, and Cyclospora cayetanensis can all cause traveler's diarrhea."
+            },
+            {
+                question: "What is the treatment for cyclosporiasis?",
+                options: [
+                    "A. Trimethoprim-sulfamethoxazole",
+                    "B. Metronidazole",
+                    "C. Nitazoxanide",
+                    "D. Paromomycin"
+                ],
+                correctAnswer: 0,
+                explanation: "Cyclospora cayetanensis infection is treated with trimethoprim-sulfamethoxazole."
+            },
+            {
+                question: "Which parasite causes 'fish tapeworm' infection?",
+                options: [
+                    "A. Diphyllobothrium latum",
+                    "B. Taenia saginata",
+                    "C. Hymenolepis nana",
+                    "D. Echinococcus granulosus"
+                ],
+                correctAnswer: 0,
+                explanation: "Diphyllobothrium latum is the fish tapeworm, acquired by eating raw or undercooked freshwater fish."
+            },
+            {
+                question: "What vitamin deficiency is associated with Diphyllobothrium latum infection?",
+                options: [
+                    "A. Vitamin B12",
+                    "B. Vitamin C",
+                    "C. Vitamin D",
+                    "D. Vitamin K"
+                ],
+                correctAnswer: 0,
+                explanation: "Diphyllobothrium latum can cause vitamin B12 deficiency by competing with the host for this vitamin."
+            },
+            {
+                question: "Which parasite is known as the 'guinea worm'?",
+                options: [
+                    "A. Dracunculus medinensis",
+                    "B. Onchocerca volvulus",
+                    "C. Loa loa",
+                    "D. Wuchereria bancrofti"
+                ],
+                correctAnswer: 0,
+                explanation: "Dracunculus medinensis is known as the guinea worm, which emerges through the skin, typically of the lower limbs."
+            }
+        ];
+
+        // Variables to track exam state
+        let currentQuestion = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let examSubmitted = false;
+        let timerInterval;
+        let timeRemaining = 90 * 60; // 90 minutes in seconds
+        let hasSubmitted = localStorage.getItem('parasitologyExamSubmitted') === 'true';
+
+        // DOM elements
+        const examForm = document.getElementById('exam-form');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const resultsDiv = document.getElementById('results');
+        const scoreValue = document.getElementById('score-value');
+        const resultsContent = document.getElementById('results-content');
+        const retakeBtn = document.getElementById('retake-btn');
+        const progressBar = document.getElementById('progress');
+        const timerDisplay = document.getElementById('timer');
+        const studentNameInput = document.getElementById('student-name');
+        const studentEmailInput = document.getElementById('student-email');
+
+        // Initialize the exam
+        function initExam() {
+            displayQuestion(currentQuestion);
+            updateProgressBar();
+            setupEventListeners();
+            
+            if (!hasSubmitted) {
+                startTimer();
+            } else {
+                // If already submitted, show results in practice mode
+                examSubmitted = true;
+                showResults();
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Already Submitted';
+            }
+        }
+
+        // Display a specific question
+        function displayQuestion(index) {
+            examForm.innerHTML = '';
+            
+            const question = questions[index];
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question';
+            
+            const questionNumber = document.createElement('div');
+            questionNumber.className = 'question-number';
+            questionNumber.textContent = `Question ${index + 1} of ${questions.length}`;
+            
+            const questionText = document.createElement('div');
+            questionText.className = 'question-text';
+            questionText.textContent = question.question;
+            
+            const optionsDiv = document.createElement('div');
+            optionsDiv.className = 'options';
+            
+            question.options.forEach((option, optionIndex) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = 'answer';
+                input.value = optionIndex;
+                input.id = `option-${optionIndex}`;
+                
+                // Check if this option was previously selected
+                if (userAnswers[index] === optionIndex) {
+                    input.checked = true;
+                }
+                
+                const label = document.createElement('label');
+                label.htmlFor = `option-${optionIndex}`;
+                label.textContent = option;
+                
+                optionDiv.appendChild(input);
+                optionDiv.appendChild(label);
+                optionsDiv.appendChild(optionDiv);
+            });
+            
+            // If in review mode (after submission), show explanation
+            if (examSubmitted) {
+                const explanation = document.createElement('div');
+                explanation.className = 'explanation';
+                explanation.innerHTML = `<strong>Explanation:</strong> ${question.explanation}`;
+                explanation.style.display = 'block';
+                
+                // Highlight correct answer
+                const correctOption = document.querySelector(`input[value="${question.correctAnswer}"]`);
+                if (correctOption) {
+                    const correctLabel = correctOption.nextElementSibling;
+                    correctLabel.classList.add('correct');
+                }
+                
+                // Highlight user's answer if incorrect
+                if (userAnswers[index] !== null && userAnswers[index] !== question.correctAnswer) {
+                    const userOption = document.querySelector(`input[value="${userAnswers[index]}"]`);
+                    if (userOption) {
+                        const userLabel = userOption.nextElementSibling;
+                        userLabel.classList.add('incorrect');
+                    }
+                }
+                
+                questionDiv.appendChild(explanation);
+            }
+            
+            questionDiv.appendChild(questionNumber);
+            questionDiv.appendChild(questionText);
+            questionDiv.appendChild(optionsDiv);
+            examForm.appendChild(questionDiv);
+            
+            // Update button states
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === questions.length - 1;
+            
+            // If we're on the last question and not submitted, enable submit button
+            if (index === questions.length - 1 && !examSubmitted) {
+                submitBtn.style.display = 'block';
+            } else {
+                submitBtn.style.display = 'none';
+            }
+        }
+
+        // Update progress bar
+        function updateProgressBar() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Previous button
+            prevBtn.addEventListener('click', () => {
+                if (currentQuestion > 0) {
+                    saveAnswer();
+                    currentQuestion--;
+                    displayQuestion(currentQuestion);
+                    updateProgressBar();
+                }
+            });
+            
+            // Next button
+            nextBtn.addEventListener('click', () => {
+                if (currentQuestion < questions.length - 1) {
+                    saveAnswer();
+                    currentQuestion++;
+                    displayQuestion(currentQuestion);
+                    updateProgressBar();
+                }
+            });
+            
+            // Submit button
+            submitBtn.addEventListener('click', () => {
+                saveAnswer();
+                if (validateForm()) {
+                    if (confirm('Are you sure you want to submit your exam? You cannot change your answers after submission.')) {
+                        submitExam();
+                    }
+                }
+            });
+            
+            // Retake button (practice mode)
+            retakeBtn.addEventListener('click', () => {
+                resetExam();
+            });
+            
+            // Save answer when user selects an option
+            examForm.addEventListener('change', (e) => {
+                if (e.target.name === 'answer') {
+                    userAnswers[currentQuestion] = parseInt(e.target.value);
+                }
+            });
+        }
+
+        // Validate form before submission
+        function validateForm() {
+            if (!studentNameInput.value.trim()) {
+                alert('Please enter your name before submitting.');
+                studentNameInput.focus();
+                return false;
+            }
+            
+            if (!studentEmailInput.value.trim()) {
+                alert('Please enter your email before submitting.');
+                studentEmailInput.focus();
+                return false;
+            }
+            
+            // Check if all questions are answered
+            const unanswered = userAnswers.filter(answer => answer === null).length;
+            if (unanswered > 0) {
+                return confirm(`You have ${unanswered} unanswered questions. Are you sure you want to submit?`);
+            }
+            
+            return true;
+        }
+
+        // Save the current answer
+        function saveAnswer() {
+            const selectedOption = document.querySelector('input[name="answer"]:checked');
+            if (selectedOption) {
+                userAnswers[currentQuestion] = parseInt(selectedOption.value);
+            }
+        }
+
+        // Start the exam timer
+        function startTimer() {
+            updateTimerDisplay();
+            
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    alert('Time is up! Your exam will be submitted automatically.');
+                    submitExam();
+                }
+            }, 1000);
+        }
+
+        // Update the timer display
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            timerDisplay.textContent = `Time Remaining: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Change color when time is running low
+            if (timeRemaining < 300) { // 5 minutes
+                timerDisplay.style.color = 'var(--accent)';
+            }
+        }
+
+        // Submit the exam
+        function submitExam() {
+            clearInterval(timerInterval);
+            examSubmitted = true;
+            
+            // Calculate score
+            let score = 0;
+            for (let i = 0; i < questions.length; i++) {
+                if (userAnswers[i] === questions[i].correctAnswer) {
+                    score++;
+                }
+            }
+            
+            // Show results
+            showResults(score);
+            
+            // Submit to Formspree if first time
+            if (!hasSubmitted) {
+                submitToFormspree(score);
+                localStorage.setItem('parasitologyExamSubmitted', 'true');
+                hasSubmitted = true;
+            }
+        }
+
+        // Show results
+        function showResults(score = null) {
+            if (score !== null) {
+                scoreValue.textContent = score;
+            }
+            
+            // Build results content
+            let resultsHTML = '<h3>Exam Results</h3>';
+            
+            questions.forEach((question, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === question.correctAnswer;
+                
+                resultsHTML += `
+                    <div class="question">
+                        <div class="question-number">Question ${index + 1}</div>
+                        <div class="question-text">${question.question}</div>
+                        <div class="options">
+                `;
+                
+                question.options.forEach((option, optionIndex) => {
+                    let optionClass = '';
+                    if (optionIndex === question.correctAnswer) {
+                        optionClass = 'correct';
+                    } else if (optionIndex === userAnswer && !isCorrect) {
+                        optionClass = 'incorrect';
+                    }
+                    
+                    resultsHTML += `
+                        <div class="option">
+                            <span class="${optionClass}">${option}</span>
+                        </div>
+                    `;
+                });
+                
+                resultsHTML += `
+                        </div>
+                        <div class="explanation">
+                            <strong>Explanation:</strong> ${question.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            resultsContent.innerHTML = resultsHTML;
+            resultsDiv.style.display = 'block';
+            
+            // Scroll to results
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Reset exam for practice mode
+        function resetExam() {
+            currentQuestion = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            examSubmitted = false;
+            timeRemaining = 90 * 60;
+            
+            resultsDiv.style.display = 'none';
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit Exam';
+            
+            displayQuestion(currentQuestion);
+            updateProgressBar();
+            updateTimerDisplay();
+            timerDisplay.style.color = '';
+            
+            // Don't start the timer in practice mode
+            clearInterval(timerInterval);
+        }
+
+        // Submit to Formspree
+        function submitToFormspree(score) {
+            const studentName = studentNameInput.value || 'Anonymous';
+            const studentEmail = studentEmailInput.value || 'No email provided';
+            
+            // Prepare form data
+            const formData = new FormData();
+            formData.append('name', studentName);
+            formData.append('email', studentEmail);
+            formData.append('score', `${score}/${questions.length}`);
+            formData.append('percentage', `${((score/questions.length)*100).toFixed(2)}%`);
+            formData.append('timestamp', new Date().toISOString());
+            
+            // Add detailed results
+            let detailedResults = '';
+            questions.forEach((question, index) => {
+                const userAnswer = userAnswers[index];
+                const answerText = userAnswer !== null ? 
+                    question.options[userAnswer] : 'Not answered';
+                const isCorrect = userAnswer === question.correctAnswer;
+                
+                detailedResults += `Q${index + 1}: ${question.question} | Your Answer: ${answerText} | Correct: ${isCorrect ? 'Yes' : 'No'}\n\n`;
+            });
+            
+            formData.append('detailed_results', detailedResults);
+            
+            // Submit to Formspree
+            fetch('https://formspree.io/f/mwprvyal', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Exam submitted successfully to Formspree');
+                } else {
+                    console.error('Failed to submit exam to Formspree');
+                }
+            })
+            .catch(error => {
+                console.error('Error submitting exam to Formspree:', error);
+            });
+        }
+
+        // Initialize the exam when the page loads
+        document.addEventListener('DOMContentLoaded', initExam);
+    </script>
+</body>
+</html>
