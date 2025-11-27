@@ -3,1078 +3,1821 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medical Helminthology - Nematodes Quiz</title>
+    <title>Unit 2: Cellular Injury & Adaptation - Pharmacy Exam</title>
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --primary-dark: #1B5E20;
+            --secondary: #FF6D00;
+            --secondary-light: #FF9800;
+            --accent: #1565C0;
+            --light: #F5F5F5;
+            --dark: #212121;
+            --gray: #757575;
+            --success: #388E3C;
+            --warning: #F57C00;
+            --danger: #D32F2F;
+            --surface: #FFFFFF;
+            --background: #E8F5E9;
+        }
+
         body {
-            background-color: #f5f7fa;
-            color: #333;
+            background: linear-gradient(135deg, var(--background) 0%, #FFFFFF 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 20px;
             line-height: 1.6;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
         }
-        
+
         header {
-            background: linear-gradient(135deg, #1a73e8, #0d47a1);
-            color: white;
-            padding: 20px 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--surface);
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid var(--primary);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .university-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .info-icon {
+            font-size: 1.2rem;
+        }
+
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 25px;
+        }
+
+        .quiz-area {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--background);
+        }
+
+        .question-number {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--dark);
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
             margin-bottom: 30px;
         }
-        
-        .header-content {
+
+        .option {
+            background: var(--light);
+            border: 2px solid #E0E0E0;
+            border-radius: 10px;
+            padding: 18px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+            align-items: flex-start;
         }
-        
-        .logo {
-            display: flex;
-            align-items: center;
+
+        .option:hover {
+            background: #E8F5E9;
+            border-color: var(--primary-light);
         }
-        
-        .logo h1 {
-            margin-left: 15px;
-            font-size: 24px;
+
+        .option.selected {
+            background: #E8F5E9;
+            border-color: var(--primary);
         }
-        
-        .logo-icon {
-            font-size: 32px;
-            background: white;
-            color: #1a73e8;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+
+        .option.correct {
+            background: #E8F5E9;
+            border-color: var(--success);
+        }
+
+        .option.incorrect {
+            background: #FFEBEE;
+            border-color: var(--danger);
+        }
+
+        .option-letter {
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        
-        .quiz-info {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
-        }
-        
-        .quiz-info h2 {
-            color: #1a73e8;
-            margin-bottom: 10px;
-        }
-        
-        .progress-bar {
-            height: 10px;
-            background: #e0e0e0;
-            border-radius: 5px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-        
-        .progress {
-            height: 100%;
-            background: #1a73e8;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-        
-        .question-container {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            margin-bottom: 20px;
-            display: none;
-        }
-        
-        .active {
-            display: block;
-        }
-        
-        .question-number {
-            font-size: 18px;
-            color: #1a73e8;
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            margin-right: 15px;
             font-weight: bold;
-            margin-bottom: 10px;
+            flex-shrink: 0;
         }
-        
-        .question-text {
-            font-size: 18px;
-            margin-bottom: 20px;
+
+        .option.selected .option-letter {
+            background: var(--primary-dark);
         }
-        
-        .options-container {
-            margin-bottom: 20px;
+
+        .option.correct .option-letter {
+            background: var(--success);
         }
-        
-        .option {
-            padding: 15px;
-            margin-bottom: 10px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
+
+        .option.incorrect .option-letter {
+            background: var(--danger);
         }
-        
-        .option:hover {
-            background: #f0f7ff;
-            border-color: #1a73e8;
-        }
-        
-        .option.selected {
-            background: #e3f2fd;
-            border-color: #1a73e8;
-        }
-        
-        .option.correct {
-            background: #e8f5e9;
-            border-color: #4caf50;
-        }
-        
-        .option.incorrect {
-            background: #ffebee;
-            border-color: #f44336;
-        }
-        
-        .feedback {
-            padding: 15px;
-            border-radius: 8px;
+
+        .feedback-area {
+            background: #F1F8E9;
+            border-radius: 12px;
+            padding: 20px;
             margin-top: 20px;
             display: none;
+            border-left: 4px solid var(--primary);
         }
-        
-        .correct-feedback {
-            background: #e8f5e9;
-            border-left: 5px solid #4caf50;
+
+        .feedback-area.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
         }
-        
-        .incorrect-feedback {
-            background: #ffebee;
-            border-left: 5px solid #f44336;
-        }
-        
+
         .feedback-title {
-            font-weight: bold;
+            font-size: 1.2rem;
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            color: var(--primary-dark);
+            font-weight: 600;
         }
-        
-        .memorization-tip {
-            background: #fff3e0;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            border-left: 3px solid #ff9800;
+
+        .explanation {
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
-        
+
+        .pharmacy-tip {
+            background: #FFF3E0;
+            border-left: 4px solid var(--warning);
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+        }
+
         .navigation {
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
+            margin-top: 30px;
         }
-        
-        button {
+
+        .btn {
             padding: 12px 25px;
-            background: #1a73e8;
-            color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-weight: 600;
             cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
-        
-        button:hover {
-            background: #0d47a1;
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
         }
-        
-        button:disabled {
-            background: #bdbdbd;
-            cursor: not-allowed;
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
         }
-        
-        .results-container {
-            background: white;
-            padding: 30px;
+
+        .btn-secondary {
+            background: #E0E0E0;
+            color: var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background: #BDBDBD;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #2E7D32;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 142, 60, 0.3);
+        }
+
+        .sidebar {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
+        .sidebar-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--background);
+        }
+
+        .question-palette {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .palette-item {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: #F5F5F5;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            border: 2px solid transparent;
+        }
+
+        .palette-item:hover {
+            background: #E0E0E0;
+            transform: scale(1.1);
+        }
+
+        .palette-item.answered {
+            background: var(--primary-light);
+            color: white;
+        }
+
+        .palette-item.current {
+            border: 2px solid var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        .palette-item.correct {
+            background: var(--success);
+            color: white;
+        }
+
+        .palette-item.incorrect {
+            background: var(--danger);
+            color: white;
+        }
+
+        .timer-container {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #E3F2FD;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .timer {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 10px 0;
+        }
+
+        .timer-warning {
+            color: var(--danger);
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #E0E0E0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .stat-card-small {
+            background: #F5F5F5;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-card-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-card-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .results-container {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
             display: none;
         }
-        
-        .results-container h2 {
-            color: #1a73e8;
+
+        .results-container.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .results-title {
+            font-size: 2.2rem;
             margin-bottom: 20px;
+            color: var(--primary);
         }
-        
-        .score {
-            font-size: 48px;
+
+        .score-display {
+            font-size: 4rem;
             font-weight: bold;
-            color: #1a73e8;
             margin: 20px 0;
+            color: var(--primary);
         }
-        
-        @media (max-width: 768px) {
-            .header-content {
+
+        .performance-message {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        .results-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .result-stat {
+            background: #F5F5F5;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .result-stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .result-stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .review-section {
+            text-align: left;
+            margin-top: 40px;
+        }
+
+        .review-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--background);
+        }
+
+        .review-item {
+            background: #FAFAFA;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-light);
+        }
+
+        .review-question {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .review-answer {
+            margin: 5px 0;
+        }
+
+        .review-correct {
+            color: var(--success);
+        }
+
+        .review-incorrect {
+            color: var(--danger);
+        }
+
+        .review-explanation {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .pharmacy-context {
+            background: #E3F2FD;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border-left: 4px solid var(--accent);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .stats-bar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .question-palette {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .results-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .university-info {
                 flex-direction: column;
-                text-align: center;
-            }
-            
-            .logo {
-                margin-bottom: 15px;
-            }
-            
-            .navigation {
-                flex-direction: column;
-            }
-            
-            button {
-                margin-bottom: 10px;
-                width: 100%;
+                align-items: center;
+                gap: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <div class="logo">
-                <div class="logo-icon">℞</div>
-                <h1>MedQuiz Helminthology</h1>
-            </div>
-            <div>Nematodes (Roundworms)</div>
-        </div>
-    </header>
-    
     <div class="container">
-        <div class="quiz-info">
-            <h2>Medical Helminthology - Nematodes Quiz</h2>
-            <p>Test your knowledge of nematodes, their morphology, life cycles, pathogenesis, and diagnosis.</p>
-            <p><strong>Instructions:</strong> Select the best answer for each question. After submitting your answer, you'll receive feedback with explanations and memorization tips.</p>
-            
-            <div class="progress-bar">
-                <div class="progress" id="progress"></div>
+        <header>
+            <h1>Unit 2: Cellular Injury & Adaptation</h1>
+            <p class="subtitle">Pharmacy Department - Haramaya University</p>
+            <div class="university-info">
+                <div class="info-item">
+                    <span class="info-icon">📚</span>
+                    <span>2nd Year Pharmacy</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">⏱️</span>
+                    <span>60 Questions</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">🎯</span>
+                    <span>Exam Preparation</span>
+                </div>
             </div>
-            <div id="progress-text">Question 1 of 55</div>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-value" id="score-value">0</div>
+                <div class="stat-label">Score</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="progress-value">0%</div>
+                <div class="stat-label">Progress</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="correct-value">0</div>
+                <div class="stat-label">Correct</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="incorrect-value">0</div>
+                <div class="stat-label">Incorrect</div>
+            </div>
         </div>
-        
-        <div id="quiz-container">
-            <!-- Questions will be inserted here by JavaScript -->
+
+        <div class="main-content">
+            <div class="quiz-area">
+                <div class="question-header">
+                    <div class="question-number" id="question-number">Question 1 of 60</div>
+                </div>
+                
+                <div class="question-text" id="question-text"></div>
+                
+                <div class="options-container" id="options-container"></div>
+                
+                <div class="feedback-area" id="feedback-area">
+                    <div class="feedback-title" id="feedback-title"></div>
+                    <div class="explanation" id="explanation"></div>
+                    <div class="pharmacy-tip" id="pharmacy-tip"></div>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" id="prev-btn">
+                        <span>←</span> Previous
+                    </button>
+                    <button class="btn btn-primary" id="next-btn">
+                        Next <span>→</span>
+                    </button>
+                    <button class="btn btn-success" id="submit-btn" style="display: none;">
+                        Submit Exam
+                    </button>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <h3 class="sidebar-title">Question Navigator</h3>
+                <div class="question-palette" id="question-palette"></div>
+                
+                <div class="timer-container">
+                    <div>Time Remaining</div>
+                    <div class="timer" id="timer">45:00</div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress" id="progress-bar"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span>Progress</span>
+                        <span id="progress-percent">0%</span>
+                    </div>
+                </div>
+                
+                <div class="quick-stats">
+                    <div class="stat-card-small">
+                        <div class="stat-card-value" id="answered-value">0</div>
+                        <div class="stat-card-label">Answered</div>
+                    </div>
+                    <div class="stat-card-small">
+                        <div class="stat-card-value" id="remaining-value">60</div>
+                        <div class="stat-card-label">Remaining</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
+
         <div class="results-container" id="results-container">
-            <h2>Quiz Completed!</h2>
-            <p>You have completed the Nematodes Quiz</p>
-            <div class="score" id="score">0%</div>
-            <p id="result-message"></p>
-            <button onclick="location.reload()">Take Quiz Again</button>
+            <h2 class="results-title">Exam Completed!</h2>
+            <div class="score-display" id="final-score">0/60</div>
+            <div class="performance-message" id="performance-message"></div>
+            
+            <div class="results-stats">
+                <div class="result-stat">
+                    <div class="result-stat-value" id="final-correct">0</div>
+                    <div class="result-stat-label">Correct Answers</div>
+                </div>
+                <div class="result-stat">
+                    <div class="result-stat-value" id="final-incorrect">0</div>
+                    <div class="result-stat-label">Incorrect Answers</div>
+                </div>
+                <div class="result-stat">
+                    <div class="result-stat-value" id="final-skipped">0</div>
+                    <div class="result-stat-label">Skipped Questions</div>
+                </div>
+                <div class="result-stat">
+                    <div class="result-stat-value" id="final-time">0:00</div>
+                    <div class="result-stat-label">Time Taken</div>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" id="retake-btn">Retake Exam</button>
+            
+            <div class="review-section">
+                <h3 class="review-title">Question Review</h3>
+                <div id="question-review"></div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Quiz questions data for Nematodes
+        // Comprehensive Unit 2 questions for Pharmacy students
         const questions = [
             {
-                question: "What is medical helminthology?",
+                question: "A 45-year-old patient with chronic hypertension presents with left ventricular enlargement. Which cellular adaptation is primarily responsible for this finding?",
                 options: [
-                    "The study of bacterial infections",
-                    "The study of viral diseases",
-                    "The scientific study of parasitic worms and their medical consequences",
-                    "The study of fungal infections"
+                    "Hyperplasia",
+                    "Hypertrophy", 
+                    "Metaplasia",
+                    "Atrophy"
                 ],
-                correctAnswer: 2,
-                explanation: "Medical helminthology is the scientific study of parasitic worms and their medical consequences.",
-                tip: "Helminth = worm, so helminthology = study of worms"
+                correct: 1,
+                explanation: "The left ventricular enlargement in chronic hypertension is due to hypertrophy - an increase in cell size without an increase in cell number. Cardiac muscle cells cannot divide, so they adapt to increased workload by enlarging.",
+                pharmacyTip: "Understanding cardiac adaptations helps in managing antihypertensive therapy and monitoring for complications like heart failure."
             },
             {
-                question: "What is the primary method for laboratory diagnosis of helminth infections?",
+                question: "A pharmacy student is reviewing a case of Barrett esophagus. Which cellular adaptation best describes the change from squamous to columnar epithelium in the esophagus?",
                 options: [
-                    "Blood culture",
-                    "PCR testing",
-                    "Detection and identification of eggs, larvae, or rarely adults",
-                    "Serological tests only"
+                    "Dysplasia",
+                    "Hyperplasia",
+                    "Metaplasia",
+                    "Hypertrophy"
                 ],
-                correctAnswer: 2,
-                explanation: "Laboratory diagnosis of helminth infections mainly depends on detection and identification of eggs, larvae, and rarely adults.",
-                tip: "Microscopic identification of parasite stages is key for helminth diagnosis"
+                correct: 2,
+                explanation: "Barrett esophagus involves metaplasia - the reversible replacement of one differentiated cell type by another. In this case, squamous epithelium changes to intestinal-type columnar epithelium due to chronic acid exposure.",
+                pharmacyTip: "Patients with Barrett esophagus require regular monitoring as this metaplastic change increases risk of adenocarcinoma."
             },
             {
-                question: "What is the general shape of nematodes?",
+                question: "A 60-year-old patient with long-standing COPD develops right ventricular hypertrophy. What is the most likely mechanism for this adaptation?",
                 options: [
-                    "Flat and leaf-like",
-                    "Cylindrical/worm-like",
-                    "Spherical",
-                    "Irregular"
+                    "Increased metabolic demand",
+                    "Chronic inflammation",
+                    "Persistent hypoxemia",
+                    "Recurrent infections"
                 ],
-                correctAnswer: 1,
-                explanation: "Nematodes have a cylindrical or worm-like shape.",
-                tip: "Nematodes = roundworms = cylindrical shape"
+                correct: 2,
+                explanation: "In COPD, chronic hypoxemia leads to pulmonary vasoconstriction and pulmonary hypertension, causing increased afterload on the right ventricle and subsequent hypertrophy.",
+                pharmacyTip: "Monitoring for cor pulmonale (right heart failure due to lung disease) is crucial in COPD management."
             },
             {
-                question: "What is the body cavity of nematodes called?",
+                question: "Which of the following pathological findings would be most characteristic of irreversible cell injury?",
                 options: [
-                    "Coelom",
-                    "Pseudocoel",
-                    "Hemocoel",
-                    "No body cavity"
+                    "Cellular swelling and fatty change",
+                    "Membrane blebbing and chromatin clumping", 
+                    "Severe mitochondrial swelling with amorphous densities",
+                    "Ribosomal detachment from RER"
                 ],
-                correctAnswer: 1,
-                explanation: "Nematodes have a pseudocoel, which is a false body cavity containing the viscera.",
-                tip: "Pseudo = false, so pseudocoel = false body cavity"
+                correct: 2,
+                explanation: "Severe mitochondrial swelling with amorphous densities represents irreversible damage to mitochondria, indicating the point of no return in cell injury where recovery is impossible.",
+                pharmacyTip: "Recognizing irreversible injury helps in understanding why some tissue damage is permanent despite treatment."
             },
             {
-                question: "Which of the following describes sexual dimorphism in nematodes?",
+                question: "A patient presents with painless jaundice, and laboratory tests show elevated conjugated bilirubin. Which mechanism of cellular injury is most likely involved?",
                 options: [
-                    "Males and females look identical",
-                    "Females are generally larger; males have a ventrally curved posterior end",
-                    "Males are larger than females",
-                    "Only females exist; they reproduce asexually"
+                    "Hemolysis",
+                    "Hepatocellular damage",
+                    "Biliary obstruction", 
+                    "Genetic enzyme deficiency"
                 ],
-                correctAnswer: 1,
-                explanation: "In nematodes, females are generally larger than males, and males have a ventrally curved or coiled posterior end.",
-                tip: "Male nematodes have curved tails for copulation"
+                correct: 2,
+                explanation: "Painless jaundice with elevated conjugated bilirubin suggests biliary obstruction, which causes injury through accumulation of toxic bile acids within hepatocytes.",
+                pharmacyTip: "Drug-induced cholestasis is an important differential diagnosis that pharmacists should recognize."
             },
             {
-                question: "What type of digestive system do nematodes have?",
+                question: "Which type of necrosis is characterized by preservation of tissue architecture and is typically seen in myocardial infarction?",
                 options: [
-                    "Incomplete digestive system",
-                    "Complete digestive system with mouth and anus",
-                    "No digestive system",
-                    "Only a mouth, no anus"
+                    "Caseous necrosis",
+                    "Coagulative necrosis",
+                    "Liquefactive necrosis", 
+                    "Fat necrosis"
                 ],
-                correctAnswer: 1,
-                explanation: "Nematodes have a complete digestive system: mouth → esophagus → intestine → rectum → anus.",
-                tip: "Complete digestive system = separate mouth and anus"
+                correct: 1,
+                explanation: "Coagulative necrosis preserves tissue architecture due to denaturation of structural proteins and enzymes. It's characteristic of ischemic injury in solid organs like heart, kidney, and spleen.",
+                pharmacyTip: "Understanding necrosis patterns helps in diagnosing the cause and extent of tissue damage."
             },
             {
-                question: "What does oviparous mean?",
+                question: "A 35-year-old woman with gallstones develops severe epigastric pain radiating to the back. Which type of necrosis would most likely be found in the pancreas?",
                 options: [
-                    "Laying eggs that hatch inside the body",
-                    "Giving birth to live larvae",
-                    "Laying fertilized eggs that develop outside the body",
-                    "Reproducing asexually"
+                    "Coagulative necrosis",
+                    "Fat necrosis", 
+                    "Caseous necrosis",
+                    "Fibrinoid necrosis"
                 ],
-                correctAnswer: 2,
-                explanation: "Oviparous nematodes lay fertilized eggs that develop outside the body.",
-                tip: "Ovi = egg, parous = bearing, so oviparous = egg-bearing"
+                correct: 1,
+                explanation: "Acute pancreatitis involves fat necrosis due to release of pancreatic lipases that digest peripancreatic fat, leading to saponification (soap formation) with calcium.",
+                pharmacyTip: "Recognizing pancreatitis complications is vital as some medications can trigger or exacerbate this condition."
             },
             {
-                question: "Which nematode is oviparous?",
+                question: "Which biochemical event is considered the 'point of no return' in irreversible cell injury?",
                 options: [
-                    "Strongyloides stercoralis",
-                    "Trichinella species",
-                    "Ascaris lumbricoides",
-                    "Dracunculus medinensis"
+                    "ATP depletion",
+                    "Loss of calcium homeostasis", 
+                    "Membrane phospholipid degradation",
+                    "Lysosomal enzyme release"
                 ],
-                correctAnswer: 2,
-                explanation: "Ascaris lumbricoides is oviparous, laying fertilized eggs that develop outside the body.",
-                tip: "Most intestinal nematodes are oviparous"
+                correct: 2,
+                explanation: "Severe membrane damage with phospholipid degradation represents irreversible injury because it leads to complete loss of cellular integrity and function.",
+                pharmacyTip: "This understanding helps explain why some toxic exposures cause irreversible organ damage despite treatment."
             },
             {
-                question: "What does viviparous mean?",
+                question: "A patient with tuberculosis develops granulomas with central necrotic material. What type of necrosis is characteristic of tuberculosis?",
                 options: [
-                    "Laying eggs",
-                    "Giving birth to live larvae with no egg stage",
-                    "Laying eggs that hatch immediately",
-                    "Reproducing by budding"
+                    "Coagulative necrosis",
+                    "Liquefactive necrosis", 
+                    "Caseous necrosis",
+                    "Gangrenous necrosis"
                 ],
-                correctAnswer: 1,
-                explanation: "Viviparous nematodes give birth to live larvae; there is no egg stage.",
-                tip: "Vivi = live, parous = bearing, so viviparous = live-bearing"
+                correct: 2,
+                explanation: "Caseous necrosis, with its characteristic cheese-like appearance, is typical of tuberculosis and results from a combination of coagulative and liquefactive processes within granulomas.",
+                pharmacyTip: "Understanding TB pathology is crucial for appropriate anti-tubercular therapy management."
             },
             {
-                question: "Which nematode is viviparous?",
+                question: "Which of the following best describes the mechanism of apoptosis?",
                 options: [
-                    "Ascaris lumbricoides",
-                    "Trichuris trichiura",
-                    "Enterobius vermicularis",
-                    "Trichinella species"
+                    "Accidental cell death with inflammation",
+                    "Programmed cell death without inflammation", 
+                    "Ischemic cell death with coagulation",
+                    "Enzymatic cell digestion with pus formation"
                 ],
-                correctAnswer: 3,
-                explanation: "Trichinella species are viviparous, giving birth to live larvae with no egg stage.",
-                tip: "Filarial worms and Trichinella are viviparous"
+                correct: 1,
+                explanation: "Apoptosis is a genetically programmed, energy-dependent process of cell death that occurs without inflammation, characterized by cell shrinkage, chromatin condensation, and formation of apoptotic bodies.",
+                pharmacyTip: "Many chemotherapeutic drugs work by inducing apoptosis in cancer cells."
             },
             {
-                question: "What is the common name for Ascaris lumbricoides?",
+                question: "A pharmacy student is studying free radical injury. Which enzyme is primarily responsible for converting superoxide to hydrogen peroxide?",
                 options: [
-                    "Pinworm",
-                    "Whipworm",
-                    "Giant intestinal roundworm",
-                    "Hookworm"
+                    "Catalase",
+                    "Glutathione peroxidase", 
+                    "Superoxide dismutase",
+                    "Myeloperoxidase"
                 ],
-                correctAnswer: 2,
-                explanation: "Ascaris lumbricoides is commonly known as the giant intestinal roundworm.",
-                tip: "Ascaris is the largest intestinal nematode, hence 'giant'"
+                correct: 2,
+                explanation: "Superoxide dismutase (SOD) converts superoxide radicals (O₂⁻) to hydrogen peroxide (H₂O₂), which is then broken down by catalase or glutathione peroxidase.",
+                pharmacyTip: "Antioxidant therapy often targets these enzyme systems to reduce oxidative stress in various diseases."
             },
             {
-                question: "Where do adult Ascaris lumbricoides worms live in the human body?",
+                question: "Which intracellular accumulation is characteristic of Wilson's disease?",
                 options: [
-                    "Large intestine",
-                    "Small intestine",
-                    "Lungs",
-                    "Liver"
+                    "Iron in hepatocytes",
+                    "Copper in hepatocytes", 
+                    "Fat in hepatocytes", 
+                    "Glycogen in hepatocytes"
                 ],
-                correctAnswer: 1,
-                explanation: "Adult Ascaris lumbricoides worms live in the small intestine.",
-                tip: "Most intestinal nematodes reside in the small intestine"
+                correct: 1,
+                explanation: "Wilson's disease involves accumulation of copper in hepatocytes due to impaired biliary excretion, leading to liver damage and neurological symptoms.",
+                pharmacyTip: "Chelating agents like penicillamine are used to treat copper overload in Wilson's disease."
             },
             {
-                question: "What is the infective stage of Ascaris lumbricoides?",
+                question: "A patient with chronic renal failure develops metastatic calcification. What is the underlying mechanism?",
                 options: [
-                    "Adult worm",
-                    "Rhabditiform larva",
-                    "Embryonated egg",
-                    "Filariform larva"
+                    "Local tissue damage with normal serum calcium",
+                    "Hypercalcemia with deposition in normal tissues", 
+                    "Infection with mineral deposition",
+                    "Trauma with dystrophic calcification"
                 ],
-                correctAnswer: 2,
-                explanation: "The embryonated egg is the infective stage of Ascaris lumbricoides.",
-                tip: "Soil-transmitted helminths typically have embryonated eggs as infective stages"
+                correct: 1,
+                explanation: "Metastatic calcification occurs in normal tissues due to hypercalcemia, commonly seen in chronic renal failure due to secondary hyperparathyroidism.",
+                pharmacyTip: "Phosphate binders and vitamin D analogs are used to manage mineral metabolism in renal failure."
             },
             {
-                question: "What is the migratory pathway of Ascaris larvae in the human body?",
+                question: "Which cellular change is reversible and represents an early response to injury?",
                 options: [
-                    "Intestine → blood → liver → heart → lungs → trachea → intestine",
-                    "Skin → blood → lungs → intestine",
-                    "Intestine → lymphatics → blood → lungs",
-                    "Direct development in intestine"
+                    "Nuclear pyknosis",
+                    "Cellular swelling", 
+                    "Membrane rupture",
+                    "Mitochondrial calcification"
                 ],
-                correctAnswer: 0,
-                explanation: "Ascaris larvae migrate: intestine → blood → liver → heart → lungs → trachea → swallowed → back to intestine.",
-                tip: "Remember the 'hepatotracheal migration' of Ascaris larvae"
+                correct: 1,
+                explanation: "Cellular swelling (hydropic change) due to failure of Na⁺-K⁺ ATPase is an early, reversible manifestation of cell injury.",
+                pharmacyTip: "Recognizing reversible changes helps in early intervention to prevent permanent damage."
             },
             {
-                question: "What is Loeffler's syndrome?",
+                question: "A patient presents with a painless neck mass. Fine needle aspiration shows cells with 'orphan Annie' nuclei. What is the most likely diagnosis?",
                 options: [
-                    "Intestinal obstruction by adult worms",
-                    "Respiratory symptoms during larval migration through lungs",
-                    "Anemia caused by hookworms",
-                    "Perianal itching from pinworms"
+                    "Papillary thyroid carcinoma", 
+                    "Follicular thyroid carcinoma",
+                    "Medullary thyroid carcinoma", 
+                    "Anaplastic thyroid carcinoma"
                 ],
-                correctAnswer: 1,
-                explanation: "Loeffler's syndrome refers to respiratory symptoms (cough, wheezing, fever) caused by larval migration of Ascaris through the lungs.",
-                tip: "Loeffler's syndrome = pulmonary symptoms during larval migration"
+                correct: 0,
+                explanation: "Papillary thyroid carcinoma characteristically shows cells with empty-appearing nuclei ('orphan Annie' nuclei) due to chromatin clearing.",
+                pharmacyTip: "Understanding cytological features helps in appropriate referral and management of thyroid nodules."
             },
             {
-                question: "What is the pre-patent period for Ascaris lumbricoides?",
+                question: "Which of the following represents pathological hyperplasia?",
                 options: [
-                    "1-2 weeks",
-                    "2-4 weeks",
-                    "60-75 days",
-                    "6 months"
+                    "Uterine enlargement during pregnancy",
+                    "Liver regeneration after partial hepatectomy", 
+                    "Endometrial hyperplasia in anovulatory cycles", 
+                    "Muscle hypertrophy in athletes"
                 ],
-                correctAnswer: 2,
-                explanation: "The pre-patent period for Ascaris lumbricoides (from infection to egg laying) is about 60-75 days.",
-                tip: "Pre-patent period = time from infection to detectable stages in specimens"
+                correct: 2,
+                explanation: "Endometrial hyperplasia due to unopposed estrogen stimulation represents pathological hyperplasia, which can progress to dysplasia and cancer.",
+                pharmacyTip: "Hormonal therapies must be carefully managed to avoid pathological hyperplastic responses."
             },
             {
-                question: "How is Ascaris lumbricoides typically diagnosed?",
+                question: "A patient with chronic gastritis due to H. pylori infection develops intestinal metaplasia. What is the significance of this finding?",
                 options: [
-                    "Blood smear",
-                    "Urine examination",
-                    "Stool examination for characteristic eggs",
-                    "Skin snip"
+                    "It is a benign reversible change",
+                    "It increases risk of gastric adenocarcinoma", 
+                    "It indicates complete healing",
+                    "It is a precursor to lymphoma"
                 ],
-                correctAnswer: 2,
-                explanation: "Ascaris lumbricoides is typically diagnosed by microscopic detection of characteristic eggs in stool.",
-                tip: "Most intestinal nematodes are diagnosed by stool examination"
+                correct: 1,
+                explanation: "Intestinal metaplasia in the stomach is a premalignant condition that significantly increases the risk of gastric adenocarcinoma.",
+                pharmacyTip: "Eradication of H. pylori may prevent progression of metaplasia to cancer."
             },
             {
-                question: "What is the drug of choice for uncomplicated intestinal ascariasis?",
+                question: "Which type of gangrene is characterized by bacterial infection and liquefactive necrosis?",
                 options: [
-                    "Ivermectin",
-                    "Albendazole or mebendazole",
-                    "Praziquantel",
-                    "Metronidazole"
+                    "Dry gangrene",
+                    "Wet gangrene", 
+                    "Gas gangrene",
+                    "Fournier's gangrene"
                 ],
-                correctAnswer: 1,
-                explanation: "Albendazole or mebendazole are the first-line drugs for uncomplicated intestinal ascariasis.",
-                tip: "Benzimidazoles (albendazole, mebendazole) are broad-spectrum anthelmintics"
+                correct: 1,
+                explanation: "Wet gangrene involves liquefactive necrosis due to superimposed bacterial infection, typically occurring in moist tissues like bowel and limbs with venous obstruction.",
+                pharmacyTip: "Wet gangrene requires urgent antibiotic therapy and surgical intervention."
             },
             {
-                question: "What is the common name for Trichuris trichiura?",
+                question: "A patient with atherosclerosis develops calcification in arterial plaques. What type of calcification is this?",
                 options: [
-                    "Pinworm",
-                    "Whipworm",
-                    "Hookworm",
-                    "Threadworm"
+                    "Metastatic calcification",
+                    "Dystrophic calcification", 
+                    "Physiological calcification",
+                    "Idiopathic calcification"
                 ],
-                correctAnswer: 1,
-                explanation: "Trichuris trichiura is commonly known as whipworm.",
-                tip: "Trichuris = 'hair tail', referring to its whip-like appearance"
+                correct: 1,
+                explanation: "Dystrophic calcification occurs in damaged or necrotic tissues with normal serum calcium levels, commonly seen in atherosclerotic plaques.",
+                pharmacyTip: "Statins may help stabilize plaques and reduce cardiovascular events beyond just lipid lowering."
             },
             {
-                question: "Where do adult Trichuris trichiura worms reside in the human body?",
+                question: "Which organ is most susceptible to hypoxic injury?",
                 options: [
-                    "Small intestine",
-                    "Cecum and ascending colon",
-                    "Jejunum",
-                    "Rectum"
+                    "Liver",
+                    "Kidney", 
+                    "Brain", 
+                    "Skeletal muscle"
                 ],
-                correctAnswer: 1,
-                explanation: "Adult Trichuris trichiura worms reside in the cecum and ascending colon.",
-                tip: "Whipworms inhabit the large intestine, particularly the cecum"
+                correct: 2,
+                explanation: "The brain is most sensitive to hypoxia because neurons have high metabolic demands, poor anaerobic capacity, and cannot regenerate.",
+                pharmacyTip: "Neuroprotective strategies focus on minimizing hypoxic damage during strokes and other brain injuries."
             },
             {
-                question: "What is the characteristic shape of Trichuris trichiura eggs?",
+                question: "A pharmacy student is reviewing a case of carbon tetrachloride poisoning. What is the primary mechanism of liver injury?",
                 options: [
-                    "Round with thin shell",
-                    "Barrel-shaped with bipolar plugs",
-                    "Oval and flattened on one side",
-                    "Lemon-shaped"
+                    "Direct membrane damage",
+                    "Free radical formation", 
+                    "Protein denaturation",
+                    "DNA damage"
                 ],
-                correctAnswer: 1,
-                explanation: "Trichuris trichiura eggs are barrel-shaped with bipolar plugs.",
-                tip: "Think of 'football-shaped' eggs with plugs at both ends for Trichuris"
+                correct: 1,
+                explanation: "Carbon tetrachloride is metabolized by cytochrome P450 to trichloromethyl free radical, which causes lipid peroxidation and membrane damage in hepatocytes.",
+                pharmacyTip: "Understanding toxic mechanisms helps in developing antidotes and protective strategies."
             },
             {
-                question: "What complication can occur in heavy Trichuris trichiura infections?",
+                question: "Which of the following is a characteristic feature of apoptosis but not necrosis?",
                 options: [
-                    "Liver abscess",
-                    "Rectal prolapse",
-                    "Intestinal obstruction",
-                    "Biliary obstruction"
+                    "Inflammation",
+                    "Cell swelling", 
+                    "Formation of apoptotic bodies", 
+                    "Loss of membrane integrity"
                 ],
-                correctAnswer: 1,
-                explanation: "Heavy Trichuris trichiura infections can cause rectal prolapse, especially in children.",
-                tip: "Chronic inflammation and straining can lead to rectal prolapse in heavy whipworm infections"
+                correct: 2,
+                explanation: "Formation of membrane-bound apoptotic bodies that are phagocytosed by neighboring cells is characteristic of apoptosis and does not occur in necrosis.",
+                pharmacyTip: "Many cancer therapies aim to induce apoptosis in malignant cells while sparing normal tissues."
             },
             {
-                question: "What is the common name for Enterobius vermicularis?",
+                question: "A patient with chronic alcohol abuse develops fatty liver. What is the primary mechanism?",
                 options: [
-                    "Whipworm",
-                    "Pinworm",
-                    "Hookworm",
-                    "Threadworm"
+                    "Increased fatty acid oxidation",
+                    "Impaired lipoprotein synthesis", 
+                    "Enhanced triglyceride secretion",
+                    "Decreased fatty acid synthesis"
                 ],
-                correctAnswer: 1,
-                explanation: "Enterobius vermicularis is commonly known as pinworm.",
-                tip: "Enterobius = 'intestinal life', vermicularis = 'worm-like'"
+                correct: 1,
+                explanation: "Alcohol metabolism generates NADH, which inhibits fatty acid oxidation and promotes triglyceride synthesis, while also impairing lipoprotein assembly and secretion.",
+                pharmacyTip: "Nutritional support and alcohol cessation are key in managing alcoholic fatty liver disease."
             },
             {
-                question: "Which diagnostic method is specific for Enterobius vermicularis?",
+                question: "Which cellular adaptation is reversible and involves replacement of one cell type by another?",
                 options: [
-                    "Stool examination",
-                    "Scotch tape test",
-                    "Blood smear",
-                    "Urine examination"
+                    "Hypertrophy",
+                    "Hyperplasia", 
+                    "Metaplasia", 
+                    "Dysplasia"
                 ],
-                correctAnswer: 1,
-                explanation: "The Scotch tape test is the specific diagnostic method for Enterobius vermicularis.",
-                tip: "Pinworms lay eggs on perianal skin, not in stool, so Scotch tape test is best"
+                correct: 2,
+                explanation: "Metaplasia is the reversible replacement of one differentiated cell type by another, usually in response to chronic irritation or stress.",
+                pharmacyTip: "Removing the inciting stimulus can reverse metaplasia and prevent progression to dysplasia."
             },
             {
-                question: "When is the best time to perform the Scotch tape test for pinworms?",
+                question: "A patient with rheumatoid arthritis develops subcutaneous nodules. What type of necrosis is typically found in these nodules?",
                 options: [
-                    "After meals",
-                    "In the morning before bathing or defecation",
-                    "At noon",
-                    "Before bedtime"
+                    "Coagulative necrosis",
+                    "Caseous necrosis", 
+                    "Fibrinoid necrosis", 
+                    "Liquefactive necrosis"
                 ],
-                correctAnswer: 1,
-                explanation: "The Scotch tape test should be performed in the morning before bathing or defecation when eggs are most likely to be present on perianal skin.",
-                tip: "Pinworms lay eggs at night, so morning is the best time for detection"
+                correct: 2,
+                explanation: "Rheumatoid nodules show fibrinoid necrosis, characterized by deposition of fibrin-like material in connective tissue.",
+                pharmacyTip: "DMARDs (Disease-Modifying Antirheumatic Drugs) help control the underlying autoimmune process."
             },
             {
-                question: "What is the most common symptom of Enterobius vermicularis infection?",
+                question: "Which of the following best describes the role of Bcl-2 in apoptosis?",
                 options: [
-                    "Abdominal pain",
-                    "Nocturnal perianal itching",
-                    "Cough",
-                    "Diarrhea"
+                    "It promotes cell death",
+                    "It inhibits apoptosis", 
+                    "It activates caspases",
+                    "It damages mitochondrial membranes"
                 ],
-                correctAnswer: 1,
-                explanation: "Nocturnal perianal itching is the most common symptom of Enterobius vermicularis infection.",
-                tip: "Female pinworms migrate to perianal area at night to lay eggs, causing itching"
+                correct: 1,
+                explanation: "Bcl-2 is an anti-apoptotic protein that prevents cytochrome c release from mitochondria, thereby inhibiting the intrinsic apoptosis pathway.",
+                pharmacyTip: "Some cancers overexpress Bcl-2, making them resistant to apoptosis-inducing chemotherapy."
             },
             {
-                question: "Why is it recommended to treat all household members for pinworm infection?",
+                question: "A patient with hyperparathyroidism develops nephrocalcinosis. What type of calcification is this?",
                 options: [
-                    "To save money on medication",
-                    "Due to high reinfection rate within households",
-                    "Because it's required by law",
-                    "To prevent drug resistance"
+                    "Dystrophic calcification",
+                    "Metastatic calcification", 
+                    "Physiological calcification",
+                    "Heterotopic calcification"
                 ],
-                correctAnswer: 1,
-                explanation: "All household members should be treated due to the high reinfection rate within households.",
-                tip: "Pinworms spread easily in close contacts, so treat everyone to prevent reinfection"
+                correct: 1,
+                explanation: "Nephrocalcinosis in hyperparathyroidism represents metastatic calcification - deposition of calcium salts in normal tissues due to hypercalcemia.",
+                pharmacyTip: "Managing hypercalcemia is crucial to prevent renal and other tissue damage."
             },
             {
-                question: "What is the common name for Strongyloides stercoralis?",
+                question: "Which intracellular pigment accumulation is associated with aging?",
                 options: [
-                    "Pinworm",
-                    "Whipworm",
-                    "Threadworm",
-                    "Hookworm"
+                    "Hemosiderin",
+                    "Melanin", 
+                    "Lipofuscin", 
+                    "Bilirubin"
                 ],
-                correctAnswer: 2,
-                explanation: "Strongyloides stercoralis is commonly known as threadworm.",
-                tip: "Strongyloides = 'round form', stercoralis = 'of feces'"
+                correct: 2,
+                explanation: "Lipofuscin, the 'wear and tear' pigment, accumulates with age in post-mitotic cells like neurons and cardiac myocytes.",
+                pharmacyTip: "Antioxidants may help reduce oxidative stress that contributes to lipofuscin accumulation."
             },
             {
-                question: "What is unique about Strongyloides stercoralis compared to other nematodes?",
+                question: "A patient presents with blackening of toes without infection. What type of gangrene is this?",
                 options: [
-                    "It has both free-living and parasitic cycles",
-                    "It only infects animals",
-                    "It is the largest nematode",
-                    "It only reproduces sexually"
+                    "Dry gangrene", 
+                    "Wet gangrene",
+                    "Gas gangrene",
+                    "Hospital gangrene"
                 ],
-                correctAnswer: 0,
-                explanation: "Strongyloides stercoralis is unique because it has both free-living and parasitic cycles.",
-                tip: "Strongyloides can complete its life cycle either inside or outside the host"
+                correct: 0,
+                explanation: "Dry gangrene occurs without infection, typically in extremities with arterial insufficiency, characterized by coagulative necrosis and mummification.",
+                pharmacyTip: "Vascular assessment and risk factor modification are essential in managing dry gangrene."
             },
             {
-                question: "What is autoinfection in Strongyloides stercoralis?",
+                question: "Which enzyme is released into serum following myocardial infarction and serves as a diagnostic marker?",
                 options: [
-                    "Infection from another person",
-                    "Reinfection by larvae that develop within the same host",
-                    "Infection from contaminated soil",
-                    "Infection from insect bites"
+                    "Amylase",
+                    "Alkaline phosphatase", 
+                    "Troponin", 
+                    "Gamma-glutamyl transferase"
                 ],
-                correctAnswer: 1,
-                explanation: "Autoinfection occurs when rhabditiform larvae transform into filariform larvae within the host and cause reinfection.",
-                tip: "Autoinfection allows Strongyloides to persist for decades without external reinfection"
+                correct: 2,
+                explanation: "Cardiac troponins are specific markers of myocardial injury released when cardiac myocytes undergo necrosis.",
+                pharmacyTip: "Troponin levels help diagnose myocardial infarction and guide antiplatelet and anticoagulant therapy."
             },
             {
-                question: "What is the infective stage of Strongyloides stercoralis?",
+                question: "A patient with chronic bronchitis develops squamous metaplasia in bronchial epithelium. What is the primary stimulus for this change?",
                 options: [
-                    "Egg",
-                    "Rhabditiform larva",
-                    "Filariform larva",
-                    "Adult worm"
+                    "Viral infection",
+                    "Cigarette smoke", 
+                    "Air pollution",
+                    "Genetic predisposition"
                 ],
-                correctAnswer: 2,
-                explanation: "The filariform larva is the infective stage of Strongyloides stercoralis.",
-                tip: "Skin-penetrating nematodes typically have filariform larvae as infective stages"
+                correct: 1,
+                explanation: "Cigarette smoke is the most common cause of squamous metaplasia in respiratory epithelium, representing an adaptive response to chronic irritation.",
+                pharmacyTip: "Smoking cessation can reverse early metaplastic changes and reduce cancer risk."
             },
             {
-                question: "What is hyperinfection syndrome in Strongyloides stercoralis?",
+                question: "Which type of cell death is characterized by inflammation and results from ischemia?",
                 options: [
-                    "Mild intestinal symptoms",
-                    "Massive proliferation and dissemination of larvae in immunocompromised hosts",
-                    "Allergic reaction to the parasite",
-                    "Formation of granulomas around larvae"
+                    "Apoptosis",
+                    "Necrosis", 
+                    "Autophagy",
+                    "Senescence"
                 ],
-                correctAnswer: 1,
-                explanation: "Hyperinfection syndrome is the massive proliferation and dissemination of larvae that can occur in immunocompromised hosts, which can be fatal.",
-                tip: "Hyperinfection = excessive multiplication within the host, often in immunocompromised individuals"
+                correct: 1,
+                explanation: "Necrosis is unprogrammed cell death that always elicits inflammation and is commonly caused by ischemia, toxins, or trauma.",
+                pharmacyTip: "Anti-inflammatory agents may help mitigate tissue damage following necrotic injury."
             },
             {
-                question: "What is the drug of choice for Strongyloides stercoralis?",
+                question: "A patient with vitamin A deficiency develops keratinization of conjunctiva. What cellular process is impaired?",
                 options: [
-                    "Albendazole",
-                    "Mebendazole",
-                    "Ivermectin",
-                    "Pyrantel pamoate"
+                    "Proliferation",
+                    "Differentiation", 
+                    "Metabolism",
+                    "Secretion"
                 ],
-                correctAnswer: 2,
-                explanation: "Ivermectin is the drug of choice for Strongyloides stercoralis.",
-                tip: "Ivermectin is particularly effective against Strongyloides"
+                correct: 1,
+                explanation: "Vitamin A is essential for epithelial differentiation. Deficiency leads to squamous metaplasia with keratinization, seen as Bitot's spots in the conjunctiva.",
+                pharmacyTip: "Vitamin A supplementation can reverse these changes if given early."
             },
             {
-                question: "How is Strongyloides stercoralis typically diagnosed?",
+                question: "Which organelle is most sensitive to hypoxic injury?",
                 options: [
-                    "Detection of eggs in stool",
-                    "Detection of rhabditiform larvae in stool",
-                    "Detection of adult worms in stool",
-                    "Blood smear"
+                    "Nucleus",
+                    "Mitochondria", 
+                    "Endoplasmic reticulum",
+                    "Golgi apparatus"
                 ],
-                correctAnswer: 1,
-                explanation: "Strongyloides stercoralis is typically diagnosed by detection of rhabditiform larvae in stool.",
-                tip: "Strongyloides larvae, not eggs, are typically found in stool"
+                correct: 1,
+                explanation: "Mitochondria are highly sensitive to hypoxia due to their role in oxidative phosphorylation. ATP depletion occurs within minutes of oxygen deprivation.",
+                pharmacyTip: "Mitochondrial protection is a target for therapies in ischemic conditions."
             },
             {
-                question: "Which two species are the main human hookworms?",
+                question: "A patient with uncontrolled diabetes develops Kimmelstiel-Wilson lesions in the kidney. What pathological process is involved?",
                 options: [
-                    "Ascaris lumbricoides and Trichuris trichiura",
-                    "Ancylostoma duodenale and Necator americanus",
-                    "Enterobius vermicularis and Strongyloides stercoralis",
-                    "Trichinella spiralis and Dracunculus medinensis"
+                    "Amyloid deposition",
+                    "Hyaline degeneration", 
+                    "Fibrinoid necrosis",
+                    "Glycogen accumulation"
                 ],
-                correctAnswer: 1,
-                explanation: "Ancylostoma duodenale (Old World hookworm) and Necator americanus (New World hookworm) are the main human hookworms.",
-                tip: "Ancylostoma = 'curved mouth', Necator = 'killer'"
+                correct: 1,
+                explanation: "Kimmelstiel-Wilson lesions in diabetic nephropathy represent hyaline degeneration of glomerular capillaries due to protein leakage and mesangial expansion.",
+                pharmacyTip: "Tight glycemic control and ACE inhibitors help prevent progression of diabetic nephropathy."
             },
             {
-                question: "Where do adult hookworms reside in the human body?",
+                question: "Which of the following represents physiological hyperplasia?",
                 options: [
-                    "Large intestine",
-                    "Jejunum of small intestine",
-                    "Lungs",
-                    "Skin"
+                    "Benign prostatic hyperplasia",
+                    "Endometrial hyperplasia", 
+                    "Compensatory liver hyperplasia", 
+                    "Psoriatic skin hyperplasia"
                 ],
-                correctAnswer: 1,
-                explanation: "Adult hookworms reside in the jejunum of the small intestine.",
-                tip: "Hookworms attach to the intestinal mucosa and feed on blood"
+                correct: 2,
+                explanation: "Compensatory hyperplasia of the liver after partial resection is a physiological response to maintain organ function.",
+                pharmacyTip: "Understanding regenerative capacity helps in surgical planning and post-operative care."
             },
             {
-                question: "What is the infective stage of hookworms?",
+                question: "A patient with chronic heart failure develops cardiac cachexia. What cellular adaptation is primarily involved?",
                 options: [
-                    "Egg",
-                    "Rhabditiform larva",
-                    "Filariform larva",
-                    "Adult worm"
+                    "Hypertrophy",
+                    "Hyperplasia", 
+                    "Atrophy", 
+                    "Metaplasia"
                 ],
-                correctAnswer: 2,
-                explanation: "The filariform larva is the infective stage of hookworms.",
-                tip: "Like Strongyloides, hookworms have filariform larvae that penetrate skin"
+                correct: 2,
+                explanation: "Cardiac cachexia involves atrophy of skeletal muscle due to chronic illness, increased metabolic demands, and cytokine-mediated catabolism.",
+                pharmacyTip: "Nutritional support and exercise training can help combat cachexia in heart failure."
             },
             {
-                question: "What is 'ground itch'?",
+                question: "Which type of necrosis is characteristic of brain infarction?",
                 options: [
-                    "Itching caused by pinworms",
-                    "Skin reaction at the site of hookworm larval penetration",
-                    "Allergy to soil",
-                    "Fungal infection of the feet"
+                    "Coagulative necrosis",
+                    "Liquefactive necrosis", 
+                    "Caseous necrosis",
+                    "Fat necrosis"
                 ],
-                correctAnswer: 1,
-                explanation: "'Ground itch' is the skin reaction (erythema, papules) at the site of hookworm larval penetration.",
-                tip: "Hookworm larvae penetrate skin, causing 'ground itch'"
+                correct: 1,
+                explanation: "Brain infarction results in liquefactive necrosis due to high lipid content and release of proteolytic enzymes from microglial cells.",
+                pharmacyTip: "Neuroimaging helps distinguish between different types of brain lesions for appropriate management."
             },
             {
-                question: "What is the main pathology caused by adult hookworms?",
+                question: "A patient with hemochromatosis develops bronze diabetes. What is accumulating in the pancreas?",
                 options: [
-                    "Liver damage",
-                    "Intestinal obstruction",
-                    "Blood loss leading to iron deficiency anemia",
-                    "Respiratory distress"
+                    "Iron", 
+                    "Copper",
+                    "Calcium",
+                    "Fat"
                 ],
-                correctAnswer: 2,
-                explanation: "The main pathology caused by adult hookworms is blood loss leading to iron deficiency anemia.",
-                tip: "Hookworms are hematophagous (blood-feeding), causing anemia"
+                correct: 0,
+                explanation: "Hemochromatosis involves iron accumulation in various organs, including the pancreas, leading to beta cell damage and diabetes mellitus.",
+                pharmacyTip: "Phlebotomy and iron chelation are mainstays of hemochromatosis treatment."
             },
             {
-                question: "How much blood can one Ancylostoma duodenale worm consume per day?",
+                question: "Which cellular change is characteristic of reversible injury?",
                 options: [
-                    "0.01 ml",
-                    "0.03 ml",
-                    "0.26 ml",
-                    "1.0 ml"
+                    "Nuclear fragmentation",
+                    "Mitochondrial swelling", 
+                    "Lysosomal rupture",
+                    "Plasma membrane disruption"
                 ],
-                correctAnswer: 2,
-                explanation: "One Ancylostoma duodenale worm can consume approximately 0.26 ml of blood per day.",
-                tip: "Ancylostoma duodenale causes more blood loss than Necator americanus"
+                correct: 1,
+                explanation: "Mitochondrial swelling is an early, reversible change in cell injury, while the other options represent irreversible damage.",
+                pharmacyTip: "Early intervention can prevent progression from reversible to irreversible injury."
             },
             {
-                question: "What is the drug of choice for hookworm infections?",
+                question: "A patient with gout develops tophi. What substance is accumulating in these lesions?",
                 options: [
-                    "Ivermectin",
-                    "Albendazole",
-                    "Praziquantel",
-                    "Metronidazole"
+                    "Calcium pyrophosphate",
+                    "Uric acid crystals", 
+                    "Cholesterol crystals",
+                    "Amyloid protein"
                 ],
-                correctAnswer: 1,
-                explanation: "Albendazole is the drug of choice for hookworm infections.",
-                tip: "Albendazole is effective against most soil-transmitted helminths"
+                correct: 1,
+                explanation: "Gouty tophi contain deposits of monosodium urate crystals surrounded by chronic inflammatory reaction.",
+                pharmacyTip: "Urate-lowering therapy with allopurinol or febuxostat helps prevent tophus formation."
             },
             {
-                question: "Which nematode is known for its unique free-living cycle?",
+                question: "Which antioxidant enzyme is deficient in acatalasemia?",
                 options: [
-                    "Ascaris lumbricoides",
-                    "Trichuris trichiura",
-                    "Strongyloides stercoralis",
-                    "Enterobius vermicularis"
+                    "Superoxide dismutase",
+                    "Catalase", 
+                    "Glutathione peroxidase",
+                    "Glutathione reductase"
                 ],
-                correctAnswer: 2,
-                explanation: "Strongyloides stercoralis is known for its unique free-living cycle where it can reproduce outside the host.",
-                tip: "Only Strongyloides has a free-living generation that can reproduce in soil"
+                correct: 1,
+                explanation: "Acatalasemia is a rare genetic disorder with deficient catalase activity, leading to increased susceptibility to hydrogen peroxide toxicity.",
+                pharmacyTip: "Avoiding oxidative stressors is important in managing this condition."
             },
             {
-                question: "Which nematode infection is diagnosed using the Baermann technique?",
+                question: "A patient with Alzheimer's disease shows amyloid plaques in the brain. What type of protein accumulation is this?",
                 options: [
-                    "Ascaris lumbricoides",
-                    "Strongyloides stercoralis",
-                    "Enterobius vermicularis",
-                    "Trichuris trichiura"
+                    "Misfolded protein accumulation", 
+                    "Enzyme deficiency accumulation",
+                    "Transport protein accumulation",
+                    "Structural protein accumulation"
                 ],
-                correctAnswer: 1,
-                explanation: "The Baermann technique is used to concentrate and detect Strongyloides stercoralis larvae in stool.",
-                tip: "Baermann technique uses warm water to attract motile larvae"
+                correct: 0,
+                explanation: "Amyloid plaques in Alzheimer's disease contain misfolded β-amyloid protein that aggregates due to improper processing and clearance.",
+                pharmacyTip: "Current research focuses on preventing amyloid accumulation as a therapeutic strategy."
             },
             {
-                question: "What is the main prevention measure for hookworm infections?",
+                question: "Which cellular adaptation represents an increase in cell number?",
                 options: [
-                    "Wearing shoes",
-                    "Washing hands",
-                    "Cooking meat thoroughly",
-                    "Using insect repellent"
+                    "Hypertrophy",
+                    "Hyperplasia", 
+                    "Metaplasia",
+                    "Dysplasia"
                 ],
-                correctAnswer: 0,
-                explanation: "Wearing shoes is the main prevention measure for hookworm infections to prevent skin contact with contaminated soil.",
-                tip: "Hookworm larvae penetrate bare skin, so shoes provide protection"
+                correct: 1,
+                explanation: "Hyperplasia involves an increase in the number of cells in a tissue or organ, which can be physiological or pathological.",
+                pharmacyTip: "Understanding hyperplastic responses helps in managing conditions like benign prostatic hyperplasia."
             },
             {
-                question: "Which nematode is most commonly associated with Loeffler's syndrome?",
+                question: "A patient with chronic alcoholism develops Mallory bodies in hepatocytes. What do these represent?",
                 options: [
-                    "Enterobius vermicularis",
-                    "Ascaris lumbricoides",
-                    "Trichuris trichiura",
-                    "Strongyloides stercoralis"
+                    "Fat accumulation",
+                    "Glycogen accumulation", 
+                    "Intermediate filament accumulation", 
+                    "Iron accumulation"
                 ],
-                correctAnswer: 1,
-                explanation: "Ascaris lumbricoides is most commonly associated with Loeffler's syndrome during its larval migration through the lungs.",
-                tip: "Loeffler's syndrome = pulmonary symptoms during Ascaris larval migration"
+                correct: 2,
+                explanation: "Mallory bodies are cytoplasmic inclusions containing aggregated cytokeratin intermediate filaments, characteristic of alcoholic liver disease.",
+                pharmacyTip: "Alcohol cessation is crucial as Mallory bodies indicate significant hepatocyte injury."
             },
             {
-                question: "Which nematode infection typically shows eosinophilia?",
+                question: "Which type of cell death involves autodigestion by lysosomal enzymes?",
                 options: [
-                    "Only Ascaris infection",
-                    "Only hookworm infection",
-                    "Only Strongyloides infection",
-                    "Most tissue-migrating nematode infections"
+                    "Apoptosis",
+                    "Necrosis", 
+                    "Autophagy",
+                    "Oncosis"
                 ],
-                correctAnswer: 3,
-                explanation: "Most tissue-migrating nematode infections typically show eosinophilia.",
-                tip: "Eosinophilia is common in helminth infections, especially during tissue migration"
+                correct: 2,
+                explanation: "Autophagy involves degradation of cellular components by lysosomal enzymes, which can be a survival mechanism or lead to cell death.",
+                pharmacyTip: "Modulating autophagy is being explored as a therapeutic strategy in various diseases."
             },
             {
-                question: "What is the most common helminth infection in children in temperate regions?",
+                question: "A patient with cystic fibrosis develops pancreatic insufficiency. What cellular process is primarily affected?",
                 options: [
-                    "Ascariasis",
-                    "Trichuriasis",
-                    "Enterobiasis (pinworm)",
-                    "Strongyloidiasis"
+                    "Protein synthesis",
+                    "Ion transport", 
+                    "Lipid metabolism",
+                    "Carbohydrate digestion"
                 ],
-                correctAnswer: 2,
-                explanation: "Enterobiasis (pinworm infection) is the most common helminth infection in children in temperate regions.",
-                tip: "Pinworms spread easily in crowded settings like schools and families"
+                correct: 1,
+                explanation: "Cystic fibrosis involves defective chloride ion transport due to CFTR gene mutation, leading to thick secretions that obstruct pancreatic ducts.",
+                pharmacyTip: "Pancreatic enzyme replacement is essential for managing malabsorption in cystic fibrosis."
             },
             {
-                question: "Which nematode can cause vulvovaginitis in young girls?",
+                question: "Which cellular change is characteristic of apoptosis?",
                 options: [
-                    "Ascaris lumbricoides",
-                    "Enterobius vermicularis",
-                    "Trichuris trichiura",
-                    "Strongyloides stercoralis"
+                    "Cell swelling",
+                    "Inflammation", 
+                    "Chromatin condensation", 
+                    "Enzyme release"
                 ],
-                correctAnswer: 1,
-                explanation: "Enterobius vermicularis (pinworm) can cause vulvovaginitis in young girls when female worms migrate to the perianal area.",
-                tip: "Pinworm migration to perianal area can lead to vulvovaginitis"
+                correct: 2,
+                explanation: "Chromatin condensation and fragmentation into well-defined masses is a hallmark of apoptosis, distinguishing it from necrosis.",
+                pharmacyTip: "Many cancer treatments work by enhancing apoptotic pathways in malignant cells."
             },
             {
-                question: "What is the treatment strategy for intestinal obstruction caused by Ascaris lumbricoides?",
+                question: "A patient with chronic venous stasis develops brown induration of legs. What pigment is responsible for the discoloration?",
                 options: [
-                    "Immediate anthelmintic therapy",
-                    "Surgery only",
-                    "Conservative management first, then anthelmintic once obstruction resolves",
-                    "No treatment needed"
+                    "Melanin",
+                    "Bilirubin", 
+                    "Hemosiderin", 
+                    "Lipofuscin"
                 ],
-                correctAnswer: 2,
-                explanation: "For intestinal obstruction caused by Ascaris, conservative management (NPO, nasogastric suction, IV fluids) is used first, followed by anthelmintic therapy once the acute obstruction resolves.",
-                tip: "Treat the obstruction first, then the infection"
+                correct: 2,
+                explanation: "Brown induration in chronic venous insufficiency results from hemosiderin deposition due to red blood cell extravasation and breakdown.",
+                pharmacyTip: "Compression therapy helps prevent progression of venous stasis changes."
             },
             {
-                question: "Which nematode infection requires screening before immunosuppressive therapy?",
+                question: "Which organ is most susceptible to carbon tetrachloride toxicity?",
                 options: [
-                    "Ascaris lumbricoides",
-                    "Strongyloides stercoralis",
-                    "Enterobius vermicularis",
-                    "Trichuris trichiura"
+                    "Kidney",
+                    "Liver", 
+                    "Brain",
+                    "Heart"
                 ],
-                correctAnswer: 1,
-                explanation: "Strongyloides stercoralis requires screening before immunosuppressive therapy due to the risk of hyperinfection syndrome.",
-                tip: "Strongyloides hyperinfection can be fatal in immunocompromised patients"
+                correct: 1,
+                explanation: "The liver is particularly susceptible to carbon tetrachloride toxicity due to high cytochrome P450 activity that generates toxic metabolites.",
+                pharmacyTip: "Early recognition of hepatotoxic drug reactions is crucial for preventing liver failure."
             },
             {
-                question: "What is the primary difference between Ancylostoma duodenale and Necator americanus mouthparts?",
+                question: "A patient with rheumatoid arthritis develops vasculitis. What type of necrosis is seen in affected vessels?",
                 options: [
-                    "Ancylostoma has cutting plates, Necator has teeth",
-                    "Ancylostoma has teeth, Necator has cutting plates",
-                    "Both have identical mouthparts",
-                    "Ancylostoma has no mouthparts, Necator has teeth"
+                    "Caseous necrosis",
+                    "Fibrinoid necrosis", 
+                    "Coagulative necrosis",
+                    "Liquefactive necrosis"
                 ],
-                correctAnswer: 1,
-                explanation: "Ancylostoma duodenale has teeth, while Necator americanus has cutting plates.",
-                tip: "Ancylostoma = teeth, Necator = cutting plates"
+                correct: 1,
+                explanation: "Fibrinoid necrosis in vasculitis involves deposition of fibrin-like material in vessel walls with immune complex deposition.",
+                pharmacyTip: "Immunosuppressive therapy is needed to control the underlying autoimmune process."
             },
             {
-                question: "Which nematode is also known as the 'guinea worm'?",
+                question: "Which cellular adaptation is irreversible?",
                 options: [
-                    "Dracunculus medinensis",
-                    "Onchocerca volvulus",
-                    "Loa loa",
-                    "Wuchereria bancrofti"
+                    "Hypertrophy",
+                    "Hyperplasia", 
+                    "Metaplasia",
+                    "Dysplasia"
                 ],
-                correctAnswer: 0,
-                explanation: "Dracunculus medinensis is also known as the guinea worm.",
-                tip: "Dracunculus medinensis causes dracunculiasis (guinea worm disease)"
+                correct: 3,
+                explanation: "Dysplasia represents disordered growth with cellular atypia and is considered irreversible, often progressing to carcinoma if untreated.",
+                pharmacyTip: "Regular screening helps detect dysplastic changes early when intervention is most effective."
             },
             {
-                question: "Which of the following is a filarial nematode?",
+                question: "A patient with chronic renal failure develops secondary hyperparathyroidism. What type of calcification may occur?",
                 options: [
-                    "Ascaris lumbricoides",
-                    "Trichuris trichiura",
-                    "Wuchereria bancrofti",
-                    "Strongyloides stercoralis"
+                    "Dystrophic calcification",
+                    "Metastatic calcification", 
+                    "Physiological calcification",
+                    "Heterotopic calcification"
                 ],
-                correctAnswer: 2,
-                explanation: "Wuchereria bancrofti is a filarial nematode that causes lymphatic filariasis.",
-                tip: "Filarial nematodes are tissue-dwelling worms transmitted by insects"
+                correct: 1,
+                explanation: "Secondary hyperparathyroidism in renal failure causes hyperphosphatemia and subsequent metastatic calcification in various tissues.",
+                pharmacyTip: "Phosphate binders and vitamin D analogs help manage mineral metabolism in renal failure."
+            },
+            {
+                question: "Which antioxidant is most important for protecting cell membranes from lipid peroxidation?",
+                options: [
+                    "Vitamin C",
+                    "Vitamin E", 
+                    "Glutathione",
+                    "Superoxide dismutase"
+                ],
+                correct: 1,
+                explanation: "Vitamin E (α-tocopherol) is lipid-soluble and incorporated into cell membranes, where it scavenges lipid peroxyl radicals.",
+                pharmacyTip: "Vitamin E supplementation may benefit conditions with increased oxidative stress."
+            },
+            {
+                question: "A patient with tuberculosis develops a Ghon complex. What type of necrosis is present?",
+                options: [
+                    "Coagulative necrosis",
+                    "Liquefactive necrosis", 
+                    "Caseous necrosis", 
+                    "Fat necrosis"
+                ],
+                correct: 2,
+                explanation: "The Ghon complex in primary tuberculosis contains caseous necrosis within granulomas, characteristic of mycobacterial infections.",
+                pharmacyTip: "Understanding TB pathology helps in appropriate anti-tubercular therapy selection and duration."
+            },
+            {
+                question: "Which cellular organelle is primarily responsible for protein synthesis?",
+                options: [
+                    "Mitochondria",
+                    "Rough endoplasmic reticulum", 
+                    "Golgi apparatus",
+                    "Lysosomes"
+                ],
+                correct: 1,
+                explanation: "The rough endoplasmic reticulum, with its attached ribosomes, is the primary site of protein synthesis in the cell.",
+                pharmacyTip: "Many drugs can affect protein synthesis, which is important for their therapeutic and toxic effects."
+            },
+            {
+                question: "A patient with chronic bronchitis develops increased mucus production. What cellular adaptation is involved?",
+                options: [
+                    "Hypertrophy of mucous glands", 
+                    "Hyperplasia of goblet cells",
+                    "Metaplasia of ciliated cells",
+                    "Dysplasia of basal cells"
+                ],
+                correct: 1,
+                explanation: "Chronic bronchitis involves hyperplasia of mucus-secreting goblet cells in the bronchial epithelium, leading to increased mucus production.",
+                pharmacyTip: "Mucolytics and bronchodilators help manage symptoms in chronic bronchitis."
+            },
+            {
+                question: "Which type of gangrene is caused by Clostridium perfringens?",
+                options: [
+                    "Dry gangrene",
+                    "Wet gangrene", 
+                    "Gas gangrene", 
+                    "Hospital gangrene"
+                ],
+                correct: 2,
+                explanation: "Gas gangrene is caused by Clostridium perfringens, which produces gas bubbles in tissues through fermentation of muscle glycogen.",
+                pharmacyTip: "Prompt surgical debridement and appropriate antibiotics are essential for gas gangrene management."
+            },
+            {
+                question: "A patient with vitamin D deficiency develops osteomalacia. What cellular process is impaired?",
+                options: [
+                    "Bone formation",
+                    "Bone mineralization", 
+                    "Bone resorption",
+                    "Cartilage formation"
+                ],
+                correct: 1,
+                explanation: "Osteomalacia involves impaired bone mineralization due to vitamin D deficiency, leading to accumulation of unmineralized osteoid.",
+                pharmacyTip: "Vitamin D and calcium supplementation are essential for treating osteomalacia."
+            },
+            {
+                question: "Which cellular change is characteristic of hydropic degeneration?",
+                options: [
+                    "Nuclear pyknosis",
+                    "Cytoplasmic vacuolization", 
+                    "Membrane blebbing",
+                    "Chromatin margination"
+                ],
+                correct: 1,
+                explanation: "Hydropic degeneration shows cytoplasmic vacuolization due to accumulation of water, representing early reversible cell injury.",
+                pharmacyTip: "Recognizing reversible changes allows for early intervention to prevent permanent damage."
+            },
+            {
+                question: "A patient with chronic aspirin use develops tinnitus. What cellular mechanism is involved?",
+                options: [
+                    "Mitochondrial dysfunction",
+                    "Ion channel blockade", 
+                    "Neurotransmitter alteration",
+                    "Cochlear hair cell damage"
+                ],
+                correct: 3,
+                explanation: "Salicylate toxicity can damage cochlear hair cells through multiple mechanisms, including oxidative stress and altered blood flow.",
+                pharmacyTip: "Monitoring for ototoxicity is important with high-dose or chronic salicylate therapy."
+            },
+            {
+                question: "Which type of necrosis involves dissolution of tissue by hydrolytic enzymes?",
+                options: [
+                    "Coagulative necrosis",
+                    "Liquefactive necrosis", 
+                    "Caseous necrosis",
+                    "Fat necrosis"
+                ],
+                correct: 1,
+                explanation: "Liquefactive necrosis involves tissue dissolution by hydrolytic enzymes released from neutrophils or intrinsic tissue enzymes.",
+                pharmacyTip: "Understanding necrosis patterns helps in diagnosing the underlying cause and extent of tissue damage."
             }
         ];
 
-        // Initialize quiz
+        // Quiz state variables
         let currentQuestion = 0;
         let score = 0;
         let userAnswers = new Array(questions.length).fill(null);
-        
-        // Display question
-        function displayQuestion() {
-            const question = questions[currentQuestion];
-            const questionElement = document.getElementById(`question-${currentQuestion}`);
-            
-            // Update progress
-            document.getElementById('progress').style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
-            document.getElementById('progress-text').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
-            
-            // Show current question
-            document.querySelectorAll('.question-container').forEach(q => q.classList.remove('active'));
-            questionElement.classList.add('active');
-            
-            // Reset options
-            questionElement.querySelectorAll('.option').forEach(option => {
-                option.classList.remove('selected', 'correct', 'incorrect');
-            });
-            
-            // Hide feedback
-            questionElement.querySelector('.feedback').style.display = 'none';
+        let timer;
+        let timeLeft = 45 * 60; // 45 minutes in seconds
+        let quizCompleted = false;
+        let startTime;
+        let correctAnswers = 0;
+        let incorrectAnswers = 0;
+
+        // DOM elements
+        const questionNumberEl = document.getElementById('question-number');
+        const questionTextEl = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const feedbackArea = document.getElementById('feedback-area');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const explanationEl = document.getElementById('explanation');
+        const pharmacyTipEl = document.getElementById('pharmacy-tip');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const scoreValue = document.getElementById('score-value');
+        const progressValue = document.getElementById('progress-value');
+        const correctValue = document.getElementById('correct-value');
+        const incorrectValue = document.getElementById('incorrect-value');
+        const progressBar = document.getElementById('progress-bar');
+        const progressPercent = document.getElementById('progress-percent');
+        const answeredValue = document.getElementById('answered-value');
+        const remainingValue = document.getElementById('remaining-value');
+        const timerEl = document.getElementById('timer');
+        const questionPalette = document.getElementById('question-palette');
+        const resultsContainer = document.getElementById('results-container');
+        const finalScore = document.getElementById('final-score');
+        const performanceMessage = document.getElementById('performance-message');
+        const finalCorrect = document.getElementById('final-correct');
+        const finalIncorrect = document.getElementById('final-incorrect');
+        const finalSkipped = document.getElementById('final-skipped');
+        const finalTime = document.getElementById('final-time');
+        const questionReview = document.getElementById('question-review');
+        const retakeBtn = document.getElementById('retake-btn');
+
+        // Initialize quiz
+        function initQuiz() {
+            scoreValue.textContent = score;
+            correctValue.textContent = correctAnswers;
+            incorrectValue.textContent = incorrectAnswers;
+            startTime = new Date();
+            createQuestionPalette();
+            loadQuestion(currentQuestion);
+            startTimer();
+            updateProgress();
         }
 
-        // Create quiz HTML
-        function createQuiz() {
-            const quizContainer = document.getElementById('quiz-container');
+        // Create question palette
+        function createQuestionPalette() {
+            questionPalette.innerHTML = '';
+            for (let i = 0; i < questions.length; i++) {
+                const paletteItem = document.createElement('div');
+                paletteItem.className = 'palette-item';
+                if (i === currentQuestion) {
+                    paletteItem.classList.add('current');
+                }
+                if (userAnswers[i] !== null) {
+                    paletteItem.classList.add('answered');
+                }
+                paletteItem.textContent = i + 1;
+                paletteItem.addEventListener('click', () => navigateToQuestion(i));
+                questionPalette.appendChild(paletteItem);
+            }
+        }
+
+        // Navigate to specific question
+        function navigateToQuestion(index) {
+            currentQuestion = index;
+            loadQuestion(currentQuestion);
+            createQuestionPalette();
+        }
+
+        // Load question
+        function loadQuestion(index) {
+            const question = questions[index];
+            questionNumberEl.textContent = `Question ${index + 1} of ${questions.length}`;
+            questionTextEl.textContent = question.question;
             
-            questions.forEach((question, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.className = `question-container ${index === 0 ? 'active' : ''}`;
-                questionDiv.id = `question-${index}`;
-                
-                let optionsHTML = '';
-                question.options.forEach((option, optIndex) => {
-                    optionsHTML += `
-                        <div class="option" data-index="${optIndex}">
-                            ${option}
-                        </div>
-                    `;
-                });
-                
-                questionDiv.innerHTML = `
-                    <div class="question-number">Question ${index + 1}</div>
-                    <div class="question-text">${question.question}</div>
-                    <div class="options-container">
-                        ${optionsHTML}
-                    </div>
-                    <div class="feedback">
-                        <div class="feedback-title">Explanation:</div>
-                        <div class="explanation"></div>
-                        <div class="memorization-tip">
-                            <strong>Memorization Tip:</strong> <span class="tip-text"></span>
-                        </div>
-                    </div>
-                    <div class="navigation">
-                        <button class="prev-btn" ${index === 0 ? 'disabled' : ''}>Previous</button>
-                        <button class="next-btn" ${index === questions.length - 1 ? 'disabled' : ''}>Next</button>
-                        ${index === questions.length - 1 ? '<button class="submit-btn">Submit Quiz</button>' : ''}
-                    </div>
-                `;
-                
-                quizContainer.appendChild(questionDiv);
-                
-                // Add event listeners to options
-                questionDiv.querySelectorAll('.option').forEach(option => {
-                    option.addEventListener('click', function() {
-                        if (userAnswers[index] !== null) return; // Already answered
-                        
-                        const selectedIndex = parseInt(this.getAttribute('data-index'));
-                        userAnswers[index] = selectedIndex;
-                        
-                        // Mark selected option
-                        questionDiv.querySelectorAll('.option').forEach(opt => {
-                            opt.classList.remove('selected');
-                        });
-                        this.classList.add('selected');
-                        
-                        // Check if correct
-                        const isCorrect = selectedIndex === question.correctAnswer;
-                        if (isCorrect) {
-                            this.classList.add('correct');
-                            score++;
-                        } else {
-                            this.classList.add('incorrect');
-                            // Mark correct answer
-                            questionDiv.querySelectorAll('.option')[question.correctAnswer].classList.add('correct');
-                        }
-                        
-                        // Show feedback
-                        const feedback = questionDiv.querySelector('.feedback');
-                        feedback.querySelector('.explanation').textContent = question.explanation;
-                        feedback.querySelector('.tip-text').textContent = question.tip;
-                        feedback.className = `feedback ${isCorrect ? 'correct-feedback' : 'incorrect-feedback'}`;
-                        feedback.style.display = 'block';
-                    });
-                });
-                
-                // Navigation buttons
-                if (index > 0) {
-                    questionDiv.querySelector('.prev-btn').addEventListener('click', function() {
-                        currentQuestion--;
-                        displayQuestion();
-                    });
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, i) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                if (userAnswers[index] === i) {
+                    optionElement.classList.add('selected');
                 }
                 
-                if (index < questions.length - 1) {
-                    questionDiv.querySelector('.next-btn').addEventListener('click', function() {
-                        currentQuestion++;
-                        displayQuestion();
-                    });
-                } else {
-                    questionDiv.querySelector('.submit-btn').addEventListener('click', function() {
-                        showResults();
-                    });
+                const optionLetter = document.createElement('div');
+                optionLetter.className = 'option-letter';
+                optionLetter.textContent = String.fromCharCode(65 + i);
+                
+                const optionText = document.createElement('div');
+                optionText.className = 'option-text';
+                optionText.textContent = option;
+                
+                optionElement.appendChild(optionLetter);
+                optionElement.appendChild(optionText);
+                optionElement.dataset.index = i;
+                optionElement.addEventListener('click', () => selectOption(i));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            feedbackArea.classList.remove('show');
+            updateProgress();
+            updatePalette();
+            
+            // Update button states
+            prevBtn.disabled = index === 0;
+            nextBtn.style.display = index === questions.length - 1 ? 'none' : 'block';
+            submitBtn.style.display = index === questions.length - 1 ? 'block' : 'none';
+        }
+
+        // Select option
+        function selectOption(optionIndex) {
+            if (quizCompleted) return;
+            
+            const options = document.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected', 'correct', 'incorrect'));
+            
+            options[optionIndex].classList.add('selected');
+            userAnswers[currentQuestion] = optionIndex;
+            
+            const isCorrect = optionIndex === questions[currentQuestion].correct;
+            
+            if (isCorrect) {
+                options[optionIndex].classList.add('correct');
+                if (userAnswers[currentQuestion] === null) {
+                    score++;
+                    correctAnswers++;
+                    scoreValue.textContent = score;
+                    correctValue.textContent = correctAnswers;
+                }
+            } else {
+                options[optionIndex].classList.add('incorrect');
+                options[questions[currentQuestion].correct].classList.add('correct');
+                if (userAnswers[currentQuestion] === null) {
+                    incorrectAnswers++;
+                    incorrectValue.textContent = incorrectAnswers;
+                }
+            }
+            
+            // Show feedback
+            feedbackTitle.textContent = isCorrect ? 'Correct!' : 'Incorrect!';
+            feedbackTitle.className = `feedback-title ${isCorrect ? 'correct' : 'incorrect'}`;
+            explanationEl.textContent = questions[currentQuestion].explanation;
+            pharmacyTipEl.textContent = questions[currentQuestion].pharmacyTip;
+            feedbackArea.classList.add('show');
+            
+            updatePalette();
+            updateProgress();
+        }
+
+        // Update question palette
+        function updatePalette() {
+            const paletteItems = document.querySelectorAll('.palette-item');
+            paletteItems.forEach((item, i) => {
+                item.classList.remove('current', 'answered', 'correct', 'incorrect');
+                
+                if (i === currentQuestion) {
+                    item.classList.add('current');
+                }
+                
+                if (userAnswers[i] !== null) {
+                    item.classList.add('answered');
+                    if (userAnswers[i] === questions[i].correct) {
+                        item.classList.add('correct');
+                    } else {
+                        item.classList.add('incorrect');
+                    }
                 }
             });
+        }
+
+        // Update progress
+        function updateProgress() {
+            const answered = userAnswers.filter(answer => answer !== null).length;
+            const progress = (answered / questions.length) * 100;
+            
+            progressBar.style.width = `${progress}%`;
+            progressPercent.textContent = `${Math.round(progress)}%`;
+            progressValue.textContent = `${Math.round(progress)}%`;
+            answeredValue.textContent = answered;
+            remainingValue.textContent = questions.length - answered;
+        }
+
+        // Next question
+        nextBtn.addEventListener('click', () => {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion(currentQuestion);
+            }
+        });
+
+        // Previous question
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion(currentQuestion);
+            }
+        });
+
+        // Submit quiz
+        submitBtn.addEventListener('click', showResults);
+
+        // Timer function
+        function startTimer() {
+            updateTimerDisplay();
+            timer = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    if (!quizCompleted) {
+                        showResults();
+                    }
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Change color when time is running low
+            if (timeLeft < 300) { // 5 minutes
+                timerEl.classList.add('timer-warning');
+            }
         }
 
         // Show results
         function showResults() {
-            document.getElementById('quiz-container').style.display = 'none';
-            const resultsContainer = document.getElementById('results-container');
-            const scoreElement = document.getElementById('score');
-            const resultMessage = document.getElementById('result-message');
+            quizCompleted = true;
+            clearInterval(timer);
             
-            const percentage = Math.round((score / questions.length) * 100);
-            scoreElement.textContent = `${percentage}%`;
+            // Calculate final score
+            score = 0;
+            correctAnswers = 0;
+            incorrectAnswers = 0;
             
-            if (percentage >= 90) {
-                resultMessage.textContent = "Excellent! You have a strong understanding of nematodes and helminthology.";
-            } else if (percentage >= 80) {
-                resultMessage.textContent = "Very good! You have a solid grasp of nematode concepts with some room for improvement.";
-            } else if (percentage >= 70) {
-                resultMessage.textContent = "Good effort! Review the areas where you had difficulty to strengthen your knowledge.";
-            } else if (percentage >= 60) {
-                resultMessage.textContent = "You passed, but consider reviewing the material again to improve your understanding.";
-            } else {
-                resultMessage.textContent = "You need more study time. Review the Nematodes chapter carefully and try again.";
+            for (let i = 0; i < questions.length; i++) {
+                if (userAnswers[i] === questions[i].correct) {
+                    score++;
+                    correctAnswers++;
+                } else if (userAnswers[i] !== null) {
+                    incorrectAnswers++;
+                }
             }
             
-            resultsContainer.style.display = 'block';
+            // Calculate time taken
+            const endTime = new Date();
+            const timeTaken = Math.floor((endTime - startTime) / 1000);
+            const minutesTaken = Math.floor(timeTaken / 60);
+            const secondsTaken = timeTaken % 60;
+            
+            // Update results display
+            finalScore.textContent = `${score}/${questions.length}`;
+            finalCorrect.textContent = correctAnswers;
+            finalIncorrect.textContent = incorrectAnswers;
+            finalSkipped.textContent = questions.length - (correctAnswers + incorrectAnswers);
+            finalTime.textContent = `${minutesTaken}:${secondsTaken.toString().padStart(2, '0')}`;
+            
+            // Performance feedback
+            const percentage = (score / questions.length) * 100;
+            if (percentage >= 80) {
+                performanceMessage.textContent = "Excellent! You have a strong understanding of cellular pathology concepts essential for pharmacy practice.";
+            } else if (percentage >= 70) {
+                performanceMessage.textContent = "Good work! You have a solid foundation in cellular injury and adaptation principles.";
+            } else if (percentage >= 60) {
+                performanceMessage.textContent = "Satisfactory performance. Review the concepts you missed to strengthen your understanding.";
+            } else if (percentage >= 50) {
+                performanceMessage.textContent = "You have basic understanding but need more study on cellular pathology concepts.";
+            } else {
+                performanceMessage.textContent = "Focus on reviewing core concepts of cellular injury, adaptation, and their clinical implications.";
+            }
+            
+            // Generate question review
+            questionReview.innerHTML = '';
+            questions.forEach((question, index) => {
+                const reviewItem = document.createElement('div');
+                reviewItem.className = 'review-item';
+                
+                const isCorrect = userAnswers[index] === question.correct;
+                const userAnswerText = userAnswers[index] !== null ? 
+                    `${String.fromCharCode(65 + userAnswers[index])}. ${question.options[userAnswers[index]]}` : 
+                    'Not answered';
+                
+                const correctAnswerText = `${String.fromCharCode(65 + question.correct)}. ${question.options[question.correct]}`;
+                
+                let reviewHTML = `
+                    <div class="review-question">${index + 1}. ${question.question}</div>
+                    <div class="review-answer ${isCorrect ? 'review-correct' : 'review-incorrect'}">
+                        <strong>Your answer:</strong> ${userAnswerText}
+                    </div>
+                    <div class="review-answer review-correct">
+                        <strong>Correct answer:</strong> ${correctAnswerText}
+                    </div>
+                    <div class="review-explanation">
+                        <strong>Explanation:</strong> ${question.explanation}
+                    </div>
+                    <div class="pharmacy-context">
+                        <strong>Pharmacy Context:</strong> ${question.pharmacyTip}
+                    </div>
+                `;
+                
+                reviewItem.innerHTML = reviewHTML;
+                questionReview.appendChild(reviewItem);
+            });
+            
+            // Show results, hide quiz
+            document.querySelector('.main-content').style.display = 'none';
+            resultsContainer.classList.add('show');
         }
 
-        // Initialize quiz
-        document.addEventListener('DOMContentLoaded', function() {
-            createQuiz();
+        // Retake quiz
+        retakeBtn.addEventListener('click', () => {
+            // Reset quiz state
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            timeLeft = 45 * 60;
+            quizCompleted = false;
+            correctAnswers = 0;
+            incorrectAnswers = 0;
+            
+            // Reset UI
+            scoreValue.textContent = score;
+            correctValue.textContent = correctAnswers;
+            incorrectValue.textContent = incorrectAnswers;
+            timerEl.textContent = '45:00';
+            timerEl.classList.remove('timer-warning');
+            document.querySelector('.main-content').style.display = 'grid';
+            resultsContainer.classList.remove('show');
+            
+            // Restart quiz
+            initQuiz();
         });
+
+        // Initialize the quiz when page loads
+        document.addEventListener('DOMContentLoaded', initQuiz);
     </script>
 </body>
-</html>
+    </html>
