@@ -3,886 +3,1369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trematodes (Flukes) Quiz</title>
+    <title>Inflammation Quiz | Haramaya University Pharmacy</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
         }
-        h1 {
-            color: #2c3e50;
+
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px;
             text-align: center;
-            margin-bottom: 30px;
         }
-        .question {
-            margin-bottom: 25px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        .question-text {
-            font-weight: bold;
+
+        header h1 {
+            font-size: 2.2rem;
             margin-bottom: 10px;
         }
-        .options {
-            margin-left: 20px;
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
-        .option {
+
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 25px;
+            background-color: var(--light);
+            border-bottom: 1px solid #ddd;
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--danger);
+        }
+
+        .progress {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: var(--transition);
+        }
+
+        .quiz-container {
+            padding: 30px;
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+        }
+
+        .question-number {
+            font-size: 1.1rem;
+            color: var(--primary);
             margin-bottom: 5px;
         }
-        .feedback {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 5px;
+
+        .question-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .option {
+            padding: 15px;
+            background-color: var(--light);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background-color: #e0e7ee;
+            transform: translateY(-2px);
+        }
+
+        .option.selected {
+            border-color: var(--primary);
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .option.correct {
+            border-color: var(--success);
+            background-color: rgba(46, 204, 113, 0.1);
+        }
+
+        .option.incorrect {
+            border-color: var(--danger);
+            background-color: rgba(231, 76, 60, 0.1);
+        }
+
+        .explanation-container {
+            padding: 20px;
+            background-color: rgba(52, 152, 219, 0.05);
+            border-radius: 8px;
+            margin-bottom: 20px;
             display: none;
         }
-        .correct {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
+
+        .explanation-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
         }
-        .incorrect {
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
+
+        .memory-tip {
+            background-color: rgba(243, 156, 18, 0.1);
+            padding: 15px;
+            border-left: 4px solid var(--warning);
+            margin-top: 15px;
+            border-radius: 0 8px 8px 0;
         }
-        .tip {
-            background-color: #e2e3e5;
-            border-left: 4px solid #6c757d;
-            padding: 10px;
-            margin-top: 10px;
-            font-style: italic;
+
+        .memory-tip-title {
+            font-weight: 600;
+            color: var(--warning);
+            margin-bottom: 5px;
         }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
         button {
-            background-color: #007bff;
-            color: white;
+            padding: 12px 25px;
             border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
+            border-radius: 8px;
+            font-weight: 600;
             cursor: pointer;
-            margin-top: 10px;
+            transition: var(--transition);
         }
+
+        .btn-prev {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+
+        .btn-next {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-submit {
+            background-color: var(--success);
+            color: white;
+            display: none;
+        }
+
         button:hover {
-            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
-        .score {
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .results-container {
+            padding: 30px;
             text-align: center;
+            display: none;
+        }
+
+        .results-title {
+            font-size: 2rem;
             margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .score {
+            font-size: 4rem;
             font-weight: bold;
-            font-size: 18px;
+            color: var(--primary);
+            margin: 20px 0;
+        }
+
+        .score-text {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+        }
+
+        .summary {
+            text-align: left;
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .summary-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .restart-btn {
+            background-color: var(--primary);
+            color: white;
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+        }
+
+        .question-review {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .review-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .review-question {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .review-answer {
+            margin-bottom: 5px;
+        }
+
+        .correct-answer {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .user-answer {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-info {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .progress-bar {
+                width: 100%;
+            }
+
+            .question-text {
+                font-size: 1.2rem;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            button {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Trematodes (Flukes) Quiz</h1>
-        <div class="score">Score: <span id="score">0</span>/<span id="total">0</span></div>
-        
-        <!-- Questions will be inserted here by JavaScript -->
-        <div id="questions-container"></div>
+        <header>
+                      <a href="https://t.me/yerotechno"><h1 style=" color: Gold;">MedQuiz</h1></a>
+            <h1>Inflammation Quiz</h1>
+            <p>Unit 3 - Pharmacy Year 2 | Haramaya University</p>
+        </header>
+
+        <div class="quiz-info">
+            <div class="timer">Time: <span id="time">80:00</span></div>
+            <div class="progress">
+                <span>Progress:</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <span id="progress-text">0/60</span>
+            </div>
+        </div>
+
+        <div class="quiz-container" id="quiz-container">
+            <div class="question-container">
+                <div class="question-number" id="question-number">Question 1 of 60</div>
+                <div class="question-text" id="question-text"></div>
+                <div class="options-container" id="options-container"></div>
+            </div>
+
+            <div class="explanation-container" id="explanation-container">
+                <div class="explanation-title">Explanation</div>
+                <div id="explanation-text"></div>
+                <div class="memory-tip" id="memory-tip">
+                    <div class="memory-tip-title">Memory Tip</div>
+                    <div id="memory-tip-text"></div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn-prev" id="prev-btn" disabled>Previous</button>
+                <button class="btn-next" id="next-btn">Next Question</button>
+                <button class="btn-submit" id="submit-btn">Submit Quiz</button>
+            </div>
+        </div>
+
+        <div class="results-container" id="results-container">
+            <h2 class="results-title">Quiz Results</h2>
+            <div class="score" id="score">0/60</div>
+            <div class="score-text" id="score-text"></div>
+
+            <div class="summary">
+                <div class="summary-title">Performance Summary</div>
+                <p>Total Questions: <span id="total-questions">60</span></p>
+                <p>Correct Answers: <span id="correct-answers">0</span></p>
+                <p>Incorrect Answers: <span id="incorrect-answers">0</span></p>
+                <p>Percentage: <span id="percentage">0%</span></p>
+                <p>Time Taken: <span id="time-taken">80:00</span></p>
+            </div>
+
+            <div class="question-review" id="question-review">
+                <h3>Question Review</h3>
+                <!-- Review content will be generated by JavaScript -->
+            </div>
+
+            <button class="restart-btn" id="restart-btn">Restart Quiz</button>
+        </div>
     </div>
 
     <script>
-        // Questions data
+        // Quiz questions array
         const questions = [
             {
-                question: "What are the four main groups of trematodes classified by?",
+                question: "Which of the following is NOT a cardinal sign of acute inflammation?",
                 options: [
-                    "The type of intermediate host they use",
-                    "The geographical location where they're found",
-                    "The site they inhabit in the human body",
-                    "The shape of their eggs"
-                ],
-                correct: 2,
-                explanation: "Trematodes are classified into four groups according to the site they inhabit in the human body: blood flukes, liver flukes, lung flukes, and intestinal flukes.",
-                tip: "Remember: Classification is by LOCATION in the body, not by shape or geography."
-            },
-            {
-                question: "Which of the following is NOT a characteristic of blood flukes (Schistosomes)?",
-                options: [
-                    "Cylindrical shaped adults",
-                    "Sexes are separate",
-                    "Hermaphroditic reproduction",
-                    "Freshwater snails as intermediate hosts"
-                ],
-                correct: 2,
-                explanation: "Unlike other trematodes, blood flukes have separate sexes (dioecious), while most other flukes are hermaphroditic.",
-                tip: "Key difference: Blood flukes = separate sexes; Other flukes = hermaphrodites."
-            },
-            {
-                question: "What is the infective stage of Schistosomes for humans?",
-                options: [
-                    "Miracidium",
-                    "Sporocyst",
-                    "Cercaria",
-                    "Adult worm"
-                ],
-                correct: 2,
-                explanation: "Cercaria is the infective stage that penetrates human skin. Miracidium infects snails, and sporocyst is a developmental stage inside snails.",
-                tip: "Cercaria → Cercaria can penetrate skin directly (think: 'C' for cutaneous penetration)."
-            },
-            {
-                question: "How is Schistosoma transmitted to humans?",
-                options: [
-                    "Ingestion of contaminated water",
-                    "Transcutaneous penetration",
-                    "Inhalation of airborne particles",
-                    "Mosquito bite"
-                ],
-                correct: 1,
-                explanation: "Schistosoma is transmitted transcutaneously when cercariae in contaminated water penetrate intact human skin.",
-                tip: "Think: Swimming or wading in contaminated water → skin penetration."
-            },
-            {
-                question: "Which species of Schistosoma causes urinary schistosomiasis?",
-                options: [
-                    "Schistosoma mansoni",
-                    "Schistosoma haematobium",
-                    "Schistosoma japonicum",
-                    "Schistosoma mekongi"
-                ],
-                correct: 1,
-                explanation: "Schistosoma haematobium resides in the veins around the urinary bladder and causes urinary schistosomiasis.",
-                tip: "Haematobium → H for hematuria (blood in urine)."
-            },
-            {
-                question: "Where do adult Schistosoma mansoni worms typically reside?",
-                options: [
-                    "Veins of the small intestine",
-                    "Veins of the large intestine",
-                    "Veins of the urinary bladder",
-                    "Portal vein in the liver"
-                ],
-                correct: 1,
-                explanation: "Schistosoma mansoni adults reside in the veins of the large intestine (inferior mesenteric veins).",
-                tip: "Mansoni → M for Mesenteric veins of Large intestine."
-            },
-            {
-                question: "What is the characteristic feature of Schistosoma mansoni eggs?",
-                options: [
-                    "Terminal spine",
-                    "Lateral spine",
-                    "No spine",
-                    "Multiple spines"
-                ],
-                correct: 1,
-                explanation: "Schistosoma mansoni eggs have a prominent lateral spine, which helps distinguish them from other species.",
-                tip: "Mansoni → M for Middle (lateral spine is in the middle/side of the egg)."
-            },
-            {
-                question: "What is the characteristic feature of Schistosoma haematobium eggs?",
-                options: [
-                    "Terminal spine",
-                    "Lateral spine",
-                    "No spine",
-                    "Multiple spines"
-                ],
-                correct: 0,
-                explanation: "Schistosoma haematobium eggs have a terminal spine at one end.",
-                tip: "Haematobium → H for Head (terminal spine at the head/end of the egg)."
-            },
-            {
-                question: "Which snail species serves as the intermediate host for Schistosoma mansoni?",
-                options: [
-                    "Bulinus spp.",
-                    "Biomphalaria spp.",
-                    "Oncomelania spp.",
-                    "Lymnaea spp."
-                ],
-                correct: 1,
-                explanation: "Biomphalaria snails are the intermediate hosts for Schistosoma mansoni.",
-                tip: "Mansoni → M for Biomphalaria (both have 'M' sound)."
-            },
-            {
-                question: "Which snail species serves as the intermediate host for Schistosoma haematobium?",
-                options: [
-                    "Bulinus spp.",
-                    "Biomphalaria spp.",
-                    "Oncomelania spp.",
-                    "Lymnaea spp."
-                ],
-                correct: 0,
-                explanation: "Bulinus snails are the intermediate hosts for Schistosoma haematobium.",
-                tip: "Haematobium → H for Bulinus (no direct mnemonic, but remember Bulinus for Bladder fluke)."
-            },
-            {
-                question: "What is the first stage that emerges from Schistosoma eggs in water?",
-                options: [
-                    "Cercaria",
-                    "Miracidium",
-                    "Sporocyst",
-                    "Redia"
-                ],
-                correct: 1,
-                explanation: "When Schistosoma eggs reach freshwater, they hatch releasing ciliated miracidia.",
-                tip: "Miracidium is MOTILE and ciliated - think 'M' for motile miracidium."
-            },
-            {
-                question: "What develops inside the snail intermediate host after miracidium penetration?",
-                options: [
-                    "Cercaria",
-                    "Sporocyst",
-                    "Adult worm",
-                    "Metacercaria"
-                ],
-                correct: 1,
-                explanation: "Inside the snail, miracidium transforms into sporocyst, which then produces cercariae.",
-                tip: "Sequence: Miracidium → Sporocyst (in snail) → Cercariae."
-            },
-            {
-                question: "After skin penetration, what is the name given to the larval stage of Schistosoma?",
-                options: [
-                    "Cercaria",
-                    "Miracidium",
-                    "Schistosomula",
-                    "Sporocyst"
-                ],
-                correct: 2,
-                explanation: "After penetrating human skin, cercariae lose their tails and become schistosomula.",
-                tip: "Schistosomula = 'little schistosomes' - the stage between cercaria and adult."
-            },
-            {
-                question: "What is the migratory pathway of schistosomula in the human body?",
-                options: [
-                    "Liver → lungs → heart → mesenteric veins",
-                    "Lungs → heart → liver → mesenteric veins",
-                    "Heart → lungs → liver → mesenteric veins",
-                    "Lungs → liver → heart → mesenteric veins"
-                ],
-                correct: 1,
-                explanation: "Schistosomula migrate via venous circulation to lungs, then to heart, develop in liver, and finally to mesenteric or vesicular veins.",
-                tip: "Remember the sequence: Skin → Veins → Lungs → Heart → Liver → Final location."
-            },
-            {
-                question: "What is the primary cause of pathology in schistosomiasis?",
-                options: [
-                    "Adult worms feeding on blood",
-                    "Toxins released by adult worms",
-                    "Immune response to eggs",
-                    "Direct tissue damage by migrating larvae"
-                ],
-                correct: 2,
-                explanation: "The host immune response against the eggs, leading to granuloma formation, is the primary cause of pathology in schistosomiasis.",
-                tip: "Eggs are the problem, not the adults! Granulomas form around eggs."
-            },
-            {
-                question: "What type of inflammatory cells typically surround Schistosoma eggs in granulomas?",
-                options: [
-                    "Neutrophils and basophils",
-                    "Eosinophils, macrophages and lymphocytes",
-                    "Platelets and erythrocytes",
-                    "Mast cells and plasma cells"
-                ],
-                correct: 1,
-                explanation: "Granulomas consist of eggs at the center surrounded by eosinophils, macrophages, and lymphocytes.",
-                tip: "Think: Eosinophils are typically elevated in parasitic infections."
-            },
-            {
-                question: "What is 'swimmer's itch' in the context of schistosomiasis?",
-                options: [
-                    "Allergic reaction to adult worms",
-                    "Cercarial dermatitis from skin penetration",
-                    "Itching caused by eggs in the skin",
-                    "Reaction to toxins in contaminated water"
-                ],
-                correct: 1,
-                explanation: "Cercarial dermatitis or 'swimmer's itch' is a transient dermatitis caused by penetration of skin by cercariae.",
-                tip: "Swimmer's itch = initial skin penetration by cercariae."
-            },
-            {
-                question: "What is Katayama's fever?",
-                options: [
-                    "Chronic liver failure due to schistosomiasis",
-                    "Acute schistosomiasis occurring weeks after initial infection",
-                    "Allergic reaction to praziquantel treatment",
-                    "Fever caused by secondary bacterial infection"
-                ],
-                correct: 1,
-                explanation: "Katayama's fever is acute schistosomiasis that may occur weeks after initial infection, associated with heavy primary infection and initiation of egg production.",
-                tip: "Katayama fever = Acute phase when eggs start being produced."
-            },
-            {
-                question: "Which complication is specifically associated with chronic Schistosoma haematobium infection?",
-                options: [
-                    "Portal hypertension",
-                    "Colonic polyposis",
-                    "Bladder cancer",
-                    "Pulmonary hypertension"
-                ],
-                correct: 2,
-                explanation: "Chronic S. haematobium infection can lead to cystitis, ureteritis, hematuria, and can progress to bladder cancer.",
-                tip: "Haematobium → Hematuria → Bladder pathology → Cancer risk."
-            },
-            {
-                question: "Which complication is associated with Schistosoma mansoni and S. japonicum infections?",
-                options: [
-                    "Bladder cancer",
-                    "Portal hypertension",
-                    "Renal failure",
-                    "Pulmonary fibrosis"
-                ],
-                correct: 1,
-                explanation: "S. mansoni and S. japonicum can cause portal hypertension with hematemesis and splenomegaly due to egg deposition in liver.",
-                tip: "Mansoni & Japonicum → Mesenteric veins → Liver involvement → Portal hypertension."
-            },
-            {
-                question: "What is the most practical method for diagnosing schistosomiasis?",
-                options: [
-                    "Serological antibody tests",
-                    "PCR detection of parasite DNA",
-                    "Microscopic identification of eggs in stool or urine",
-                    "Imaging studies like ultrasound"
-                ],
-                correct: 2,
-                explanation: "Microscopic identification of eggs in stool or urine is the most practical and direct method for diagnosis.",
-                tip: "Direct visualization of eggs is the gold standard for diagnosis."
-            },
-            {
-                question: "Which specimen should be examined if S. haematobium infection is suspected?",
-                options: [
-                    "Stool only",
-                    "Urine only",
-                    "Both stool and urine",
-                    "Sputum"
-                ],
-                correct: 1,
-                explanation: "For S. haematobium, urine examination is appropriate since eggs are passed in urine.",
-                tip: "Haematobium → Hematuria → Check urine for eggs."
-            },
-            {
-                question: "What is the drug of choice for treating all species of Schistosoma?",
-                options: [
-                    "Albendazole",
-                    "Ivermectin",
-                    "Praziquantel",
-                    "Metronidazole"
-                ],
-                correct: 2,
-                explanation: "Praziquantel is effective against all Schistosoma species and is the treatment of choice.",
-                tip: "Praziquantel for ALL flukes (trematodes)."
-            },
-            {
-                question: "Which of the following is NOT a prevention and control measure for schistosomiasis?",
-                options: [
-                    "Avoiding contamination of water with human waste",
-                    "Destroying snail intermediate hosts",
-                    "Using insecticide-treated bed nets",
-                    "Providing safe recreational bathing sites"
-                ],
-                correct: 2,
-                explanation: "Insecticide-treated bed nets are used for mosquito-borne diseases like malaria, not for water-borne schistosomiasis.",
-                tip: "Schistosomiasis is water-borne, not vector-borne like malaria."
-            },
-            {
-                question: "How do liver, lung, and intestinal flukes differ from blood flukes in terms of transmission?",
-                options: [
-                    "They are transmitted by mosquito bites",
-                    "They are transmitted via contaminated food",
-                    "They are transmitted by direct contact",
-                    "They are transmitted by inhalation"
-                ],
-                correct: 1,
-                explanation: "Liver, lung, and intestinal flukes are food-borne, transmitted via ingestion of infected fish, crabs, or aquatic vegetation.",
-                tip: "Key difference: Blood flukes = skin penetration; Other flukes = ingestion."
-            },
-            {
-                question: "What is the infective stage for liver, lung, and intestinal flukes?",
-                options: [
-                    "Miracidium",
-                    "Sporocyst",
-                    "Cercaria",
-                    "Metacercaria"
+                    "Rubor (redness)",
+                    "Tumor (swelling)",
+                    "Calor (heat)",
+                    "Febris (fever)"
                 ],
                 correct: 3,
-                explanation: "For food-borne flukes, metacercaria is the infective stage that is ingested with contaminated food.",
-                tip: "Metacercaria = the encysted stage in food sources."
+                explanation: "The five cardinal signs of acute inflammation are rubor (redness), tumor (swelling), calor (heat), dolor (pain), and functio laesa (loss of function). Febris (fever) is a systemic response, not a local cardinal sign.",
+                memoryTip: "Remember the 5 R's: Redness, Swelling, Heat, Pain, and Loss of function. Fever is systemic, not local."
             },
             {
-                question: "Which of the following is a characteristic of liver, lung, and intestinal flukes but NOT blood flukes?",
+                question: "The process by which leukocytes move from the bloodstream to the tissue is called:",
                 options: [
-                    "They use snails as intermediate hosts",
-                    "They have complex life cycles",
-                    "They are hermaphroditic",
-                    "They cause granulomatous inflammation"
+                    "Chemotaxis",
+                    "Phagocytosis",
+                    "Diapedesis",
+                    "Opsonization"
                 ],
                 correct: 2,
-                explanation: "Liver, lung, and intestinal flukes are hermaphroditic, while blood flukes have separate sexes.",
-                tip: "Blood flukes = separate sexes; Other flukes = hermaphrodites."
+                explanation: "Diapedesis is the process where leukocytes migrate through the walls of blood vessels into the tissues. Chemotaxis is movement toward chemical attractants, phagocytosis is engulfment of particles, and opsonization is coating of pathogens to enhance phagocytosis.",
+                memoryTip: "Diapedesis = 'Dia' (through) + 'pedesis' (leaping) = leaping through vessel walls."
             },
             {
-                question: "What additional developmental stage is present in liver, lung, and intestinal flukes but not typically emphasized in blood flukes?",
+                question: "Which cell type is the primary effector in acute inflammation?",
                 options: [
-                    "Miracidium",
-                    "Sporocyst",
-                    "Redia",
-                    "Cercaria"
+                    "Lymphocytes",
+                    "Macrophages",
+                    "Neutrophils",
+                    "Eosinophils"
                 ],
                 correct: 2,
-                explanation: "Redia is an additional developmental stage in the snail intermediate host for food-borne flukes.",
-                tip: "Food flukes have more complex development in snails: Sporocyst → Redia → Cercaria."
+                explanation: "Neutrophils are the primary cells in acute inflammation, arriving first at the site of injury. They are highly efficient at phagocytosis and release of inflammatory mediators.",
+                memoryTip: "Neutrophils = 'First responders' in acute inflammation. They arrive within 6-24 hours."
             },
             {
-                question: "In which geographical region is Schistosoma mansoni NOT commonly found?",
+                question: "The increased vascular permeability in acute inflammation is primarily mediated by:",
                 options: [
-                    "Africa",
-                    "South America",
-                    "Middle East",
-                    "Southeast Asia"
-                ],
-                correct: 3,
-                explanation: "S. mansoni is found in Africa, South America, and the Middle East, but not typically in Southeast Asia where S. japonicum is more common.",
-                tip: "Mansoni = Africa, Americas, Middle East; Japonicum = Asia."
-            },
-            {
-                question: "In Ethiopia, where has Schistosoma haematobium been reported?",
-                options: [
-                    "Only in highland areas",
-                    "Only in urban centers",
-                    "Awash, Wabeshebele, Asossa",
-                    "All administrative regions"
-                ],
-                correct: 2,
-                explanation: "In Ethiopia, S. haematobium has been reported specifically from Awash, Wabeshebele, and Asossa regions.",
-                tip: "Remember the three Ethiopian regions for S. haematobium: AWA (Awash, Wabeshebele, Asossa)."
-            },
-            {
-                question: "What happens to Schistosoma eggs after they are deposited in tissues?",
-                options: [
-                    "They hatch into miracidia inside the human body",
-                    "They are destroyed by the immune system without consequence",
-                    "They produce enzymes that aid tissue destruction and passage to lumen",
-                    "They calcify and become harmless"
-                ],
-                correct: 2,
-                explanation: "Larvae inside eggs produce enzymes that aid in tissue destruction and allow eggs to pass through mucosa into the lumen of bowel or bladder.",
-                tip: "Eggs need to exit the body to continue the life cycle - enzymes help them reach the lumen."
-            },
-            {
-                question: "Which species of Schistosoma has the most widespread distribution in Ethiopia?",
-                options: [
-                    "Schistosoma mansoni",
-                    "Schistosoma haematobium",
-                    "Schistosoma japonicum",
-                    "All have equal distribution"
+                    "Histamine",
+                    "Prostaglandins",
+                    "Leukotrienes",
+                    "Cytokines"
                 ],
                 correct: 0,
-                explanation: "S. mansoni has been reported from all administrative regions in Ethiopia, making it the most widespread.",
-                tip: "Mansoni is the most common human schistosome globally and in Ethiopia."
+                explanation: "Histamine, released by mast cells, basophils, and platelets, is a key mediator that causes vasodilation and increased vascular permeability in the early stages of acute inflammation.",
+                memoryTip: "Histamine causes the 'H' effects: Heat, Hyperemia, and increased permeability."
             },
             {
-                question: "What is the shape of adult blood flukes?",
+                question: "Which of the following is a characteristic feature of chronic inflammation?",
                 options: [
-                    "Leaf-like and flat",
-                    "Cylindrical",
-                    "Spherical",
-                    "Tape-like and segmented"
-                ],
-                correct: 1,
-                explanation: "Adult blood flukes are cylindrical in shape, unlike other flukes that are typically leaf-like and flat.",
-                tip: "Blood flukes are cylindrical; other flukes are flat and leaf-like."
-            },
-            {
-                question: "What facilitates the penetration of cercariae through human skin?",
-                options: [
-                    "Mechanical drilling action",
-                    "Lytic substances from penetration glands",
-                    "Enzymes from bacteria on the skin",
-                    "Heat activation from body temperature"
-                ],
-                correct: 1,
-                explanation: "Skin penetration is facilitated by lytic substances secreted by penetration glands present in the cercaria.",
-                tip: "Cercariae have special penetration glands that secrete lytic enzymes."
-            },
-            {
-                question: "How long can cercariae survive in water waiting for a host?",
-                options: [
-                    "A few hours",
-                    "1-3 days",
-                    "1-2 weeks",
-                    "Several months"
-                ],
-                correct: 1,
-                explanation: "Cercariae can swim about in water for 1-3 days while searching for a human host.",
-                tip: "Cercariae have limited survival time in water - usually 1-3 days."
-            },
-            {
-                question: "Which organ do schistosomulae primarily develop in before migrating to their final location?",
-                options: [
-                    "Lungs",
-                    "Heart",
-                    "Liver",
-                    "Intestines"
+                    "Predominance of neutrophils",
+                    "Formation of pus",
+                    "Tissue destruction and repair occurring simultaneously",
+                    "Rapid onset and short duration"
                 ],
                 correct: 2,
-                explanation: "Schistosomulae develop in the liver before exiting via the portal vein system when mature.",
-                tip: "Liver is the development site for schistosomulae before final migration."
+                explanation: "Chronic inflammation is characterized by prolonged duration (weeks to months) with active inflammation, tissue destruction, and attempts at repair occurring simultaneously.",
+                memoryTip: "Chronic = Long duration + Tissue destruction + Repair happening together."
             },
             {
-                question: "What is the primary manifestation of chronic intestinal schistosomiasis?",
+                question: "Granulomatous inflammation is typically associated with:",
                 options: [
-                    "Severe dehydration",
-                    "Neurological symptoms",
-                    "Mild, chronic bloody stools",
-                    "Respiratory distress"
+                    "Viral infections",
+                    "Acute bacterial infections",
+                    "Intracellular pathogens or foreign bodies",
+                    "Allergic reactions"
                 ],
                 correct: 2,
-                explanation: "Chronic intestinal schistosomiasis may present with mild, chronic bloody stools due to passage of eggs through the intestinal wall.",
-                tip: "Chronic intestinal schisto = blood in stool from eggs passing through intestinal wall."
+                explanation: "Granulomatous inflammation is a specific type of chronic inflammation characterized by the formation of granulomas, which are typically seen in response to intracellular pathogens (like Mycobacterium tuberculosis) or foreign bodies that are difficult to eliminate.",
+                memoryTip: "Granulomas form when the immune system 'walls off' something it can't eliminate - think TB, sarcoidosis, foreign bodies."
             },
             {
-                question: "Which species of Schistosoma is associated with colonic polyposis?",
+                question: "Which of the following is NOT a function of macrophages in inflammation?",
                 options: [
-                    "S. haematobium only",
-                    "S. mansoni mostly",
-                    "S. japonicum only",
-                    "All species equally"
+                    "Phagocytosis of pathogens and debris",
+                    "Antigen presentation to lymphocytes",
+                    "Production of antibodies",
+                    "Secretion of cytokines and growth factors"
+                ],
+                correct: 2,
+                explanation: "Macrophages perform many functions including phagocytosis, antigen presentation, and secretion of various mediators, but they do not produce antibodies. Antibody production is the function of B lymphocytes and plasma cells.",
+                memoryTip: "Macrophages are phagocytic 'big eaters' and antigen presenters, but B-cells make antibodies."
+            },
+            {
+                question: "The complement component C5a is primarily responsible for:",
+                options: [
+                    "Opsonization of pathogens",
+                    "Formation of membrane attack complex",
+                    "Chemotaxis of neutrophils",
+                    "Vasodilation"
+                ],
+                correct: 2,
+                explanation: "C5a is a powerful chemotactic factor that attracts neutrophils to the site of inflammation. C3b is involved in opsonization, C5b-9 forms the membrane attack complex, and C3a and C5a both contribute to vasodilation.",
+                memoryTip: "C5a = Chemotaxis (both start with 'C')"
+            },
+            {
+                question: "Which of the following mediators is derived from arachidonic acid via the lipoxygenase pathway?",
+                options: [
+                    "Prostaglandins",
+                    "Leukotrienes",
+                    "Thromboxanes",
+                    "Prostacyclins"
                 ],
                 correct: 1,
-                explanation: "Colonic polyposis with bloody diarrhea is mostly associated with S. mansoni infection.",
-                tip: "Mansoni → Mesenteric veins of Large intestine → Colonic pathology."
+                explanation: "Leukotrienes are derived from arachidonic acid via the lipoxygenase pathway. Prostaglandins, thromboxanes, and prostacyclins are derived via the cyclooxygenase pathway.",
+                memoryTip: "Lipoxygenase → Leukotrienes (both start with 'L')"
             },
             {
-                question: "In what percentage of cases can granulomas cause significant blockage of blood flow in the liver?",
+                question: "The process of coating microorganisms to enhance phagocytosis is called:",
                 options: [
-                    "Less than 10%",
-                    "About 25%",
-                    "About 50%",
-                    "More than 75%"
+                    "Chemotaxis",
+                    "Diapedesis",
+                    "Opsonization",
+                    "Margination"
+                ],
+                correct: 2,
+                explanation: "Opsonization is the process of coating pathogens with opsonins (such as antibodies or complement proteins) to enhance their recognition and phagocytosis by immune cells.",
+                memoryTip: "Opsonization makes pathogens 'tasty' for phagocytes to eat."
+            },
+            {
+                question: "Which type of inflammation is characterized by the formation of pus?",
+                options: [
+                    "Serous inflammation",
+                    "Fibrinous inflammation",
+                    "Suppurative inflammation",
+                    "Catarrhal inflammation"
+                ],
+                correct: 2,
+                explanation: "Suppurative (or purulent) inflammation is characterized by the formation of pus, which consists of dead neutrophils, tissue debris, and fluid.",
+                memoryTip: "Suppurative = Pus formation. Think abscesses and boils."
+            },
+            {
+                question: "The migration of leukocytes along the endothelial surface in a tumbling motion is called:",
+                options: [
+                    "Adhesion",
+                    "Rolling",
+                    "Pavementing",
+                    "Margination"
+                ],
+                correct: 1,
+                explanation: "Rolling is the process where leukocytes tumble slowly along the endothelium, mediated by selectins, before firm adhesion and transmigration.",
+                memoryTip: "Rolling → Adhesion → Transmigration. Remember the sequence: RAT."
+            },
+            {
+                question: "Which of the following is a key difference between exudate and transudate?",
+                options: [
+                    "Exudate has lower protein content",
+                    "Transudate has higher specific gravity",
+                    "Exudate results from increased vascular permeability",
+                    "Transudate contains more inflammatory cells"
+                ],
+                correct: 2,
+                explanation: "Exudate is an inflammatory fluid with high protein content and cells, resulting from increased vascular permeability. Transudate is a non-inflammatory fluid with low protein content, resulting from hemodynamic imbalances.",
+                memoryTip: "Exudate = Inflammatory, protein-rich. Transudate = Non-inflammatory, protein-poor."
+            },
+            {
+                question: "The most efficient bactericidal system in neutrophils is:",
+                options: [
+                    "Oxygen-independent mechanisms",
+                    "Lysozyme action",
+                    "H2O2-halide-myeloperoxidase system",
+                    "Lactoferrin"
+                ],
+                correct: 2,
+                explanation: "The H2O2-halide-myeloperoxidase system is the most efficient bactericidal mechanism in neutrophils, producing hypochlorous acid (similar to household bleach) that is highly toxic to microorganisms.",
+                memoryTip: "Myeloperoxidase system = Neutrophil's 'bleach factory' for killing microbes."
+            },
+            {
+                question: "Which cytokine is primarily responsible for fever in systemic inflammation?",
+                options: [
+                    "IL-1",
+                    "IL-4",
+                    "IL-10",
+                    "TGF-β"
                 ],
                 correct: 0,
-                explanation: "In less than 10% of cases, granulomas can cause blockage of blood flow in the liver leading to splenomegaly and ascites.",
-                tip: "Severe liver complications occur in <10% of cases - most infections are milder."
+                explanation: "IL-1 (interleukin-1) is a key pyrogenic cytokine that acts on the hypothalamus to raise the body's temperature set point, resulting in fever.",
+                memoryTip: "IL-1 = Inflammatory cytokine that induces fever (both start with 'F' sound)."
             },
             {
-                question: "Which diagnostic method is NOT typically used for routine diagnosis of schistosomiasis?",
+                question: "Langhans giant cells are characteristically seen in:",
                 options: [
-                    "Microscopic examination of stool",
-                    "Microscopic examination of urine",
-                    "Rectal biopsy for egg identification",
-                    "Blood culture"
+                    "Rheumatoid arthritis",
+                    "Tuberculosis",
+                    "Acute appendicitis",
+                    "Asthma"
+                ],
+                correct: 1,
+                explanation: "Langhans giant cells, with peripherally arranged nuclei in a horseshoe pattern, are characteristic of tuberculous granulomas, although they can be seen in other granulomatous diseases.",
+                memoryTip: "Langhans giant cells = Think TB (Tuberculosis)."
+            },
+            {
+                question: "Which of the following is NOT a systemic effect of inflammation?",
+                options: [
+                    "Fever",
+                    "Leukocytosis",
+                    "Increased acute-phase proteins",
+                    "Vasoconstriction"
                 ],
                 correct: 3,
-                explanation: "Blood culture is used for bacterial infections, not for parasitic infections like schistosomiasis.",
-                tip: "Schistosomiasis diagnosis relies on finding eggs in excreta or tissue biopsies, not blood cultures."
+                explanation: "Vasoconstriction is a local vascular response in acute inflammation, not a systemic effect. Fever, leukocytosis, and increased acute-phase proteins are all systemic manifestations of inflammation.",
+                memoryTip: "Systemic effects: FEVER (Fever, Elevated acute-phase proteins, White cell changes, Endocrine changes, Reduced appetite)."
             },
             {
-                question: "What is the primary purpose of latrine construction in schistosomiasis control?",
+                question: "The process where leukocytes are attracted to the site of inflammation by chemical gradients is called:",
                 options: [
-                    "To provide comfortable facilities",
-                    "To prevent contamination of water with feces/urine",
-                    "To reduce mosquito breeding sites",
-                    "To improve overall community hygiene"
+                    "Margination",
+                    "Chemotaxis",
+                    "Phagocytosis",
+                    "Opsonization"
                 ],
                 correct: 1,
-                explanation: "Latrine construction helps prevent contamination of water sources with feces and urine containing Schistosoma eggs.",
-                tip: "Proper sanitation breaks the transmission cycle by preventing egg contamination of water."
+                explanation: "Chemotaxis is the directed movement of cells along a chemical gradient. In inflammation, leukocytes are attracted to the site by chemotactic factors like C5a, LTB4, and bacterial products.",
+                memoryTip: "Chemotaxis = Chemical (chemo) + movement (taxis). Cells follow the chemical trail."
             },
             {
-                question: "Which of the following is a source of human infection for liver, lung, and intestinal flukes?",
+                question: "Which of the following cells is primarily involved in chronic inflammation?",
                 options: [
-                    "Contaminated drinking water",
-                    "Freshwater fish, crustaceans, or aquatic vegetation",
-                    "Undercooked meat",
-                    "Soil contaminated with feces"
-                ],
-                correct: 1,
-                explanation: "Liver, lung, and intestinal flukes are food-borne, with freshwater fish, crustaceans (crabs), and aquatic vegetation as sources of infection.",
-                tip: "Food-borne flukes = infected aquatic foods (fish, crabs, plants)."
-            },
-            {
-                question: "What is the role of snails in the Schistosoma life cycle?",
-                options: [
-                    "Definitive host",
-                    "Intermediate host",
-                    "Paratenic host",
-                    "Reservoir host"
-                ],
-                correct: 1,
-                explanation: "Freshwater snails serve as intermediate hosts where asexual reproduction and development occur.",
-                tip: "Snails are INTERMEDIATE hosts - essential for parasite development but not the final host."
-            },
-            {
-                question: "What is the role of humans in the Schistosoma life cycle?",
-                options: [
-                    "Intermediate host",
-                    "Definitive host",
-                    "Accidental host",
-                    "Paratenic host"
-                ],
-                correct: 1,
-                explanation: "Humans are the most significant definitive host where sexual reproduction occurs.",
-                tip: "Humans are DEFINITIVE hosts - where sexual reproduction and egg production occur."
-            },
-            {
-                question: "Which developmental stage of Schistosoma is responsible for infecting snails?",
-                options: [
-                    "Cercaria",
-                    "Miracidium",
-                    "Sporocyst",
-                    "Adult worm"
-                ],
-                correct: 1,
-                explanation: "Miracidium is the stage that infects snails after emerging from eggs in water.",
-                tip: "Miracidium infects snails; Cercaria infects humans."
-            },
-            {
-                question: "What happens to cercariae after they penetrate human skin?",
-                options: [
-                    "They immediately develop into adult worms",
-                    "They become schistosomulae (losing their tails)",
-                    "They migrate to the lungs as cercariae",
-                    "They encyst in the skin"
-                ],
-                correct: 1,
-                explanation: "After skin penetration, cercariae lose their tails and become schistosomulae.",
-                tip: "Cercariae → lose tails → become schistosomulae → begin migration."
-            },
-            {
-                question: "Which species of Schistosoma resides in the veins of the small intestine?",
-                options: [
-                    "S. mansoni",
-                    "S. haematobium",
-                    "S. japonicum",
-                    "S. intercalatum"
+                    "Neutrophils",
+                    "Eosinophils",
+                    "Macrophages",
+                    "Basophils"
                 ],
                 correct: 2,
-                explanation: "S. japonicum adults reside in the veins of the small intestine (superior mesenteric veins).",
-                tip: "Japonicum → J for Jejunum (part of small intestine)."
+                explanation: "Macrophages are the primary cells in chronic inflammation. They persist at the site, phagocytose debris, present antigens, and secrete mediators that perpetuate the inflammatory response.",
+                memoryTip: "Chronic inflammation = Macrophages as the 'orchestrators'."
             },
             {
-                question: "What is a key morphological difference between blood flukes and other flukes?",
+                question: "The initial transient vasoconstriction in acute inflammation is followed by:",
                 options: [
-                    "Blood flukes are larger",
-                    "Blood flukes have separate sexes",
-                    "Blood flukes have more complex life cycles",
-                    "Blood flukes are more resistant to treatment"
+                    "Vasodilation",
+                    "Increased vascular permeability",
+                    "Stasis",
+                    "Margination"
                 ],
-                correct: 1,
-                explanation: "Blood flukes have separate sexes (dioecious), while other flukes are typically hermaphroditic.",
-                tip: "Key distinction: Blood flukes = separate sexes; Other flukes = hermaphrodites."
+                correct: 0,
+                explanation: "After the initial brief vasoconstriction, there is sustained vasodilation of arterioles and venules, leading to increased blood flow (hyperemia) and the redness and heat of inflammation.",
+                memoryTip: "Vascular events sequence: Constriction → Dilation → Increased permeability → Stasis."
             },
             {
-                question: "Which species of Schistosoma uses Oncomelania snails as intermediate hosts?",
+                question: "Which of the following is a characteristic of serous inflammation?",
                 options: [
-                    "S. mansoni",
-                    "S. haematobium",
-                    "S. japonicum",
-                    "All Schistosoma species"
-                ],
-                correct: 2,
-                explanation: "S. japonicum uses Oncomelania snails as intermediate hosts.",
-                tip: "Japonicum in Japan → Oncomelania snails."
-            },
-            {
-                question: "What is the typical appearance of liver, lung, and intestinal flukes?",
-                options: [
-                    "Cylindrical",
-                    "Leaf-like and flat",
-                    "Spherical",
-                    "Segmented like tapeworms"
-                ],
-                correct: 1,
-                explanation: "Liver, lung, and intestinal flukes are typically flat and leaf-like in appearance.",
-                tip: "Most flukes are flat and leaf-like; only blood flukes are cylindrical."
-            },
-            {
-                question: "What is the primary method to control schistosomiasis transmission?",
-                options: [
-                    "Vaccination",
-                    "Mass drug administration only",
-                    "Integrated approach including sanitation, snail control, and treatment",
-                    "Insecticide spraying"
+                    "Formation of pus",
+                    "Accumulation of fibrin",
+                    "Outpouring of thin, protein-poor fluid",
+                    "Extensive necrosis"
                 ],
                 correct: 2,
-                explanation: "Control requires an integrated approach including preventing water contamination, destroying snail hosts, treating infected individuals, and health education.",
-                tip: "Integrated control targets multiple points in the transmission cycle."
+                explanation: "Serous inflammation is characterized by the outpouring of a thin, watery fluid (transudate or modified transudate) derived from plasma or mesothelial cell secretions.",
+                memoryTip: "Serous = Clear, watery fluid like in blisters or pleural effusions."
             },
             {
-                question: "Which symptom is characteristic of urinary schistosomiasis?",
+                question: "The Hageman factor (Factor XII) activates which of the following systems?",
                 options: [
-                    "Bloody diarrhea",
-                    "Hematuria (blood in urine)",
-                    "Chronic cough",
-                    "Jaundice"
-                ],
-                correct: 1,
-                explanation: "Hematuria (blood in urine) is the characteristic symptom of urinary schistosomiasis caused by S. haematobium.",
-                tip: "Urinary schisto = blood in urine; Intestinal schisto = blood in stool."
-            },
-            {
-                question: "What is the significance of the spine on Schistosoma eggs?",
-                options: [
-                    "It helps in tissue penetration",
-                    "It provides structural support",
-                    "It aids in species identification",
-                    "It contains digestive enzymes"
-                ],
-                correct: 2,
-                explanation: "The location and shape of the spine (lateral in S. mansoni, terminal in S. haematobium) helps in species identification.",
-                tip: "Spine location is key for species identification: Lateral for Mansoni, Terminal for Haematobium."
-            },
-            {
-                question: "Which of the following is NOT a typical manifestation of acute schistosomiasis (Katayama fever)?",
-                options: [
-                    "Fever and abdominal pain",
-                    "Hepatosplenomegaly",
-                    "Lymphadenopathy and eosinophilia",
-                    "Neurological deficits"
+                    "Complement system only",
+                    "Coagulation system only",
+                    "Kinin system only",
+                    "Coagulation, kinin, and complement systems"
                 ],
                 correct: 3,
-                explanation: "Neurological deficits are not typical of acute schistosomiasis; they may occur in rare cases of ectopic egg deposition but are not part of the classic Katayama fever presentation.",
-                tip: "Katayama fever = fever, abdominal pain, hepatosplenomegaly, lymphadenopathy, eosinophilia."
+                explanation: "Hageman factor (Factor XII) activation initiates multiple systems: the coagulation system, the kinin system (leading to bradykinin production), the fibrinolytic system, and the complement system.",
+                memoryTip: "Hageman factor = Master activator of multiple inflammatory pathways."
+            },
+            {
+                question: "Which of the following is NOT an opsonin?",
+                options: [
+                    "IgG antibody",
+                    "C3b complement component",
+                    "Histamine",
+                    "Mannose-binding lectin"
+                ],
+                correct: 2,
+                explanation: "Histamine is a vasoactive amine that increases vascular permeability but does not function as an opsonin. IgG, C3b, and mannose-binding lectin are all opsonins that enhance phagocytosis.",
+                memoryTip: "Opsonins = Antibodies (IgG), Complement (C3b), Collectins (MBL). Histamine is not an opsonin."
+            },
+            {
+                question: "The transformation of macrophages into epithelioid cells is mediated by:",
+                options: [
+                    "IL-4",
+                    "IFN-γ",
+                    "IL-10",
+                    "TGF-β"
+                ],
+                correct: 1,
+                explanation: "Interferon-gamma (IFN-γ), produced by activated T cells, is the key cytokine that transforms macrophages into epithelioid cells in granulomatous inflammation.",
+                memoryTip: "IFN-γ from T-cells transforms macrophages into epithelioid cells in granulomas."
+            },
+            {
+                question: "Which of the following is a feature of pseudomembranous inflammation?",
+                options: [
+                    "Formation of a false membrane over mucosal surfaces",
+                    "Accumulation of serous fluid in body cavities",
+                    "Extensive hemorrhage",
+                    "Minimal tissue damage"
+                ],
+                correct: 0,
+                explanation: "Pseudomembranous inflammation is characterized by the formation of a false membrane composed of fibrin, necrotic epithelial cells, and inflammatory cells over inflamed mucosal surfaces, as seen in diphtheria and pseudomembranous colitis.",
+                memoryTip: "Pseudomembranous = False membrane formation on mucosa."
+            },
+            {
+                question: "The pain in acute inflammation is primarily mediated by:",
+                options: [
+                    "Histamine",
+                    "Bradykinin and prostaglandins",
+                    "Complement components",
+                    "Leukotrienes"
+                ],
+                correct: 1,
+                explanation: "Pain (dolor) in acute inflammation is mediated by bradykinin and prostaglandins (especially PGE2), which sensitize nerve endings to painful stimuli.",
+                memoryTip: "Pain mediators: Bradykinin and Prostaglandins (remember BP for Blood Pressure and Pain)."
+            },
+            {
+                question: "Which of the following is a key characteristic of immune granulomas?",
+                options: [
+                    "Formation around inert foreign bodies",
+                    "Presence of T lymphocytes and macrophage activation",
+                    "Absence of giant cells",
+                    "Rapid resolution"
+                ],
+                correct: 1,
+                explanation: "Immune granulomas are characterized by T cell-mediated immune responses with activated macrophages (epithelioid cells) and often giant cells. Foreign body granulomas form around inert materials without significant immune activation.",
+                memoryTip: "Immune granulomas involve T-cells activating macrophages; Foreign body granulomas form around inert materials."
+            },
+            {
+                question: "The process of leukocytes moving to the periphery of blood vessels is called:",
+                options: [
+                    "Rolling",
+                    "Adhesion",
+                    "Margination",
+                    "Diapedesis"
+                ],
+                correct: 2,
+                explanation: "Margination is the process where leukocytes move from the central axial stream to the periphery of blood vessels, positioning them closer to the endothelium for subsequent adhesion and transmigration.",
+                memoryTip: "Margination = Moving to the 'margin' of the vessel."
+            },
+            {
+                question: "Which of the following is NOT a beneficial effect of acute inflammation?",
+                options: [
+                    "Dilution of toxins",
+                    "Delivery of nutrients and oxygen",
+                    "Prevention of infection spread",
+                    "Tissue destruction"
+                ],
+                correct: 3,
+                explanation: "Tissue destruction is a harmful effect of inflammation. The beneficial effects include dilution of toxins, delivery of nutrients and antibodies, containment of infection, and promotion of immunity.",
+                memoryTip: "Inflammation is a double-edged sword: Protective but can cause tissue damage."
+            },
+            {
+                question: "The primary cell type in acute inflammation arrives at the site within:",
+                options: [
+                    "Minutes to hours",
+                    "Days",
+                    "Weeks",
+                    "Months"
+                ],
+                correct: 0,
+                explanation: "Neutrophils, the primary cells in acute inflammation, begin to arrive at the site within minutes to hours after injury.",
+                memoryTip: "Acute inflammation = Rapid onset (minutes to hours) with neutrophils as first responders."
+            },
+            {
+                question: "Which mediator is responsible for the increased vascular permeability in the delayed sustained response?",
+                options: [
+                    "Histamine",
+                    "Bradykinin",
+                    "Leukotrienes C4, D4, E4",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Increased vascular permeability in inflammation occurs in multiple phases. Histamine and bradykinin mediate the immediate transient response, while leukotrienes and other mediators contribute to the delayed sustained response.",
+                memoryTip: "Multiple mediators contribute to vascular permeability at different times."
+            },
+            {
+                question: "The resolution of acute inflammation involves all EXCEPT:",
+                options: [
+                    "Neutralization of chemical mediators",
+                    "Apoptosis of neutrophils",
+                    "Proliferation of fibroblasts",
+                    "Removal of edema fluid and debris"
+                ],
+                correct: 2,
+                explanation: "Resolution involves cessation of inflammation, removal of mediators, apoptosis of inflammatory cells, and clearance of fluid and debris. Fibroblast proliferation and collagen deposition occur in healing by fibrosis, not resolution.",
+                memoryTip: "Resolution = Return to normal; Fibrosis = Scar formation."
+            },
+            {
+                question: "Which of the following is a key feature of chronic inflammation?",
+                options: [
+                    "Predominance of neutrophils",
+                    "Absence of tissue destruction",
+                    "Simultaneous tissue destruction and repair",
+                    "Rapid resolution"
+                ],
+                correct: 2,
+                explanation: "Chronic inflammation is characterized by prolonged duration with simultaneous active inflammation, tissue destruction, and attempts at repair, often leading to fibrosis.",
+                memoryTip: "Chronic inflammation: Long duration + Tissue destruction + Attempted repair happening together."
+            },
+            {
+                question: "The most important chemotactic factor for neutrophils is:",
+                options: [
+                    "C5a",
+                    "IL-4",
+                    "TGF-β",
+                    "IL-10"
+                ],
+                correct: 0,
+                explanation: "C5a (a complement component) is one of the most potent chemotactic factors for neutrophils, along with bacterial products, LTB4, and chemokines like IL-8.",
+                memoryTip: "C5a = Powerful chemoattractant for neutrophils."
+            },
+            {
+                question: "Which of the following is characteristic of fibrinous inflammation?",
+                options: [
+                    "Accumulation of serous fluid",
+                    "Formation of pus",
+                    "Deposition of fibrin",
+                    "Minimal exudate"
+                ],
+                correct: 2,
+                explanation: "Fibrinous inflammation is characterized by the exudation of fibrinogen, which converts to fibrin and forms a meshwork at the site of injury, often seen in serous body cavities like the pericardium.",
+                memoryTip: "Fibrinous inflammation = Fibrin deposition, like in bread-and-butter pericarditis."
+            },
+            {
+                question: "The primary function of M2 macrophages in chronic inflammation is:",
+                options: [
+                    "Pro-inflammatory cytokine production",
+                    "Microbial killing",
+                    "Tissue repair and fibrosis",
+                    "Antigen presentation"
+                ],
+                correct: 2,
+                explanation: "M2 macrophages are alternatively activated macrophages that promote tissue repair, angiogenesis, and fibrosis through the production of growth factors and anti-inflammatory cytokines like IL-10 and TGF-β.",
+                memoryTip: "M1 macrophages = 'Fight' (pro-inflammatory); M2 macrophages = 'Fix' (repair and fibrosis)."
+            },
+            {
+                question: "Which of the following is NOT a source of chemical mediators in inflammation?",
+                options: [
+                    "Platelets",
+                    "Mast cells",
+                    "Erythrocytes",
+                    "Lymphocytes"
+                ],
+                correct: 2,
+                explanation: "Erythrocytes (red blood cells) are not significant sources of inflammatory mediators. Platelets, mast cells, lymphocytes, neutrophils, and macrophages all produce various inflammatory mediators.",
+                memoryTip: "RBCs transport oxygen, not inflammatory mediators."
+            },
+            {
+                question: "The process of leukocyte adhesion to endothelium is mediated by:",
+                options: [
+                    "Selectins only",
+                    "Integrins only",
+                    "Immunoglobulin superfamily only",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Leukocyte adhesion involves multiple adhesion molecule families: selectins mediate rolling, integrins and immunoglobulin superfamily members mediate firm adhesion.",
+                memoryTip: "Adhesion molecules: Selectins (rolling), Integrins (adhesion), Immunoglobulin family (adhesion)."
+            },
+            {
+                question: "Which of the following is a characteristic of catarrhal inflammation?",
+                options: [
+                    "Formation of granulomas",
+                    "Accumulation of mucus",
+                    "Extensive tissue necrosis",
+                    "Formation of pus"
+                ],
+                correct: 1,
+                explanation: "Catarrhal inflammation is a mild inflammation of mucous membranes characterized by hypersecretion of mucus, commonly seen in the upper respiratory tract during viral infections.",
+                memoryTip: "Catarrhal = Mucus hypersecretion, like in common cold (rhinitis)."
+            },
+            {
+                question: "The systemic increase in white blood cell count during inflammation is called:",
+                options: [
+                    "Leukopenia",
+                    "Leukocytosis",
+                    "Thrombocytosis",
+                    "Anemia"
+                ],
+                correct: 1,
+                explanation: "Leukocytosis is an increase in the total white blood cell count, commonly seen in bacterial infections. Leukopenia is a decrease in white blood cell count.",
+                memoryTip: "Leukocytosis = Increased WBC count (common in bacterial infections)."
+            },
+            {
+                question: "Which of the following is a key difference between acute and chronic inflammation?",
+                options: [
+                    "Onset and duration",
+                    "Predominant cell types",
+                    "Tissue destruction and fibrosis",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Acute and chronic inflammation differ in onset (rapid vs slow), duration (short vs long), predominant cells (neutrophils vs macrophages/lymphocytes), and outcomes (resolution vs fibrosis).",
+                memoryTip: "Acute vs Chronic: Rapid vs Slow, Neutrophils vs Macrophages/Lymphocytes, Resolution vs Fibrosis."
+            },
+            {
+                question: "The transformation of monocytes into tissue macrophages occurs:",
+                options: [
+                    "In the bone marrow",
+                    "In the bloodstream",
+                    "After migration into tissues",
+                    "During diapedesis"
+                ],
+                correct: 2,
+                explanation: "Monocytes circulate in the blood and migrate into tissues where they differentiate into tissue-specific macrophages (e.g., Kupffer cells in liver, microglia in brain).",
+                memoryTip: "Monocytes → Tissue macrophages after entering tissues."
+            },
+            {
+                question: "Which of the following is NOT a type of giant cell?",
+                options: [
+                    "Langhans giant cell",
+                    "Foreign body giant cell",
+                    "Touton giant cell",
+                    "Kupffer giant cell"
+                ],
+                correct: 3,
+                explanation: "Kupffer cells are resident macrophages in the liver, not a type of giant cell. Langhans, foreign body, and Touton giant cells are all multinucleated giant cells seen in various inflammatory conditions.",
+                memoryTip: "Giant cells: Langhans (TB), Foreign body (around foreign materials), Touton (in fat necrosis)."
+            },
+            {
+                question: "The primary role of bradykinin in inflammation is:",
+                options: [
+                    "Vasodilation and pain",
+                    "Chemotaxis",
+                    "Opsonization",
+                    "Antibody production"
+                ],
+                correct: 0,
+                explanation: "Bradykinin, produced from the kinin system, causes vasodilation, increased vascular permeability, and pain. It is one of the most potent pain-producing substances.",
+                memoryTip: "Bradykinin = Pain producer in inflammation."
+            },
+            {
+                question: "Which of the following is a characteristic of granulomatous inflammation?",
+                options: [
+                    "Predominance of neutrophils",
+                    "Formation of epithelioid cell aggregates",
+                    "Minimal tissue damage",
+                    "Rapid resolution"
+                ],
+                correct: 1,
+                explanation: "Granulomatous inflammation is characterized by the formation of granulomas, which are focal collections of activated macrophages (epithelioid cells) often surrounded by lymphocytes.",
+                memoryTip: "Granuloma = Collection of epithelioid cells (activated macrophages)."
+            },
+            {
+                question: "The initial response to tissue injury involves:",
+                options: [
+                    "Vasodilation",
+                    "Vasoconstriction",
+                    "Increased permeability",
+                    "Stasis"
+                ],
+                correct: 1,
+                explanation: "The very first vascular response to injury is a brief period of vasoconstriction (lasting seconds), which is followed by vasodilation.",
+                memoryTip: "Vascular events sequence: Constriction (brief) → Dilation → Increased permeability → Stasis."
+            },
+            {
+                question: "Which of the following is a key feature of abscess formation?",
+                options: [
+                    "Diffuse spread through tissues",
+                    "Localized collection of pus",
+                    "Minimal tissue damage",
+                    "Absence of neutrophils"
+                ],
+                correct: 1,
+                explanation: "An abscess is a localized collection of pus (dead neutrophils, tissue debris, and bacteria) surrounded by a pyogenic membrane in living tissue.",
+                memoryTip: "Abscess = Localized pus collection walled off by inflammatory tissue."
+            },
+            {
+                question: "The primary source of histamine in inflammation is:",
+                options: [
+                    "Neutrophils",
+                    "Macrophages",
+                    "Mast cells",
+                    "Lymphocytes"
+                ],
+                correct: 2,
+                explanation: "Mast cells are the primary source of preformed histamine, which is released during degranulation in response to various stimuli.",
+                memoryTip: "Mast cells = Major histamine stores, released during allergic reactions and inflammation."
+            },
+            {
+                question: "Which of the following is NOT a characteristic of chronic inflammation?",
+                options: [
+                    "Infiltration with mononuclear cells",
+                    "Tissue destruction",
+                    "Angiogenesis",
+                    "Predominance of neutrophils"
+                ],
+                correct: 3,
+                explanation: "Chronic inflammation is characterized by infiltration with mononuclear cells (macrophages, lymphocytes, plasma cells), tissue destruction, attempts at repair (angiogenesis, fibrosis), but not predominance of neutrophils.",
+                memoryTip: "Chronic inflammation = Mononuclear cells (macrophages, lymphocytes), not neutrophils."
+            },
+            {
+                question: "The process of phagocytosis involves all EXCEPT:",
+                options: [
+                    "Recognition and attachment",
+                    "Engulfment",
+                    "Intracellular killing",
+                    "Antibody production"
+                ],
+                correct: 3,
+                explanation: "Phagocytosis involves recognition/attachment of the particle, engulfment to form a phagosome, and intracellular killing/digestion. Antibody production is a function of B cells, not part of phagocytosis.",
+                memoryTip: "Phagocytosis steps: RECOGNIZE → ENGULF → KILL. Antibody production is separate."
+            },
+            {
+                question: "Which cytokine is anti-inflammatory and helps regulate the inflammatory response?",
+                options: [
+                    "IL-1",
+                    "TNF-α",
+                    "IL-10",
+                    "IL-6"
+                ],
+                correct: 2,
+                explanation: "IL-10 is a key anti-inflammatory cytokine that inhibits the production of pro-inflammatory cytokines and helps control and resolve inflammation.",
+                memoryTip: "IL-10 = Anti-inflammatory 'brake' on inflammation."
+            },
+            {
+                question: "The primary difference between transudate and exudate is:",
+                options: [
+                    "Color",
+                    "Protein content",
+                    "Presence of cells",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Transudate is clear, has low protein content (<3 g/dL), and few cells. Exudate is cloudy, has high protein content (>3 g/dL), and many inflammatory cells.",
+                memoryTip: "Exudate = Inflammatory, protein-rich, cloudy. Transudate = Non-inflammatory, protein-poor, clear."
+            },
+            {
+                question: "Which of the following is a key feature of serous inflammation?",
+                options: [
+                    "Formation of granulomas",
+                    "Accumulation of fibrin",
+                    "Outpouring of thin, watery fluid",
+                    "Extensive tissue necrosis"
+                ],
+                correct: 2,
+                explanation: "Serous inflammation is characterized by the accumulation of a thin, watery fluid (transudate or modified transudate) in body cavities or tissue spaces.",
+                memoryTip: "Serous = Watery fluid accumulation, like in blisters."
+            },
+            {
+                question: "The primary cells involved in granulomatous inflammation are:",
+                options: [
+                    "Neutrophils and eosinophils",
+                    "Macrophages and lymphocytes",
+                    "Mast cells and basophils",
+                    "Platelets and endothelial cells"
+                ],
+                correct: 1,
+                explanation: "Granulomatous inflammation is characterized by activated macrophages (epithelioid cells) and multinucleated giant cells, typically surrounded by a cuff of lymphocytes.",
+                memoryTip: "Granuloma = Epithelioid cells (modified macrophages) + Lymphocytes."
+            },
+            {
+                question: "Which of the following is a systemic effect of inflammation?",
+                options: [
+                    "Fever",
+                    "Leukocytosis",
+                    "Increased acute-phase proteins",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Systemic effects of inflammation include fever, leukocytosis (increased white blood cells), increased acute-phase proteins (CRP, fibrinogen), and other metabolic and behavioral changes.",
+                memoryTip: "Systemic inflammation: Fever, Leukocytosis, Acute-phase proteins, Endocrine changes."
+            },
+            {
+                question: "The process of leukocyte migration through endothelial junctions is called:",
+                options: [
+                    "Margination",
+                    "Rolling",
+                    "Transmigration",
+                    "Chemotaxis"
+                ],
+                correct: 2,
+                explanation: "Transmigration (or diapedesis) is the process where leukocytes migrate through the endothelial cell junctions into the tissues.",
+                memoryTip: "Transmigration = Moving through (trans) the vessel wall."
+            },
+            {
+                question: "Which of the following is a characteristic of chronic inflammation?",
+                options: [
+                    "Rapid onset",
+                    "Predominance of neutrophils",
+                    "Simultaneous inflammation and repair",
+                    "Minimal tissue damage"
+                ],
+                correct: 2,
+                explanation: "Chronic inflammation is characterized by prolonged duration with simultaneous active inflammation, tissue destruction, and attempts at repair.",
+                memoryTip: "Chronic inflammation: Long duration + Tissue destruction + Attempted repair."
+            },
+            {
+                question: "The primary mediator of vasodilation in acute inflammation is:",
+                options: [
+                    "Histamine",
+                    "C5a",
+                    "Leukotrienes",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Multiple mediators contribute to vasodilation in acute inflammation, including histamine, prostaglandins, nitric oxide, and complement components.",
+                memoryTip: "Vasodilation is mediated by multiple factors: Histamine, Prostaglandins, NO, etc."
+            },
+            {
+                question: "Which of the following is NOT a type of acute inflammation?",
+                options: [
+                    "Serous",
+                    "Fibrinous",
+                    "Suppurative",
+                    "Granulomatous"
+                ],
+                correct: 3,
+                correct: 3,
+                explanation: "Granulomatous inflammation is a type of chronic inflammation, not acute inflammation. Serous, fibrinous, and suppurative inflammations are all patterns of acute inflammation.",
+                memoryTip: "Granulomatous = Chronic inflammation. Serous, Fibrinous, Suppurative = Acute inflammation patterns."
+            },
+            {
+                question: "The primary function of neutrophils in acute inflammation is:",
+                options: [
+                    "Antibody production",
+                    "Phagocytosis and microbial killing",
+                    "Antigen presentation",
+                    "Tissue repair"
+                ],
+                correct: 1,
+                explanation: "Neutrophils are professional phagocytes that engulf and kill microorganisms through oxygen-dependent and oxygen-independent mechanisms.",
+                memoryTip: "Neutrophils = Professional phagocytes, first line of defense against bacteria."
+            },
+            {
+                question: "Which of the following is a key characteristic of pseudomembranous inflammation?",
+                options: [
+                    "Formation of a false membrane on mucosal surfaces",
+                    "Accumulation of serous fluid",
+                    "Minimal tissue damage",
+                    "Absence of inflammatory cells"
+                ],
+                correct: 0,
+                explanation: "Pseudomembranous inflammation is characterized by the formation of a false membrane composed of fibrin, necrotic epithelial cells, and inflammatory cells on mucosal surfaces.",
+                memoryTip: "Pseudomembranous = False membrane on mucosa (e.g., diphtheria, C. difficile colitis)."
             }
         ];
 
-        // Initialize variables
-        let currentScore = 0;
-        let questionsAnswered = 0;
+        // DOM elements
+        const quizContainer = document.getElementById('quiz-container');
+        const resultsContainer = document.getElementById('results-container');
+        const questionNumber = document.getElementById('question-number');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const explanationText = document.getElementById('explanation-text');
+        const memoryTipText = document.getElementById('memory-tip-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
+        const timeDisplay = document.getElementById('time');
+        const scoreDisplay = document.getElementById('score');
+        const scoreText = document.getElementById('score-text');
+        const totalQuestions = document.getElementById('total-questions');
+        const correctAnswers = document.getElementById('correct-answers');
+        const incorrectAnswers = document.getElementById('incorrect-answers');
+        const percentage = document.getElementById('percentage');
+        const timeTaken = document.getElementById('time-taken');
+        const questionReview = document.getElementById('question-review');
+        const restartBtn = document.getElementById('restart-btn');
 
-        // Function to shuffle array (Fisher-Yates algorithm)
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
+        // Quiz state
+        let currentQuestion = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let score = 0;
+        let timer;
+        let timeLeft = 80 * 60; // 80 minutes in seconds
+        let quizCompleted = false;
+
+        // Initialize quiz
+        function initQuiz() {
+            displayQuestion();
+            startTimer();
+            updateProgress();
         }
 
-        // Function to display questions
-        function displayQuestions() {
-            const container = document.getElementById('questions-container');
+        // Display current question
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            questionNumber.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            questionText.textContent = question.question;
             
-            // Shuffle questions to randomize order
-            const shuffledQuestions = shuffleArray([...questions]);
-            
-            shuffledQuestions.forEach((q, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'question';
-                questionDiv.id = `question-${index}`;
-                
-                // Create question text
-                const questionText = document.createElement('div');
-                questionText.className = 'question-text';
-                questionText.textContent = `${index + 1}. ${q.question}`;
-                questionDiv.appendChild(questionText);
-                
-                // Create options container
-                const optionsDiv = document.createElement('div');
-                optionsDiv.className = 'options';
-                
-                // Shuffle options but keep track of correct answer
-                const optionsWithIndex = q.options.map((option, i) => ({ option, originalIndex: i }));
-                const shuffledOptions = shuffleArray(optionsWithIndex);
-                let correctOptionLetter = '';
-                
-                shuffledOptions.forEach((opt, optIndex) => {
-                    const optionDiv = document.createElement('div');
-                    optionDiv.className = 'option';
-                    
-                    const letter = String.fromCharCode(65 + optIndex); // A, B, C, D
-                    if (opt.originalIndex === q.correct) {
-                        correctOptionLetter = letter;
-                    }
-                    
-                    const input = document.createElement('input');
-                    input.type = 'radio';
-                    input.name = `q${index}`;
-                    input.id = `q${index}-${letter}`;
-                    input.value = letter;
-                    
-                    const label = document.createElement('label');
-                    label.htmlFor = `q${index}-${letter}`;
-                    label.textContent = `${letter}. ${opt.option}`;
-                    
-                    optionDiv.appendChild(input);
-                    optionDiv.appendChild(label);
-                    optionsDiv.appendChild(optionDiv);
-                });
-                
-                questionDiv.appendChild(optionsDiv);
-                
-                // Create check button
-                const button = document.createElement('button');
-                button.textContent = 'Check Answer';
-                button.onclick = function() {
-                    checkAnswer(index, correctOptionLetter, q.explanation, q.tip);
-                };
-                questionDiv.appendChild(button);
-                
-                // Create feedback div
-                const feedback = document.createElement('div');
-                feedback.id = `feedback-${index}`;
-                feedback.className = 'feedback';
-                questionDiv.appendChild(feedback);
-                
-                container.appendChild(questionDiv);
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                if (userAnswers[currentQuestion] === index) {
+                    optionElement.classList.add('selected');
+                }
+                optionElement.textContent = option;
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
             });
             
-            // Update total questions count
-            document.getElementById('total').textContent = questions.length;
-        }
-
-        // Function to check answer
-        function checkAnswer(questionIndex, correctLetter, explanation, tip) {
-            const questionDiv = document.getElementById(`question-${questionIndex}`);
-            const selectedOption = questionDiv.querySelector(`input[name="q${questionIndex}"]:checked`);
-            const feedback = document.getElementById(`feedback-${questionIndex}`);
-            
-            if (!selectedOption) {
-                feedback.textContent = 'Please select an answer.';
-                feedback.className = 'feedback incorrect';
-                feedback.style.display = 'block';
-                return;
-            }
-            
-            const userAnswer = selectedOption.value;
-            questionsAnswered++;
-            
-            if (userAnswer === correctLetter) {
-                currentScore++;
-                feedback.innerHTML = `<div class="correct">Correct! ${explanation}</div>`;
+            // Show/hide explanation
+            if (userAnswers[currentQuestion] !== null) {
+                showExplanation();
             } else {
-                feedback.innerHTML = `<div class="incorrect">Incorrect. The correct answer is ${correctLetter}. ${explanation}</div>`;
+                explanationContainer.style.display = 'none';
             }
             
-            // Add memorization tip
-            const tipDiv = document.createElement('div');
-            tipDiv.className = 'tip';
-            tipDiv.textContent = `Memorization Tip: ${tip}`;
-            feedback.appendChild(tipDiv);
-            
-            feedback.style.display = 'block';
-            
-            // Update score
-            document.getElementById('score').textContent = currentScore;
-            
-            // Disable all options for this question
-            const options = questionDiv.querySelectorAll('input[type="radio"]');
-            options.forEach(opt => {
-                opt.disabled = true;
-            });
-            
-            // Disable the check button
-            const button = questionDiv.querySelector('button');
-            button.disabled = true;
+            // Update button states
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.disabled = false;
+            submitBtn.style.display = currentQuestion === questions.length - 1 ? 'block' : 'none';
         }
 
-        // Initialize the quiz when page loads
-        window.onload = function() {
-            displayQuestions();
-        };
+        // Select an option
+        function selectOption(index) {
+            if (quizCompleted) return;
+            
+            userAnswers[currentQuestion] = index;
+            
+            // Update UI
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[index].classList.add('selected');
+            
+            showExplanation();
+        }
+
+        // Show explanation for current question
+        function showExplanation() {
+            const question = questions[currentQuestion];
+            explanationText.textContent = question.explanation;
+            memoryTipText.textContent = question.memoryTip;
+            explanationContainer.style.display = 'block';
+            
+            // Highlight correct/incorrect answers
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, index) => {
+                option.classList.remove('correct', 'incorrect');
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === userAnswers[currentQuestion] && index !== question.correct) {
+                    option.classList.add('incorrect');
+                }
+            });
+        }
+
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+                updateProgress();
+            }
+        }
+
+        // Navigate to previous question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+                updateProgress();
+            }
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = `${currentQuestion + 1}/${questions.length}`;
+        }
+
+        // Start timer
+        function startTimer() {
+            timer = setInterval(() => {
+                timeLeft--;
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        // Submit quiz
+        function submitQuiz() {
+            clearInterval(timer);
+            quizCompleted = true;
+            
+            // Calculate score
+            score = 0;
+            for (let i = 0; i < questions.length; i++) {
+                if (userAnswers[i] === questions[i].correct) {
+                    score++;
+                }
+            }
+            
+            // Display results
+            quizContainer.style.display = 'none';
+            resultsContainer.style.display = 'block';
+            
+            scoreDisplay.textContent = `${score}/${questions.length}`;
+            totalQuestions.textContent = questions.length;
+            correctAnswers.textContent = score;
+            incorrectAnswers.textContent = questions.length - score;
+            percentage.textContent = `${((score / questions.length) * 100).toFixed(1)}%`;
+            
+            const minutesTaken = Math.floor((80 * 60 - timeLeft) / 60);
+            const secondsTaken = (80 * 60 - timeLeft) % 60;
+            timeTaken.textContent = `${minutesTaken.toString().padStart(2, '0')}:${secondsTaken.toString().padStart(2, '0')}`;
+            
+            // Set score text
+            if (score >= questions.length * 0.8) {
+                scoreText.textContent = "Excellent! You have a strong understanding of inflammation.";
+            } else if (score >= questions.length * 0.6) {
+                scoreText.textContent = "Good job! You have a solid foundation in inflammation concepts.";
+            } else if (score >= questions.length * 0.5) {
+                scoreText.textContent = "You passed! Review the explanations to strengthen your knowledge.";
+            } else {
+                scoreText.textContent = "You need more study. Review the material and try again.";
+            }
+            
+            // Generate question review
+            generateQuestionReview();
+        }
+
+        // Generate question review
+        function generateQuestionReview() {
+            questionReview.innerHTML = '<h3>Question Review</h3>';
+            
+            questions.forEach((question, index) => {
+                const reviewItem = document.createElement('div');
+                reviewItem.className = 'review-item';
+                
+                const reviewQuestion = document.createElement('div');
+                reviewQuestion.className = 'review-question';
+                reviewQuestion.textContent = `${index + 1}. ${question.question}`;
+                
+                const userAnswer = document.createElement('div');
+                userAnswer.className = 'review-answer';
+                if (userAnswers[index] !== null) {
+                    userAnswer.innerHTML = `Your answer: <span class="user-answer">${question.options[userAnswers[index]]}</span>`;
+                } else {
+                    userAnswer.innerHTML = `Your answer: <span class="user-answer">Not answered</span>`;
+                }
+                
+                const correctAnswer = document.createElement('div');
+                correctAnswer.className = 'review-answer';
+                correctAnswer.innerHTML = `Correct answer: <span class="correct-answer">${question.options[question.correct]}</span>`;
+                
+                reviewItem.appendChild(reviewQuestion);
+                reviewItem.appendChild(userAnswer);
+                reviewItem.appendChild(correctAnswer);
+                
+                questionReview.appendChild(reviewItem);
+            });
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            score = 0;
+            timeLeft = 80 * 60;
+            quizCompleted = false;
+            
+            quizContainer.style.display = 'block';
+            resultsContainer.style.display = 'none';
+            
+            initQuiz();
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        submitBtn.addEventListener('click', submitQuiz);
+        restartBtn.addEventListener('click', restartQuiz);
+
+        // Start the quiz
+        initQuiz();
     </script>
 </body>
-</html>
+    </html>
