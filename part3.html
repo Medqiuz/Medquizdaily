@@ -325,7 +325,6 @@
 <body>
     <div class="container">
         <header>
-                      <a href="https://t.me/yerotechno"><h1 style=" color: Gold;">MedQuiz</h1></a>
             <h1>Inflammation Quiz</h1>
             <p>Unit 3 - Pharmacy Year 2 | Haramaya University</p>
         </header>
@@ -337,13 +336,13 @@
                 <div class="progress-bar">
                     <div class="progress-fill" id="progress-fill"></div>
                 </div>
-                <span id="progress-text">0/60</span>
+                <span id="progress-text">0/80</span>
             </div>
         </div>
 
         <div class="quiz-container" id="quiz-container">
             <div class="question-container">
-                <div class="question-number" id="question-number">Question 1 of 60</div>
+                <div class="question-number" id="question-number">Question 1 of 80</div>
                 <div class="question-text" id="question-text"></div>
                 <div class="options-container" id="options-container"></div>
             </div>
@@ -366,12 +365,12 @@
 
         <div class="results-container" id="results-container">
             <h2 class="results-title">Quiz Results</h2>
-            <div class="score" id="score">0/60</div>
+            <div class="score" id="score">0/80</div>
             <div class="score-text" id="score-text"></div>
 
             <div class="summary">
                 <div class="summary-title">Performance Summary</div>
-                <p>Total Questions: <span id="total-questions">60</span></p>
+                <p>Total Questions: <span id="total-questions">80</span></p>
                 <p>Correct Answers: <span id="correct-answers">0</span></p>
                 <p>Incorrect Answers: <span id="incorrect-answers">0</span></p>
                 <p>Percentage: <span id="percentage">0%</span></p>
@@ -390,6 +389,7 @@
     <script>
         // Quiz questions array
         const questions = [
+            // Basic Questions (1-20)
             {
                 question: "Which of the following is NOT a cardinal sign of acute inflammation?",
                 options: [
@@ -630,6 +630,8 @@
                 explanation: "After the initial brief vasoconstriction, there is sustained vasodilation of arterioles and venules, leading to increased blood flow (hyperemia) and the redness and heat of inflammation.",
                 memoryTip: "Vascular events sequence: Constriction → Dilation → Increased permeability → Stasis."
             },
+
+            // Intermediate Questions (21-40)
             {
                 question: "Which of the following is a characteristic of serous inflammation?",
                 options: [
@@ -870,258 +872,489 @@
                 explanation: "Leukocytosis is an increase in the total white blood cell count, commonly seen in bacterial infections. Leukopenia is a decrease in white blood cell count.",
                 memoryTip: "Leukocytosis = Increased WBC count (common in bacterial infections)."
             },
+
+            // Conceptual Questions (41-60)
             {
-                question: "Which of the following is a key difference between acute and chronic inflammation?",
+                question: "A patient with a genetic deficiency in NADPH oxidase would be most susceptible to infections with which type of microorganism?",
                 options: [
-                    "Onset and duration",
-                    "Predominant cell types",
-                    "Tissue destruction and fibrosis",
+                    "Viruses",
+                    "Intracellular bacteria",
+                    "Extracellular pyogenic bacteria",
+                    "Fungi"
+                ],
+                correct: 2,
+                explanation: "NADPH oxidase deficiency (chronic granulomatous disease) impairs the respiratory burst in phagocytes, making patients highly susceptible to catalase-positive bacteria (like Staphylococcus aureus) that can survive inside phagocytes.",
+                memoryTip: "NADPH oxidase deficiency = Defective oxidative killing = Susceptibility to catalase-positive bacteria."
+            },
+            {
+                question: "Which of the following best explains why corticosteroids are effective in treating chronic inflammatory conditions but increase susceptibility to infections?",
+                options: [
+                    "They enhance neutrophil function",
+                    "They inhibit phospholipase A2 and NF-κB pathways",
+                    "They promote antibody production",
+                    "They increase complement activation"
+                ],
+                correct: 1,
+                explanation: "Corticosteroids inhibit phospholipase A2 (reducing arachidonic acid metabolites) and NF-κB (reducing cytokine production), which suppresses inflammation but also impairs host defense against infections.",
+                memoryTip: "Corticosteroids = Broad anti-inflammatory effects but immunosuppression = Increased infection risk."
+            },
+            {
+                question: "A patient with rheumatoid arthritis develops subcutaneous nodules. Which pathological process best explains their formation?",
+                options: [
+                    "Suppurative inflammation",
+                    "Granulomatous inflammation",
+                    "Serous inflammation",
+                    "Fibrinous inflammation"
+                ],
+                correct: 1,
+                explanation: "Rheumatoid nodules are characterized by central fibrinoid necrosis surrounded by palisading macrophages and fibroblasts, representing a form of granulomatous inflammation.",
+                memoryTip: "Rheumatoid nodules = Palisading granulomas with central necrosis."
+            },
+            {
+                question: "Why do NSAIDs reduce pain and fever but not affect the progression of chronic inflammatory diseases?",
+                options: [
+                    "They only affect cyclooxygenase pathways",
+                    "They don't inhibit neutrophil migration",
+                    "They have no effect on cytokine production",
                     "All of the above"
                 ],
                 correct: 3,
-                explanation: "Acute and chronic inflammation differ in onset (rapid vs slow), duration (short vs long), predominant cells (neutrophils vs macrophages/lymphocytes), and outcomes (resolution vs fibrosis).",
-                memoryTip: "Acute vs Chronic: Rapid vs Slow, Neutrophils vs Macrophages/Lymphocytes, Resolution vs Fibrosis."
+                explanation: "NSAIDs inhibit cyclooxygenase and reduce prostaglandin production (mediating pain and fever) but don't affect other inflammatory pathways like cytokine production or cell migration that drive chronic inflammation.",
+                memoryTip: "NSAIDs = Symptom relief (pain/fever) but don't modify disease progression in chronic inflammation."
             },
             {
-                question: "The transformation of monocytes into tissue macrophages occurs:",
+                question: "In a patient with tuberculosis, the formation of caseous necrosis in granulomas primarily results from:",
                 options: [
-                    "In the bone marrow",
-                    "In the bloodstream",
-                    "After migration into tissues",
-                    "During diapedesis"
-                ],
-                correct: 2,
-                explanation: "Monocytes circulate in the blood and migrate into tissues where they differentiate into tissue-specific macrophages (e.g., Kupffer cells in liver, microglia in brain).",
-                memoryTip: "Monocytes → Tissue macrophages after entering tissues."
-            },
-            {
-                question: "Which of the following is NOT a type of giant cell?",
-                options: [
-                    "Langhans giant cell",
-                    "Foreign body giant cell",
-                    "Touton giant cell",
-                    "Kupffer giant cell"
+                    "Direct bacterial cytotoxicity",
+                    "Ischemic injury due to vascular compression",
+                    "Enzyme release from necrotic neutrophils",
+                    "Host immune response to mycobacterial antigens"
                 ],
                 correct: 3,
-                explanation: "Kupffer cells are resident macrophages in the liver, not a type of giant cell. Langhans, foreign body, and Touton giant cells are all multinucleated giant cells seen in various inflammatory conditions.",
-                memoryTip: "Giant cells: Langhans (TB), Foreign body (around foreign materials), Touton (in fat necrosis)."
+                explanation: "Caseous necrosis in tuberculosis results from a hypersensitivity reaction to mycobacterial antigens, where the intense immune response causes tissue destruction.",
+                memoryTip: "Caseous necrosis in TB = Type IV hypersensitivity reaction causing tissue destruction."
             },
             {
-                question: "The primary role of bradykinin in inflammation is:",
+                question: "A patient with a deficiency in C3 complement component would be most likely to experience:",
                 options: [
-                    "Vasodilation and pain",
-                    "Chemotaxis",
-                    "Opsonization",
-                    "Antibody production"
+                    "Impaired opsonization and recurrent pyogenic infections",
+                    "Defective membrane attack complex formation",
+                    "Reduced chemotaxis of neutrophils",
+                    "Decreased vascular permeability"
                 ],
                 correct: 0,
-                explanation: "Bradykinin, produced from the kinin system, causes vasodilation, increased vascular permeability, and pain. It is one of the most potent pain-producing substances.",
-                memoryTip: "Bradykinin = Pain producer in inflammation."
+                explanation: "C3 is central to all complement pathways. Deficiency leads to impaired opsonization (C3b), reduced anaphylatoxin production (C3a), and impaired membrane attack complex formation, resulting in recurrent pyogenic infections.",
+                memoryTip: "C3 deficiency = Impaired opsonization = Recurrent pyogenic infections."
             },
             {
-                question: "Which of the following is a characteristic of granulomatous inflammation?",
+                question: "Which mechanism best explains why chronic inflammation can lead to fibrosis?",
                 options: [
-                    "Predominance of neutrophils",
-                    "Formation of epithelioid cell aggregates",
-                    "Minimal tissue damage",
-                    "Rapid resolution"
-                ],
-                correct: 1,
-                explanation: "Granulomatous inflammation is characterized by the formation of granulomas, which are focal collections of activated macrophages (epithelioid cells) often surrounded by lymphocytes.",
-                memoryTip: "Granuloma = Collection of epithelioid cells (activated macrophages)."
-            },
-            {
-                question: "The initial response to tissue injury involves:",
-                options: [
-                    "Vasodilation",
-                    "Vasoconstriction",
-                    "Increased permeability",
-                    "Stasis"
-                ],
-                correct: 1,
-                explanation: "The very first vascular response to injury is a brief period of vasoconstriction (lasting seconds), which is followed by vasodilation.",
-                memoryTip: "Vascular events sequence: Constriction (brief) → Dilation → Increased permeability → Stasis."
-            },
-            {
-                question: "Which of the following is a key feature of abscess formation?",
-                options: [
-                    "Diffuse spread through tissues",
-                    "Localized collection of pus",
-                    "Minimal tissue damage",
-                    "Absence of neutrophils"
-                ],
-                correct: 1,
-                explanation: "An abscess is a localized collection of pus (dead neutrophils, tissue debris, and bacteria) surrounded by a pyogenic membrane in living tissue.",
-                memoryTip: "Abscess = Localized pus collection walled off by inflammatory tissue."
-            },
-            {
-                question: "The primary source of histamine in inflammation is:",
-                options: [
-                    "Neutrophils",
-                    "Macrophages",
-                    "Mast cells",
-                    "Lymphocytes"
+                    "Persistent neutrophil infiltration",
+                    "Sustained mast cell degranulation",
+                    "Continuous macrophage activation and growth factor release",
+                    "Recurrent vascular permeability changes"
                 ],
                 correct: 2,
-                explanation: "Mast cells are the primary source of preformed histamine, which is released during degranulation in response to various stimuli.",
-                memoryTip: "Mast cells = Major histamine stores, released during allergic reactions and inflammation."
+                explanation: "In chronic inflammation, activated macrophages continuously release growth factors (TGF-β, PDGF) that stimulate fibroblast proliferation and collagen deposition, leading to fibrosis.",
+                memoryTip: "Chronic inflammation → Macrophage activation → Growth factors → Fibroblast proliferation → Fibrosis."
             },
             {
-                question: "Which of the following is NOT a characteristic of chronic inflammation?",
+                question: "A patient with aspirin-exacerbated respiratory disease (AERD) experiences bronchospasm after taking NSAIDs. This is primarily due to:",
                 options: [
-                    "Infiltration with mononuclear cells",
-                    "Tissue destruction",
-                    "Angiogenesis",
-                    "Predominance of neutrophils"
+                    "Increased histamine release",
+                    "Shunting of arachidonic acid to leukotriene production",
+                    "Direct complement activation",
+                    "Enhanced cytokine production"
                 ],
-                correct: 3,
-                explanation: "Chronic inflammation is characterized by infiltration with mononuclear cells (macrophages, lymphocytes, plasma cells), tissue destruction, attempts at repair (angiogenesis, fibrosis), but not predominance of neutrophils.",
-                memoryTip: "Chronic inflammation = Mononuclear cells (macrophages, lymphocytes), not neutrophils."
+                correct: 1,
+                explanation: "In AERD, inhibition of cyclooxygenase by NSAIDs shunts arachidonic acid metabolism to the lipoxygenase pathway, increasing leukotriene production which causes bronchospasm.",
+                memoryTip: "AERD = COX inhibition → Shunting to LOX pathway → Increased leukotrienes → Bronchospasm."
             },
             {
-                question: "The process of phagocytosis involves all EXCEPT:",
+                question: "Which characteristic best differentiates acute from chronic inflammation at the molecular level?",
                 options: [
-                    "Recognition and attachment",
-                    "Engulfment",
-                    "Intracellular killing",
-                    "Antibody production"
-                ],
-                correct: 3,
-                explanation: "Phagocytosis involves recognition/attachment of the particle, engulfment to form a phagosome, and intracellular killing/digestion. Antibody production is a function of B cells, not part of phagocytosis.",
-                memoryTip: "Phagocytosis steps: RECOGNIZE → ENGULF → KILL. Antibody production is separate."
-            },
-            {
-                question: "Which cytokine is anti-inflammatory and helps regulate the inflammatory response?",
-                options: [
-                    "IL-1",
-                    "TNF-α",
-                    "IL-10",
-                    "IL-6"
-                ],
-                correct: 2,
-                explanation: "IL-10 is a key anti-inflammatory cytokine that inhibits the production of pro-inflammatory cytokines and helps control and resolve inflammation.",
-                memoryTip: "IL-10 = Anti-inflammatory 'brake' on inflammation."
-            },
-            {
-                question: "The primary difference between transudate and exudate is:",
-                options: [
-                    "Color",
-                    "Protein content",
-                    "Presence of cells",
+                    "Type of cellular infiltrate",
+                    "Pattern of cytokine production",
+                    "Duration of the response",
                     "All of the above"
                 ],
                 correct: 3,
-                explanation: "Transudate is clear, has low protein content (<3 g/dL), and few cells. Exudate is cloudy, has high protein content (>3 g/dL), and many inflammatory cells.",
-                memoryTip: "Exudate = Inflammatory, protein-rich, cloudy. Transudate = Non-inflammatory, protein-poor, clear."
+                explanation: "Acute and chronic inflammation differ in cellular infiltrate (neutrophils vs macrophages/lymphocytes), cytokine patterns (IL-1/TNF vs IFN-γ/IL-17), and duration (short vs long).",
+                memoryTip: "Acute vs Chronic: Different cells, different cytokines, different duration."
             },
             {
-                question: "Which of the following is a key feature of serous inflammation?",
+                question: "In a patient with sepsis, the systemic inflammatory response is primarily driven by:",
                 options: [
-                    "Formation of granulomas",
-                    "Accumulation of fibrin",
-                    "Outpouring of thin, watery fluid",
-                    "Extensive tissue necrosis"
+                    "Massive histamine release",
+                    "Widespread complement activation",
+                    "Excessive cytokine production (cytokine storm)",
+                    "Generalized mast cell degranulation"
                 ],
                 correct: 2,
-                explanation: "Serous inflammation is characterized by the accumulation of a thin, watery fluid (transudate or modified transudate) in body cavities or tissue spaces.",
-                memoryTip: "Serous = Watery fluid accumulation, like in blisters."
+                explanation: "Sepsis involves excessive production of pro-inflammatory cytokines (TNF-α, IL-1, IL-6) leading to a systemic inflammatory response that can progress to organ dysfunction.",
+                memoryTip: "Sepsis = Cytokine storm → SIRS (Systemic Inflammatory Response Syndrome)."
             },
             {
-                question: "The primary cells involved in granulomatous inflammation are:",
+                question: "Which of the following best explains why glucocorticoids are more effective than NSAIDs in treating autoimmune diseases?",
                 options: [
-                    "Neutrophils and eosinophils",
-                    "Macrophages and lymphocytes",
-                    "Mast cells and basophils",
-                    "Platelets and endothelial cells"
+                    "They inhibit both cyclooxygenase and lipoxygenase pathways",
+                    "They suppress T cell activation and cytokine production",
+                    "They enhance resolution of inflammation",
+                    "They promote apoptosis of inflammatory cells"
                 ],
                 correct: 1,
-                explanation: "Granulomatous inflammation is characterized by activated macrophages (epithelioid cells) and multinucleated giant cells, typically surrounded by a cuff of lymphocytes.",
-                memoryTip: "Granuloma = Epithelioid cells (modified macrophages) + Lymphocytes."
+                explanation: "Glucocorticoids have broad anti-inflammatory effects including suppression of T cell activation and cytokine gene expression, making them more effective than NSAIDs for autoimmune conditions.",
+                memoryTip: "Glucocorticoids = Broad immunosuppression; NSAIDs = Limited to prostaglandin inhibition."
             },
             {
-                question: "Which of the following is a systemic effect of inflammation?",
+                question: "A patient with chronic granulomatous disease develops a liver abscess. The most likely pathogen is:",
                 options: [
-                    "Fever",
-                    "Leukocytosis",
-                    "Increased acute-phase proteins",
+                    "Streptococcus pneumoniae",
+                    "Staphylococcus aureus",
+                    "Mycobacterium tuberculosis",
+                    "Candida albicans"
+                ],
+                correct: 1,
+                explanation: "Chronic granulomatous disease patients are particularly susceptible to catalase-positive organisms like Staphylococcus aureus that can survive inside phagocytes due to impaired oxidative killing.",
+                memoryTip: "CGD = Susceptibility to catalase-positive organisms (S. aureus, E. coli, Aspergillus)."
+            },
+            {
+                question: "Which mechanism best explains the anti-inflammatory effects of omega-3 fatty acids?",
+                options: [
+                    "Inhibition of cyclooxygenase",
+                    "Competition with arachidonic acid for enzyme binding",
+                    "Production of less inflammatory eicosanoids",
                     "All of the above"
                 ],
                 correct: 3,
-                explanation: "Systemic effects of inflammation include fever, leukocytosis (increased white blood cells), increased acute-phase proteins (CRP, fibrinogen), and other metabolic and behavioral changes.",
-                memoryTip: "Systemic inflammation: Fever, Leukocytosis, Acute-phase proteins, Endocrine changes."
+                explanation: "Omega-3 fatty acids compete with arachidonic acid for cyclooxygenase and lipoxygenase, leading to production of less inflammatory eicosanoids (e.g., prostaglandin E3 instead of E2).",
+                memoryTip: "Omega-3s = Compete with arachidonic acid → Less inflammatory eicosanoids."
             },
             {
-                question: "The process of leukocyte migration through endothelial junctions is called:",
+                question: "In a patient with asthma, the characteristic airway inflammation is primarily mediated by:",
                 options: [
-                    "Margination",
-                    "Rolling",
-                    "Transmigration",
-                    "Chemotaxis"
+                    "Neutrophils and IL-8",
+                    "Eosinophils and IL-5",
+                    "Macrophages and TNF-α",
+                    "Mast cells and histamine"
                 ],
-                correct: 2,
-                explanation: "Transmigration (or diapedesis) is the process where leukocytes migrate through the endothelial cell junctions into the tissues.",
-                memoryTip: "Transmigration = Moving through (trans) the vessel wall."
+                correct: 1,
+                explanation: "Asthma involves Th2-mediated inflammation with eosinophil recruitment (via IL-5) and IgE production, leading to mast cell degranulation and bronchoconstriction.",
+                memoryTip: "Asthma = Th2 response → Eosinophils (IL-5) + IgE → Mast cells → Bronchoconstriction."
             },
             {
-                question: "Which of the following is a characteristic of chronic inflammation?",
+                question: "Which of the following best explains why chronic inflammation is associated with increased cancer risk?",
                 options: [
-                    "Rapid onset",
-                    "Predominance of neutrophils",
-                    "Simultaneous inflammation and repair",
-                    "Minimal tissue damage"
-                ],
-                correct: 2,
-                explanation: "Chronic inflammation is characterized by prolonged duration with simultaneous active inflammation, tissue destruction, and attempts at repair.",
-                memoryTip: "Chronic inflammation: Long duration + Tissue destruction + Attempted repair."
-            },
-            {
-                question: "The primary mediator of vasodilation in acute inflammation is:",
-                options: [
-                    "Histamine",
-                    "C5a",
-                    "Leukotrienes",
+                    "DNA damage from reactive oxygen species",
+                    "Continuous cell proliferation",
+                    "Immune suppression",
                     "All of the above"
                 ],
                 correct: 3,
-                explanation: "Multiple mediators contribute to vasodilation in acute inflammation, including histamine, prostaglandins, nitric oxide, and complement components.",
-                memoryTip: "Vasodilation is mediated by multiple factors: Histamine, Prostaglandins, NO, etc."
+                explanation: "Chronic inflammation increases cancer risk through multiple mechanisms: ROS-induced DNA damage, growth factor-driven cell proliferation, and immune evasion.",
+                memoryTip: "Chronic inflammation → DNA damage + Proliferation + Immune evasion → Increased cancer risk."
             },
             {
-                question: "Which of the following is NOT a type of acute inflammation?",
+                question: "A patient with a defect in L-selectin would be expected to have impaired:",
                 options: [
-                    "Serous",
-                    "Fibrinous",
-                    "Suppurative",
-                    "Granulomatous"
+                    "Neutrophil adhesion to endothelium",
+                    "Neutrophil rolling on endothelium",
+                    "Neutrophil transmigration",
+                    "Neutrophil phagocytosis"
+                ],
+                correct: 1,
+                explanation: "L-selectin on neutrophils mediates the initial rolling interaction with endothelial cells. Defects impair this first step of leukocyte recruitment.",
+                memoryTip: "Selectins = Rolling; Integrins = Adhesion; ICAM/VCAM = Transmigration."
+            },
+            {
+                question: "Which of the following best explains the difference between innate and adaptive immunity in inflammation?",
+                options: [
+                    "Speed of response and specificity",
+                    "Type of cells involved",
+                    "Mechanisms of pathogen recognition",
+                    "All of the above"
                 ],
                 correct: 3,
-                correct: 3,
-                explanation: "Granulomatous inflammation is a type of chronic inflammation, not acute inflammation. Serous, fibrinous, and suppurative inflammations are all patterns of acute inflammation.",
-                memoryTip: "Granulomatous = Chronic inflammation. Serous, Fibrinous, Suppurative = Acute inflammation patterns."
+                explanation: "Innate immunity is rapid but non-specific (using pattern recognition receptors), while adaptive immunity is slower but highly specific (using antigen receptors on lymphocytes).",
+                memoryTip: "Innate = Fast, non-specific; Adaptive = Slow, specific."
             },
             {
-                question: "The primary function of neutrophils in acute inflammation is:",
+                question: "In a patient with systemic lupus erythematosus, the characteristic inflammation is primarily due to:",
+                options: [
+                    "Persistent bacterial infection",
+                    "Deposition of immune complexes",
+                    "Direct tissue toxicity by autoantibodies",
+                    "Defective neutrophil function"
+                ],
+                correct: 1,
+                explanation: "SLE involves widespread deposition of immune complexes in tissues, activating complement and causing inflammation in multiple organs.",
+                memoryTip: "SLE = Immune complex deposition → Complement activation → Inflammation."
+            },
+            {
+                question: "Which of the following best explains why some infections trigger granuloma formation while others cause suppurative inflammation?",
+                options: [
+                    "Type of immune response elicited",
+                    "Virulence factors of the pathogen",
+                    "Ability of pathogen to survive intracellularly",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Granulomas form against pathogens that survive intracellularly and elicit cell-mediated immunity, while suppurative inflammation occurs with extracellular pathogens that attract neutrophils.",
+                memoryTip: "Granulomas = Cell-mediated immunity against intracellular pathogens; Suppuration = Neutrophil response to extracellular pathogens."
+            },
+            {
+                question: "A patient with a deficiency in IL-10 would be expected to have:",
+                options: [
+                    "Increased susceptibility to infections",
+                    "Excessive inflammatory responses",
+                    "Defective antibody production",
+                    "Impaired neutrophil function"
+                ],
+                correct: 1,
+                explanation: "IL-10 is an anti-inflammatory cytokine that suppresses immune responses. Deficiency leads to uncontrolled inflammation and autoimmune phenomena.",
+                memoryTip: "IL-10 deficiency = Loss of anti-inflammatory brake → Excessive inflammation."
+            },
+
+            // Advanced Conceptual Questions (61-80)
+            {
+                question: "In the context of pharmacological intervention, why might a drug targeting TNF-α be effective for rheumatoid arthritis but dangerous for tuberculosis?",
+                options: [
+                    "TNF-α inhibition impairs granuloma formation",
+                    "TNF-α is required for neutrophil recruitment",
+                    "TNF-α inhibition increases susceptibility to viral infections",
+                    "TNF-α is essential for antibody production"
+                ],
+                correct: 0,
+                explanation: "TNF-α is crucial for maintaining granuloma integrity in tuberculosis. Inhibiting TNF-α can cause dissemination of latent TB by disrupting granulomas that contain the infection.",
+                memoryTip: "Anti-TNF therapy → Impaired granuloma formation → Reactivation of latent TB."
+            },
+            {
+                question: "A patient with chronic hepatitis B infection develops hepatocellular carcinoma. Which inflammatory mechanism most contributes to this progression?",
+                options: [
+                    "Persistent neutrophil infiltration causing oxidative damage",
+                    "Continuous macrophage activation releasing growth factors",
+                    "Recurrent complement activation leading to cell lysis",
+                    "Sustained mast cell degranulation causing fibrosis"
+                ],
+                correct: 1,
+                explanation: "Chronic hepatitis involves continuous immune-mediated liver cell injury and regeneration, with activated macrophages releasing growth factors that promote carcinogenesis.",
+                memoryTip: "Chronic hepatitis → Continuous inflammation → Regeneration + Growth factors → Increased cancer risk."
+            },
+            {
+                question: "Which of the following best explains the difference between acute and chronic inflammation in terms of tissue repair?",
+                options: [
+                    "Acute inflammation always leads to complete regeneration",
+                    "Chronic inflammation is associated with fibrosis and scarring",
+                    "Acute inflammation involves more tissue destruction",
+                    "Chronic inflammation has better healing outcomes"
+                ],
+                correct: 1,
+                explanation: "Chronic inflammation typically leads to fibrosis and scarring due to simultaneous tissue destruction and repair, while acute inflammation can resolve with complete regeneration if tissue damage is limited.",
+                memoryTip: "Acute inflammation → Resolution or fibrosis; Chronic inflammation → Fibrosis and scarring."
+            },
+            {
+                question: "In a patient with atherosclerosis, the chronic inflammation in arterial walls is primarily driven by:",
+                options: [
+                    "Bacterial infection of the endothelium",
+                    "Immune responses to oxidized LDL",
+                    "Autoantibodies against vascular tissue",
+                    "Complement deposition in vessel walls"
+                ],
+                correct: 1,
+                explanation: "Atherosclerosis involves chronic inflammation triggered by oxidized LDL accumulation in vessel walls, leading to macrophage recruitment and foam cell formation.",
+                memoryTip: "Atherosclerosis = Inflammation in response to oxidized LDL → Foam cells → Plaque formation."
+            },
+            {
+                question: "Which of the following best explains why leukocyte adhesion deficiency increases susceptibility to infections?",
+                options: [
+                    "Impaired phagocytosis",
+                    "Defective antibody production",
+                    "Inability to recruit neutrophils to sites of infection",
+                    "Reduced complement activation"
+                ],
+                correct: 2,
+                explanation: "Leukocyte adhesion deficiency involves defects in adhesion molecules (like integrins), preventing neutrophils from migrating to sites of infection despite normal numbers in blood.",
+                memoryTip: "Leukocyte adhesion deficiency = Defective migration → Recurrent infections despite normal neutrophil count."
+            },
+            {
+                question: "A patient with a genetic defect in MyD88 would be expected to have impaired responses to which type of pathogens?",
+                options: [
+                    "Gram-positive bacteria",
+                    "Gram-negative bacteria",
+                    "Intracellular viruses",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "MyD88 is a key adaptor protein for most TLR signaling pathways. Deficiency impairs recognition of diverse pathogens including bacteria, viruses, and fungi.",
+                memoryTip: "MyD88 deficiency = Defective TLR signaling → Impaired recognition of multiple pathogen types."
+            },
+            {
+                question: "Which mechanism best explains the anti-inflammatory effects of colchicine in gout?",
+                options: [
+                    "Inhibition of neutrophil migration",
+                    "Reduction of uric acid production",
+                    "Inhibition of cytokine production",
+                    "Enhanced uric acid excretion"
+                ],
+                correct: 0,
+                explanation: "Colchicine inhibits microtubule polymerization, impairing neutrophil migration and phagocytosis, which are key to the inflammatory response in acute gout.",
+                memoryTip: "Colchicine = Microtubule inhibition → Impaired neutrophil migration → Reduced inflammation in gout."
+            },
+            {
+                question: "In a patient with sepsis, the transition from systemic inflammation to immunosuppression is characterized by:",
+                options: [
+                    "Increased pro-inflammatory cytokine production",
+                    "Massive neutrophil recruitment to tissues",
+                    "Apoptosis of lymphocytes and immune paralysis",
+                    "Enhanced antigen presentation"
+                ],
+                correct: 2,
+                explanation: "Sepsis often involves an initial hyperinflammatory phase followed by immunosuppression due to lymphocyte apoptosis and immune cell exhaustion, increasing susceptibility to secondary infections.",
+                memoryTip: "Sepsis → Initial cytokine storm → Later immunosuppression (lymphocyte apoptosis) → Secondary infections."
+            },
+            {
+                question: "Which of the following best explains why chronic inflammatory diseases often have flare-ups and remissions?",
+                options: [
+                    "Cyclical pathogen exposure",
+                    "Varying levels of autoantibodies",
+                    "Dynamic balance between pro- and anti-inflammatory mechanisms",
+                    "Changes in environmental triggers"
+                ],
+                correct: 2,
+                explanation: "Chronic inflammatory diseases show periods of activity and quiescence due to the dynamic balance between pro-inflammatory drivers and anti-inflammatory/repair mechanisms.",
+                memoryTip: "Chronic inflammation flare-ups = Imbalance favoring pro-inflammatory mechanisms over regulation."
+            },
+            {
+                question: "A patient with a defect in the NLRP3 inflammasome would be expected to have impaired:",
                 options: [
                     "Antibody production",
-                    "Phagocytosis and microbial killing",
-                    "Antigen presentation",
-                    "Tissue repair"
+                    "Complement activation",
+                    "IL-1β processing and secretion",
+                    "Neutrophil chemotaxis"
                 ],
-                correct: 1,
-                explanation: "Neutrophils are professional phagocytes that engulf and kill microorganisms through oxygen-dependent and oxygen-independent mechanisms.",
-                memoryTip: "Neutrophils = Professional phagocytes, first line of defense against bacteria."
+                correct: 2,
+                explanation: "The NLRP3 inflammasome processes pro-IL-1β into active IL-1β. Defects impair this key inflammatory cytokine production.",
+                memoryTip: "NLRP3 inflammasome = IL-1β activation platform; Defects → Impaired IL-1β production."
             },
             {
-                question: "Which of the following is a key characteristic of pseudomembranous inflammation?",
+                question: "Which of the following best explains the difference between infection and inflammation?",
                 options: [
-                    "Formation of a false membrane on mucosal surfaces",
-                    "Accumulation of serous fluid",
-                    "Minimal tissue damage",
-                    "Absence of inflammatory cells"
+                    "Infection always causes inflammation",
+                    "Inflammation can occur without infection",
+                    "Infection involves microbial invasion",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Infection involves microbial invasion and may cause inflammation, but inflammation can occur without infection (e.g., in autoimmune diseases or tissue injury).",
+                memoryTip: "Infection = Microbial invasion; Inflammation = Response to injury/infection; Not all inflammation is due to infection."
+            },
+            {
+                question: "In a patient with Crohn's disease, the characteristic 'skip lesions' in the intestine result from:",
+                options: [
+                    "Segmental distribution of pathogenic bacteria",
+                    "Patchy immune activation and transmural inflammation",
+                    "Variable blood supply to different intestinal segments",
+                    "Random distribution of autoimmune antibodies"
+                ],
+                correct: 1,
+                explanation: "Crohn's disease involves transmural inflammation that can affect discontinuous segments of the gastrointestinal tract ('skip lesions'), unlike ulcerative colitis which shows continuous inflammation.",
+                memoryTip: "Crohn's disease = Transmural inflammation + Skip lesions; Ulcerative colitis = Mucosal inflammation + Continuous involvement."
+            },
+            {
+                question: "Which of the following best explains why chronic inflammation is considered a 'double-edged sword'?",
+                options: [
+                    "It protects against infection but can cause tissue damage",
+                    "It involves both innate and adaptive immunity",
+                    "It can be both acute and chronic",
+                    "It requires balance between different cell types"
                 ],
                 correct: 0,
-                explanation: "Pseudomembranous inflammation is characterized by the formation of a false membrane composed of fibrin, necrotic epithelial cells, and inflammatory cells on mucosal surfaces.",
-                memoryTip: "Pseudomembranous = False membrane on mucosa (e.g., diphtheria, C. difficile colitis)."
+                explanation: "Inflammation is protective against pathogens and promotes repair, but when chronic or excessive, it can cause significant tissue damage and contribute to various diseases.",
+                memoryTip: "Inflammation = Protective but potentially damaging → Double-edged sword."
+            },
+            {
+                question: "A patient with a defect in the C1 esterase inhibitor would be expected to have:",
+                options: [
+                    "Impaired classical complement pathway",
+                    "Excessive bradykinin production",
+                    "Defective alternative complement pathway",
+                    "Reduced inflammatory cytokine production"
+                ],
+                correct: 1,
+                explanation: "C1 esterase inhibitor deficiency leads to uncontrolled activation of the complement and contact systems, resulting in excessive bradykinin production and angioedema.",
+                memoryTip: "C1 esterase inhibitor deficiency → Uncontrolled bradykinin production → Hereditary angioedema."
+            },
+            {
+                question: "Which of the following best explains the difference between physiological and pathological inflammation?",
+                options: [
+                    "Duration and magnitude of the response",
+                    "Types of cells involved",
+                    "Mediators produced",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Physiological inflammation is appropriate, self-limited, and protective, while pathological inflammation is excessive, prolonged, and causes tissue damage.",
+                memoryTip: "Physiological inflammation = Appropriate, protective; Pathological inflammation = Excessive, damaging."
+            },
+            {
+                question: "In a patient with multiple sclerosis, the characteristic CNS inflammation is primarily mediated by:",
+                options: [
+                    "Neutrophils and IL-8",
+                    "Macrophages and TNF-α",
+                    "T cells and antibodies against myelin",
+                    "Eosinophils and IL-5"
+                ],
+                correct: 2,
+                explanation: "Multiple sclerosis involves autoimmune T cell responses against CNS myelin, with antibody-mediated damage also contributing to demyelination.",
+                memoryTip: "Multiple sclerosis = Autoimmune T cell response against myelin + Antibodies → Demyelination."
+            },
+            {
+                question: "Which of the following best explains why chronic inflammation can lead to systemic symptoms like fatigue and weight loss?",
+                options: [
+                    "Direct tissue damage in multiple organs",
+                    "Systemic effects of inflammatory cytokines",
+                    "Impaired nutrient absorption",
+                    "Increased metabolic demands"
+                ],
+                correct: 1,
+                explanation: "Chronic inflammation leads to systemic symptoms through the actions of inflammatory cytokines (TNF-α, IL-1, IL-6) that affect the brain (fatigue) and metabolism (weight loss).",
+                memoryTip: "Chronic inflammation → Cytokine effects on CNS and metabolism → Fatigue + Weight loss."
+            },
+            {
+                question: "A patient with a defect in the receptor for IFN-γ would be expected to have increased susceptibility to:",
+                options: [
+                    "Viral infections",
+                    "Intracellular bacterial infections",
+                    "Extracellular bacterial infections",
+                    "Fungal infections"
+                ],
+                correct: 1,
+                explanation: "IFN-γ is crucial for macrophage activation against intracellular pathogens. Defects in IFN-γ signaling increase susceptibility to intracellular bacteria like mycobacteria.",
+                memoryTip: "IFN-γ receptor defect → Impaired macrophage activation → Susceptibility to intracellular pathogens (mycobacteria, salmonella)."
+            },
+            {
+                question: "Which of the following best explains the difference between innate and adaptive immune memory in inflammation?",
+                options: [
+                    "Innate immunity has no memory",
+                    "Adaptive immunity has specific memory",
+                    "Innate memory involves epigenetic changes",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Traditional view held that only adaptive immunity has memory, but recent evidence shows innate immunity can have 'trained immunity' through epigenetic reprogramming, though it's non-specific.",
+                memoryTip: "Adaptive immunity = Specific memory; Innate immunity = Non-specific 'trained immunity' via epigenetic changes."
+            },
+            {
+                question: "In a patient with systemic sclerosis, the widespread fibrosis results from:",
+                options: [
+                    "Persistent neutrophil activation",
+                    "Continuous mast cell degranulation",
+                    "Sustained fibroblast activation by TGF-β",
+                    "Recurrent complement deposition"
+                ],
+                correct: 2,
+                explanation: "Systemic sclerosis involves persistent fibroblast activation and excessive collagen production driven primarily by TGF-β, leading to widespread fibrosis.",
+                memoryTip: "Systemic sclerosis = TGF-β-driven fibroblast activation → Excessive collagen → Fibrosis."
             }
         ];
 
