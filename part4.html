@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cestodes Knowledge Assessment</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Hemodynamic Disorders Quiz | Medical University</title>
     <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,345 +25,299 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
             line-height: 1.6;
-            padding: 20px;
             min-height: 100vh;
+            padding: 20px;
         }
 
         .container {
             max-width: 1000px;
             margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
         }
 
         header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px;
             text-align: center;
-            margin-bottom: 30px;
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        h1 {
-            font-size: 2.5rem;
+        header h1 {
+            font-size: 2.2rem;
             margin-bottom: 10px;
-            color: #1a2a6c;
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: #555;
-        }
-
-        .quiz-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease;
-        }
-
-        .quiz-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .question-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .question-number {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #1a2a6c;
-            display: flex;
-            align-items: center;
-        }
-
-        .question-number i {
-            margin-right: 10px;
-            color: #fdbb2d;
-        }
-
-        .question-text {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 25px;
-            color: #222;
-            line-height: 1.5;
-        }
-
-        .options {
-            display: grid;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .option {
-            padding: 18px 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
+        header p {
             font-size: 1.1rem;
-        }
-
-        .option:hover {
-            background-color: #f8f9fa;
-            border-color: #b21f1f;
-        }
-
-        .option.selected {
-            background-color: #e3f2fd;
-            border-color: #2196f3;
-        }
-
-        .option.correct {
-            background-color: #e8f5e9;
-            border-color: #4caf50;
-        }
-
-        .option.incorrect {
-            background-color: #ffebee;
-            border-color: #f44336;
-        }
-
-        .option-letter {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            background-color: #e0e0e0;
-            border-radius: 50%;
-            margin-right: 15px;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-
-        .option.selected .option-letter {
-            background-color: #2196f3;
-            color: white;
-        }
-
-        .option.correct .option-letter {
-            background-color: #4caf50;
-            color: white;
-        }
-
-        .option.incorrect .option-letter {
-            background-color: #f44336;
-            color: white;
-        }
-
-        .feedback {
-            padding: 25px;
-            border-radius: 10px;
-            margin-top: 20px;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .feedback.correct {
-            background-color: #e8f5e9;
-            border-left: 5px solid #4caf50;
-        }
-
-        .feedback.incorrect {
-            background-color: #ffebee;
-            border-left: 5px solid #f44336;
-        }
-
-        .feedback-title {
-            font-weight: bold;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            font-size: 1.2rem;
-        }
-
-        .feedback-title i {
-            margin-right: 10px;
-        }
-
-        .explanation, .memorization-tip {
-            margin-top: 15px;
-        }
-
-        .memorization-tip {
-            padding: 15px;
-            background-color: #fff3cd;
-            border-radius: 8px;
-            border-left: 4px solid #ffc107;
-        }
-
-        .tip-title {
-            font-weight: bold;
-            color: #856404;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-        }
-
-        .tip-title i {
-            margin-right: 8px;
+            opacity: 0.9;
         }
 
         .quiz-info {
             display: flex;
             justify-content: space-between;
-            background-color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 15px 25px;
+            background-color: var(--light);
+            border-bottom: 1px solid #ddd;
         }
 
-        .info-item {
-            text-align: center;
-            flex: 1;
-        }
-
-        .info-label {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 5px;
-        }
-
-        .info-value {
-            font-size: 1.8rem;
+        .timer {
+            font-size: 1.2rem;
             font-weight: bold;
-            color: #1a2a6c;
-        }
-
-        .progress-container {
-            margin-bottom: 30px;
-        }
-
-        .progress-bar {
-            height: 12px;
-            background-color: #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
+            color: var(--danger);
         }
 
         .progress {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
             height: 100%;
-            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            background-color: var(--primary);
             width: 0%;
-            transition: width 0.5s ease;
+            transition: var(--transition);
+        }
+
+        .quiz-container {
+            padding: 30px;
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+        }
+
+        .question-number {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .option {
+            padding: 15px;
+            background-color: var(--light);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background-color: #e0e7ee;
+            transform: translateY(-2px);
+        }
+
+        .option.selected {
+            border-color: var(--primary);
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .option.correct {
+            border-color: var(--success);
+            background-color: rgba(46, 204, 113, 0.1);
+        }
+
+        .option.incorrect {
+            border-color: var(--danger);
+            background-color: rgba(231, 76, 60, 0.1);
+        }
+
+        .explanation-container {
+            padding: 20px;
+            background-color: rgba(52, 152, 219, 0.05);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .explanation-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .memory-tip {
+            background-color: rgba(243, 156, 18, 0.1);
+            padding: 15px;
+            border-left: 4px solid var(--warning);
+            margin-top: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .memory-tip-title {
+            font-weight: 600;
+            color: var(--warning);
+            margin-bottom: 5px;
         }
 
         .navigation {
             display: flex;
             justify-content: space-between;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
         button {
-            padding: 14px 30px;
-            background: linear-gradient(to right, #1a2a6c, #b21f1f);
-            color: white;
+            padding: 12px 25px;
             border: none;
             border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1rem;
             font-weight: 600;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-prev {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+
+        .btn-next {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-submit {
+            background-color: var(--success);
+            color: white;
+            display: none;
         }
 
         button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
 
         button:disabled {
-            background: #cccccc;
+            opacity: 0.6;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
         }
 
-        button i {
-            margin-right: 8px;
-        }
-
-        .results {
+        .results-container {
+            padding: 30px;
             text-align: center;
-            padding: 50px 30px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             display: none;
         }
 
-        .results h2 {
-            color: #1a2a6c;
+        .results-title {
+            font-size: 2rem;
             margin-bottom: 20px;
-            font-size: 2.2rem;
+            color: var(--secondary);
         }
 
         .score {
             font-size: 4rem;
             font-weight: bold;
-            color: #b21f1f;
-            margin: 30px 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            color: var(--primary);
+            margin: 20px 0;
         }
 
-        .performance-message {
+        .score-text {
             font-size: 1.3rem;
             margin-bottom: 30px;
-            color: #555;
+        }
+
+        .summary {
+            text-align: left;
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .summary-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--secondary);
         }
 
         .restart-btn {
-            background: linear-gradient(to right, #1a2a6c, #b21f1f);
-            margin: 0 auto;
+            background-color: var(--primary);
+            color: white;
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+        }
+
+        .question-review {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .review-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .review-question {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .review-answer {
+            margin-bottom: 5px;
+        }
+
+        .correct-answer {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .user-answer {
+            color: var(--danger);
+            font-weight: 600;
         }
 
         @media (max-width: 768px) {
             .quiz-info {
                 flex-direction: column;
-                gap: 20px;
+                gap: 15px;
+                text-align: center;
             }
-            
+
+            .progress-bar {
+                width: 100%;
+            }
+
             .question-text {
                 font-size: 1.2rem;
             }
-            
-            .option {
-                padding: 15px;
-                font-size: 1rem;
-            }
-            
+
             .navigation {
                 flex-direction: column;
-                gap: 15px;
+                gap: 10px;
             }
-            
+
             button {
                 width: 100%;
-            }
-            
-            h1 {
-                font-size: 2rem;
             }
         }
     </style>
@@ -360,882 +325,966 @@
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-microscope"></i> Cestodes (Tapeworms) Knowledge Assessment</h1>
-            <p class="subtitle">Test your understanding of intestinal and tissue cestodes</p>
+            <h1>Hemodynamic Disorders Quiz</h1>
+            <p>Medical Pathology | Hemodynamic Disorders</p>
         </header>
-        
+
         <div class="quiz-info">
-            <div class="info-item">
-                <div class="info-label">Questions</div>
-                <div class="info-value" id="question-count">0/0</div>
-            </div>
-            <div class="info-item">
-                <div class="info-label">Correct Answers</div>
-                <div class="info-value" id="correct-count">0</div>
-            </div>
-            <div class="info-item">
-                <div class="info-label">Score</div>
-                <div class="info-value" id="score">0%</div>
+            <div class="timer">Time: <span id="time">65:00</span></div>
+            <div class="progress">
+                <span>Progress:</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <span id="progress-text">0/65</span>
             </div>
         </div>
-        
-        <div class="progress-container">
-            <div class="progress-bar">
-                <div class="progress" id="progress-bar"></div>
+
+        <div class="quiz-container" id="quiz-container">
+            <div class="question-container">
+                <div class="question-number" id="question-number">Question 1 of 65</div>
+                <div class="question-text" id="question-text"></div>
+                <div class="options-container" id="options-container"></div>
+            </div>
+
+            <div class="explanation-container" id="explanation-container">
+                <div class="explanation-title">Explanation</div>
+                <div id="explanation-text"></div>
+                <div class="memory-tip" id="memory-tip">
+                    <div class="memory-tip-title">Memory Tip</div>
+                    <div id="memory-tip-text"></div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn-prev" id="prev-btn" disabled>Previous</button>
+                <button class="btn-next" id="next-btn">Next Question</button>
+                <button class="btn-submit" id="submit-btn">Submit Quiz</button>
             </div>
         </div>
-        
-        <div id="quiz-container">
-            <!-- Questions will be dynamically inserted here -->
-        </div>
-        
-        <div class="navigation">
-            <button id="prev-btn" disabled><i class="fas fa-arrow-left"></i> Previous</button>
-            <button id="next-btn">Next <i class="fas fa-arrow-right"></i></button>
-        </div>
-        
-        <div class="results" id="results">
-            <h2><i class="fas fa-trophy"></i> Quiz Completed!</h2>
-            <p>You have finished the Cestodes Knowledge Assessment</p>
-            <div class="score" id="final-score">0%</div>
-            <p class="performance-message" id="performance-message"></p>
-            <button class="restart-btn" id="restart-btn"><i class="fas fa-redo"></i> Restart Quiz</button>
+
+        <div class="results-container" id="results-container">
+            <h2 class="results-title">Quiz Results</h2>
+            <div class="score" id="score">0/65</div>
+            <div class="score-text" id="score-text"></div>
+
+            <div class="summary">
+                <div class="summary-title">Performance Summary</div>
+                <p>Total Questions: <span id="total-questions">65</span></p>
+                <p>Correct Answers: <span id="correct-answers">0</span></p>
+                <p>Incorrect Answers: <span id="incorrect-answers">0</span></p>
+                <p>Percentage: <span id="percentage">0%</span></p>
+                <p>Time Taken: <span id="time-taken">65:00</span></p>
+            </div>
+
+            <div class="question-review" id="question-review">
+                <h3>Question Review</h3>
+                <!-- Review content will be generated by JavaScript -->
+            </div>
+
+            <button class="restart-btn" id="restart-btn">Restart Quiz</button>
         </div>
     </div>
 
     <script>
-        // Questions data - 50+ questions with varied correct answers
+        // Quiz questions array
         const questions = [
             {
-                question: "Which of the following is a general characteristic of cestodes (tapeworms)?",
+                question: "Which of the following Starling forces is responsible for drawing fluid INTO capillaries from the interstitium?",
                 options: [
-                    "They are cylindrical in shape",
-                    "They have separate sexes",
-                    "They are segmented, tape-like worms",
-                    "They obtain nutrients by ingestion through a mouth"
+                    "Capillary hydrostatic pressure",
+                    "Interstitial fluid hydrostatic pressure",
+                    "Plasma colloid osmotic pressure",
+                    "Interstitial fluid colloid osmotic pressure"
                 ],
-                correctAnswer: 2, // C
-                explanation: "Cestodes are characterized as segmented, tape-like worms. They are hermaphroditic (monoecious) and obtain nutrients by absorption through their body surface.",
-                memorizationTip: "Remember the 3 S's: Segmented, Scolex, Strobila."
+                correct: 2,
+                explanation: "Plasma colloid osmotic pressure (oncotic pressure) is created by plasma proteins, primarily albumin, and draws fluid from the interstitium back into the capillaries.",
+                memoryTip: "Remember: Osmotic pressure PULLS fluid in, while hydrostatic pressure PUSHES fluid out."
             },
             {
-                question: "What are the three main body regions of a cestode?",
+                question: "A patient with nephrotic syndrome develops generalized edema. Which mechanism is primarily responsible?",
                 options: [
-                    "Head, thorax, abdomen",
-                    "Scolex, neck, strobila",
-                    "Anterior, middle, posterior",
-                    "Cephalic, cervical, caudal"
+                    "Increased capillary hydrostatic pressure",
+                    "Decreased plasma oncotic pressure",
+                    "Increased vascular permeability",
+                    "Lymphatic obstruction"
                 ],
-                correctAnswer: 1, // B
-                explanation: "The three main body regions of cestodes are: scolex (head for attachment), neck (growth region), and strobila (a collection of proglottids).",
-                memorizationTip: "SNS: Scolex, Neck, Strobila - remember this sequence."
+                correct: 1,
+                explanation: "Nephrotic syndrome causes massive proteinuria, leading to hypoalbuminemia and decreased plasma oncotic pressure. This reduces the force drawing fluid back into capillaries, resulting in edema.",
+                memoryTip: "Nephrotic syndrome → protein loss → low oncotic pressure → edema"
             },
             {
-                question: "What is the function of the scolex in tapeworms?",
+                question: "Which component of Virchow's triad is most important for arterial thrombosis?",
                 options: [
-                    "Reproduction",
-                    "Absorption of nutrients",
-                    "Attachment to host",
-                    "Production of eggs"
+                    "Hypercoagulability",
+                    "Endothelial injury",
+                    "Stasis of blood flow",
+                    "Turbulence of blood flow"
                 ],
-                correctAnswer: 2, // C
-                explanation: "The scolex is the head region of the tapeworm and functions as an attachment organ, allowing the worm to anchor itself to the host's intestinal wall.",
-                memorizationTip: "Scolex = Suckers and sometimes hooks = Attachment."
+                correct: 1,
+                explanation: "Endothelial injury is the most important factor for arterial thrombosis. In arteries, high flow rates prevent thrombosis unless the endothelial lining is damaged.",
+                memoryTip: "Remember Virchow's triad: Endothelial injury, Stasis, Hypercoagulability. Endothelial injury is key for arterial thrombosis."
             },
             {
-                question: "Which of the following cestodes is known as the beef tapeworm?",
+                question: "A patient presents with warm, red, and swollen tissues in an area of acute inflammation. This is an example of:",
                 options: [
-                    "Taenia solium",
-                    "Taenia saginata",
-                    "Hymenolepis nana",
-                    "Echinococcus granulosus"
+                    "Passive congestion",
+                    "Active hyperemia",
+                    "Chronic congestion",
+                    "Ischemia"
                 ],
-                correctAnswer: 1, // B
-                explanation: "Taenia saginata is commonly known as the beef tapeworm, while Taenia solium is the pork tapeworm.",
-                memorizationTip: "Saginata = Beef (both have 'S' and 'B' sounds)."
+                correct: 1,
+                explanation: "Active hyperemia results from arteriolar dilation, increasing blood flow to a tissue. This causes the tissue to become warm, red, and swollen, commonly seen in inflammation.",
+                memoryTip: "Active = increased flow IN; Passive = impaired flow OUT"
             },
             {
-                question: "Where does the adult form of Taenia saginata reside in humans?",
+                question: "Which of the following is a characteristic feature of transudative edema fluid?",
+                options: [
+                    "High protein content",
+                    "High specific gravity (>1.012)",
+                    "Low cellular content",
+                    "Associated with inflammation"
+                ],
+                correct: 2,
+                explanation: "Transudative edema results from hemodynamic imbalances (increased hydrostatic pressure or decreased oncotic pressure) and has low protein content, low specific gravity, and few cells.",
+                memoryTip: "Transudate = Thin, clear fluid; Exudate = Thick, protein-rich fluid in inflammation"
+            },
+            {
+                question: "A 65-year-old patient with chronic heart failure develops pitting edema in the lower extremities. The initial pathophysiological event in this cascade is:",
+                options: [
+                    "Activation of renin-angiotensin-aldosterone system",
+                    "Increased venous hydrostatic pressure",
+                    "Reduced cardiac output",
+                    "Sodium and water retention"
+                ],
+                correct: 2,
+                explanation: "In congestive heart failure, the initial event is reduced cardiac output, which triggers a cascade including decreased renal perfusion, RAAS activation, sodium/water retention, and ultimately increased venous hydrostatic pressure causing edema.",
+                memoryTip: "CHF edema cascade: Reduced CO → decreased renal perfusion → RAAS activation → Na+/H2O retention → increased venous pressure → edema"
+            },
+            {
+                question: "Which of the following is most likely to cause hemorrhagic infarction?",
+                options: [
+                    "Occlusion of renal artery",
+                    "Occlusion of splenic artery",
+                    "Occlusion of pulmonary vein",
+                    "Occlusion of coronary artery"
+                ],
+                correct: 2,
+                explanation: "Hemorrhagic infarcts occur in loose tissues or those with dual blood supply. Pulmonary infarction is often hemorrhagic because the lungs have dual blood supply (pulmonary and bronchial arteries) and loose tissue architecture that allows blood to seep into the necrotic area.",
+                memoryTip: "Red infarcts: Lungs, Liver, Intestines; White infarcts: Heart, Kidney, Spleen"
+            },
+            {
+                question: "A patient with deep vein thrombosis suddenly develops dyspnea, chest pain, and hypotension. The most likely diagnosis is:",
+                options: [
+                    "Systemic embolism",
+                    "Pulmonary thromboembolism",
+                    "Fat embolism syndrome",
+                    "Paradoxical embolism"
+                ],
+                correct: 1,
+                explanation: "Deep vein thrombi from the lower extremities can dislodge and travel to the pulmonary arteries, causing pulmonary thromboembolism. Large emboli can obstruct pulmonary blood flow, leading to right heart failure, hypotension, and potentially sudden death.",
+                memoryTip: "DVT → Pulmonary Embolism → Dyspnea, Chest pain, Hypotension"
+            },
+            {
+                question: "Which of the following laboratory findings is characteristic of Disseminated Intravascular Coagulation (DIC)?",
+                options: [
+                    "Increased fibrinogen levels",
+                    "Prolonged bleeding time",
+                    "Elevated D-dimer",
+                    "Decreased prothrombin time"
+                ],
+                correct: 2,
+                explanation: "DIC involves widespread activation of the coagulation system, leading to fibrin deposition and subsequent fibrinolysis. Elevated D-dimer (a fibrin degradation product) is a characteristic finding, along with prolonged PT/PTT, thrombocytopenia, and decreased fibrinogen.",
+                memoryTip: "DIC labs: Elevated D-dimer, Prolonged PT/PTT, Low fibrinogen, Low platelets"
+            },
+            {
+                question: "In septic shock, the initial event in the pathophysiology cascade is:",
+                options: [
+                    "Systemic vasodilation",
+                    "Endothelial injury",
+                    "Endotoxin binding to immune cells",
+                    "Multiple organ dysfunction"
+                ],
+                correct: 2,
+                explanation: "Septic shock begins with endotoxin (LPS) from gram-negative bacteria binding to CD14 receptors on monocytes/macrophages, triggering release of inflammatory mediators like TNF-α and IL-1, which then cause systemic vasodilation, endothelial injury, and organ dysfunction.",
+                memoryTip: "Septic shock pathway: Endotoxin → Immune activation → Cytokine release → Vasodilation/Endothelial injury → Organ dysfunction"
+            },
+            {
+                question: "Which type of shock is characterized by low cardiac output despite adequate intravascular volume?",
+                options: [
+                    "Hypovolemic shock",
+                    "Cardiogenic shock",
+                    "Distributive shock",
+                    "Obstructive shock"
+                ],
+                correct: 1,
+                explanation: "Cardiogenic shock results from pump failure (e.g., myocardial infarction, cardiomyopathy) leading to low cardiac output despite normal or increased intravascular volume.",
+                memoryTip: "Cardiogenic = Pump failure; Hypovolemic = Volume loss; Distributive = Vasodilation; Obstructive = Mechanical blockage"
+            },
+            {
+                question: "A patient with extensive burns develops edema at the burn sites. This type of edema is best classified as:",
+                options: [
+                    "Transudate",
+                    "Exudate",
+                    "Lymphedema",
+                    "Hydrostatic edema"
+                ],
+                correct: 1,
+                explanation: "Burns cause tissue damage and inflammation, leading to increased vascular permeability and formation of protein-rich inflammatory exudate.",
+                memoryTip: "Inflammation → Increased permeability → Exudate (protein-rich)"
+            },
+            {
+                question: "Which organ is most susceptible to infarction due to its end-arterial blood supply?",
                 options: [
                     "Liver",
-                    "Small intestine",
-                    "Large intestine",
-                    "Muscles"
+                    "Lung",
+                    "Kidney",
+                    "Small intestine"
                 ],
-                correctAnswer: 1, // B
-                explanation: "The adult form of Taenia saginata resides in the small intestine of humans, where it can grow 4-12 meters long.",
-                memorizationTip: "Adult tapeworms live in the intestine; larval forms live in tissues."
+                correct: 2,
+                explanation: "The kidney has an end-arterial supply with minimal collateral circulation, making it highly susceptible to infarction following arterial occlusion.",
+                memoryTip: "End-arterial organs: Kidney, Spleen, Heart → Pale infarcts"
             },
             {
-                question: "What is the larval form of Taenia saginata called?",
+                question: "The 'nutmeg liver' appearance is characteristic of:",
                 options: [
-                    "Cysticercus cellulosae",
-                    "Cysticercus bovis",
-                    "Hydatid cyst",
-                    "Cysticercoid"
+                    "Acute hepatic congestion",
+                    "Chronic passive congestion of the liver",
+                    "Hepatic infarction",
+                    "Liver cirrhosis"
                 ],
-                correctAnswer: 1, // B
-                explanation: "The larval form of Taenia saginata is called Cysticercus bovis, which develops in the musculature of cattle.",
-                memorizationTip: "Bovis = cattle; Saginata = beef tapeworm."
+                correct: 1,
+                explanation: "Chronic passive congestion of the liver results in a 'nutmeg liver' appearance due to centrilobular congestion and hemorrhage with surrounding pale, fatty peripheral zones.",
+                memoryTip: "Nutmeg liver = Chronic passive congestion (commonly from right heart failure)"
             },
             {
-                question: "How is Taenia saginata typically transmitted to humans?",
+                question: "Which of the following is a primary (genetic) hypercoagulable state?",
                 options: [
-                    "Ingestion of eggs in contaminated water",
-                    "Ingestion of cysticerci in undercooked beef",
-                    "Skin penetration by larvae",
-                    "Inhalation of eggs"
+                    "Antithrombin III deficiency",
+                    "Prolonged immobilization",
+                    "Nephrotic syndrome",
+                    "Oral contraceptive use"
                 ],
-                correctAnswer: 1, // B
-                explanation: "Humans are infected with T. saginata by consuming raw or undercooked beef containing cysticerci (Cysticercus bovis).",
-                memorizationTip: "Beef tapeworm = infected beef = cysticercus bovis."
+                correct: 0,
+                explanation: "Antithrombin III deficiency is an inherited disorder that impairs the natural anticoagulant system, predisposing to thrombosis. Other options are acquired risk factors.",
+                memoryTip: "Primary hypercoagulability: Genetic (Factor V Leiden, Protein C/S deficiency, Antithrombin III deficiency)"
             },
             {
-                question: "What is a distinguishing feature of the Taenia saginata scolex?",
+                question: "A patient with a prosthetic heart valve develops multiple small hemorrhages on the skin (1-2 mm in size). These are best described as:",
                 options: [
-                    "It has 4 suckers and a rostellum with hooks",
-                    "It has 4 suckers but no hooks or rostellum",
-                    "It has 2 suckers and a rostellum",
-                    "It has no suckers but has hooks"
+                    "Ecchymoses",
+                    "Petechiae",
+                    "Purpura",
+                    "Hematomas"
                 ],
-                correctAnswer: 1, // B
-                explanation: "The T. saginata scolex has 4 suckers but no hooks or rostellum, distinguishing it from T. solium which has hooks.",
-                memorizationTip: "Saginata = Smooth (no hooks); Solium = Spiny (has hooks)."
+                correct: 1,
+                explanation: "Petechiae are minute 1-2 mm hemorrhages in the skin or mucous membranes, often associated with platelet disorders or increased vascular fragility.",
+                memoryTip: "Petechiae: 1-2 mm; Purpura: >3 mm; Ecchymosis: >1 cm"
             },
             {
-                question: "What is the most common clinical feature of Taenia saginata infection?",
+                question: "In the progression of shock, the irreversible stage is characterized by:",
                 options: [
-                    "Seizures",
-                    "Passage of proglottids",
-                    "Liver cysts",
-                    "Skin nodules"
+                    "Compensatory vasoconstriction",
+                    "Widespread cellular injury that cannot be reversed",
+                    "Activation of the renin-angiotensin system",
+                    "Increased cardiac output"
                 ],
-                correctAnswer: 1, // B
-                explanation: "The most striking feature of T. saginata infection is the passage (active and passive) of proglottids. Infections are often otherwise asymptomatic.",
-                memorizationTip: "Saginata = Segments passing visibly."
+                correct: 1,
+                explanation: "The irreversible stage of shock involves widespread cellular damage and organ failure that cannot be reversed even with restoration of perfusion.",
+                memoryTip: "Shock stages: Compensated → Progressive → Irreversible (cellular damage)"
             },
             {
-                question: "How many lateral branches does the uterus have in gravid Taenia saginata proglottids?",
+                question: "Which of the following is a feature of arterial thrombi compared to venous thrombi?",
                 options: [
-                    "5-10",
-                    "7-13",
-                    "15-30",
-                    "30-50"
+                    "Softer consistency",
+                    "Red color (red thrombi)",
+                    "Grow in the direction of blood flow",
+                    "Firm attachment to vessel wall"
                 ],
-                correctAnswer: 2, // C
-                explanation: "Gravid T. saginata proglottids have a uterus with 15-30 lateral branches, which is more than T. solium (7-13 branches).",
-                memorizationTip: "Saginata has more branches (15-30) than solium (7-13)."
+                correct: 3,
+                explanation: "Arterial thrombi are typically firm, pale, and firmly attached to the vessel wall at sites of endothelial injury. They grow retrograde (against blood flow).",
+                memoryTip: "Arterial thrombi: Pale, firm, retrograde growth; Venous thrombi: Red, soft, antegrade growth"
             },
             {
-                question: "Which drug is considered first-line treatment for Taenia saginata infection?",
+                question: "Amniotic fluid embolism is characterized by all of the following EXCEPT:",
                 options: [
-                    "Albendazole",
-                    "Mebendazole",
-                    "Praziquantel",
-                    "Niclosamide"
+                    "High mortality rate (>80%)",
+                    "Disseminated intravascular coagulation",
+                    "Gradual onset over several hours",
+                    "Respiratory distress and cyanosis"
                 ],
-                correctAnswer: 2, // C
-                explanation: "Praziquantel is the first-line treatment for T. saginata infection, typically given as a single dose of 5-10 mg/kg.",
-                memorizationTip: "Praziquantel is the 'P' drug for Parasitic tapeworms."
+                correct: 2,
+                explanation: "Amniotic fluid embolism has a sudden, dramatic onset during or after delivery, characterized by dyspnea, cyanosis, shock, and frequently DIC. It does not have a gradual onset.",
+                memoryTip: "Amniotic fluid embolism: Sudden onset, Respiratory distress, Shock, DIC, High mortality"
             },
             {
-                question: "What is the common name for Taenia solium?",
+                question: "The most common source of pulmonary thromboembolism is:",
                 options: [
-                    "Beef tapeworm",
-                    "Pork tapeworm",
-                    "Dwarf tapeworm",
-                    "Hydatid tapeworm"
+                    "Right atrial thrombi",
+                    "Deep vein thrombi in lower extremities",
+                    "Pelvic vein thrombi",
+                    "Upper extremity deep vein thrombi"
                 ],
-                correctAnswer: 1, // B
-                explanation: "Taenia solium is commonly known as the pork tapeworm.",
-                memorizationTip: "Solium = Swine = Pork tapeworm."
+                correct: 1,
+                explanation: "Approximately 95% of pulmonary emboli originate from deep vein thrombi in the lower extremities (deep venous thrombosis).",
+                memoryTip: "DVT → Pulmonary Embolism (95% of cases)"
             },
             {
-                question: "Which of the following diseases can be caused by Taenia solium?",
+                question: "Which type of infarct typically shows coagulative necrosis?",
                 options: [
-                    "Taeniasis only",
-                    "Cysticercosis only",
-                    "Both taeniasis and cysticercosis",
-                    "Hydatid disease"
+                    "Cerebral infarct",
+                    "Pulmonary infarct",
+                    "Renal infarct",
+                    "Splenic infarct"
                 ],
-                correctAnswer: 2, // C
-                explanation: "Taenia solium can cause both intestinal taeniasis (adult worm) and cysticercosis (larval form in tissues).",
-                memorizationTip: "Solium is dangerous because it can cause both intestinal and tissue infections."
+                correct: 2,
+                explanation: "Most solid organs (kidney, heart, spleen) show coagulative necrosis in infarction, characterized by preservation of tissue architecture. The brain is an exception, showing liquefactive necrosis.",
+                memoryTip: "Coagulative necrosis: Most solid organs; Liquefactive necrosis: Brain"
             },
             {
-                question: "What is the key morphological difference between Taenia solium and Taenia saginata?",
+                question: "In anaphylactic shock, the primary mechanism is:",
                 options: [
-                    "T. solium is longer than T. saginata",
-                    "T. solium has a rostellum with hooks, T. saginata does not",
-                    "T. solium has more uterine branches",
-                    "T. solium eggs are smaller"
+                    "Pump failure",
+                    "Massive vasodilation and increased permeability",
+                    "Volume depletion",
+                    "Obstruction of blood flow"
                 ],
-                correctAnswer: 1, // B
-                explanation: "The key difference is that T. solium has a rostellum with a double row of hooks, while T. saginata has no hooks.",
-                memorizationTip: "Solium = Spiny (hooks); Saginata = Smooth (no hooks)."
+                correct: 1,
+                explanation: "Anaphylactic shock is an IgE-mediated hypersensitivity reaction causing massive histamine release, leading to systemic vasodilation and increased vascular permeability.",
+                memoryTip: "Anaphylaxis → Histamine release → Vasodilation + Increased permeability → Shock"
             },
             {
-                question: "How do humans become accidental intermediate hosts for Taenia solium?",
+                question: "Which of the following conditions is most likely to cause generalized edema (anasarca)?",
                 options: [
-                    "By eating undercooked pork",
-                    "By ingesting T. solium eggs",
-                    "By skin contact with infected pigs",
-                    "By drinking contaminated milk"
+                    "Deep vein thrombosis",
+                    "Liver cirrhosis",
+                    "Localized allergic reaction",
+                    "Cerebral edema"
                 ],
-                correctAnswer: 1, // B
-                explanation: "Humans become accidental intermediate hosts (developing cysticercosis) by ingesting T. solium eggs from contaminated food/water or through autoinfection.",
-                memorizationTip: "Eggs → cysticercosis; Cysticerci → intestinal tapeworm."
+                correct: 1,
+                explanation: "Liver cirrhosis causes decreased synthesis of albumin, leading to reduced plasma oncotic pressure and generalized edema (anasarca).",
+                memoryTip: "Anasarca causes: Nephrotic syndrome, Cirrhosis, Heart failure, Malnutrition"
             },
             {
-                question: "What is the most serious form of cysticercosis?",
+                question: "The Trousseau syndrome refers to:",
                 options: [
-                    "Subcutaneous cysticercosis",
-                    "Muscular cysticercosis",
-                    "Neurocysticercosis",
-                    "Ocular cysticercosis"
+                    "Migratory thrombophlebitis associated with cancer",
+                    "Paradoxical embolism through a patent foramen ovale",
+                    "Air embolism in divers",
+                    "Fat embolism after fractures"
                 ],
-                correctAnswer: 2, // C
-                explanation: "Neurocysticercosis (cysticerci in the brain) is the most serious form, causing seizures, headaches, and hydrocephalus.",
-                memorizationTip: "Neurocysticercosis = neurological symptoms = most dangerous."
+                correct: 0,
+                explanation: "Trousseau syndrome is migratory thrombophlebitis that is often associated with underlying malignancy, particularly pancreatic cancer.",
+                memoryTip: "Trousseau syndrome = Migratory thrombophlebitis + Cancer"
             },
             {
-                question: "Which diagnostic method is most appropriate for neurocysticercosis?",
+                question: "In neurogenic shock, the primary defect is:",
                 options: [
-                    "Stool examination for eggs",
-                    "Serology tests",
-                    "CT or MRI imaging",
-                    "Biopsy of subcutaneous nodules"
+                    "Loss of sympathetic tone",
+                    "Myocardial depression",
+                    "Fluid loss",
+                    "Endotoxin release"
                 ],
-                correctAnswer: 2, // C
-                explanation: "CT or MRI imaging is most appropriate for diagnosing neurocysticercosis, as it can visualize cysts in the brain.",
-                memorizationTip: "Brain cysts need brain imaging (CT/MRI)."
+                correct: 0,
+                explanation: "Neurogenic shock results from spinal cord injury or anesthesia causing loss of sympathetic tone, leading to vasodilation, bradycardia, and hypotension.",
+                memoryTip: "Neurogenic shock: Loss of sympathetic tone → Vasodilation + Bradycardia"
             },
             {
-                question: "What is unique about Hymenolepis nana among tapeworms?",
+                question: "Which factor is most important in the development of deep vein thrombosis?",
                 options: [
-                    "It is the largest tapeworm",
-                    "It can complete its life cycle in a single host",
-                    "It has separate sexes",
-                    "It does not produce eggs"
+                    "Endothelial injury",
+                    "Hypercoagulability",
+                    "Stasis",
+                    "Turbulence"
                 ],
-                correctAnswer: 1, // B
-                explanation: "H. nana is unique among tapeworms because it can complete its life cycle in a single host (humans), without requiring an intermediate host.",
-                memorizationTip: "H. nana = No intermediate host needed (usually)."
+                correct: 2,
+                explanation: "Stasis is the most important factor in venous thrombosis, as slowed blood flow allows clotting factors to accumulate and platelets to contact the endothelium.",
+                memoryTip: "Venous thrombosis: Stasis most important; Arterial thrombosis: Endothelial injury most important"
             },
             {
-                question: "What is the common name for Hymenolepis nana?",
+                question: "A patient with acute myocardial infarction is at risk for which complication due to endothelial injury and stasis?",
                 options: [
-                    "Beef tapeworm",
-                    "Pork tapeworm",
-                    "Dwarf tapeworm",
-                    "Hydatid tapeworm"
+                    "Pulmonary embolism",
+                    "Mural thrombosis",
+                    "Systemic embolism",
+                    "Fat embolism"
                 ],
-                correctAnswer: 2, // C
-                explanation: "Hymenolepis nana is commonly known as the dwarf tapeworm, as it is the smallest tapeworm that infects humans (15-40 mm long).",
-                memorizationTip: "Nana = small = dwarf tapeworm."
+                correct: 1,
+                explanation: "Myocardial infarction causes endocardial injury and areas of non-contractile myocardium (stasis), predisposing to mural thrombus formation in the ventricles.",
+                memoryTip: "MI → Endocardial injury + Stasis → Mural thrombus"
             },
             {
-                question: "Which population is most commonly affected by Hymenolepis nana?",
+                question: "Which of the following best describes the fluid in lymphatic edema?",
                 options: [
-                    "Elderly",
-                    "Adults",
-                    "Children",
-                    "Pregnant women"
+                    "Low protein content",
+                    "High protein content",
+                    "Low specific gravity",
+                    "Straw-colored"
                 ],
-                correctAnswer: 2, // C
-                explanation: "Hymenolepis nana is more common in children, likely due to poorer hygiene practices.",
-                memorizationTip: "Dwarf tapeworm = common in small (children) hosts."
+                correct: 1,
+                explanation: "Lymphatic edema fluid is protein-rich because lymphatic obstruction prevents drainage of proteins that normally leak from capillaries.",
+                memoryTip: "Lymphatic edema = Protein-rich fluid (blocked lymphatic drainage)"
             },
             {
-                question: "How is Hymenolepis nana typically diagnosed?",
+                question: "In anaphylactic shock, the initial treatment of choice is:",
                 options: [
-                    "Imaging studies",
-                    "Serological tests",
-                    "Finding eggs in feces",
-                    "Biopsy of intestinal tissue"
+                    "Intravenous fluids",
+                    "Epinephrine",
+                    "Antihistamines",
+                    "Corticosteroids"
                 ],
-                correctAnswer: 2, // C
-                explanation: "H. nana infection is diagnosed by finding characteristic eggs in the feces.",
-                memorizationTip: "Intestinal tapeworms = eggs in stool."
+                correct: 1,
+                explanation: "Epinephrine is the first-line treatment for anaphylactic shock as it counteracts vasodilation, bronchoconstriction, and increased permeability.",
+                memoryTip: "Anaphylaxis treatment: Epinephrine first"
             },
             {
-                question: "What is the treatment of choice for Hymenolepis nana?",
+                question: "Which type of infarct typically has a wedge-shaped appearance?",
                 options: [
-                    "Albendazole",
-                    "Mebendazole",
-                    "Praziquantel",
-                    "Niclosamide"
+                    "Myocardial infarct",
+                    "Cerebral infarct",
+                    "Renal infarct",
+                    "All of the above"
                 ],
-                correctAnswer: 2, // C
-                explanation: "Praziquantel is the treatment of choice for H. nana, typically given as a single dose of 25 mg/kg.",
-                memorizationTip: "Praziquantel works against both adult and larval forms of H. nana."
+                correct: 3,
+                explanation: "Most infarcts appear wedge-shaped with the occluded vessel at the apex and the organ periphery forming the base.",
+                memoryTip: "Infarct morphology: Wedge-shaped with vessel at apex"
             },
             {
-                question: "Which cestode causes hydatid disease?",
+                question: "The most common cause of hypovolemic shock is:",
                 options: [
-                    "Taenia saginata",
-                    "Taenia solium",
-                    "Hymenolepis nana",
-                    "Echinococcus granulosus"
-                ],
-                correctAnswer: 3, // D
-                explanation: "Echinococcus granulosus causes hydatid disease (hydatidosis), characterized by the formation of hydatid cysts in various organs.",
-                memorizationTip: "Echinococcus = Hydatid cysts."
-            },
-            {
-                question: "What is the definitive host for Echinococcus granulosus?",
-                options: [
-                    "Humans",
-                    "Cattle",
-                    "Sheep",
-                    "Dogs and other canines"
-                ],
-                correctAnswer: 3, // D
-                explanation: "The definitive host for E. granulosus is dogs and other canines, where the adult worm resides in the small intestine.",
-                memorizationTip: "Dogs = Definitive host (both start with 'D')."
-            },
-            {
-                question: "Which organ is most commonly affected in human hydatid disease?",
-                options: [
-                    "Brain",
-                    "Lungs",
-                    "Liver",
-                    "Kidneys"
-                ],
-                correctAnswer: 2, // C
-                explanation: "The liver is the most common site for hydatid cysts (about 70% of cases), followed by the lungs (about 20%).",
-                memorizationTip: "Liver is the largest internal organ = most common site for hydatid cysts."
-            },
-            {
-                question: "What is the main risk associated with rupture of a hydatid cyst?",
-                options: [
-                    "Bleeding",
-                    "Anaphylactic shock",
-                    "Intestinal obstruction",
-                    "Neurological damage"
-                ],
-                correctAnswer: 1, // B
-                explanation: "Rupture of a hydatid cyst can cause anaphylactic shock due to the release of cyst fluid, which is highly antigenic.",
-                memorizationTip: "Cyst rupture = anaphylaxis risk."
-            },
-            {
-                question: "Which diagnostic method is most specific for confirming hydatid disease?",
-                options: [
-                    "Stool examination",
-                    "Serology (ELISA for antibodies)",
-                    "Complete blood count",
-                    "Urine analysis"
-                ],
-                correctAnswer: 1, // B
-                explanation: "Serological tests like ELISA for antibody detection are most specific for confirming hydatid disease.",
-                memorizationTip: "Hydatid disease = serological diagnosis (not stool examination)."
-            },
-            {
-                question: "What is the primary treatment for hydatid cysts?",
-                options: [
-                    "Medication only",
-                    "Surgical removal",
-                    "Radiation therapy",
-                    "No treatment needed"
-                ],
-                correctAnswer: 1, // B
-                explanation: "Surgery is the main treatment for hydatid cysts, especially for large or complicated cysts.",
-                memorizationTip: "Large cysts = surgery; small cysts = medication (albendazole)."
-            },
-            {
-                question: "What does PAIR stand for in the context of hydatid disease treatment?",
-                options: [
-                    "Puncture, Aspiration, Injection, Reaspiration",
-                    "Procedure for Aspiration of Internal Rupture",
-                    "Permanent Aspiration of Infected Region",
-                    "Primary Approach to Internal Removal"
-                ],
-                correctAnswer: 0, // A
-                explanation: "PAIR stands for Puncture, Aspiration, Injection, Reaspiration - a minimally invasive procedure for treating hydatid cysts.",
-                memorizationTip: "PAIR: Puncture, Aspiration, Injection, Reaspiration."
-            },
-            {
-                question: "Which animal is the most common intermediate host for Echinococcus granulosus?",
-                options: [
-                    "Dogs",
-                    "Humans",
-                    "Sheep",
-                    "Pigs"
-                ],
-                correctAnswer: 2, // C
-                explanation: "Sheep are the most common intermediate host for E. granulosus, harboring the larval form (hydatid cysts) in their organs.",
-                memorizationTip: "Sheep are herbivores that graze where dogs defecate = common intermediate hosts."
-            },
-            {
-                question: "How can human infection with Echinococcus granulosus be prevented?",
-                options: [
-                    "Cooking pork thoroughly",
-                    "Washing hands after handling dogs",
-                    "Using insect repellent",
-                    "Avoiding swimming in freshwater"
-                ],
-                correctAnswer: 1, // B
-                explanation: "Human infection can be prevented by thorough hand washing after handling dogs, periodic deworming of dogs, and preventing dogs from eating infected organs.",
-                memorizationTip: "Dogs are the definitive host = hygiene with dogs is key to prevention."
-            },
-            {
-                question: "Which cestode has the smallest adult form but the largest larval form?",
-                options: [
-                    "Taenia saginata",
-                    "Taenia solium",
-                    "Hymenolepis nana",
-                    "Echinococcus granulosus"
-                ],
-                correctAnswer: 3, // D
-                explanation: "Echinococcus granulosus has the smallest adult form (only a few mm) but the largest larval form (hydatid cysts can grow very large).",
-                memorizationTip: "Echinococcus adults are tiny but cysts are huge."
-            },
-            {
-                question: "What is the typical growth rate of hydatid cysts?",
-                options: [
-                    "1-5 cm per month",
-                    "1-5 cm per year",
-                    "5-10 cm per month",
-                    "5-10 cm per year"
-                ],
-                correctAnswer: 1, // B
-                explanation: "Hydatid cysts typically grow at a rate of 1-5 cm per year, which is why infections can be asymptomatic for years.",
-                memorizationTip: "Hydatid cysts grow slowly (1-5 cm/year)."
-            },
-            {
-                question: "Which of the following is NOT a typical symptom of heavy Hymenolepis nana infection?",
-                options: [
-                    "Abdominal pain",
+                    "Burns",
                     "Diarrhea",
-                    "Weakness and headaches",
-                    "Seizures"
+                    "Hemorrhage",
+                    "Vomiting"
                 ],
-                correctAnswer: 3, // D
-                explanation: "Heavy H. nana infections can cause abdominal pain, diarrhea, weakness, and headaches, but not typically seizures (which are associated with neurocysticercosis).",
-                memorizationTip: "Seizures = neurocysticercosis (T. solium), not H. nana."
+                correct: 2,
+                explanation: "Hemorrhage is the most common cause of hypovolemic shock in clinical practice.",
+                memoryTip: "Most common cause of hypovolemic shock = Hemorrhage"
             },
             {
-                question: "What is the infective stage of Taenia solium for humans in cysticercosis?",
+                question: "Which of the following is a feature of chronic DIC compared to acute DIC?",
                 options: [
-                    "Cysticercus cellulosae",
-                    "Eggs",
-                    "Adult worm",
-                    "Proglottids"
+                    "More severe bleeding manifestations",
+                    "Higher mortality rate",
+                    "Often associated with malignancies",
+                    "Sudden onset with shock"
                 ],
-                correctAnswer: 1, // B
-                explanation: "In cysticercosis, the infective stage for humans is the egg, which contains the oncosphere that develops into cysticerci in tissues.",
-                memorizationTip: "Eggs → cysticercosis; Cysticerci → intestinal tapeworm."
+                correct: 2,
+                explanation: "Chronic DIC often occurs with malignancies or retained dead fetus and may have less dramatic bleeding than acute DIC.",
+                memoryTip: "Chronic DIC: Malignancies, Retained dead fetus; Acute DIC: Sepsis, Trauma, Obstetric"
             },
             {
-                question: "Which feature distinguishes Hymenolepis nana eggs from other tapeworm eggs?",
+                question: "In the pathophysiology of shock, the 'sick cell syndrome' refers to:",
                 options: [
-                    "They have a terminal spine",
-                    "They have a lateral spine",
-                    "They have polar filaments",
-                    "They are triangular in shape"
+                    "Endothelial cell activation",
+                    "Impaired Na+/K+ ATPase function",
+                    "Lysosomal enzyme release",
+                    "Mitochondrial swelling"
                 ],
-                correctAnswer: 2, // C
-                explanation: "H. nana eggs have polar filaments between the oncosphere and the eggshell, which is a distinguishing feature.",
-                memorizationTip: "H. nana eggs have polar filaments - a unique characteristic."
+                correct: 1,
+                explanation: "In progressive shock, ATP depletion impairs Na+/K+ ATPase function, causing sodium and water to enter cells (cellular swelling) - the 'sick cell syndrome'.",
+                memoryTip: "Sick cell syndrome = Impaired Na+/K+ ATPase → Cellular swelling"
             },
             {
-                question: "What is the most common way that autoinfection occurs with Hymenolepis nana?",
+                question: "Which of the following is most characteristic of cardiogenic shock?",
                 options: [
-                    "Through skin penetration",
-                    "By inhalation of eggs",
-                    "By retrograde movement of eggs in the intestine",
-                    "Through blood transfusion"
+                    "Warm, dry skin",
+                    "Bounding pulses",
+                    "Pulmonary edema",
+                    "Decreased jugular venous pressure"
                 ],
-                correctAnswer: 2, // C
-                explanation: "Autoinfection with H. nana can occur when eggs hatch in the intestine and the oncospheres penetrate the intestinal villi without being passed in feces.",
-                memorizationTip: "H. nana can autoinfect - eggs hatch in same host without leaving body."
+                correct: 2,
+                explanation: "Cardiogenic shock often presents with pulmonary edema due to left ventricular failure and backup of blood in the pulmonary circulation.",
+                memoryTip: "Cardiogenic shock: Pulmonary edema common"
             },
             {
-                question: "Which cestode infection is associated with the highest risk of severe complications in humans?",
+                question: "A patient with thrombocytopenia would be most likely to present with:",
                 options: [
-                    "Taenia saginata",
-                    "Hymenolepis nana",
-                    "Taenia solium (cysticercosis)",
-                    "Diphyllobothrium latum"
+                    "Deep vein thrombosis",
+                    "Petechiae and purpura",
+                    "Arterial thrombosis",
+                    "Embolic phenomena"
                 ],
-                correctAnswer: 2, // C
-                explanation: "Taenia solium cysticercosis, particularly neurocysticercosis, is associated with the most severe complications including seizures, hydrocephalus, and death.",
-                memorizationTip: "Cysticercosis in brain = most dangerous cestode infection."
+                correct: 1,
+                explanation: "Thrombocytopenia (low platelet count) impairs primary hemostasis, leading to bleeding manifestations like petechiae, purpura, and mucosal bleeding.",
+                memoryTip: "Thrombocytopenia → Bleeding (petechiae, purpura)"
             },
             {
-                question: "What is the typical length of an adult Taenia solium worm?",
+                question: "Which of the following is the final common pathway in most types of shock?",
                 options: [
-                    "15-40 mm",
-                    "2-3 meters",
-                    "4-10 meters",
-                    "A few mm only"
+                    "Vasodilation",
+                    "Tissue hypoperfusion",
+                    "Cardiac dysfunction",
+                    "Coagulation abnormalities"
                 ],
-                correctAnswer: 1, // B
-                explanation: "Adult Taenia solium worms are typically 2-3 meters long, shorter than T. saginata (4-10 meters).",
-                memorizationTip: "Solium (pork) is shorter (2-3m) than saginata (beef, 4-10m)."
+                correct: 1,
+                explanation: "Despite different initial mechanisms, all types of shock ultimately lead to inadequate tissue perfusion and cellular hypoxia.",
+                memoryTip: "All shock → Tissue hypoperfusion → Cellular hypoxia"
             },
             {
-                question: "Which of the following is a key prevention measure for Taenia solium infection?",
+                question: "Which of the following is NOT a component of hemostasis?",
                 options: [
-                    "Cooking beef thoroughly",
-                    "Cooking pork thoroughly",
-                    "Washing hands after handling dogs",
-                    "Avoiding contaminated water"
+                    "Vascular wall",
+                    "Platelets",
+                    "Coagulation factors",
+                    "Fibrinolytic system"
                 ],
-                correctAnswer: 1, // B
-                explanation: "Thoroughly cooking pork destroys the cysticerci, preventing intestinal taeniasis. Preventing fecal-oral transmission of eggs is also important to prevent cysticercosis.",
-                memorizationTip: "Pork tapeworm = cook pork thoroughly."
+                correct: 3,
+                explanation: "Hemostasis involves the vascular wall, platelets, and coagulation factors working together to prevent bleeding. The fibrinolytic system works to dissolve clots and is part of the regulatory mechanism, not primary hemostasis.",
+                memoryTip: "Hemostasis: Vascular wall + Platelets + Coagulation factors"
             },
             {
-                question: "What is the primary pathological mechanism in cysticercosis?",
+                question: "A patient with liver cirrhosis develops ascites. The primary mechanism is:",
                 options: [
-                    "Toxin production by adult worms",
-                    "Mechanical obstruction by adult worms",
-                    "Inflammation around dying larvae in tissues",
-                    "Allergic reaction to eggs"
+                    "Increased portal venous pressure",
+                    "Decreased lymphatic drainage",
+                    "Increased systemic venous pressure",
+                    "Decreased aldosterone production"
                 ],
-                correctAnswer: 2, // C
-                explanation: "The primary pathology in cysticercosis results from inflammation around the cysticerci, particularly when they begin to degenerate and die.",
-                memorizationTip: "Cysticercosis pathology = inflammation around dying larvae."
+                correct: 0,
+                explanation: "In liver cirrhosis, fibrosis increases resistance to portal blood flow, leading to portal hypertension which drives fluid transudation into the peritoneal cavity (ascites).",
+                memoryTip: "Cirrhosis → Portal hypertension → Ascites"
             },
             {
-                question: "Which drug is often used in combination with albendazole for neurocysticercosis treatment?",
+                question: "Which type of embolism is most likely to cause systemic arterial occlusion?",
                 options: [
-                    "Praziquantel",
-                    "Corticosteroids",
-                    "Niclosamide",
-                    "Antibiotics"
+                    "Fat embolism",
+                    "Air embolism",
+                    "Amniotic fluid embolism",
+                    "Paradoxical embolism"
                 ],
-                correctAnswer: 1, // B
-                explanation: "Corticosteroids (like prednisolone) are often used with albendazole or praziquantel in neurocysticercosis to control inflammation caused by dying cysticerci.",
-                memorizationTip: "Neurocysticercosis treatment = antiparasitic + steroids to reduce inflammation."
+                correct: 3,
+                explanation: "Paradoxical embolism occurs when a venous embolus crosses from the right to left side of the heart (through a patent foramen ovale) and enters the systemic circulation.",
+                memoryTip: "Paradoxical embolism: Venous embolus → Right heart → Left heart (via PFO) → Systemic embolism"
             },
             {
-                question: "How long does it take for cysticerci to develop in tissues after egg ingestion?",
+                question: "The primary difference between petechiae and ecchymosis is:",
                 options: [
-                    "24-48 hours",
-                    "1-2 weeks",
-                    "2-3 months",
-                    "6-12 months"
+                    "Underlying mechanism",
+                    "Color",
+                    "Size",
+                    "Location"
                 ],
-                correctAnswer: 2, // C
-                explanation: "It takes about 2-3 months for cysticerci to fully develop in tissues after ingestion of T. solium eggs.",
-                memorizationTip: "Cysticerci develop in 2-3 months - similar to gestation period."
+                correct: 2,
+                explanation: "Petechiae are 1-2 mm hemorrhages, while ecchymoses are larger than 1-2 cm. Both result from extravasation of blood.",
+                memoryTip: "Petechiae: 1-2 mm; Purpura: >3 mm; Ecchymosis: >1-2 cm"
             },
             {
-                question: "Which cestode is also known as the dog tapeworm?",
+                question: "Which of the following is a feature of hemorrhagic infarcts?",
                 options: [
-                    "Taenia saginata",
-                    "Taenia solium",
-                    "Hymenolepis nana",
-                    "Echinococcus granulosus"
+                    "Occur in solid organs",
+                    "Result from venous occlusion",
+                    "Pale appearance",
+                    "Common in heart and spleen"
                 ],
-                correctAnswer: 3, // D
-                explanation: "Echinococcus granulosus is also known as the dog tapeworm, as dogs are the definitive host.",
-                memorizationTip: "Dog tapeworm = Echinococcus (dogs are definitive host)."
+                correct: 1,
+                explanation: "Hemorrhagic infarcts often result from venous occlusion or in organs with dual blood supply where blood can seep into the necrotic area.",
+                memoryTip: "Hemorrhagic infarcts: Venous occlusion or dual blood supply organs"
             },
             {
-                question: "What is the most common symptom of cerebral cysticercosis?",
+                question: "In septic shock, the initial hemodynamic pattern is typically:",
                 options: [
-                    "Headaches",
-                    "Seizures",
-                    "Visual disturbances",
-                    "Memory loss"
+                    "Low CO, high SVR",
+                    "High CO, low SVR",
+                    "Low CO, low SVR",
+                    "High CO, high SVR"
                 ],
-                correctAnswer: 1, // B
-                explanation: "Seizures are the most common symptom of cerebral cysticercosis (neurocysticercosis).",
-                memorizationTip: "Neurocysticercosis = seizures as hallmark symptom."
+                correct: 1,
+                explanation: "Early septic shock is characterized by systemic vasodilation (low systemic vascular resistance) with compensatory increased cardiac output.",
+                memoryTip: "Early septic shock: Vasodilation → Low SVR, High CO"
             },
             {
-                question: "Which diagnostic finding is pathognomonic for hydatid disease?",
+                question: "Which of the following conditions is most associated with the development of marantic thrombosis?",
                 options: [
-                    "Eosinophilia",
-                    "Hydatid sand in cyst fluid",
-                    "Elevated liver enzymes",
-                    "Positive stool for eggs"
+                    "Pregnancy",
+                    "Malignancy",
+                    "Trauma",
+                    "Autoimmune disease"
                 ],
-                correctAnswer: 1, // B
-                explanation: "Hydatid sand (brood capsules and protoscolices) in cyst fluid is pathognomonic for hydatid disease.",
-                memorizationTip: "Hydatid sand = diagnostic for hydatid disease."
+                correct: 1,
+                explanation: "Marantic thrombosis refers to DVT associated with debilitating conditions like advanced cancer or severe malnutrition.",
+                memoryTip: "Marantic thrombosis = DVT in debilitating conditions (cancer, malnutrition)"
             },
             {
-                question: "What is the typical appearance of Taenia eggs under microscopy?",
+                question: "The most sensitive laboratory indicator of DIC is:",
                 options: [
-                    "Triangular with lateral spine",
-                    "Oval with terminal spine",
-                    "Round with radially striated shell",
-                    "Lemon-shaped with opercula"
+                    "Platelet count",
+                    "Fibrinogen level",
+                    "D-dimer level",
+                    "Prothrombin time"
                 ],
-                correctAnswer: 2, // C
-                explanation: "Taenia eggs are round with a thick, radially striated shell containing an oncosphere (hexacanth embryo).",
-                memorizationTip: "Taenia eggs are round and radially striated - cannot distinguish species by eggs alone."
+                correct: 2,
+                explanation: "D-dimer, a fibrin degradation product, is elevated in DIC due to widespread fibrin formation and subsequent fibrinolysis. It's a sensitive but not specific marker.",
+                memoryTip: "DIC: Elevated D-dimer (sensitive), Low fibrinogen (specific for bleeding risk)"
             },
             {
-                question: "Which of the following is a key difference between intestinal taeniasis and cysticercosis?",
+                question: "Which organ is most vulnerable to hypoxic injury in shock?",
                 options: [
-                    "Intestinal taeniasis is caused by larvae, cysticercosis by adults",
-                    "Intestinal taeniasis is caused by adults, cysticercosis by larvae",
-                    "Both are caused by adult worms but in different locations",
-                    "Both are caused by larval forms but in different hosts"
+                    "Heart",
+                    "Kidney",
+                    "Brain",
+                    "Liver"
                 ],
-                correctAnswer: 1, // B
-                explanation: "Intestinal taeniasis is caused by adult worms in the intestine, while cysticercosis is caused by larval forms (cysticerci) in various tissues.",
-                memorizationTip: "Adults in gut = taeniasis; Larvae in tissues = cysticercosis."
+                correct: 2,
+                explanation: "Neurons are extremely sensitive to hypoxia and can undergo irreversible damage within 3-4 minutes of oxygen deprivation.",
+                memoryTip: "Hypoxia sensitivity: Brain (3-4 min) > Heart (20-30 min) > Kidney > Liver"
             },
             {
-                question: "What is the most important public health measure for controlling Taenia solium transmission?",
+                question: "A patient with extensive third-degree burns is at risk for which type of shock in the first 24 hours?",
                 options: [
-                    "Vaccination of pigs",
-                    "Improved sanitation and pig management",
-                    "Mass treatment of humans with praziquantel",
-                    "Meat inspection only"
+                    "Cardiogenic shock",
+                    "Neurogenic shock",
+                    "Hypovolemic shock",
+                    "Septic shock"
                 ],
-                correctAnswer: 1, // B
-                explanation: "Improved sanitation (to prevent contamination of environment with human feces) and proper pig management (preventing pigs from accessing human feces) are key to controlling T. solium transmission.",
-                memorizationTip: "Break the cycle: prevent pigs from eating human feces."
+                correct: 2,
+                explanation: "In the first 24 hours after major burns, massive fluid loss through damaged skin can lead to hypovolemic shock. Septic shock may develop later from infection.",
+                memoryTip: "Burns: Early → Hypovolemic shock; Late → Septic shock"
             },
             {
-                question: "Which characteristic is used to differentiate between Taenia saginata and Taenia solium proglottids?",
+                question: "Which of the following is a characteristic of arterial emboli compared to venous emboli?",
                 options: [
-                    "Number of uterine branches",
-                    "Presence of eggs",
-                    "Size of the proglottid",
-                    "Color of the proglottid"
+                    "Usually originate from deep leg veins",
+                    "Most commonly lodge in the lungs",
+                    "Can travel to a wide variety of sites",
+                    "Almost always cause infarction"
                 ],
-                correctAnswer: 0, // A
-                explanation: "The number of uterine branches is used to differentiate: T. saginata has 15-30 lateral branches, while T. solium has 7-13.",
-                memorizationTip: "Saginata has more uterine branches (15-30) than solium (7-13)."
+                correct: 2,
+                explanation: "Arterial emboli can travel to various sites including brain, kidneys, limbs, and intestines, while venous emboli primarily lodge in the lungs.",
+                memoryTip: "Arterial emboli: Multiple possible sites; Venous emboli: Primarily lungs"
             },
             {
-                question: "What is the most serious potential complication of ocular cysticercosis?",
+                question: "In the renin-angiotensin-aldosterone system activation during shock, the primary effect is:",
                 options: [
-                    "Conjunctivitis",
-                    "Visual loss",
-                    "Ocular pain",
-                    "Periorbital edema"
+                    "Vasodilation",
+                    "Sodium and water retention",
+                    "Increased heart rate",
+                    "Bronchodilation"
                 ],
-                correctAnswer: 1, // B
-                explanation: "The most serious complication of ocular cysticercosis is visual loss, which can be permanent if not treated promptly.",
-                memorizationTip: "Ocular cysticercosis → visual impairment/loss."
+                correct: 1,
+                explanation: "RAAS activation in shock leads to sodium and water retention, increasing blood volume and attempting to maintain perfusion pressure.",
+                memoryTip: "RAAS in shock: Na+/H2O retention → Increased blood volume"
             },
             {
-                question: "Which of the following is NOT a typical feature of cestodes?",
+                question: "Which of the following is NOT a common clinical setting for DIC?",
                 options: [
-                    "Hermaphroditic",
-                    "Segmented body",
-                    "Complete digestive system",
-                    "Absorptive nutrition"
+                    "Obstetric complications",
+                    "Sepsis",
+                    "Hypertension",
+                    "Malignancy"
                 ],
-                correctAnswer: 2, // C
-                explanation: "Cestodes lack a digestive system entirely; they absorb nutrients directly through their tegument.",
-                memorizationTip: "Tapeworms have no gut - they absorb nutrients through their skin."
+                correct: 2,
+                explanation: "Common settings for DIC include obstetric catastrophes, sepsis, malignancies, and major trauma. Hypertension is not typically a direct cause of DIC.",
+                memoryTip: "DIC settings: Obstetric, Sepsis, Cancer, Trauma"
             },
             {
-                question: "What is the primary method for diagnosing intestinal taeniasis?",
+                question: "The primary mechanism of cerebral edema in hypertensive crisis is:",
                 options: [
-                    "Serology",
-                    "Imaging",
-                    "Microscopic examination of stool",
-                    "Biopsy"
+                    "Increased capillary permeability",
+                    "Decreased plasma oncotic pressure",
+                    "Increased hydrostatic pressure",
+                    "Lymphatic obstruction"
                 ],
-                correctAnswer: 2, // C
-                explanation: "Intestinal taeniasis is primarily diagnosed by microscopic examination of stool for eggs or proglottids.",
-                memorizationTip: "Intestinal parasites = stool examination."
+                correct: 2,
+                explanation: "In hypertensive crisis, severely elevated blood pressure increases cerebral capillary hydrostatic pressure, forcing fluid into brain tissue.",
+                memoryTip: "Hypertensive cerebral edema = Increased hydrostatic pressure"
             },
             {
-                question: "Which medication is NOT typically used for cestode infections?",
+                question: "Which of the following is a feature of chronic passive congestion?",
                 options: [
-                    "Praziquantel",
-                    "Niclosamide",
-                    "Albendazole",
-                    "Ivermectin"
+                    "Warm, red tissues",
+                    "Reversible changes",
+                    "Parenchymal cell degeneration",
+                    "Increased arterial inflow"
                 ],
-                correctAnswer: 3, // D
-                explanation: "Ivermectin is used for some nematode infections and ectoparasites, but not typically for cestode infections. Praziquantel, niclosamide, and albendazole are used for cestodes.",
-                memorizationTip: "Ivermectin = for roundworms, not tapeworms."
+                correct: 2,
+                explanation: "Chronic passive congestion leads to chronic hypoxia, causing parenchymal cell degeneration, atrophy, and potentially fibrosis.",
+                memoryTip: "Chronic passive congestion → Hypoxia → Parenchymal degeneration"
             },
             {
-                question: "What is the most effective way to prevent Hymenolepis nana infection?",
+                question: "The most common site for arterial thrombosis is:",
                 options: [
-                    "Cooking meat thoroughly",
-                    "Proper hand hygiene",
-                    "Avoiding contact with dogs",
-                    "Using insect repellent"
+                    "Cerebral arteries",
+                    "Coronary arteries",
+                    "Mesenteric arteries",
+                    "Renal arteries"
                 ],
-                correctAnswer: 1, // B
-                explanation: "Proper hand hygiene is the most effective way to prevent H. nana infection, as it is primarily transmitted through the fecal-oral route.",
-                memorizationTip: "Dwarf tapeworm = hand hygiene (fecal-oral transmission)."
+                correct: 1,
+                explanation: "Coronary arteries are the most common site for arterial thrombosis, followed by cerebral arteries and femoral arteries.",
+                memoryTip: "Arterial thrombosis sites: Coronary > Cerebral > Femoral"
             },
             {
-                question: "Which cestode has the shortest prepatent period (time from infection to egg production)?",
+                question: "In the progressive stage of shock, which metabolic abnormality develops?",
                 options: [
-                    "Taenia saginata",
-                    "Taenia solium",
-                    "Hymenolepis nana",
-                    "Echinococcus granulosus"
+                    "Respiratory alkalosis",
+                    "Metabolic alkalosis",
+                    "Lactic acidosis",
+                    "Hyperkalemia without acidosis"
                 ],
-                correctAnswer: 2, // C
-                explanation: "Hymenolepis nana has the shortest prepatent period of about 2-4 weeks, compared to 2-3 months for Taenia species.",
-                memorizationTip: "Dwarf tapeworm = short life cycle = short prepatent period."
+                correct: 2,
+                explanation: "In progressive shock, tissue hypoxia leads to anaerobic metabolism and lactic acid accumulation, causing metabolic (lactic) acidosis.",
+                memoryTip: "Progressive shock → Anaerobic metabolism → Lactic acidosis"
             },
             {
-                question: "What is the typical treatment duration for albendazole in hydatid disease?",
+                question: "A saddle embolus typically lodges at the:",
                 options: [
-                    "Single dose",
-                    "3 days",
-                    "4 weeks",
-                    "Several months"
+                    "Bifurcation of the pulmonary trunk",
+                    "Aortic arch",
+                    "Coronary artery ostium",
+                    "Carotid artery bifurcation"
                 ],
-                correctAnswer: 3, // D
-                explanation: "Albendazole is typically given for several months in hydatid disease, either as primary treatment for inoperable cysts or adjunctively after surgery.",
-                memorizationTip: "Hydatid disease requires prolonged treatment (months)."
+                correct: 0,
+                explanation: "A saddle embolus straddles the bifurcation of the main pulmonary trunk, often causing sudden death by obstructing blood flow to both lungs.",
+                memoryTip: "Saddle embolus = Pulmonary artery bifurcation → Sudden death"
+            },
+            {
+                question: "Which type of shock is characterized by high cardiac output and low peripheral resistance?",
+                options: [
+                    "Hypovolemic shock",
+                    "Cardiogenic shock",
+                    "Distributive shock",
+                    "Obstructive shock"
+                ],
+                correct: 2,
+                explanation: "Distributive shock (septic, anaphylactic, neurogenic) is characterized by systemic vasodilation leading to low peripheral resistance, with initially high cardiac output.",
+                memoryTip: "Distributive shock: Vasodilation → Low resistance, High output (initially)"
+            },
+            {
+                question: "In fat embolism syndrome, symptoms typically begin:",
+                options: [
+                    "Immediately after trauma",
+                    "1-3 days after trauma",
+                    "1 week after trauma",
+                    "2 weeks after trauma"
+                ],
+                correct: 1,
+                explanation: "Fat embolism syndrome typically begins 1-3 days after trauma, during which tissue swelling forces fat into the venous system.",
+                memoryTip: "Fat embolism syndrome: Onset 1-3 days post-trauma"
+            },
+            {
+                question: "Which of the following is a low-risk factor for hypercoagulability?",
+                options: [
+                    "Major surgery",
+                    "Prolonged immobilization",
+                    "Oral contraceptive use",
+                    "Malignancy"
+                ],
+                correct: 2,
+                explanation: "Oral contraceptive use is considered a low-risk factor for hypercoagulability, while major surgery, prolonged immobilization, and malignancy are high-risk factors.",
+                memoryTip: "High-risk hypercoagulability: Surgery, Trauma, Cancer, Immobilization; Low-risk: OCPs, Smoking, Pregnancy"
+            },
+            {
+                question: "A patient with mitral stenosis is at increased risk for developing:",
+                options: [
+                    "Right ventricular hypertrophy",
+                    "Left atrial thrombosis",
+                    "Pulmonary artery thrombosis",
+                    "Aortic valve vegetations"
+                ],
+                correct: 1,
+                explanation: "Mitral stenosis causes left atrial dilation and stasis, creating a prime location for thrombus formation, especially when associated with atrial fibrillation.",
+                memoryTip: "Mitral stenosis → Left atrial dilation → Stasis → Thrombus formation"
+            },
+            {
+                question: "Which of the following best describes the morphology of a typical venous thrombus?",
+                options: [
+                    "Firm, gray-red, lines of Zahn",
+                    "Soft, red, occlusive",
+                    "Friable, infected vegetation",
+                    "Pale, laminated appearance"
+                ],
+                correct: 1,
+                explanation: "Venous thrombi are typically soft, red, and almost invariably occlusive. They may show lines of Zahn but are generally less organized than arterial thrombi.",
+                memoryTip: "Venous thrombi: Red, soft, occlusive; Arterial thrombi: Pale, firm, lines of Zahn"
+            },
+            {
+                question: "The most common cause of cardiogenic shock is:",
+                options: [
+                    "Massive pulmonary embolism",
+                    "Acute myocardial infarction",
+                    "Cardiac tamponade",
+                    "Dilated cardiomyopathy"
+                ],
+                correct: 1,
+                explanation: "Acute myocardial infarction is the most common cause of cardiogenic shock, particularly when it involves ≥40% of the left ventricular mass.",
+                memoryTip: "Most common cause of cardiogenic shock = Myocardial infarction"
+            },
+            {
+                question: "In DIC, the paradoxical clinical presentation includes:",
+                options: [
+                    "Hypertension and bradycardia",
+                    "Bleeding and thrombosis",
+                    "Hypervolemia and oliguria",
+                    "Fever and leukopenia"
+                ],
+                correct: 1,
+                explanation: "DIC is characterized by simultaneous bleeding (due to consumption of clotting factors) and thrombosis (due to widespread activation of coagulation).",
+                memoryTip: "DIC paradox: Bleeding + Thrombosis simultaneously"
+            },
+            {
+                question: "Which organ has dual blood supply that protects it from infarction?",
+                options: [
+                    "Kidney",
+                    "Spleen",
+                    "Lung",
+                    "Heart"
+                ],
+                correct: 2,
+                explanation: "The lung has dual blood supply from pulmonary and bronchial arteries, providing some protection from infarction when one supply is compromised.",
+                memoryTip: "Dual blood supply: Lung, Liver, Hand/Forearm"
+            },
+            {
+                question: "A patient with chronic congestive heart failure develops 'brown induration' of the lungs. This refers to:",
+                options: [
+                    "Pulmonary edema",
+                    "Hemosiderin-laden macrophages in alveoli",
+                    "Pulmonary fibrosis",
+                    "Chronic bronchitis"
+                ],
+                correct: 1,
+                explanation: "Brown induration of the lungs in chronic passive congestion results from hemosiderin-laden macrophages accumulating in alveolar spaces due to recurrent microhemorrhages.",
+                memoryTip: "Brown induration = Hemosiderin-laden macrophages in chronic pulmonary congestion"
+            },
+            {
+                question: "Which of the following is the earliest histologic change in edema?",
+                options: [
+                    "Fibrosis",
+                    "Clear separation of extracellular matrix",
+                    "Inflammatory cell infiltration",
+                    "Necrosis"
+                ],
+                correct: 1,
+                explanation: "The earliest microscopic manifestation of edema is subtle cell swelling and clearing with separation of the extracellular matrix.",
+                memoryTip: "Early edema: Cell swelling + Separation of extracellular matrix"
+            },
+            {
+                question: "The most important mechanism of edema formation in acute inflammation is:",
+                options: [
+                    "Decreased plasma oncotic pressure",
+                    "Increased capillary hydrostatic pressure",
+                    "Increased vascular permeability",
+                    "Lymphatic obstruction"
+                ],
+                correct: 2,
+                explanation: "In acute inflammation, chemical mediators cause increased vascular permeability, allowing protein-rich fluid (exudate) to escape into tissues.",
+                memoryTip: "Inflammatory edema = Increased vascular permeability → Exudate"
             }
         ];
 
-        // Quiz state
-        let currentQuestion = 0;
-        let score = 0;
-        let userAnswers = new Array(questions.length).fill(null);
-
         // DOM elements
         const quizContainer = document.getElementById('quiz-container');
-        const questionCountElement = document.getElementById('question-count');
-        const correctCountElement = document.getElementById('correct-count');
-        const scoreElement = document.getElementById('score');
-        const progressBar = document.getElementById('progress-bar');
-        const prevButton = document.getElementById('prev-btn');
-        const nextButton = document.getElementById('next-btn');
-        const resultsContainer = document.getElementById('results');
-        const finalScoreElement = document.getElementById('final-score');
-        const performanceMessageElement = document.getElementById('performance-message');
-        const restartButton = document.getElementById('restart-btn');
+        const resultsContainer = document.getElementById('results-container');
+        const questionNumber = document.getElementById('question-number');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const explanationText = document.getElementById('explanation-text');
+        const memoryTipText = document.getElementById('memory-tip-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
+        const timeDisplay = document.getElementById('time');
+        const scoreDisplay = document.getElementById('score');
+        const scoreText = document.getElementById('score-text');
+        const totalQuestions = document.getElementById('total-questions');
+        const correctAnswers = document.getElementById('correct-answers');
+        const incorrectAnswers = document.getElementById('incorrect-answers');
+        const percentage = document.getElementById('percentage');
+        const timeTaken = document.getElementById('time-taken');
+        const questionReview = document.getElementById('question-review');
+        const restartBtn = document.getElementById('restart-btn');
+
+        // Quiz state
+        let currentQuestion = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let score = 0;
+        let timer;
+        let timeLeft = 65 * 60; // 65 minutes in seconds
+        let quizCompleted = false;
 
         // Initialize quiz
         function initQuiz() {
             displayQuestion();
+            startTimer();
             updateProgress();
-            updateQuizInfo();
         }
 
         // Display current question
         function displayQuestion() {
             const question = questions[currentQuestion];
+            questionNumber.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            questionText.textContent = question.question;
             
-            let optionsHTML = '';
+            optionsContainer.innerHTML = '';
             question.options.forEach((option, index) => {
-                const isSelected = userAnswers[currentQuestion] === index;
-                const optionClass = isSelected ? 'option selected' : 'option';
-                const letter = String.fromCharCode(65 + index); // A, B, C, D
-                
-                optionsHTML += `
-                    <li class="${optionClass}" onclick="selectOption(${index})">
-                        <span class="option-letter">${letter}</span>
-                        ${option}
-                    </li>
-                `;
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                if (userAnswers[currentQuestion] === index) {
+                    optionElement.classList.add('selected');
+                }
+                optionElement.textContent = option;
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
             });
             
-            const questionHTML = `
-                <div class="quiz-card">
-                    <div class="question-header">
-                        <div class="question-number"><i class="fas fa-question-circle"></i> Question ${currentQuestion + 1} of ${questions.length}</div>
-                    </div>
-                    <div class="question-text">${question.question}</div>
-                    <ul class="options">${optionsHTML}</ul>
-                    ${userAnswers[currentQuestion] !== null ? getFeedbackHTML() : ''}
-                </div>
-            `;
+            // Show/hide explanation
+            if (userAnswers[currentQuestion] !== null) {
+                showExplanation();
+            } else {
+                explanationContainer.style.display = 'none';
+            }
             
-            quizContainer.innerHTML = questionHTML;
-            updateNavigationButtons();
+            // Update button states
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.disabled = false;
+            submitBtn.style.display = currentQuestion === questions.length - 1 ? 'block' : 'none';
         }
 
         // Select an option
-        function selectOption(optionIndex) {
-            userAnswers[currentQuestion] = optionIndex;
-            displayQuestion();
+        function selectOption(index) {
+            if (quizCompleted) return;
             
-            // If this is the first time answering this question, check if correct
+            userAnswers[currentQuestion] = index;
+            
+            // Update UI
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[index].classList.add('selected');
+            
+            showExplanation();
+        }
+
+        // Show explanation for current question
+        function showExplanation() {
             const question = questions[currentQuestion];
-            if (optionIndex === question.correctAnswer) {
-                score++;
-            }
+            explanationText.textContent = question.explanation;
+            memoryTipText.textContent = question.memoryTip;
+            explanationContainer.style.display = 'block';
             
-            updateQuizInfo();
+            // Highlight correct/incorrect answers
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, index) => {
+                option.classList.remove('correct', 'incorrect');
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === userAnswers[currentQuestion] && index !== question.correct) {
+                    option.classList.add('incorrect');
+                }
+            });
         }
 
-        // Get feedback HTML
-        function getFeedbackHTML() {
-            const question = questions[currentQuestion];
-            const userAnswerIndex = userAnswers[currentQuestion];
-            const isCorrect = userAnswerIndex === question.correctAnswer;
-            const feedbackClass = isCorrect ? 'feedback correct' : 'feedback incorrect';
-            const feedbackTitle = isCorrect ? 'Correct!' : 'Incorrect!';
-            const correctAnswerLetter = String.fromCharCode(65 + question.correctAnswer);
-            const correctAnswerText = question.options[question.correctAnswer];
-            
-            return `
-                <div class="${feedbackClass}">
-                    <div class="feedback-title">
-                        <i class="fas ${isCorrect ? 'fa-check-circle' : 'fa-times-circle'}"></i>
-                        ${feedbackTitle}
-                    </div>
-                    <div class="explanation">
-                        <strong>Explanation:</strong> ${question.explanation}
-                    </div>
-                    ${!isCorrect ? `
-                        <div class="correct-answer">
-                            <strong>Correct Answer:</strong> ${correctAnswerLetter}. ${correctAnswerText}
-                        </div>
-                    ` : ''}
-                    <div class="memorization-tip">
-                        <div class="tip-title"><i class="fas fa-lightbulb"></i> Memorization Tip:</div>
-                        ${question.memorizationTip}
-                    </div>
-                </div>
-            `;
-        }
-
-        // Update navigation buttons
-        function updateNavigationButtons() {
-            prevButton.disabled = currentQuestion === 0;
-            nextButton.disabled = userAnswers[currentQuestion] === null;
-            
-            if (currentQuestion === questions.length - 1) {
-                nextButton.textContent = 'Finish Quiz';
-                nextButton.innerHTML = 'Finish Quiz <i class="fas fa-flag-checkered"></i>';
-            } else {
-                nextButton.textContent = 'Next';
-                nextButton.innerHTML = 'Next <i class="fas fa-arrow-right"></i>';
-            }
-        }
-
-        // Update progress bar
-        function updateProgress() {
-            const progress = ((currentQuestion + 1) / questions.length) * 100;
-            progressBar.style.width = `${progress}%`;
-        }
-
-        // Update quiz info
-        function updateQuizInfo() {
-            questionCountElement.textContent = `${currentQuestion + 1}/${questions.length}`;
-            correctCountElement.textContent = score;
-            const currentScore = Math.round((score / questions.length) * 100);
-            scoreElement.textContent = `${currentScore}%`;
-        }
-
-        // Next question
+        // Navigate to next question
         function nextQuestion() {
             if (currentQuestion < questions.length - 1) {
                 currentQuestion++;
                 displayQuestion();
                 updateProgress();
-            } else {
-                showResults();
             }
         }
 
-        // Previous question
+        // Navigate to previous question
         function prevQuestion() {
             if (currentQuestion > 0) {
                 currentQuestion--;
@@ -1244,57 +1293,125 @@
             }
         }
 
-        // Show results
-        function showResults() {
-            const finalScore = Math.round((score / questions.length) * 100);
-            finalScoreElement.textContent = `${finalScore}%`;
+        // Update progress bar
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = `${currentQuestion + 1}/${questions.length}`;
+        }
+
+        // Start timer
+        function startTimer() {
+            timer = setInterval(() => {
+                timeLeft--;
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        // Submit quiz
+        function submitQuiz() {
+            clearInterval(timer);
+            quizCompleted = true;
             
-            let performanceMessage = '';
-            if (finalScore >= 90) {
-                performanceMessage = 'Excellent! You have mastered the topic of Cestodes.';
-            } else if (finalScore >= 80) {
-                performanceMessage = 'Very good! You have a solid understanding of Cestodes.';
-            } else if (finalScore >= 70) {
-                performanceMessage = 'Good job! You have a good grasp of the material.';
-            } else if (finalScore >= 60) {
-                performanceMessage = 'Not bad! Review the material to improve your knowledge.';
-            } else {
-                performanceMessage = 'Keep studying! Review the material and try again.';
+            // Calculate score
+            score = 0;
+            for (let i = 0; i < questions.length; i++) {
+                if (userAnswers[i] === questions[i].correct) {
+                    score++;
+                }
             }
             
-            performanceMessageElement.textContent = performanceMessage;
-            resultsContainer.style.display = 'block';
+            // Display results
             quizContainer.style.display = 'none';
-            document.querySelector('.navigation').style.display = 'none';
-            document.querySelector('.progress-container').style.display = 'none';
-            document.querySelector('.quiz-info').style.display = 'none';
+            resultsContainer.style.display = 'block';
+            
+            scoreDisplay.textContent = `${score}/${questions.length}`;
+            totalQuestions.textContent = questions.length;
+            correctAnswers.textContent = score;
+            incorrectAnswers.textContent = questions.length - score;
+            percentage.textContent = `${((score / questions.length) * 100).toFixed(1)}%`;
+            
+            const minutesTaken = Math.floor((65 * 60 - timeLeft) / 60);
+            const secondsTaken = (65 * 60 - timeLeft) % 60;
+            timeTaken.textContent = `${minutesTaken.toString().padStart(2, '0')}:${secondsTaken.toString().padStart(2, '0')}`;
+            
+            // Set score text
+            if (score >= questions.length * 0.8) {
+                scoreText.textContent = "Excellent! You have a strong understanding of hemodynamic disorders.";
+            } else if (score >= questions.length * 0.6) {
+                scoreText.textContent = "Good job! You have a solid foundation in hemodynamic concepts.";
+            } else if (score >= questions.length * 0.5) {
+                scoreText.textContent = "You passed! Review the explanations to strengthen your knowledge.";
+            } else {
+                scoreText.textContent = "You need more study. Review the material and try again.";
+            }
+            
+            // Generate question review
+            generateQuestionReview();
+        }
+
+        // Generate question review
+        function generateQuestionReview() {
+            questionReview.innerHTML = '<h3>Question Review</h3>';
+            
+            questions.forEach((question, index) => {
+                const reviewItem = document.createElement('div');
+                reviewItem.className = 'review-item';
+                
+                const reviewQuestion = document.createElement('div');
+                reviewQuestion.className = 'review-question';
+                reviewQuestion.textContent = `${index + 1}. ${question.question}`;
+                
+                const userAnswer = document.createElement('div');
+                userAnswer.className = 'review-answer';
+                if (userAnswers[index] !== null) {
+                    userAnswer.innerHTML = `Your answer: <span class="user-answer">${question.options[userAnswers[index]]}</span>`;
+                } else {
+                    userAnswer.innerHTML = `Your answer: <span class="user-answer">Not answered</span>`;
+                }
+                
+                const correctAnswer = document.createElement('div');
+                correctAnswer.className = 'review-answer';
+                correctAnswer.innerHTML = `Correct answer: <span class="correct-answer">${question.options[question.correct]}</span>`;
+                
+                reviewItem.appendChild(reviewQuestion);
+                reviewItem.appendChild(userAnswer);
+                reviewItem.appendChild(correctAnswer);
+                
+                questionReview.appendChild(reviewItem);
+            });
         }
 
         // Restart quiz
         function restartQuiz() {
             currentQuestion = 0;
-            score = 0;
             userAnswers = new Array(questions.length).fill(null);
+            score = 0;
+            timeLeft = 65 * 60;
+            quizCompleted = false;
             
-            resultsContainer.style.display = 'none';
             quizContainer.style.display = 'block';
-            document.querySelector('.navigation').style.display = 'flex';
-            document.querySelector('.progress-container').style.display = 'block';
-            document.querySelector('.quiz-info').style.display = 'flex';
+            resultsContainer.style.display = 'none';
             
             initQuiz();
         }
 
         // Event listeners
-        prevButton.addEventListener('click', prevQuestion);
-        nextButton.addEventListener('click', nextQuestion);
-        restartButton.addEventListener('click', restartQuiz);
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        submitBtn.addEventListener('click', submitQuiz);
+        restartBtn.addEventListener('click', restartQuiz);
 
-        // Make functions available globally for onclick events
-        window.selectOption = selectOption;
-
-        // Initialize the quiz
+        // Start the quiz
         initQuiz();
     </script>
 </body>
-</html>
+                    </html>
