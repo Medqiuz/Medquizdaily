@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parasitology Mid-Exam</title>
+    <title>Healing, Repair & Regeneration Quiz</title>
     <style>
         :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --success: #27ae60;
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --success: #2ecc71;
+            --danger: #e74c3c;
             --warning: #f39c12;
+            --light: #ecf0f1;
+            --dark: #34495e;
         }
         
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
@@ -35,123 +35,191 @@
         }
         
         header {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
         
-        .header-content {
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .quiz-info {
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        
-        .exam-title {
-            text-align: center;
-            margin: 20px 0;
-            color: var(--primary);
-        }
-        
-        .exam-info {
             background-color: white;
-            border-radius: 8px;
             padding: 20px;
+            border-radius: 10px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
         
-        .instructions {
+        .progress-container {
             background-color: var(--light);
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
+            border-radius: 10px;
+            height: 15px;
+            margin: 20px 0;
+            overflow: hidden;
         }
         
-        .exam-form {
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .question-container {
             background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .question {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
         
         .question-number {
-            font-weight: bold;
-            margin-bottom: 10px;
             color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
         }
         
         .question-text {
-            margin-bottom: 15px;
-            font-weight: 500;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+            line-height: 1.5;
         }
         
-        .options {
-            margin-left: 20px;
+        .options-container {
+            display: grid;
+            gap: 12px;
         }
         
         .option {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: flex-start;
-        }
-        
-        .option input {
-            margin-right: 10px;
-            margin-top: 5px;
-        }
-        
-        .explanation {
             background-color: var(--light);
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 15px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background-color: #d6dbdf;
+            transform: translateY(-2px);
+        }
+        
+        .option.selected {
+            border-color: var(--primary);
+            background-color: #e1f0fa;
+        }
+        
+        .option.correct {
+            border-color: var(--success);
+            background-color: #d4efdf;
+        }
+        
+        .option.incorrect {
+            border-color: var(--danger);
+            background-color: #fadbd8;
+        }
+        
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background-color: #bdc3c7;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .selected .option-letter, .correct .option-letter, .incorrect .option-letter {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .explanation-container {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
             display: none;
+            border-left: 5px solid var(--primary);
         }
         
-        .correct {
-            color: var(--success);
+        .explanation-title {
             font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary);
+            font-size: 1.1rem;
         }
         
-        .incorrect {
-            color: var(--accent);
+        .memory-tip {
+            background-color: #fff9e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid var(--warning);
+        }
+        
+        .memory-tip-title {
             font-weight: bold;
+            color: var(--warning);
+            margin-bottom: 5px;
         }
         
-        .buttons {
+        .navigation {
             display: flex;
             justify-content: space-between;
             margin-top: 30px;
         }
         
         button {
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s ease;
+            font-size: 1rem;
         }
         
         .btn-primary {
-            background-color: var(--secondary);
+            background-color: var(--primary);
             color: white;
         }
         
         .btn-primary:hover {
             background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #1c2833;
+            transform: translateY(-2px);
         }
         
         .btn-success {
@@ -160,80 +228,126 @@
         }
         
         .btn-success:hover {
-            background-color: #219955;
+            background-color: #27ae60;
+            transform: translateY(-2px);
         }
         
-        .btn-warning {
-            background-color: var(--warning);
+        .btn-danger {
+            background-color: var(--danger);
             color: white;
         }
         
-        .btn-warning:hover {
-            background-color: #e67e22;
+        .btn-danger:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
         }
         
-        .user-info {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
         }
         
-        .user-info input {
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            flex: 1;
-        }
-        
-        .progress-bar {
-            height: 10px;
-            background-color: #eee;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-        
-        .progress {
-            height: 100%;
-            background-color: var(--secondary);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-        
-        .results {
-            display: none;
+        .results-container {
             background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .score {
+            border-radius: 10px;
+            padding: 40px;
             text-align: center;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            display: none;
         }
         
-        .retake-btn {
-            display: block;
-            margin: 20px auto;
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            background: conic-gradient(var(--success) 0% 0%, var(--light) 0% 100%);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         
-        .timer {
-            text-align: center;
-            font-size: 1.2rem;
-            margin-bottom: 20px;
+        .performance-summary {
+            margin-top: 30px;
+            text-align: left;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .stat-label {
+            font-weight: 600;
+        }
+        
+        .stat-value {
             font-weight: bold;
         }
         
+        .review-container {
+            display: none;
+            margin-top: 30px;
+        }
+        
+        .review-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .review-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .review-answer {
+            margin-top: 5px;
+            padding: 8px 0;
+        }
+        
+        .correct-answer {
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        .user-answer.correct {
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        .user-answer.incorrect {
+            color: var(--danger);
+            font-weight: 600;
+        }
+        
+        .section-title {
+            margin: 30px 0 15px;
+            color: var(--secondary);
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 10px;
+        }
+        
         @media (max-width: 768px) {
-            .header-content {
+            .quiz-info {
                 flex-direction: column;
-                text-align: center;
+                gap: 15px;
             }
             
-            .buttons {
+            .navigation {
                 flex-direction: column;
                 gap: 10px;
             }
@@ -241,1109 +355,2315 @@
             button {
                 width: 100%;
             }
+            
+            .question-text {
+                font-size: 1.1rem;
+            }
+            
+            .score-circle {
+                width: 150px;
+                height: 150px;
+                font-size: 2.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="https://t.me/yerotechno"><h1 style="color:pink;">MedQuiz</h1></a>
-                <div class="logo">Parasitology Exam</div>
-                <div>Mid-Examination</div>
-            </div>
-        </div>
-    </header>
-    
     <div class="container">
-        <h1 class="exam-title">Parasitology Mid-Term Examination</h1>
+        <header>
+            <h1>Healing, Repair & Regeneration</h1>
+            <p class="subtitle">Comprehensive Quiz for Medical Students</p>
+        </header>
         
-        <div class="exam-info">
-            <div class="instructions">
-                <h3>Instructions:</h3>
-                <ul>
-                    <li>This exam consists of 55 multiple-choice questions.</li>
-                    <li>Select the best answer for each question.</li>
-                    <li>You can only submit your answers once.</li>
-                    <li>After submission, you will see your score and can review the correct answers with explanations.</li>
-                    <li>The exam has a time limit of 90 minutes.</li>
-                </ul>
-            </div>
-            
-            <div class="user-info">
-                <input type="text" id="student-name" placeholder="Enter your name" required>
-                <input type="email" id="student-email" placeholder="Enter your email" required>
-            </div>
-            
-            <div class="timer" id="timer">Time Remaining: 90:00</div>
-            
-            <div class="progress-bar">
-                <div class="progress" id="progress"></div>
+        <div class="quiz-info">
+            <div>Questions: <span id="current-question">1</span>/<span id="total-questions">45</span></div>
+            <div>Score: <span id="current-score">0</span>/45</div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        
+        <div id="quiz-container">
+            <div class="question-container">
+                <div class="question-number">Question <span id="q-number">1</span></div>
+                <div class="question-text" id="question-text"></div>
+                
+                <div class="options-container" id="options-container">
+                    <!-- Options will be inserted here by JavaScript -->
+                </div>
+                
+                <div class="explanation-container" id="explanation-container">
+                    <div class="explanation-title">Explanation:</div>
+                    <div id="explanation-text"></div>
+                    <div class="memory-tip">
+                        <div class="memory-tip-title">Memory Tip:</div>
+                        <div id="memory-tip"></div>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <button id="prev-btn" class="btn-secondary">Previous Question</button>
+                    <button id="next-btn" class="btn-primary">Next Question</button>
+                    <button id="submit-btn" class="btn-success" style="display: none;">Submit Quiz</button>
+                </div>
             </div>
         </div>
         
-        <form id="exam-form" class="exam-form">
-            <!-- Questions will be inserted here by JavaScript -->
-        </form>
-        
-        <div class="buttons">
-            <button type="button" id="prev-btn" class="btn-primary">Previous</button>
-            <button type="button" id="next-btn" class="btn-primary">Next</button>
-            <button type="button" id="submit-btn" class="btn-success">Submit Exam</button>
+        <div class="results-container" id="results-container">
+            <h2>Quiz Results</h2>
+            <div class="score-circle" id="score-circle">
+                <span id="score-percentage">0%</span>
+            </div>
+            <h3>Your Score: <span id="score-text">0</span>/<span id="total-score">45</span></h3>
+            
+            <div class="performance-summary">
+                <h4 class="section-title">Performance Summary</h4>
+                <div class="stat-row">
+                    <span class="stat-label">Correct Answers:</span>
+                    <span class="stat-value" id="correct-count">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Incorrect Answers:</span>
+                    <span class="stat-value" id="incorrect-count">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Unanswered Questions:</span>
+                    <span class="stat-value" id="unanswered-count">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Accuracy:</span>
+                    <span class="stat-value" id="accuracy">0%</span>
+                </div>
+            </div>
+            
+            <div class="navigation" style="margin-top: 30px;">
+                <button id="review-btn" class="btn-secondary">Review Questions</button>
+                <button id="restart-btn" class="btn-primary">Restart Quiz</button>
+            </div>
         </div>
         
-        <div id="results" class="results">
-            <h2 class="score">Your Score: <span id="score-value">0</span>/55</h2>
-            <div id="results-content">
-                <!-- Results will be inserted here by JavaScript -->
+        <div class="review-container" id="review-container">
+            <h2>Question Review</h2>
+            <div id="review-questions">
+                <!-- Review items will be inserted here by JavaScript -->
             </div>
-            <button type="button" id="retake-btn" class="btn-warning retake-btn">Retake Exam (Practice Mode)</button>
+            <div class="navigation">
+                <button id="back-to-results" class="btn-primary">Back to Results</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // Questions array - 55 questions covering all topics from the provided materials
+        // Quiz questions array
         const questions = [
             {
-                question: "What is the definitive host for Taenia saginata?",
+                id: 1,
+                question: "What is the primary definition of healing in a pathological context?",
                 options: [
-                    "A. Human",
-                    "B. Cow",
-                    "C. Pig",
-                    "D. Dog"
-                ],
-                correctAnswer: 0,
-                explanation: "Humans are the definitive host for Taenia saginata, as the adult worm resides in the human intestine."
-            },
-            {
-                question: "Which parasite causes 'swimmer's itch'?",
-                options: [
-                    "A. Ascaris lumbricoides",
-                    "B. Schistosoma species",
-                    "C. Enterobius vermicularis",
-                    "D. Trichuris trichiura"
+                    "The process of inflammation following tissue injury",
+                    "The body's process of replacing destroyed tissue with new, viable tissue",
+                    "The formation of scar tissue to close a wound",
+                    "The regeneration of specialized cells after damage"
                 ],
                 correctAnswer: 1,
-                explanation: "Schistosoma species cause cercarial dermatitis, also known as swimmer's itch, when their cercariae penetrate human skin."
+                explanation: "Healing refers to the body's process of replacing destroyed tissue with new, viable tissue, restoring normal structure and function after injury.",
+                memoryTip: "Healing = tissue replacement to restore structure and function"
             },
             {
-                question: "What is the infective stage of Strongyloides stercoralis?",
+                id: 2,
+                question: "Which of the following represents the two distinct processes of healing?",
                 options: [
-                    "A. Egg",
-                    "B. Rhabditiform larva",
-                    "C. Filariform larva",
-                    "D. Adult worm"
+                    "Inflammation and proliferation",
+                    "Regeneration and repair",
+                    "Hemostasis and remodeling",
+                    "Granulation and contraction"
+                ],
+                correctAnswer: 1,
+                explanation: "Healing occurs through two distinct processes: regeneration (replacement with similar tissue) and repair (replacement with scar tissue).",
+                memoryTip: "Two healing modes: Regeneration (same tissue) and Repair (scar tissue)"
+            },
+            {
+                id: 3,
+                question: "What determines whether healing occurs through regeneration or repair?",
+                options: [
+                    "The patient's age and nutritional status",
+                    "The type of injury and presence of infection",
+                    "The cell type involved, injury severity, and stromal framework integrity",
+                    "The location of the injury and blood supply"
                 ],
                 correctAnswer: 2,
-                explanation: "The filariform larva is the infective stage of Strongyloides stercoralis, which penetrates the skin."
+                explanation: "The balance between regeneration and repair is influenced by cell type, injury severity, and stromal framework integrity.",
+                memoryTip: "Regeneration vs. Repair depends on: Cell type + Injury severity + Stromal framework"
             },
             {
-                question: "Which diagnostic method is used for Enterobius vermicularis?",
+                id: 4,
+                question: "Which type of cells have continuous turnover by programmed division of stem cells?",
                 options: [
-                    "A. Stool microscopy",
-                    "B. Blood film",
-                    "C. Scotch tape test",
-                    "D. Urine microscopy"
+                    "Permanent cells",
+                    "Stable cells",
+                    "Labile cells",
+                    "Fibroblasts"
                 ],
                 correctAnswer: 2,
-                explanation: "The Scotch tape test is used to detect Enterobius vermicularis eggs from the perianal region."
+                explanation: "Labile cells have continuous turnover by programmed division of stem cells and are found in surface epithelia of the GI tract, urinary tract, skin, and hematopoietic systems.",
+                memoryTip: "Labile cells = continuous division (skin, GI tract, bone marrow)"
             },
             {
-                question: "What complication can occur if a hydatid cyst ruptures during surgery?",
+                id: 5,
+                question: "Which of the following are examples of permanent cells?",
                 options: [
-                    "A. Portal hypertension",
-                    "B. Anaphylactic shock",
-                    "C. Secondary bacterial infection",
-                    "D. Hydatid sand release"
-                ],
-                correctAnswer: 1,
-                explanation: "Rupture of a hydatid cyst can release antigens that may cause anaphylactic shock."
-            },
-            {
-                question: "Which drug is the first-line treatment for neurocysticercosis?",
-                options: [
-                    "A. Praziquantel alone",
-                    "B. Niclosamide",
-                    "C. Albendazole + corticosteroids",
-                    "D. Mebendazole"
+                    "Hepatocytes and renal tubular cells",
+                    "Skin epithelial cells and GI tract lining",
+                    "Adult neurons and striated muscle cells",
+                    "Fibroblasts and endothelial cells"
                 ],
                 correctAnswer: 2,
-                explanation: "Albendazole combined with corticosteroids is the recommended treatment for neurocysticercosis to reduce inflammation."
+                explanation: "Permanent cells are non-dividing cells that cannot be replaced if lost, including adult neurons, striated muscle cells, and lens cells.",
+                memoryTip: "Permanent cells = neurons, cardiac muscle, skeletal muscle - cannot regenerate"
             },
             {
-                question: "What is the characteristic feature of Trichuris trichiura eggs?",
+                id: 6,
+                question: "What is a key requirement for regeneration to occur?",
                 options: [
-                    "A. Barrel-shaped with bipolar plugs",
-                    "B. Oval with thin shell",
-                    "C. Triangular lateral spine",
-                    "D. Terminal spine"
-                ],
-                correctAnswer: 0,
-                explanation: "Trichuris trichiura eggs are barrel-shaped with bipolar plugs, which is a distinctive characteristic."
-            },
-            {
-                question: "Which parasite is known for its autoinfection cycle?",
-                options: [
-                    "A. Ascaris lumbricoides",
-                    "B. Strongyloides stercoralis",
-                    "C. Trichuris trichiura",
-                    "D. Enterobius vermicularis"
-                ],
-                correctAnswer: 1,
-                explanation: "Strongyloides stercoralis has an autoinfection cycle where larvae can reinfect the same host without leaving the body."
-            },
-            {
-                question: "What is the intermediate host for Schistosoma mansoni?",
-                options: [
-                    "A. Bulinus spp. snail",
-                    "B. Biomphalaria spp. snail",
-                    "C. Oncomelania spp. snail",
-                    "D. Freshwater fish"
-                ],
-                correctAnswer: 1,
-                explanation: "Biomphalaria spp. snails are the intermediate hosts for Schistosoma mansoni."
-            },
-            {
-                question: "Which of the following is a blood fluke?",
-                options: [
-                    "A. Taenia saginata",
-                    "B. Schistosoma haematobium",
-                    "C. Hymenolepis nana",
-                    "D. Echinococcus granulosus"
-                ],
-                correctAnswer: 1,
-                explanation: "Schistosoma haematobium is a blood fluke that resides in the venous plexus of the urinary bladder."
-            },
-            {
-                question: "What is the primary mode of transmission for hookworms?",
-                options: [
-                    "A. Ingestion of eggs",
-                    "B. Mosquito bite",
-                    "C. Skin penetration",
-                    "D. Sexual contact"
+                    "Complete destruction of the stromal framework",
+                    "Presence of significant inflammation",
+                    "Mitotic ability of residual cells",
+                    "Formation of granulation tissue"
                 ],
                 correctAnswer: 2,
-                explanation: "Hookworm infection occurs when filariform larvae penetrate the skin, usually of the feet."
+                explanation: "Regeneration requires that residual cells retain the ability to divide and proliferate, among other factors like preserved stromal integrity.",
+                memoryTip: "Regeneration needs: 1. Mitotic ability 2. Intact stromal framework 3. Injury removal"
             },
             {
-                question: "Which parasite is associated with Loeffler's syndrome?",
+                id: 7,
+                question: "During regeneration, what do basal keratinocytes do to restore epithelial continuity?",
                 options: [
-                    "A. Trichuris trichiura",
-                    "B. Enterobius vermicularis",
-                    "C. Ascaris lumbricoides",
-                    "D. Strongyloides stercoralis"
+                    "Differentiate into fibroblasts",
+                    "Flatten and slide forward while proliferating",
+                    "Secrete collagen to form a matrix",
+                    "Transform into myofibroblasts"
+                ],
+                correctAnswer: 1,
+                explanation: "Basal keratinocytes flatten and slide forward while proliferating to restore epithelial continuity during regeneration.",
+                memoryTip: "Keratinocytes flatten → slide → proliferate → restore epithelium"
+            },
+            {
+                id: 8,
+                question: "What characterizes the inflammatory phase of repair by scarring?",
+                options: [
+                    "Fibroblast proliferation and collagen deposition",
+                    "Vasodilatation, neutrophil infiltration, and plasma protein delivery",
+                    "Wound contraction and scar maturation",
+                    "Angiogenesis and granulation tissue formation"
+                ],
+                correctAnswer: 1,
+                explanation: "The inflammatory phase of repair begins with acute inflammation characterized by vasodilatation, neutrophil infiltration, and plasma protein delivery.",
+                memoryTip: "Inflammatory phase = vasodilation + neutrophils + plasma proteins"
+            },
+            {
+                id: 9,
+                question: "What is the primary role of macrophages during the demolition phase of repair?",
+                options: [
+                    "Produce collagen for matrix formation",
+                    "Stimulate angiogenesis",
+                    "Debride dead cells and release cytokines",
+                    "Contract the wound edges"
                 ],
                 correctAnswer: 2,
-                explanation: "Ascaris lumbricoides larval migration through the lungs can cause Loeffler's syndrome, characterized by respiratory symptoms and eosinophilia."
+                explanation: "Macrophages arrive to debride dead cells and release cytokines that recruit fibroblasts and endothelial cells during the demolition phase.",
+                memoryTip: "Macrophages = debris cleanup + cytokine release"
             },
             {
-                question: "What is the drug of choice for treating schistosomiasis?",
+                id: 10,
+                question: "When does angiogenesis typically begin after injury?",
                 options: [
-                    "A. Mebendazole",
-                    "B. Praziquantel",
-                    "C. Albendazole",
-                    "D. Ivermectin"
+                    "Within the first 6 hours",
+                    "48 to 72 hours after injury",
+                    "1 week after injury",
+                    "During the remodeling phase"
                 ],
                 correctAnswer: 1,
-                explanation: "Praziquantel is the drug of choice for treating all species of Schistosoma."
+                explanation: "Vascular proliferation (angiogenesis) starts 48 to 72 hours after injury and lasts for several days.",
+                memoryTip: "Angiogenesis begins 2-3 days post-injury"
             },
             {
-                question: "Which cestode has eggs that are immediately infective when passed in feces?",
+                id: 11,
+                question: "What type of collagen is initially deposited in granulation tissue?",
                 options: [
-                    "A. Taenia saginata",
-                    "B. Taenia solium",
-                    "C. Hymenolepis nana",
-                    "D. Echinococcus granulosus"
+                    "Type I collagen",
+                    "Type II collagen",
+                    "Type III collagen",
+                    "Type IV collagen"
                 ],
                 correctAnswer: 2,
-                explanation: "Hymenolepis nana eggs are immediately infective when passed in feces and can cause autoinfection."
+                explanation: "Bright-red, moist granulation tissue is rich in type III collagen, fibronectin, and proteoglycans.",
+                memoryTip: "Early granulation tissue = Type III collagen → later replaced by Type I"
             },
             {
-                question: "What is the definitive host for Echinococcus granulosus?",
+                id: 12,
+                question: "What happens during collagen remodeling in wound healing?",
                 options: [
-                    "A. Human",
-                    "B. Sheep",
-                    "C. Dog",
-                    "D. Cow"
+                    "Type I collagen is replaced by type III collagen",
+                    "Collagen content decreases as healing progresses",
+                    "Type III collagen is cross-linked and replaced by type I collagen",
+                    "Collagen fibers randomly arrange without organization"
                 ],
                 correctAnswer: 2,
-                explanation: "Dogs and other canines are the definitive hosts for Echinococcus granulosus, harboring the adult worm."
+                explanation: "Over weeks, type III collagen is cross-linked and gradually replaced by stronger type I collagen during collagen remodeling.",
+                memoryTip: "Collagen remodeling: Type III → Type I (stronger)"
             },
             {
-                question: "Which nematode is transmitted by the fecal-oral route?",
+                id: 13,
+                question: "What cells are responsible for wound contraction?",
                 options: [
-                    "A. Hookworm",
-                    "B. Strongyloides stercoralis",
-                    "C. Ascaris lumbricoides",
-                    "D. Wuchereria bancrofti"
-                ],
-                correctAnswer: 2,
-                explanation: "Ascaris lumbricoides is transmitted via the fecal-oral route through ingestion of embryonated eggs."
-            },
-            {
-                question: "What is the infective stage of Taenia saginata for humans?",
-                options: [
-                    "A. Egg",
-                    "B. Cysticercus bovis",
-                    "C. Oncosphere",
-                    "D. Proglottid"
+                    "Fibroblasts",
+                    "Myofibroblasts",
+                    "Keratinocytes",
+                    "Macrophages"
                 ],
                 correctAnswer: 1,
-                explanation: "Cysticercus bovis, the larval stage in cattle muscle, is the infective stage for humans who consume undercooked beef."
+                explanation: "Contraction is due to myofibroblasts, which have features intermediate between fibroblasts and smooth muscle cells.",
+                memoryTip: "Myofibroblasts = wound contraction"
             },
             {
-                question: "Which parasite causes Katayama fever?",
+                id: 14,
+                question: "How much can wound contraction reduce the size of a defect?",
                 options: [
-                    "A. Plasmodium falciparum",
-                    "B. Schistosoma species",
-                    "C. Trypanosoma cruzi",
-                    "D. Leishmania donovani"
-                ],
-                correctAnswer: 1,
-                explanation: "Katayama fever is an acute form of schistosomiasis that occurs weeks after initial infection with Schistosoma species."
-            },
-            {
-                question: "What is the most common site for hydatid cysts in humans?",
-                options: [
-                    "A. Brain",
-                    "B. Lungs",
-                    "C. Liver",
-                    "D. Kidney"
-                ],
-                correctAnswer: 2,
-                explanation: "The liver is the most common site (about 70% of cases) for hydatid cysts caused by Echinococcus granulosus."
-            },
-            {
-                question: "Which diagnostic stage is characteristic of Schistosoma haematobium?",
-                options: [
-                    "A. Eggs with lateral spine",
-                    "B. Eggs with terminal spine",
-                    "C. Rhabditiform larvae",
-                    "D. Cysticerci"
-                ],
-                correctAnswer: 1,
-                explanation: "Schistosoma haematobium eggs have a characteristic terminal spine and are found in urine."
-            },
-            {
-                question: "What is the treatment of choice for strongyloidiasis?",
-                options: [
-                    "A. Praziquantel",
-                    "B. Ivermectin",
-                    "C. Albendazole",
-                    "D. Mebendazole"
-                ],
-                correctAnswer: 1,
-                explanation: "Ivermectin is the drug of choice for treating Strongyloides stercoralis infections."
-            },
-            {
-                question: "Which parasite is known as the 'whipworm'?",
-                options: [
-                    "A. Trichuris trichiura",
-                    "B. Enterobius vermicularis",
-                    "C. Ascaris lumbricoides",
-                    "D. Strongyloides stercoralis"
-                ],
-                correctAnswer: 0,
-                explanation: "Trichuris trichiura is commonly known as the whipworm due to its whip-like shape."
-            },
-            {
-                question: "What is the primary pathological mechanism in schistosomiasis?",
-                options: [
-                    "A. Adult worms blocking blood vessels",
-                    "B. Larval migration through tissues",
-                    "C. Granuloma formation around eggs",
-                    "D. Toxin production by adult worms"
-                ],
-                correctAnswer: 2,
-                explanation: "The primary pathology in schistosomiasis is granuloma formation around eggs trapped in tissues, leading to fibrosis and organ damage."
-            },
-            {
-                question: "Which of the following is a filarial nematode?",
-                options: [
-                    "A. Trichinella spiralis",
-                    "B. Wuchereria bancrofti",
-                    "C. Strongyloides stercoralis",
-                    "D. Necator americanus"
-                ],
-                correctAnswer: 1,
-                explanation: "Wuchereria bancrofti is a filarial nematode that causes lymphatic filariasis."
-            },
-            {
-                question: "What is the infective stage of Plasmodium species to humans?",
-                options: [
-                    "A. Sporozoite",
-                    "B. Merozoite",
-                    "C. Trophozoite",
-                    "D. Gametocyte"
-                ],
-                correctAnswer: 0,
-                explanation: "Sporozoites are the infective stage of Plasmodium species, injected into humans during a mosquito bite."
-            },
-            {
-                question: "Which parasite causes Chagas disease?",
-                options: [
-                    "A. Trypanosoma brucei",
-                    "B. Trypanosoma cruzi",
-                    "C. Leishmania donovani",
-                    "D. Plasmodium vivax"
-                ],
-                correctAnswer: 1,
-                explanation: "Trypanosoma cruzi causes Chagas disease, which is transmitted by reduviid bugs."
-            },
-            {
-                question: "What is the definitive host for Toxoplasma gondii?",
-                options: [
-                    "A. Human",
-                    "B. Cat",
-                    "C. Dog",
-                    "D. Rodent"
-                ],
-                correctAnswer: 1,
-                explanation: "Cats are the definitive host for Toxoplasma gondii, where sexual reproduction occurs."
-            },
-            {
-                question: "Which diagnostic method is used for African sleeping sickness?",
-                options: [
-                    "A. Blood smear",
-                    "B. Lymph node aspirate",
-                    "C. CSF examination",
-                    "D. All of the above"
+                    "10-20% of its original size",
+                    "30-40% of its original size",
+                    "50-60% of its original size",
+                    "70-80% of its original size"
                 ],
                 correctAnswer: 3,
-                explanation: "Diagnosis of African sleeping sickness (Trypanosoma brucei) involves blood smears, lymph node aspirates, and CSF examination in later stages."
+                explanation: "Wound contraction can reduce the wound by approximately 70-80% of its original size, resulting in faster healing.",
+                memoryTip: "Wound contraction reduces defect by 70-80%"
             },
             {
-                question: "What is the vector for Leishmania species?",
+                id: 15,
+                question: "Which type of healing occurs in clean surgical incisions with approximated edges?",
                 options: [
-                    "A. Mosquito",
-                    "B. Tsetse fly",
-                    "C. Sandfly",
-                    "D. Reduviid bug"
+                    "Healing by second intention",
+                    "Healing by primary union",
+                    "Healing by tertiary intention",
+                    "Healing by regeneration only"
+                ],
+                correctAnswer: 1,
+                explanation: "Healing by first intention (primary union) occurs in clean surgical incisions with approximated edges.",
+                memoryTip: "Primary intention = clean surgical wounds with approximated edges"
+            },
+            {
+                id: 16,
+                question: "What is a key difference between primary and secondary intention healing?",
+                options: [
+                    "Primary intention involves more granulation tissue",
+                    "Secondary intention has minimal inflammation",
+                    "Primary intention results in a narrower scar",
+                    "Secondary intention involves no wound contraction"
                 ],
                 correctAnswer: 2,
-                explanation: "Sandflies are the vectors for Leishmania species, transmitting the promastigote stage during blood meals."
+                explanation: "Healing by primary intention results in a narrow scar with little cosmetic or functional impairment, unlike secondary intention.",
+                memoryTip: "Primary intention = narrow scar; Secondary intention = wider scar"
             },
             {
-                question: "Which protozoan causes amoebic dysentery?",
+                id: 17,
+                question: "Which growth factor is primarily responsible for driving angiogenesis?",
                 options: [
-                    "A. Giardia lamblia",
-                    "B. Entamoeba histolytica",
-                    "C. Cryptosporidium parvum",
-                    "D. Balantidium coli"
-                ],
-                correctAnswer: 1,
-                explanation: "Entamoeba histolytica causes amoebic dysentery, characterized by bloody diarrhea and flask-shaped ulcers in the colon."
-            },
-            {
-                question: "What is the treatment for giardiasis?",
-                options: [
-                    "A. Metronidazole",
-                    "B. Chloroquine",
-                    "C. Praziquantel",
-                    "D. Ivermectin"
-                ],
-                correctAnswer: 0,
-                explanation: "Metronidazole is the drug of choice for treating Giardia lamblia infections."
-            },
-            {
-                question: "Which parasite is associated with 'river blindness'?",
-                options: [
-                    "A. Onchocerca volvulus",
-                    "B. Loa loa",
-                    "C. Wuchereria bancrofti",
-                    "D. Brugia malayi"
-                ],
-                correctAnswer: 0,
-                explanation: "Onchocerca volvulus causes onchocerciasis or 'river blindness', transmitted by black flies."
-            },
-            {
-                question: "What is the characteristic lesion in cutaneous leishmaniasis?",
-                options: [
-                    "A. Chancre",
-                    "B. Ulcer with raised border",
-                    "C. Verrucous plaque",
-                    "D. All of the above"
-                ],
-                correctAnswer: 3,
-                explanation: "Cutaneous leishmaniasis can present as a chancre, ulcer with raised border, or verrucous plaque depending on the species and host immune response."
-            },
-            {
-                question: "Which diagnostic stage is found in the stool of patients with hookworm infection?",
-                options: [
-                    "A. Eggs",
-                    "B. Rhabditiform larvae",
-                    "C. Filariform larvae",
-                    "D. Adult worms"
-                ],
-                correctAnswer: 0,
-                explanation: "Hookworm eggs are found in the stool of infected individuals and are used for diagnosis."
-            },
-            {
-                question: "What is the primary mode of transmission for Trichomonas vaginalis?",
-                options: [
-                    "A. Fecal-oral",
-                    "B. Sexual contact",
-                    "C. Blood transfusion",
-                    "D. Insect bite"
-                ],
-                correctAnswer: 1,
-                explanation: "Trichomonas vaginalis is primarily transmitted through sexual contact."
-            },
-            {
-                question: "Which parasite causes 'beef tapeworm' infection?",
-                options: [
-                    "A. Taenia solium",
-                    "B. Taenia saginata",
-                    "C. Hymenolepis nana",
-                    "D. Diphyllobothrium latum"
-                ],
-                correctAnswer: 1,
-                explanation: "Taenia saginata is known as the beef tapeworm as humans acquire infection by eating undercooked beef containing cysticerci."
-            },
-            {
-                question: "What is the infective stage of Leishmania species?",
-                options: [
-                    "A. Amastigote",
-                    "B. Promastigote",
-                    "C. Epimastigote",
-                    "D. Trypomastigote"
-                ],
-                correctAnswer: 1,
-                explanation: "The promastigote stage of Leishmania is the infective form, injected into humans during sandfly blood meals."
-            },
-            {
-                question: "Which parasite is associated with 'ground itch'?",
-                options: [
-                    "A. Strongyloides stercoralis",
-                    "B. Hookworm",
-                    "C. Schistosoma species",
-                    "D. Enterobius vermicularis"
-                ],
-                correctAnswer: 1,
-                explanation: "Hookworm infection causes 'ground itch' at the site of larval penetration, usually on the feet."
-            },
-            {
-                question: "What is the treatment for lymphatic filariasis?",
-                options: [
-                    "A. Diethylcarbamazine",
-                    "B. Ivermectin",
-                    "C. Albendazole",
-                    "D. All of the above"
-                ],
-                correctAnswer: 3,
-                explanation: "Lymphatic filariasis is treated with diethylcarbamazine, ivermectin, or albendazole, often in combination."
-            },
-            {
-                question: "Which parasite causes 'sleeping sickness'?",
-                options: [
-                    "A. Trypanosoma cruzi",
-                    "B. Trypanosoma brucei",
-                    "C. Plasmodium falciparum",
-                    "D. Toxoplasma gondii"
-                ],
-                correctAnswer: 1,
-                explanation: "Trypanosoma brucei causes African sleeping sickness, transmitted by tsetse flies."
-            },
-            {
-                question: "What is the diagnostic stage for malaria?",
-                options: [
-                    "A. Sporozoites",
-                    "B. Merozoites",
-                    "C. Trophozoites",
-                    "D. Gametocytes"
+                    "PDGF (Platelet-Derived Growth Factor)",
+                    "TGF-β (Transforming Growth Factor-Beta)",
+                    "VEGF (Vascular Endothelial Growth Factor)",
+                    "EGF (Epidermal Growth Factor)"
                 ],
                 correctAnswer: 2,
-                explanation: "Trophozoites (ring forms) are the diagnostic stage for malaria, visible in blood smears."
+                explanation: "VEGF drives angiogenesis, which is essential for new blood vessel formation during healing.",
+                memoryTip: "VEGF = Vascular Endothelial Growth Factor = angiogenesis"
             },
             {
-                question: "Which parasite is associated with 'red urine'?",
+                id: 18,
+                question: "What is the role of TGF-β in the later stages of healing?",
                 options: [
-                    "A. Schistosoma mansoni",
-                    "B. Schistosoma haematobium",
-                    "C. Schistosoma japonicum",
-                    "D. Fasciola hepatica"
+                    "Stimulates further fibroblast proliferation",
+                    "Promotes epithelial migration",
+                    "Switches to an inhibitory role for epithelial and endothelial cells",
+                    "Enhances collagen degradation"
+                ],
+                correctAnswer: 2,
+                explanation: "When tissue integrity is restored, TGF-β switches to an inhibitory role for epithelial and endothelial cells, helping to stop the healing process.",
+                memoryTip: "TGF-β = dual role: stimulates early, inhibits late"
+            },
+            {
+                id: 19,
+                question: "Which local factor significantly delays wound healing by prolonging inflammation and releasing collagenases?",
+                options: [
+                    "Adequate vascular supply",
+                    "Infection",
+                    "Immobilization of the wound",
+                    "Clean wound edges"
                 ],
                 correctAnswer: 1,
-                explanation: "Schistosoma haematobium causes urinary schistosomiasis, which can present with hematuria ('red urine')."
+                explanation: "Bacterial contamination prolongs inflammation, diverts energy to immune defense, and releases collagenases that degrade matrix.",
+                memoryTip: "Infection = prolonged inflammation + collagenase release"
             },
             {
-                question: "What is the vector for dengue virus?",
+                id: 20,
+                question: "How does impaired vascular supply affect wound healing?",
                 options: [
-                    "A. Anopheles mosquito",
-                    "B. Aedes mosquito",
-                    "C. Culex mosquito",
-                    "D. Sandfly"
+                    "Accelerates collagen synthesis",
+                    "Has no significant effect on healing",
+                    "Leads to slow healing and weak scars",
+                    "Promotes excessive granulation tissue formation"
+                ],
+                correctAnswer: 2,
+                explanation: "Wounds with impaired blood supply heal slowly, and ischemia can produce pressure sores and prevent proper healing.",
+                memoryTip: "Poor blood supply = slow healing + weak scars"
+            },
+            {
+                id: 21,
+                question: "Which vitamin deficiency specifically impairs collagen synthesis by affecting proline and lysine hydroxylation?",
+                options: [
+                    "Vitamin A deficiency",
+                    "Vitamin B12 deficiency",
+                    "Vitamin C deficiency",
+                    "Vitamin D deficiency"
+                ],
+                correctAnswer: 2,
+                explanation: "Vitamin C is required for hydroxylation of proline and lysine in collagen synthesis; deficiency results in impaired wound healing.",
+                memoryTip: "Vitamin C needed for collagen hydroxylation → scurvy = poor healing"
+            },
+            {
+                id: 22,
+                question: "How do corticosteroids affect wound healing?",
+                options: [
+                    "Accelerate collagen synthesis and epithelialization",
+                    "Have no significant effect on healing processes",
+                    "Impair healing by inhibiting collagen synthesis and fibroplasia",
+                    "Promote angiogenesis and granulation tissue formation"
+                ],
+                correctAnswer: 2,
+                explanation: "Corticosteroids impair wound healing by inhibiting collagen synthesis, fibroplasia, neovascularization, epithelialization, and contraction.",
+                memoryTip: "Corticosteroids = impaired healing (anti-inflammatory + anti-fibroplastic)"
+            },
+            {
+                id: 23,
+                question: "What is wound dehiscence?",
+                options: [
+                    "Excessive scar formation beyond wound margins",
+                    "Formation of an epidermoid cyst in a healing wound",
+                    "Bursting open of a wound due to weak scar formation",
+                    "Exaggerated wound contraction causing deformity"
+                ],
+                correctAnswer: 2,
+                explanation: "Dehiscence occurs when insufficient extracellular matrix is deposited or there is inadequate cross-linking, resulting in weak scars that can burst open.",
+                memoryTip: "Dehiscence = wound bursting open"
+            },
+            {
+                id: 24,
+                question: "What distinguishes a keloid from a hypertrophic scar?",
+                options: [
+                    "Keloids remain confined to wound borders",
+                    "Hypertrophic scars extend beyond original margins",
+                    "Keloids extend beyond original margins and invade adjacent dermis",
+                    "Hypertrophic scars recur after excision"
+                ],
+                correctAnswer: 2,
+                explanation: "Keloids are characterized by excessive collagenous tissue that extends beyond original margins, invades adjacent dermis, and recurs after excision.",
+                memoryTip: "Keloid = grows beyond borders; Hypertrophic scar = stays within borders"
+            },
+            {
+                id: 25,
+                question: "What causes contractures in wound healing?",
+                options: [
+                    "Excessive collagen deposition without organization",
+                    "Inadequate granulation tissue formation",
+                    "Exaggeration of wound contraction processes",
+                    "Infection and persistent inflammation"
+                ],
+                correctAnswer: 2,
+                explanation: "Contractures result from an exaggeration of wound contraction processes, causing severe deformity of the wound and surrounding tissues.",
+                memoryTip: "Contracture = excessive contraction → deformity"
+            },
+            {
+                id: 26,
+                question: "Which condition is characterized by palmar contracture?",
+                options: [
+                    "Peyronie disease",
+                    "Dupuytren disease",
+                    "Lederhosen disease",
+                    "Keloid disorder"
                 ],
                 correctAnswer: 1,
-                explanation: "Aedes mosquitoes, primarily Aedes aegypti, are the vectors for dengue virus."
+                explanation: "Dupuytren disease is characterized by palmar contracture, while Peyronie disease affects the penis and Lederhosen disease affects the plantar fascia.",
+                memoryTip: "Dupuytren = palmar contracture"
             },
             {
-                question: "Which parasite causes 'elephantiasis'?",
+                id: 27,
+                question: "What is 'proud flesh' in the context of wound healing?",
                 options: [
-                    "A. Wuchereria bancrofti",
-                    "B. Onchocerca volvulus",
-                    "C. Loa loa",
-                    "D. Dracunculus medinensis"
+                    "Excessive collagen deposition in a scar",
+                    "Epithelial cells that form a cyst in the wound",
+                    "Exuberant granulation tissue that protrudes from the wound",
+                    "Necrotic tissue that impedes healing"
                 ],
-                correctAnswer: 0,
-                explanation: "Wuchereria bancrofti causes lymphatic filariasis, which can lead to elephantiasis (massive swelling of limbs)."
+                correctAnswer: 2,
+                explanation: "'Proud flesh' refers to exuberant granulation tissue that protrudes above the wound surface, impeding re-epithelialization.",
+                memoryTip: "Proud flesh = excessive granulation tissue"
             },
             {
-                question: "What is the treatment for enterobiasis (pinworm infection)?",
+                id: 28,
+                question: "What are the two histological types of bone?",
                 options: [
-                    "A. Mebendazole",
-                    "B. Albendazole",
-                    "C. Pyrantel pamoate",
-                    "D. All of the above"
-                ],
-                correctAnswer: 3,
-                explanation: "Enterobius vermicularis (pinworm) infection is treated with mebendazole, albendazole, or pyrantel pamoate."
-            },
-            {
-                question: "Which parasite is transmitted by consuming undercooked pork?",
-                options: [
-                    "A. Taenia saginata",
-                    "B. Taenia solium",
-                    "C. Trichinella spiralis",
-                    "D. Both B and C"
-                ],
-                correctAnswer: 3,
-                explanation: "Both Taenia solium (pork tapeworm) and Trichinella spiralis (trichinosis) are transmitted by consuming undercooked pork."
-            },
-            {
-                question: "What is the diagnostic method for trichinellosis?",
-                options: [
-                    "A. Stool examination",
-                    "B. Muscle biopsy",
-                    "C. Serology",
-                    "D. Both B and C"
-                ],
-                correctAnswer: 3,
-                explanation: "Trichinellosis is diagnosed by muscle biopsy showing larvae or by serological tests."
-            },
-            {
-                question: "Which parasite causes 'visceral larva migrans'?",
-                options: [
-                    "A. Toxocara canis",
-                    "B. Ancylostoma braziliense",
-                    "C. Strongyloides stercoralis",
-                    "D. Ascaris lumbricoides"
-                ],
-                correctAnswer: 0,
-                explanation: "Toxocara canis, the dog roundworm, causes visceral larva migrans when humans ingest its eggs."
-            },
-            {
-                question: "What is the treatment for cutaneous larva migrans?",
-                options: [
-                    "A. Albendazole",
-                    "B. Ivermectin",
-                    "C. Thiabendazole cream",
-                    "D. All of the above"
-                ],
-                correctAnswer: 3,
-                explanation: "Cutaneous larva migrans (creeping eruption) is treated with albendazole, ivermectin, or topical thiabendazole."
-            },
-            {
-                question: "Which parasite is associated with 'Calabar swellings'?",
-                options: [
-                    "A. Loa loa",
-                    "B. Onchocerca volvulus",
-                    "C. Wuchereria bancrofti",
-                    "D. Brugia malayi"
-                ],
-                correctAnswer: 0,
-                explanation: "Loa loa infection causes Calabar swellings, which are transient, localized angioedema."
-            },
-            {
-                question: "What is the primary prevention method for malaria?",
-                options: [
-                    "A. Bed nets",
-                    "B. Chemoprophylaxis",
-                    "C. Vector control",
-                    "D. All of the above"
-                ],
-                correctAnswer: 3,
-                explanation: "Malaria prevention includes bed nets, chemoprophylaxis, and vector control measures."
-            },
-            {
-                question: "Which parasite causes 'brain abscess' in immunocompromised patients?",
-                options: [
-                    "A. Toxoplasma gondii",
-                    "B. Entamoeba histolytica",
-                    "C. Naegleria fowleri",
-                    "D. Acanthamoeba species"
-                ],
-                correctAnswer: 0,
-                explanation: "Toxoplasma gondii can cause brain abscesses in immunocompromised patients, particularly those with AIDS."
-            },
-            {
-                question: "What is the treatment for acanthamoeba keratitis?",
-                options: [
-                    "A. Topical polyhexamethylene biguanide",
-                    "B. Topical chlorhexidine",
-                    "C. Oral miltefosine",
-                    "D. All of the above"
-                ],
-                correctAnswer: 3,
-                explanation: "Acanthamoeba keratitis is treated with topical polyhexamethylene biguanide, chlorhexidine, and sometimes oral miltefosine."
-            },
-            {
-                question: "Which parasite causes 'primary amebic meningoencephalitis' (PAM)?",
-                options: [
-                    "A. Naegleria fowleri",
-                    "B. Acanthamoeba species",
-                    "C. Balamuthia mandrillaris",
-                    "D. Entamoeba histolytica"
-                ],
-                correctAnswer: 0,
-                explanation: "Naegleria fowleri causes primary amebic meningoencephalitis (PAM), a rare but often fatal brain infection."
-            },
-            {
-                question: "What is the diagnostic stage for cryptosporidiosis?",
-                options: [
-                    "A. Trophozoites",
-                    "B. Oocysts",
-                    "C. Sporozoites",
-                    "D. Merozoites"
+                    "Cortical and cancellous bone",
+                    "Woven and lamellar bone",
+                    "Compact and spongy bone",
+                    "Trabecular and Haversian bone"
                 ],
                 correctAnswer: 1,
-                explanation: "Cryptosporidium oocysts are the diagnostic stage found in stool samples of infected individuals."
+                explanation: "Bone has two histological types: woven (immature) bone with irregular collagen arrangement, and lamellar (adult) bone with parallel collagen sheets.",
+                memoryTip: "Bone types: Woven (immature) and Lamellar (mature)"
             },
             {
-                question: "Which parasite is associated with 'traveler's diarrhea'?",
+                id: 29,
+                question: "Which type of bone has higher mineral content and superior strength?",
                 options: [
-                    "A. Giardia lamblia",
-                    "B. Cryptosporidium parvum",
-                    "C. Cyclospora cayetanensis",
-                    "D. All of the above"
+                    "Woven bone",
+                    "Lamellar bone",
+                    "Both have similar strength",
+                    "It depends on the location in the body"
                 ],
-                correctAnswer: 3,
-                explanation: "Giardia lamblia, Cryptosporidium parvum, and Cyclospora cayetanensis can all cause traveler's diarrhea."
+                correctAnswer: 1,
+                explanation: "Lamellar bone has high mineral content and superior strength compared to woven bone, which has less calcium and is relatively weak.",
+                memoryTip: "Lamellar bone > Woven bone in strength"
             },
             {
-                question: "What is the treatment for cyclosporiasis?",
+                id: 30,
+                question: "What is the first stage of fracture healing?",
                 options: [
-                    "A. Trimethoprim-sulfamethoxazole",
-                    "B. Metronidazole",
-                    "C. Nitazoxanide",
-                    "D. Paromomycin"
+                    "Inflammation",
+                    "Formation of granulation tissue",
+                    "Haematoma formation",
+                    "Callus development"
                 ],
-                correctAnswer: 0,
-                explanation: "Cyclospora cayetanensis infection is treated with trimethoprim-sulfamethoxazole."
+                correctAnswer: 2,
+                explanation: "The first stage of fracture healing is haematoma formation, where bleeding from torn vessels forms a clot that stabilizes the injury site.",
+                memoryTip: "Fracture healing starts with hematoma formation"
             },
             {
-                question: "Which parasite causes 'fish tapeworm' infection?",
+                id: 31,
+                question: "During fracture healing, what is the role of platelets in the haematoma?",
                 options: [
-                    "A. Diphyllobothrium latum",
-                    "B. Taenia saginata",
-                    "C. Hymenolepis nana",
-                    "D. Echinococcus granulosus"
+                    "Phagocytose dead cells and debris",
+                    "Form the initial soft callus",
+                    "Release growth factors and cytokines",
+                    "Differentiate into osteoblasts"
                 ],
-                correctAnswer: 0,
-                explanation: "Diphyllobothrium latum is the fish tapeworm, acquired by eating raw or undercooked freshwater fish."
+                correctAnswer: 2,
+                explanation: "Platelets in the clot release growth factors and cytokines that attract immune cells and initiate the inflammatory phase of fracture healing.",
+                memoryTip: "Platelets release growth factors in fracture healing"
             },
             {
-                question: "What vitamin deficiency is associated with Diphyllobothrium latum infection?",
+                id: 32,
+                question: "When do neutrophils typically migrate to a fracture site?",
                 options: [
-                    "A. Vitamin B12",
-                    "B. Vitamin C",
-                    "C. Vitamin D",
-                    "D. Vitamin K"
-                ],
-                correctAnswer: 0,
-                explanation: "Diphyllobothrium latum can cause vitamin B12 deficiency by competing with the host for this vitamin."
-            },
-            {
-                question: "Which parasite is known as the 'guinea worm'?",
-                options: [
-                    "A. Dracunculus medinensis",
-                    "B. Onchocerca volvulus",
-                    "C. Loa loa",
-                    "D. Wuchereria bancrofti"
+                    "Within hours of injury",
+                    "3-5 days after injury",
+                    "1 week after injury",
+                    "During the remodeling phase"
                 ],
                 correctAnswer: 0,
-                explanation: "Dracunculus medinensis is known as the guinea worm, which emerges through the skin, typically of the lower limbs."
+                explanation: "Neutrophils migrate to the fracture site within hours of injury, clearing debris and bacteria.",
+                memoryTip: "Neutrophils = first responders (hours)"
+            },
+            {
+                id: 33,
+                question: "What is formed during the callus development stage of fracture healing?",
+                options: [
+                    "A fibrin clot that stabilizes the fracture",
+                    "Granulation tissue with type III collagen",
+                    "Woven bone and cartilage that unites fracture ends",
+                    "Lamellar bone with Haversian systems"
+                ],
+                correctAnswer: 2,
+                explanation: "During callus development, mesenchymal cells differentiate to form either woven bone or cartilage, creating a callus that unites the fracture ends.",
+                memoryTip: "Callus = woven bone + cartilage → unites fracture"
+            },
+            {
+                id: 34,
+                question: "How long does the remodeling phase of fracture healing typically take?",
+                options: [
+                    "Days to weeks",
+                    "Weeks to months",
+                    "Months to years",
+                    "It is complete within 6 weeks"
+                ],
+                correctAnswer: 2,
+                explanation: "The remodeling phase of fracture healing can take months to years as osteoclasts resorb woven bone and osteoblasts lay down lamellar bone along stress lines.",
+                memoryTip: "Bone remodeling = months to years"
+            },
+            {
+                id: 35,
+                question: "Which growth factors drive osteoblastic differentiation in fracture healing?",
+                options: [
+                    "VEGF and EGF",
+                    "PDGF and TGF-β",
+                    "BMPs and TGF-β",
+                    "FGF and IGF"
+                ],
+                correctAnswer: 2,
+                explanation: "Bone Morphogenetic Proteins (BMPs) and Transforming Growth Factor-Beta (TGF-β) drive osteoblastic differentiation, promoting new bone formation.",
+                memoryTip: "BMPs + TGF-β = osteoblast differentiation"
+            },
+            {
+                id: 36,
+                question: "What characterizes atrophic non-union in fracture healing?",
+                options: [
+                    "Abundant callus that fails to fuse",
+                    "Scant callus formation",
+                    "Proper alignment but delayed healing",
+                    "Infection at the fracture site"
+                ],
+                correctAnswer: 1,
+                explanation: "Atrophic non-union shows scant callus due to poor blood supply or biological factors. Hypertrophic non-union has abundant callus that fails to unite due to mechanical instability.",
+                memoryTip: "Atrophic non-union = little callus; Hypertrophic = much callus but no union"
+            },
+            {
+                id: 37,
+                question: "What is malunion in fracture healing?",
+                options: [
+                    "Delayed healing due to infection",
+                    "Failure of the fracture to heal",
+                    "Healing with improper alignment",
+                    "Refracture at the same site"
+                ],
+                correctAnswer: 2,
+                explanation: "Malunion occurs due to improper alignment during healing, leading to angulation, rotation, or shortening of the bone.",
+                memoryTip: "Malunion = healed in wrong position"
+            },
+            {
+                id: 38,
+                question: "Which factor does NOT typically delay fracture healing?",
+                options: [
+                    "Adequate blood supply",
+                    "Infection",
+                    "Excessive motion",
+                    "Smoking"
+                ],
+                correctAnswer: 0,
+                explanation: "Inadequate blood supply, infection, smoking, NSAIDs, and excessive motion can delay or prevent fracture union, while adequate blood supply promotes healing.",
+                memoryTip: "Good blood supply promotes fracture healing"
+            },
+            {
+                id: 39,
+                question: "What is a key difference between soft tissue repair and bone healing?",
+                options: [
+                    "Bone healing always results in scar tissue formation",
+                    "Soft tissue repair can restore pre-injury architecture",
+                    "Bone can regain pre-injury strength without permanent scar tissue",
+                    "Soft tissue healing is always faster than bone healing"
+                ],
+                correctAnswer: 2,
+                explanation: "Unlike soft-tissue repair, bone can regain pre-injury strength and architecture without permanent scar tissue under favorable circumstances.",
+                memoryTip: "Bone can heal without scar tissue; soft tissue cannot"
+            },
+            {
+                id: 40,
+                question: "Which cells are responsible for bone resorption during remodeling?",
+                options: [
+                    "Osteoblasts",
+                    "Osteocytes",
+                    "Osteoclasts",
+                    "Chondrocytes"
+                ],
+                correctAnswer: 2,
+                explanation: "Osteoclasts are responsible for bone resorption during the remodeling phase of fracture healing, while osteoblasts lay down new bone.",
+                memoryTip: "Osteoclasts = bone breakdown; Osteoblasts = bone formation"
+            },
+            {
+                id: 41,
+                question: "What provides the initial stability in a fracture before callus formation?",
+                options: [
+                    "The periosteum",
+                    "The haematoma",
+                    "Muscle contractions",
+                    "External fixation only"
+                ],
+                correctAnswer: 1,
+                explanation: "The haematoma formed immediately after fracture provides initial stability and a scaffold for inflammatory cells before callus formation.",
+                memoryTip: "Hematoma provides initial fracture stability"
+            },
+            {
+                id: 42,
+                question: "During which stage of fracture healing does angiogenesis peak?",
+                options: [
+                    "Haematoma formation",
+                    "Inflammation",
+                    "Granulation tissue formation",
+                    "Remodeling"
+                ],
+                correctAnswer: 2,
+                explanation: "Angiogenesis peaks during the granulation tissue formation stage, providing oxygen and nutrients necessary for cell proliferation and matrix synthesis.",
+                memoryTip: "Angiogenesis peaks during granulation tissue formation"
+            },
+            {
+                id: 43,
+                question: "What is the primary source of osteoprogenitor cells in fracture healing?",
+                options: [
+                    "Circulating blood cells",
+                    "The haematoma",
+                    "Periosteum and endosteum",
+                    "Adjacent muscle tissue"
+                ],
+                correctAnswer: 2,
+                explanation: "The periosteum and endosteum contribute osteoprogenitors during fracture healing, which differentiate into osteoblasts for bone formation.",
+                memoryTip: "Osteoprogenitors from periosteum and endosteum"
+            },
+            {
+                id: 44,
+                question: "Which factor is most critical for proper fracture healing?",
+                options: [
+                    "Complete immobilization throughout healing",
+                    "Adequate stability and blood supply",
+                    "High doses of corticosteroids",
+                    "Immediate weight-bearing"
+                ],
+                correctAnswer: 1,
+                explanation: "Adequate stability (to allow proper callus formation) and blood supply (to deliver nutrients and cells) are critical for proper fracture healing.",
+                memoryTip: "Fracture healing needs: Stability + Blood supply"
+            },
+            {
+                id: 45,
+                question: "What happens during the formation of lamellar bone in fracture healing?",
+                options: [
+                    "Random deposition of collagen fibers",
+                    "Formation of cartilage intermediate",
+                    "Invasion of initial scaffolding by osteoclasts followed by osteoblast activity",
+                    "Direct transformation of haematoma into bone"
+                ],
+                correctAnswer: 2,
+                explanation: "During lamellar bone formation, the initial scaffolding (woven bone or calcified cartilage) is invaded by osteoclasts, followed by osteoblasts laying down osteoid that calcifies to form lamellar bone.",
+                memoryTip: "Lamellar bone formation: Osteoclasts remove old → Osteoblasts build new"
             }
         ];
 
-        // Variables to track exam state
-        let currentQuestion = 0;
-        let userAnswers = new Array(questions.length).fill(null);
-        let examSubmitted = false;
-        let timerInterval;
-        let timeRemaining = 90 * 60; // 90 minutes in seconds
-        let hasSubmitted = localStorage.getItem('parasitologyExamSubmitted') === 'true';
-
         // DOM elements
-        const examForm = document.getElementById('exam-form');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const submitBtn = document.getElementById('submit-btn');
-        const resultsDiv = document.getElementById('results');
-        const scoreValue = document.getElementById('score-value');
-        const resultsContent = document.getElementById('results-content');
-        const retakeBtn = document.getElementById('retake-btn');
-        const progressBar = document.getElementById('progress');
-        const timerDisplay = document.getElementById('timer');
-        const studentNameInput = document.getElementById('student-name');
-        const studentEmailInput = document.getElementById('student-email');
+        const currentQuestionElement = document.getElementById('current-question');
+        const totalQuestionsElement = document.getElementById('total-questions');
+        const currentScoreElement = document.getElementById('current-score');
+        const progressBar = document.getElementById('progress-bar');
+        const questionNumberElement = document.getElementById('q-number');
+        const questionTextElement = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const explanationTextElement = document.getElementById('explanation-text');
+        const memoryTipElement = document.getElementById('memory-tip');
+        const prevButton = document.getElementById('prev-btn');
+        const nextButton = document.getElementById('next-btn');
+        const submitButton = document.getElementById('submit-btn');
+        const resultsContainer = document.getElementById('results-container');
+        const scoreCircle = document.getElementById('score-circle');
+        const scorePercentageElement = document.getElementById('score-percentage');
+        const scoreTextElement = document.getElementById('score-text');
+        const totalScoreElement = document.getElementById('total-score');
+        const correctCountElement = document.getElementById('correct-count');
+        const incorrectCountElement = document.getElementById('incorrect-count');
+        const unansweredCountElement = document.getElementById('unanswered-count');
+        const accuracyElement = document.getElementById('accuracy');
+        const reviewButton = document.getElementById('review-btn');
+        const restartButton = document.getElementById('restart-btn');
+        const reviewContainer = document.getElementById('review-container');
+        const reviewQuestionsElement = document.getElementById('review-questions');
+        const backToResultsButton = document.getElementById('back-to-results');
 
-        // Initialize the exam
-        function initExam() {
-            displayQuestion(currentQuestion);
-            updateProgressBar();
-            setupEventListeners();
-            
-            if (!hasSubmitted) {
-                startTimer();
-            } else {
-                // If already submitted, show results in practice mode
-                examSubmitted = true;
-                showResults();
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Already Submitted';
+        // Quiz state
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let userCorrect = new Array(questions.length).fill(false);
+        let quizCompleted = false;
+
+        // Shuffle function for array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
             }
+            return array;
         }
 
-        // Display a specific question
-        function displayQuestion(index) {
-            examForm.innerHTML = '';
+        // Initialize quiz
+        function initQuiz() {
+            totalQuestionsElement.textContent = questions.length;
+            totalScoreElement.textContent = questions.length;
             
-            const question = questions[index];
-            const questionDiv = document.createElement('div');
-            questionDiv.className = 'question';
-            
-            const questionNumber = document.createElement('div');
-            questionNumber.className = 'question-number';
-            questionNumber.textContent = `Question ${index + 1} of ${questions.length}`;
-            
-            const questionText = document.createElement('div');
-            questionText.className = 'question-text';
-            questionText.textContent = question.question;
-            
-            const optionsDiv = document.createElement('div');
-            optionsDiv.className = 'options';
-            
-            question.options.forEach((option, optionIndex) => {
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'option';
-                
-                const input = document.createElement('input');
-                input.type = 'radio';
-                input.name = 'answer';
-                input.value = optionIndex;
-                input.id = `option-${optionIndex}`;
-                
-                // Check if this option was previously selected
-                if (userAnswers[index] === optionIndex) {
-                    input.checked = true;
-                }
-                
-                const label = document.createElement('label');
-                label.htmlFor = `option-${optionIndex}`;
-                label.textContent = option;
-                
-                optionDiv.appendChild(input);
-                optionDiv.appendChild(label);
-                optionsDiv.appendChild(optionDiv);
+            // Shuffle questions and options
+            shuffleArray(questions);
+            questions.forEach(question => {
+                // Store the correct answer before shuffling
+                const correctAnswer = question.correctAnswer;
+                // Shuffle all options
+                question.options = shuffleArray(question.options);
+                // Update the correct answer index after shuffling
+                question.correctAnswer = question.options.indexOf(question.options.find((opt, idx) => 
+                    idx === correctAnswer
+                ));
             });
             
-            // If in review mode (after submission), show explanation
-            if (examSubmitted) {
-                const explanation = document.createElement('div');
-                explanation.className = 'explanation';
-                explanation.innerHTML = `<strong>Explanation:</strong> ${question.explanation}`;
-                explanation.style.display = 'block';
-                
-                // Highlight correct answer
-                const correctOption = document.querySelector(`input[value="${question.correctAnswer}"]`);
-                if (correctOption) {
-                    const correctLabel = correctOption.nextElementSibling;
-                    correctLabel.classList.add('correct');
+            displayQuestion();
+            
+            // Event listeners
+            prevButton.addEventListener('click', goToPreviousQuestion);
+            nextButton.addEventListener('click', goToNextQuestion);
+            submitButton.addEventListener('click', submitQuiz);
+            reviewButton.addEventListener('click', showReview);
+            restartButton.addEventListener('click', restartQuiz);
+            backToResultsButton.addEventListener('click', showResults);
+        }
+
+        // Display current question
+        function displayQuestion() {
+            const question = questions[currentQuestionIndex];
+            
+            questionNumberElement.textContent = currentQuestionIndex + 1;
+            currentQuestionElement.textContent = currentQuestionIndex + 1;
+            questionTextElement.textContent = question.question;
+            
+            // Update progress bar
+            progressBar.style.width = `${((currentQuestionIndex + 1) / questions.length) * 100}%`;
+            
+            // Update current score
+            const currentScore = userCorrect.filter(correct => correct).length;
+            currentScoreElement.textContent = currentScore;
+            
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+            
+            // Add new options
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                if (userAnswers[currentQuestionIndex] === index) {
+                    optionElement.classList.add('selected');
                 }
                 
-                // Highlight user's answer if incorrect
-                if (userAnswers[index] !== null && userAnswers[index] !== question.correctAnswer) {
-                    const userOption = document.querySelector(`input[value="${userAnswers[index]}"]`);
-                    if (userOption) {
-                        const userLabel = userOption.nextElementSibling;
-                        userLabel.classList.add('incorrect');
+                const optionLetter = document.createElement('div');
+                optionLetter.className = 'option-letter';
+                optionLetter.textContent = String.fromCharCode(65 + index);
+                
+                const optionText = document.createElement('div');
+                optionText.textContent = option;
+                
+                optionElement.appendChild(optionLetter);
+                optionElement.appendChild(optionText);
+                
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Hide explanation initially
+            explanationContainer.style.display = 'none';
+            
+            // Update navigation buttons
+            prevButton.disabled = currentQuestionIndex === 0;
+            nextButton.style.display = currentQuestionIndex === questions.length - 1 ? 'none' : 'inline-block';
+            submitButton.style.display = currentQuestionIndex === questions.length - 1 ? 'inline-block' : 'none';
+        }
+
+        // Select an option
+        function selectOption(optionIndex) {
+            if (quizCompleted) return;
+            
+            userAnswers[currentQuestionIndex] = optionIndex;
+            
+            // Check if answer is correct
+            const question = questions[currentQuestionIndex];
+            const isCorrect = optionIndex === question.correctAnswer;
+            userCorrect[currentQuestionIndex] = isCorrect;
+            
+            // Update UI to show selected option
+            const options = document.querySelectorAll('.option');
+            options.forEach((opt, idx) => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                if (idx === optionIndex) {
+                    opt.classList.add('selected');
+                    if (isCorrect) {
+                        opt.classList.add('correct');
+                    } else {
+                        opt.classList.add('incorrect');
                     }
                 }
-                
-                questionDiv.appendChild(explanation);
-            }
-            
-            questionDiv.appendChild(questionNumber);
-            questionDiv.appendChild(questionText);
-            questionDiv.appendChild(optionsDiv);
-            examForm.appendChild(questionDiv);
-            
-            // Update button states
-            prevBtn.disabled = index === 0;
-            nextBtn.disabled = index === questions.length - 1;
-            
-            // If we're on the last question and not submitted, enable submit button
-            if (index === questions.length - 1 && !examSubmitted) {
-                submitBtn.style.display = 'block';
-            } else {
-                submitBtn.style.display = 'none';
-            }
-        }
-
-        // Update progress bar
-        function updateProgressBar() {
-            const progress = ((currentQuestion + 1) / questions.length) * 100;
-            progressBar.style.width = `${progress}%`;
-        }
-
-        // Set up event listeners
-        function setupEventListeners() {
-            // Previous button
-            prevBtn.addEventListener('click', () => {
-                if (currentQuestion > 0) {
-                    saveAnswer();
-                    currentQuestion--;
-                    displayQuestion(currentQuestion);
-                    updateProgressBar();
+                if (idx === question.correctAnswer) {
+                    opt.classList.add('correct');
                 }
             });
             
-            // Next button
-            nextBtn.addEventListener('click', () => {
-                if (currentQuestion < questions.length - 1) {
-                    saveAnswer();
-                    currentQuestion++;
-                    displayQuestion(currentQuestion);
-                    updateProgressBar();
-                }
-            });
-            
-            // Submit button
-            submitBtn.addEventListener('click', () => {
-                saveAnswer();
-                if (validateForm()) {
-                    if (confirm('Are you sure you want to submit your exam? You cannot change your answers after submission.')) {
-                        submitExam();
-                    }
-                }
-            });
-            
-            // Retake button (practice mode)
-            retakeBtn.addEventListener('click', () => {
-                resetExam();
-            });
-            
-            // Save answer when user selects an option
-            examForm.addEventListener('change', (e) => {
-                if (e.target.name === 'answer') {
-                    userAnswers[currentQuestion] = parseInt(e.target.value);
-                }
-            });
+            // Show explanation
+            showExplanation();
         }
 
-        // Validate form before submission
-        function validateForm() {
-            if (!studentNameInput.value.trim()) {
-                alert('Please enter your name before submitting.');
-                studentNameInput.focus();
-                return false;
-            }
+        // Show explanation for current question
+        function showExplanation() {
+            const question = questions[currentQuestionIndex];
             
-            if (!studentEmailInput.value.trim()) {
-                alert('Please enter your email before submitting.');
-                studentEmailInput.focus();
-                return false;
-            }
-            
-            // Check if all questions are answered
-            const unanswered = userAnswers.filter(answer => answer === null).length;
-            if (unanswered > 0) {
-                return confirm(`You have ${unanswered} unanswered questions. Are you sure you want to submit?`);
-            }
-            
-            return true;
+            explanationTextElement.textContent = question.explanation;
+            memoryTipElement.textContent = question.memoryTip;
+            explanationContainer.style.display = 'block';
         }
 
-        // Save the current answer
-        function saveAnswer() {
-            const selectedOption = document.querySelector('input[name="answer"]:checked');
-            if (selectedOption) {
-                userAnswers[currentQuestion] = parseInt(selectedOption.value);
+        // Navigate to previous question
+        function goToPreviousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
             }
         }
 
-        // Start the exam timer
-        function startTimer() {
-            updateTimerDisplay();
-            
-            timerInterval = setInterval(() => {
-                timeRemaining--;
-                updateTimerDisplay();
-                
-                if (timeRemaining <= 0) {
-                    clearInterval(timerInterval);
-                    alert('Time is up! Your exam will be submitted automatically.');
-                    submitExam();
-                }
-            }, 1000);
-        }
-
-        // Update the timer display
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timeRemaining / 60);
-            const seconds = timeRemaining % 60;
-            timerDisplay.textContent = `Time Remaining: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            // Change color when time is running low
-            if (timeRemaining < 300) { // 5 minutes
-                timerDisplay.style.color = 'var(--accent)';
+        // Navigate to next question
+        function goToNextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion();
             }
         }
 
-        // Submit the exam
-        function submitExam() {
-            clearInterval(timerInterval);
-            examSubmitted = true;
+        // Submit the quiz
+        function submitQuiz() {
+            quizCompleted = true;
             
             // Calculate score
-            let score = 0;
-            for (let i = 0; i < questions.length; i++) {
-                if (userAnswers[i] === questions[i].correctAnswer) {
-                    score++;
-                }
-            }
+            const correctCount = userCorrect.filter(correct => correct).length;
+            const incorrectCount = userAnswers.filter((answer, index) => 
+                answer !== null && !userCorrect[index]
+            ).length;
+            const unansweredCount = userAnswers.filter(answer => answer === null).length;
             
-            // Show results
-            showResults(score);
+            const scorePercentage = Math.round((correctCount / questions.length) * 100);
+            const accuracy = userAnswers.filter(answer => answer !== null).length > 0 
+                ? Math.round((correctCount / (userAnswers.filter(answer => answer !== null).length)) * 100) 
+                : 0;
             
-            // Submit to Formspree if first time
-            if (!hasSubmitted) {
-                submitToFormspree(score);
-                localStorage.setItem('parasitologyExamSubmitted', 'true');
-                hasSubmitted = true;
-            }
+            // Update results UI
+            scoreCircle.style.background = `conic-gradient(var(--success) 0% ${scorePercentage}%, var(--light) ${scorePercentage}% 100%)`;
+            scorePercentageElement.textContent = `${scorePercentage}%`;
+            scoreTextElement.textContent = correctCount;
+            correctCountElement.textContent = correctCount;
+            incorrectCountElement.textContent = incorrectCount;
+            unansweredCountElement.textContent = unansweredCount;
+            accuracyElement.textContent = `${accuracy}%`;
+            
+            // Hide quiz, show results
+            document.getElementById('quiz-container').style.display = 'none';
+            resultsContainer.style.display = 'block';
         }
 
-        // Show results
-        function showResults(score = null) {
-            if (score !== null) {
-                scoreValue.textContent = score;
-            }
+        // Show question review
+        function showReview() {
+            resultsContainer.style.display = 'none';
+            reviewContainer.style.display = 'block';
             
-            // Build results content
-            let resultsHTML = '<h3>Exam Results</h3>';
+            // Clear previous review
+            reviewQuestionsElement.innerHTML = '';
             
+            // Add review items
             questions.forEach((question, index) => {
-                const userAnswer = userAnswers[index];
-                const isCorrect = userAnswer === question.correctAnswer;
+                const reviewItem = document.createElement('div');
+                reviewItem.className = 'review-item';
                 
-                resultsHTML += `
-                    <div class="question">
-                        <div class="question-number">Question ${index + 1}</div>
-                        <div class="question-text">${question.question}</div>
-                        <div class="options">
-                `;
+                const userAnswerIndex = userAnswers[index];
+                const userAnswer = userAnswerIndex !== null ? question.options[userAnswerIndex] : 'Not answered';
+                const isCorrect = userCorrect[index];
+                const correctAnswer = question.options[question.correctAnswer];
                 
-                question.options.forEach((option, optionIndex) => {
-                    let optionClass = '';
-                    if (optionIndex === question.correctAnswer) {
-                        optionClass = 'correct';
-                    } else if (optionIndex === userAnswer && !isCorrect) {
-                        optionClass = 'incorrect';
-                    }
-                    
-                    resultsHTML += `
-                        <div class="option">
-                            <span class="${optionClass}">${option}</span>
-                        </div>
-                    `;
-                });
-                
-                resultsHTML += `
-                        </div>
-                        <div class="explanation">
-                            <strong>Explanation:</strong> ${question.explanation}
-                        </div>
+                reviewItem.innerHTML = `
+                    <div class="review-question">${index + 1}. ${question.question}</div>
+                    <div class="review-answer">
+                        Your answer: <span class="user-answer ${isCorrect ? 'correct' : 'incorrect'}">${userAnswer}</span>
+                    </div>
+                    <div class="review-answer correct-answer">
+                        Correct answer: ${correctAnswer}
+                    </div>
+                    <div class="review-answer">
+                        <strong>Explanation:</strong> ${question.explanation}
+                    </div>
+                    <div class="memory-tip">
+                        <div class="memory-tip-title">Memory Tip:</div>
+                        ${question.memoryTip}
                     </div>
                 `;
-            });
-            
-            resultsContent.innerHTML = resultsHTML;
-            resultsDiv.style.display = 'block';
-            
-            // Scroll to results
-            resultsDiv.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Reset exam for practice mode
-        function resetExam() {
-            currentQuestion = 0;
-            userAnswers = new Array(questions.length).fill(null);
-            examSubmitted = false;
-            timeRemaining = 90 * 60;
-            
-            resultsDiv.style.display = 'none';
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Submit Exam';
-            
-            displayQuestion(currentQuestion);
-            updateProgressBar();
-            updateTimerDisplay();
-            timerDisplay.style.color = '';
-            
-            // Don't start the timer in practice mode
-            clearInterval(timerInterval);
-        }
-
-        // Submit to Formspree
-        function submitToFormspree(score) {
-            const studentName = studentNameInput.value || 'Anonymous';
-            const studentEmail = studentEmailInput.value || 'No email provided';
-            
-            // Prepare form data
-            const formData = new FormData();
-            formData.append('name', studentName);
-            formData.append('email', studentEmail);
-            formData.append('score', `${score}/${questions.length}`);
-            formData.append('percentage', `${((score/questions.length)*100).toFixed(2)}%`);
-            formData.append('timestamp', new Date().toISOString());
-            
-            // Add detailed results
-            let detailedResults = '';
-            questions.forEach((question, index) => {
-                const userAnswer = userAnswers[index];
-                const answerText = userAnswer !== null ? 
-                    question.options[userAnswer] : 'Not answered';
-                const isCorrect = userAnswer === question.correctAnswer;
                 
-                detailedResults += `Q${index + 1}: ${question.question} | Your Answer: ${answerText} | Correct: ${isCorrect ? 'Yes' : 'No'}\n\n`;
-            });
-            
-            formData.append('detailed_results', detailedResults);
-            
-            // Submit to Formspree
-            fetch('https://formspree.io/f/mwprvyal', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Exam submitted successfully to Formspree');
-                } else {
-                    console.error('Failed to submit exam to Formspree');
-                }
-            })
-            .catch(error => {
-                console.error('Error submitting exam to Formspree:', error);
+                reviewQuestionsElement.appendChild(reviewItem);
             });
         }
 
-        // Initialize the exam when the page loads
-        document.addEventListener('DOMContentLoaded', initExam);
+        // Show results after review
+        function showResults() {
+            reviewContainer.style.display = 'none';
+            resultsContainer.style.display = 'block';
+        }
+
+        // Restart the quiz
+        function restartQuiz() {
+            // Reset quiz state
+            currentQuestionIndex = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            userCorrect = new Array(questions.length).fill(false);
+            quizCompleted = false;
+            
+            // Shuffle questions and options again
+            shuffleArray(questions);
+            questions.forEach(question => {
+                // Store the correct answer before shuffling
+                const correctAnswer = question.correctAnswer;
+                // Shuffle all options
+                question.options = shuffleArray(question.options);
+                // Update the correct answer index after shuffling
+                question.correctAnswer = question.options.indexOf(question.options.find((opt, idx) => 
+                    idx === correctAnswer
+                ));
+            });
+            
+            // Reset UI
+            document.getElementById('quiz-container').style.display = 'block';
+            resultsContainer.style.display = 'none';
+            reviewContainer.style.display = 'none';
+            
+            // Display first question
+            displayQuestion();
+        }
+
+        // Initialize the quiz when the page loads
+        window.addEventListener('load', initQuiz);
     </script>
 </body>
-</html>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healing, Repair & Regeneration Quiz</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --light: #ecf0f1;
+            --dark: #34495e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .progress-container {
+            background-color: var(--light);
+            border-radius: 10px;
+            height: 15px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .question-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .question-number {
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+        
+        .options-container {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .option {
+            background-color: var(--light);
+            padding: 15px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background-color: #d6dbdf;
+            transform: translateY(-2px);
+        }
+        
+        .option.selected {
+            border-color: var(--primary);
+            background-color: #e1f0fa;
+        }
+        
+        .option.correct {
+            border-color: var(--success);
+            background-color: #d4efdf;
+        }
+        
+        .option.incorrect {
+            border-color: var(--danger);
+            background-color: #fadbd8;
+        }
+        
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background-color: #bdc3c7;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .selected .option-letter, .correct .option-letter, .incorrect .option-letter {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .explanation-container {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+            display: none;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .explanation-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        
+        .memory-tip {
+            background-color: #fff9e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid var(--warning);
+        }
+        
+        .memory-tip-title {
+            font-weight: bold;
+            color: var(--warning);
+            margin-bottom: 5px;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #1c2833;
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .results-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            display: none;
+        }
+        
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            background: conic-gradient(var(--success) 0% 0%, var(--light) 0% 100%);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .performance-summary {
+            margin-top: 30px;
+            text-align: left;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .stat-label {
+            font-weight: 600;
+        }
+        
+        .stat-value {
+            font-weight: bold;
+        }
+        
+        .review-container {
+            display: none;
+            margin-top: 30px;
+        }
+        
+        .review-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .review-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .review-answer {
+            margin-top: 5px;
+            padding: 8px 0;
+        }
+        
+        .correct-answer {
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        .user-answer.correct {
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        .user-answer.incorrect {
+            color: var(--danger);
+            font-weight: 600;
+        }
+        
+        .section-title {
+            margin: 30px 0 15px;
+            color: var(--secondary);
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .quiz-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            .question-text {
+                font-size: 1.1rem;
+            }
+            
+            .score-circle {
+                width: 150px;
+                height: 150px;
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Healing, Repair & Regeneration</h1>
+            <p class="subtitle">Comprehensive Quiz for Medical Students</p>
+        </header>
+        
+        <div class="quiz-info">
+            <div>Questions: <span id="current-question">1</span>/<span id="total-questions">45</span></div>
+            <div>Score: <span id="current-score">0</span>/45</div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        
+        <div id="quiz-container">
+            <div class="question-container">
+                <div class="question-number">Question <span id="q-number">1</span></div>
+                <div class="question-text" id="question-text"></div>
+                
+                <div class="options-container" id="options-container">
+                    <!-- Options will be inserted here by JavaScript -->
+                </div>
+                
+                <div class="explanation-container" id="explanation-container">
+                    <div class="explanation-title">Explanation:</div>
+                    <div id="explanation-text"></div>
+                    <div class="memory-tip">
+                        <div class="memory-tip-title">Memory Tip:</div>
+                        <div id="memory-tip"></div>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <button id="prev-btn" class="btn-secondary">Previous Question</button>
+                    <button id="next-btn" class="btn-primary">Next Question</button>
+                    <button id="submit-btn" class="btn-success" style="display: none;">Submit Quiz</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="results-container" id="results-container">
+            <h2>Quiz Results</h2>
+            <div class="score-circle" id="score-circle">
+                <span id="score-percentage">0%</span>
+            </div>
+            <h3>Your Score: <span id="score-text">0</span>/<span id="total-score">45</span></h3>
+            
+            <div class="performance-summary">
+                <h4 class="section-title">Performance Summary</h4>
+                <div class="stat-row">
+                    <span class="stat-label">Correct Answers:</span>
+                    <span class="stat-value" id="correct-count">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Incorrect Answers:</span>
+                    <span class="stat-value" id="incorrect-count">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Unanswered Questions:</span>
+                    <span class="stat-value" id="unanswered-count">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Accuracy:</span>
+                    <span class="stat-value" id="accuracy">0%</span>
+                </div>
+            </div>
+            
+            <div class="navigation" style="margin-top: 30px;">
+                <button id="review-btn" class="btn-secondary">Review Questions</button>
+                <button id="restart-btn" class="btn-primary">Restart Quiz</button>
+            </div>
+        </div>
+        
+        <div class="review-container" id="review-container">
+            <h2>Question Review</h2>
+            <div id="review-questions">
+                <!-- Review items will be inserted here by JavaScript -->
+            </div>
+            <div class="navigation">
+                <button id="back-to-results" class="btn-primary">Back to Results</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz questions array
+        const questions = [
+            {
+                id: 1,
+                question: "What is the primary definition of healing in a pathological context?",
+                options: [
+                    "The process of inflammation following tissue injury",
+                    "The body's process of replacing destroyed tissue with new, viable tissue",
+                    "The formation of scar tissue to close a wound",
+                    "The regeneration of specialized cells after damage"
+                ],
+                correctAnswer: 1,
+                explanation: "Healing refers to the body's process of replacing destroyed tissue with new, viable tissue, restoring normal structure and function after injury.",
+                memoryTip: "Healing = tissue replacement to restore structure and function"
+            },
+            {
+                id: 2,
+                question: "Which of the following represents the two distinct processes of healing?",
+                options: [
+                    "Inflammation and proliferation",
+                    "Regeneration and repair",
+                    "Hemostasis and remodeling",
+                    "Granulation and contraction"
+                ],
+                correctAnswer: 1,
+                explanation: "Healing occurs through two distinct processes: regeneration (replacement with similar tissue) and repair (replacement with scar tissue).",
+                memoryTip: "Two healing modes: Regeneration (same tissue) and Repair (scar tissue)"
+            },
+            {
+                id: 3,
+                question: "What determines whether healing occurs through regeneration or repair?",
+                options: [
+                    "The patient's age and nutritional status",
+                    "The type of injury and presence of infection",
+                    "The cell type involved, injury severity, and stromal framework integrity",
+                    "The location of the injury and blood supply"
+                ],
+                correctAnswer: 2,
+                explanation: "The balance between regeneration and repair is influenced by cell type, injury severity, and stromal framework integrity.",
+                memoryTip: "Regeneration vs. Repair depends on: Cell type + Injury severity + Stromal framework"
+            },
+            {
+                id: 4,
+                question: "Which type of cells have continuous turnover by programmed division of stem cells?",
+                options: [
+                    "Permanent cells",
+                    "Stable cells",
+                    "Labile cells",
+                    "Fibroblasts"
+                ],
+                correctAnswer: 2,
+                explanation: "Labile cells have continuous turnover by programmed division of stem cells and are found in surface epithelia of the GI tract, urinary tract, skin, and hematopoietic systems.",
+                memoryTip: "Labile cells = continuous division (skin, GI tract, bone marrow)"
+            },
+            {
+                id: 5,
+                question: "Which of the following are examples of permanent cells?",
+                options: [
+                    "Hepatocytes and renal tubular cells",
+                    "Skin epithelial cells and GI tract lining",
+                    "Adult neurons and striated muscle cells",
+                    "Fibroblasts and endothelial cells"
+                ],
+                correctAnswer: 2,
+                explanation: "Permanent cells are non-dividing cells that cannot be replaced if lost, including adult neurons, striated muscle cells, and lens cells.",
+                memoryTip: "Permanent cells = neurons, cardiac muscle, skeletal muscle - cannot regenerate"
+            },
+            {
+                id: 6,
+                question: "What is a key requirement for regeneration to occur?",
+                options: [
+                    "Complete destruction of the stromal framework",
+                    "Presence of significant inflammation",
+                    "Mitotic ability of residual cells",
+                    "Formation of granulation tissue"
+                ],
+                correctAnswer: 2,
+                explanation: "Regeneration requires that residual cells retain the ability to divide and proliferate, among other factors like preserved stromal integrity.",
+                memoryTip: "Regeneration needs: 1. Mitotic ability 2. Intact stromal framework 3. Injury removal"
+            },
+            {
+                id: 7,
+                question: "During regeneration, what do basal keratinocytes do to restore epithelial continuity?",
+                options: [
+                    "Differentiate into fibroblasts",
+                    "Flatten and slide forward while proliferating",
+                    "Secrete collagen to form a matrix",
+                    "Transform into myofibroblasts"
+                ],
+                correctAnswer: 1,
+                explanation: "Basal keratinocytes flatten and slide forward while proliferating to restore epithelial continuity during regeneration.",
+                memoryTip: "Keratinocytes flatten → slide → proliferate → restore epithelium"
+            },
+            {
+                id: 8,
+                question: "What characterizes the inflammatory phase of repair by scarring?",
+                options: [
+                    "Fibroblast proliferation and collagen deposition",
+                    "Vasodilatation, neutrophil infiltration, and plasma protein delivery",
+                    "Wound contraction and scar maturation",
+                    "Angiogenesis and granulation tissue formation"
+                ],
+                correctAnswer: 1,
+                explanation: "The inflammatory phase of repair begins with acute inflammation characterized by vasodilatation, neutrophil infiltration, and plasma protein delivery.",
+                memoryTip: "Inflammatory phase = vasodilation + neutrophils + plasma proteins"
+            },
+            {
+                id: 9,
+                question: "What is the primary role of macrophages during the demolition phase of repair?",
+                options: [
+                    "Produce collagen for matrix formation",
+                    "Stimulate angiogenesis",
+                    "Debride dead cells and release cytokines",
+                    "Contract the wound edges"
+                ],
+                correctAnswer: 2,
+                explanation: "Macrophages arrive to debride dead cells and release cytokines that recruit fibroblasts and endothelial cells during the demolition phase.",
+                memoryTip: "Macrophages = debris cleanup + cytokine release"
+            },
+            {
+                id: 10,
+                question: "When does angiogenesis typically begin after injury?",
+                options: [
+                    "Within the first 6 hours",
+                    "48 to 72 hours after injury",
+                    "1 week after injury",
+                    "During the remodeling phase"
+                ],
+                correctAnswer: 1,
+                explanation: "Vascular proliferation (angiogenesis) starts 48 to 72 hours after injury and lasts for several days.",
+                memoryTip: "Angiogenesis begins 2-3 days post-injury"
+            },
+            {
+                id: 11,
+                question: "What type of collagen is initially deposited in granulation tissue?",
+                options: [
+                    "Type I collagen",
+                    "Type II collagen",
+                    "Type III collagen",
+                    "Type IV collagen"
+                ],
+                correctAnswer: 2,
+                explanation: "Bright-red, moist granulation tissue is rich in type III collagen, fibronectin, and proteoglycans.",
+                memoryTip: "Early granulation tissue = Type III collagen → later replaced by Type I"
+            },
+            {
+                id: 12,
+                question: "What happens during collagen remodeling in wound healing?",
+                options: [
+                    "Type I collagen is replaced by type III collagen",
+                    "Collagen content decreases as healing progresses",
+                    "Type III collagen is cross-linked and replaced by type I collagen",
+                    "Collagen fibers randomly arrange without organization"
+                ],
+                correctAnswer: 2,
+                explanation: "Over weeks, type III collagen is cross-linked and gradually replaced by stronger type I collagen during collagen remodeling.",
+                memoryTip: "Collagen remodeling: Type III → Type I (stronger)"
+            },
+            {
+                id: 13,
+                question: "What cells are responsible for wound contraction?",
+                options: [
+                    "Fibroblasts",
+                    "Myofibroblasts",
+                    "Keratinocytes",
+                    "Macrophages"
+                ],
+                correctAnswer: 1,
+                explanation: "Contraction is due to myofibroblasts, which have features intermediate between fibroblasts and smooth muscle cells.",
+                memoryTip: "Myofibroblasts = wound contraction"
+            },
+            {
+                id: 14,
+                question: "How much can wound contraction reduce the size of a defect?",
+                options: [
+                    "10-20% of its original size",
+                    "30-40% of its original size",
+                    "50-60% of its original size",
+                    "70-80% of its original size"
+                ],
+                correctAnswer: 3,
+                explanation: "Wound contraction can reduce the wound by approximately 70-80% of its original size, resulting in faster healing.",
+                memoryTip: "Wound contraction reduces defect by 70-80%"
+            },
+            {
+                id: 15,
+                question: "Which type of healing occurs in clean surgical incisions with approximated edges?",
+                options: [
+                    "Healing by second intention",
+                    "Healing by primary union",
+                    "Healing by tertiary intention",
+                    "Healing by regeneration only"
+                ],
+                correctAnswer: 1,
+                explanation: "Healing by first intention (primary union) occurs in clean surgical incisions with approximated edges.",
+                memoryTip: "Primary intention = clean surgical wounds with approximated edges"
+            },
+            {
+                id: 16,
+                question: "What is a key difference between primary and secondary intention healing?",
+                options: [
+                    "Primary intention involves more granulation tissue",
+                    "Secondary intention has minimal inflammation",
+                    "Primary intention results in a narrower scar",
+                    "Secondary intention involves no wound contraction"
+                ],
+                correctAnswer: 2,
+                explanation: "Healing by primary intention results in a narrow scar with little cosmetic or functional impairment, unlike secondary intention.",
+                memoryTip: "Primary intention = narrow scar; Secondary intention = wider scar"
+            },
+            {
+                id: 17,
+                question: "Which growth factor is primarily responsible for driving angiogenesis?",
+                options: [
+                    "PDGF (Platelet-Derived Growth Factor)",
+                    "TGF-β (Transforming Growth Factor-Beta)",
+                    "VEGF (Vascular Endothelial Growth Factor)",
+                    "EGF (Epidermal Growth Factor)"
+                ],
+                correctAnswer: 2,
+                explanation: "VEGF drives angiogenesis, which is essential for new blood vessel formation during healing.",
+                memoryTip: "VEGF = Vascular Endothelial Growth Factor = angiogenesis"
+            },
+            {
+                id: 18,
+                question: "What is the role of TGF-β in the later stages of healing?",
+                options: [
+                    "Stimulates further fibroblast proliferation",
+                    "Promotes epithelial migration",
+                    "Switches to an inhibitory role for epithelial and endothelial cells",
+                    "Enhances collagen degradation"
+                ],
+                correctAnswer: 2,
+                explanation: "When tissue integrity is restored, TGF-β switches to an inhibitory role for epithelial and endothelial cells, helping to stop the healing process.",
+                memoryTip: "TGF-β = dual role: stimulates early, inhibits late"
+            },
+            {
+                id: 19,
+                question: "Which local factor significantly delays wound healing by prolonging inflammation and releasing collagenases?",
+                options: [
+                    "Adequate vascular supply",
+                    "Infection",
+                    "Immobilization of the wound",
+                    "Clean wound edges"
+                ],
+                correctAnswer: 1,
+                explanation: "Bacterial contamination prolongs inflammation, diverts energy to immune defense, and releases collagenases that degrade matrix.",
+                memoryTip: "Infection = prolonged inflammation + collagenase release"
+            },
+            {
+                id: 20,
+                question: "How does impaired vascular supply affect wound healing?",
+                options: [
+                    "Accelerates collagen synthesis",
+                    "Has no significant effect on healing",
+                    "Leads to slow healing and weak scars",
+                    "Promotes excessive granulation tissue formation"
+                ],
+                correctAnswer: 2,
+                explanation: "Wounds with impaired blood supply heal slowly, and ischemia can produce pressure sores and prevent proper healing.",
+                memoryTip: "Poor blood supply = slow healing + weak scars"
+            },
+            {
+                id: 21,
+                question: "Which vitamin deficiency specifically impairs collagen synthesis by affecting proline and lysine hydroxylation?",
+                options: [
+                    "Vitamin A deficiency",
+                    "Vitamin B12 deficiency",
+                    "Vitamin C deficiency",
+                    "Vitamin D deficiency"
+                ],
+                correctAnswer: 2,
+                explanation: "Vitamin C is required for hydroxylation of proline and lysine in collagen synthesis; deficiency results in impaired wound healing.",
+                memoryTip: "Vitamin C needed for collagen hydroxylation → scurvy = poor healing"
+            },
+            {
+                id: 22,
+                question: "How do corticosteroids affect wound healing?",
+                options: [
+                    "Accelerate collagen synthesis and epithelialization",
+                    "Have no significant effect on healing processes",
+                    "Impair healing by inhibiting collagen synthesis and fibroplasia",
+                    "Promote angiogenesis and granulation tissue formation"
+                ],
+                correctAnswer: 2,
+                explanation: "Corticosteroids impair wound healing by inhibiting collagen synthesis, fibroplasia, neovascularization, epithelialization, and contraction.",
+                memoryTip: "Corticosteroids = impaired healing (anti-inflammatory + anti-fibroplastic)"
+            },
+            {
+                id: 23,
+                question: "What is wound dehiscence?",
+                options: [
+                    "Excessive scar formation beyond wound margins",
+                    "Formation of an epidermoid cyst in a healing wound",
+                    "Bursting open of a wound due to weak scar formation",
+                    "Exaggerated wound contraction causing deformity"
+                ],
+                correctAnswer: 2,
+                explanation: "Dehiscence occurs when insufficient extracellular matrix is deposited or there is inadequate cross-linking, resulting in weak scars that can burst open.",
+                memoryTip: "Dehiscence = wound bursting open"
+            },
+            {
+                id: 24,
+                question: "What distinguishes a keloid from a hypertrophic scar?",
+                options: [
+                    "Keloids remain confined to wound borders",
+                    "Hypertrophic scars extend beyond original margins",
+                    "Keloids extend beyond original margins and invade adjacent dermis",
+                    "Hypertrophic scars recur after excision"
+                ],
+                correctAnswer: 2,
+                explanation: "Keloids are characterized by excessive collagenous tissue that extends beyond original margins, invades adjacent dermis, and recurs after excision.",
+                memoryTip: "Keloid = grows beyond borders; Hypertrophic scar = stays within borders"
+            },
+            {
+                id: 25,
+                question: "What causes contractures in wound healing?",
+                options: [
+                    "Excessive collagen deposition without organization",
+                    "Inadequate granulation tissue formation",
+                    "Exaggeration of wound contraction processes",
+                    "Infection and persistent inflammation"
+                ],
+                correctAnswer: 2,
+                explanation: "Contractures result from an exaggeration of wound contraction processes, causing severe deformity of the wound and surrounding tissues.",
+                memoryTip: "Contracture = excessive contraction → deformity"
+            },
+            {
+                id: 26,
+                question: "Which condition is characterized by palmar contracture?",
+                options: [
+                    "Peyronie disease",
+                    "Dupuytren disease",
+                    "Lederhosen disease",
+                    "Keloid disorder"
+                ],
+                correctAnswer: 1,
+                explanation: "Dupuytren disease is characterized by palmar contracture, while Peyronie disease affects the penis and Lederhosen disease affects the plantar fascia.",
+                memoryTip: "Dupuytren = palmar contracture"
+            },
+            {
+                id: 27,
+                question: "What is 'proud flesh' in the context of wound healing?",
+                options: [
+                    "Excessive collagen deposition in a scar",
+                    "Epithelial cells that form a cyst in the wound",
+                    "Exuberant granulation tissue that protrudes from the wound",
+                    "Necrotic tissue that impedes healing"
+                ],
+                correctAnswer: 2,
+                explanation: "'Proud flesh' refers to exuberant granulation tissue that protrudes above the wound surface, impeding re-epithelialization.",
+                memoryTip: "Proud flesh = excessive granulation tissue"
+            },
+            {
+                id: 28,
+                question: "What are the two histological types of bone?",
+                options: [
+                    "Cortical and cancellous bone",
+                    "Woven and lamellar bone",
+                    "Compact and spongy bone",
+                    "Trabecular and Haversian bone"
+                ],
+                correctAnswer: 1,
+                explanation: "Bone has two histological types: woven (immature) bone with irregular collagen arrangement, and lamellar (adult) bone with parallel collagen sheets.",
+                memoryTip: "Bone types: Woven (immature) and Lamellar (mature)"
+            },
+            {
+                id: 29,
+                question: "Which type of bone has higher mineral content and superior strength?",
+                options: [
+                    "Woven bone",
+                    "Lamellar bone",
+                    "Both have similar strength",
+                    "It depends on the location in the body"
+                ],
+                correctAnswer: 1,
+                explanation: "Lamellar bone has high mineral content and superior strength compared to woven bone, which has less calcium and is relatively weak.",
+                memoryTip: "Lamellar bone > Woven bone in strength"
+            },
+            {
+                id: 30,
+                question: "What is the first stage of fracture healing?",
+                options: [
+                    "Inflammation",
+                    "Formation of granulation tissue",
+                    "Haematoma formation",
+                    "Callus development"
+                ],
+                correctAnswer: 2,
+                explanation: "The first stage of fracture healing is haematoma formation, where bleeding from torn vessels forms a clot that stabilizes the injury site.",
+                memoryTip: "Fracture healing starts with hematoma formation"
+            },
+            {
+                id: 31,
+                question: "During fracture healing, what is the role of platelets in the haematoma?",
+                options: [
+                    "Phagocytose dead cells and debris",
+                    "Form the initial soft callus",
+                    "Release growth factors and cytokines",
+                    "Differentiate into osteoblasts"
+                ],
+                correctAnswer: 2,
+                explanation: "Platelets in the clot release growth factors and cytokines that attract immune cells and initiate the inflammatory phase of fracture healing.",
+                memoryTip: "Platelets release growth factors in fracture healing"
+            },
+            {
+                id: 32,
+                question: "When do neutrophils typically migrate to a fracture site?",
+                options: [
+                    "Within hours of injury",
+                    "3-5 days after injury",
+                    "1 week after injury",
+                    "During the remodeling phase"
+                ],
+                correctAnswer: 0,
+                explanation: "Neutrophils migrate to the fracture site within hours of injury, clearing debris and bacteria.",
+                memoryTip: "Neutrophils = first responders (hours)"
+            },
+            {
+                id: 33,
+                question: "What is formed during the callus development stage of fracture healing?",
+                options: [
+                    "A fibrin clot that stabilizes the fracture",
+                    "Granulation tissue with type III collagen",
+                    "Woven bone and cartilage that unites fracture ends",
+                    "Lamellar bone with Haversian systems"
+                ],
+                correctAnswer: 2,
+                explanation: "During callus development, mesenchymal cells differentiate to form either woven bone or cartilage, creating a callus that unites the fracture ends.",
+                memoryTip: "Callus = woven bone + cartilage → unites fracture"
+            },
+            {
+                id: 34,
+                question: "How long does the remodeling phase of fracture healing typically take?",
+                options: [
+                    "Days to weeks",
+                    "Weeks to months",
+                    "Months to years",
+                    "It is complete within 6 weeks"
+                ],
+                correctAnswer: 2,
+                explanation: "The remodeling phase of fracture healing can take months to years as osteoclasts resorb woven bone and osteoblasts lay down lamellar bone along stress lines.",
+                memoryTip: "Bone remodeling = months to years"
+            },
+            {
+                id: 35,
+                question: "Which growth factors drive osteoblastic differentiation in fracture healing?",
+                options: [
+                    "VEGF and EGF",
+                    "PDGF and TGF-β",
+                    "BMPs and TGF-β",
+                    "FGF and IGF"
+                ],
+                correctAnswer: 2,
+                explanation: "Bone Morphogenetic Proteins (BMPs) and Transforming Growth Factor-Beta (TGF-β) drive osteoblastic differentiation, promoting new bone formation.",
+                memoryTip: "BMPs + TGF-β = osteoblast differentiation"
+            },
+            {
+                id: 36,
+                question: "What characterizes atrophic non-union in fracture healing?",
+                options: [
+                    "Abundant callus that fails to fuse",
+                    "Scant callus formation",
+                    "Proper alignment but delayed healing",
+                    "Infection at the fracture site"
+                ],
+                correctAnswer: 1,
+                explanation: "Atrophic non-union shows scant callus due to poor blood supply or biological factors. Hypertrophic non-union has abundant callus that fails to unite due to mechanical instability.",
+                memoryTip: "Atrophic non-union = little callus; Hypertrophic = much callus but no union"
+            },
+            {
+                id: 37,
+                question: "What is malunion in fracture healing?",
+                options: [
+                    "Delayed healing due to infection",
+                    "Failure of the fracture to heal",
+                    "Healing with improper alignment",
+                    "Refracture at the same site"
+                ],
+                correctAnswer: 2,
+                explanation: "Malunion occurs due to improper alignment during healing, leading to angulation, rotation, or shortening of the bone.",
+                memoryTip: "Malunion = healed in wrong position"
+            },
+            {
+                id: 38,
+                question: "Which factor does NOT typically delay fracture healing?",
+                options: [
+                    "Adequate blood supply",
+                    "Infection",
+                    "Excessive motion",
+                    "Smoking"
+                ],
+                correctAnswer: 0,
+                explanation: "Inadequate blood supply, infection, smoking, NSAIDs, and excessive motion can delay or prevent fracture union, while adequate blood supply promotes healing.",
+                memoryTip: "Good blood supply promotes fracture healing"
+            },
+            {
+                id: 39,
+                question: "What is a key difference between soft tissue repair and bone healing?",
+                options: [
+                    "Bone healing always results in scar tissue formation",
+                    "Soft tissue repair can restore pre-injury architecture",
+                    "Bone can regain pre-injury strength without permanent scar tissue",
+                    "Soft tissue healing is always faster than bone healing"
+                ],
+                correctAnswer: 2,
+                explanation: "Unlike soft-tissue repair, bone can regain pre-injury strength and architecture without permanent scar tissue under favorable circumstances.",
+                memoryTip: "Bone can heal without scar tissue; soft tissue cannot"
+            },
+            {
+                id: 40,
+                question: "Which cells are responsible for bone resorption during remodeling?",
+                options: [
+                    "Osteoblasts",
+                    "Osteocytes",
+                    "Osteoclasts",
+                    "Chondrocytes"
+                ],
+                correctAnswer: 2,
+                explanation: "Osteoclasts are responsible for bone resorption during the remodeling phase of fracture healing, while osteoblasts lay down new bone.",
+                memoryTip: "Osteoclasts = bone breakdown; Osteoblasts = bone formation"
+            },
+            {
+                id: 41,
+                question: "What provides the initial stability in a fracture before callus formation?",
+                options: [
+                    "The periosteum",
+                    "The haematoma",
+                    "Muscle contractions",
+                    "External fixation only"
+                ],
+                correctAnswer: 1,
+                explanation: "The haematoma formed immediately after fracture provides initial stability and a scaffold for inflammatory cells before callus formation.",
+                memoryTip: "Hematoma provides initial fracture stability"
+            },
+            {
+                id: 42,
+                question: "During which stage of fracture healing does angiogenesis peak?",
+                options: [
+                    "Haematoma formation",
+                    "Inflammation",
+                    "Granulation tissue formation",
+                    "Remodeling"
+                ],
+                correctAnswer: 2,
+                explanation: "Angiogenesis peaks during the granulation tissue formation stage, providing oxygen and nutrients necessary for cell proliferation and matrix synthesis.",
+                memoryTip: "Angiogenesis peaks during granulation tissue formation"
+            },
+            {
+                id: 43,
+                question: "What is the primary source of osteoprogenitor cells in fracture healing?",
+                options: [
+                    "Circulating blood cells",
+                    "The haematoma",
+                    "Periosteum and endosteum",
+                    "Adjacent muscle tissue"
+                ],
+                correctAnswer: 2,
+                explanation: "The periosteum and endosteum contribute osteoprogenitors during fracture healing, which differentiate into osteoblasts for bone formation.",
+                memoryTip: "Osteoprogenitors from periosteum and endosteum"
+            },
+            {
+                id: 44,
+                question: "Which factor is most critical for proper fracture healing?",
+                options: [
+                    "Complete immobilization throughout healing",
+                    "Adequate stability and blood supply",
+                    "High doses of corticosteroids",
+                    "Immediate weight-bearing"
+                ],
+                correctAnswer: 1,
+                explanation: "Adequate stability (to allow proper callus formation) and blood supply (to deliver nutrients and cells) are critical for proper fracture healing.",
+                memoryTip: "Fracture healing needs: Stability + Blood supply"
+            },
+            {
+                id: 45,
+                question: "What happens during the formation of lamellar bone in fracture healing?",
+                options: [
+                    "Random deposition of collagen fibers",
+                    "Formation of cartilage intermediate",
+                    "Invasion of initial scaffolding by osteoclasts followed by osteoblast activity",
+                    "Direct transformation of haematoma into bone"
+                ],
+                correctAnswer: 2,
+                explanation: "During lamellar bone formation, the initial scaffolding (woven bone or calcified cartilage) is invaded by osteoclasts, followed by osteoblasts laying down osteoid that calcifies to form lamellar bone.",
+                memoryTip: "Lamellar bone formation: Osteoclasts remove old → Osteoblasts build new"
+            }
+        ];
+
+        // DOM elements
+        const currentQuestionElement = document.getElementById('current-question');
+        const totalQuestionsElement = document.getElementById('total-questions');
+        const currentScoreElement = document.getElementById('current-score');
+        const progressBar = document.getElementById('progress-bar');
+        const questionNumberElement = document.getElementById('q-number');
+        const questionTextElement = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const explanationTextElement = document.getElementById('explanation-text');
+        const memoryTipElement = document.getElementById('memory-tip');
+        const prevButton = document.getElementById('prev-btn');
+        const nextButton = document.getElementById('next-btn');
+        const submitButton = document.getElementById('submit-btn');
+        const resultsContainer = document.getElementById('results-container');
+        const scoreCircle = document.getElementById('score-circle');
+        const scorePercentageElement = document.getElementById('score-percentage');
+        const scoreTextElement = document.getElementById('score-text');
+        const totalScoreElement = document.getElementById('total-score');
+        const correctCountElement = document.getElementById('correct-count');
+        const incorrectCountElement = document.getElementById('incorrect-count');
+        const unansweredCountElement = document.getElementById('unanswered-count');
+        const accuracyElement = document.getElementById('accuracy');
+        const reviewButton = document.getElementById('review-btn');
+        const restartButton = document.getElementById('restart-btn');
+        const reviewContainer = document.getElementById('review-container');
+        const reviewQuestionsElement = document.getElementById('review-questions');
+        const backToResultsButton = document.getElementById('back-to-results');
+
+        // Quiz state
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let userCorrect = new Array(questions.length).fill(false);
+        let quizCompleted = false;
+
+        // Shuffle function for array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Initialize quiz
+        function initQuiz() {
+            totalQuestionsElement.textContent = questions.length;
+            totalScoreElement.textContent = questions.length;
+            
+            // Shuffle questions and options
+            shuffleArray(questions);
+            questions.forEach(question => {
+                // Store the correct answer before shuffling
+                const correctAnswer = question.correctAnswer;
+                // Shuffle all options
+                question.options = shuffleArray(question.options);
+                // Update the correct answer index after shuffling
+                question.correctAnswer = question.options.indexOf(question.options.find((opt, idx) => 
+                    idx === correctAnswer
+                ));
+            });
+            
+            displayQuestion();
+            
+            // Event listeners
+            prevButton.addEventListener('click', goToPreviousQuestion);
+            nextButton.addEventListener('click', goToNextQuestion);
+            submitButton.addEventListener('click', submitQuiz);
+            reviewButton.addEventListener('click', showReview);
+            restartButton.addEventListener('click', restartQuiz);
+            backToResultsButton.addEventListener('click', showResults);
+        }
+
+        // Display current question
+        function displayQuestion() {
+            const question = questions[currentQuestionIndex];
+            
+            questionNumberElement.textContent = currentQuestionIndex + 1;
+            currentQuestionElement.textContent = currentQuestionIndex + 1;
+            questionTextElement.textContent = question.question;
+            
+            // Update progress bar
+            progressBar.style.width = `${((currentQuestionIndex + 1) / questions.length) * 100}%`;
+            
+            // Update current score
+            const currentScore = userCorrect.filter(correct => correct).length;
+            currentScoreElement.textContent = currentScore;
+            
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+            
+            // Add new options
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                if (userAnswers[currentQuestionIndex] === index) {
+                    optionElement.classList.add('selected');
+                }
+                
+                const optionLetter = document.createElement('div');
+                optionLetter.className = 'option-letter';
+                optionLetter.textContent = String.fromCharCode(65 + index);
+                
+                const optionText = document.createElement('div');
+                optionText.textContent = option;
+                
+                optionElement.appendChild(optionLetter);
+                optionElement.appendChild(optionText);
+                
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Hide explanation initially
+            explanationContainer.style.display = 'none';
+            
+            // Update navigation buttons
+            prevButton.disabled = currentQuestionIndex === 0;
+            nextButton.style.display = currentQuestionIndex === questions.length - 1 ? 'none' : 'inline-block';
+            submitButton.style.display = currentQuestionIndex === questions.length - 1 ? 'inline-block' : 'none';
+        }
+
+        // Select an option
+        function selectOption(optionIndex) {
+            if (quizCompleted) return;
+            
+            userAnswers[currentQuestionIndex] = optionIndex;
+            
+            // Check if answer is correct
+            const question = questions[currentQuestionIndex];
+            const isCorrect = optionIndex === question.correctAnswer;
+            userCorrect[currentQuestionIndex] = isCorrect;
+            
+            // Update UI to show selected option
+            const options = document.querySelectorAll('.option');
+            options.forEach((opt, idx) => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                if (idx === optionIndex) {
+                    opt.classList.add('selected');
+                    if (isCorrect) {
+                        opt.classList.add('correct');
+                    } else {
+                        opt.classList.add('incorrect');
+                    }
+                }
+                if (idx === question.correctAnswer) {
+                    opt.classList.add('correct');
+                }
+            });
+            
+            // Show explanation
+            showExplanation();
+        }
+
+        // Show explanation for current question
+        function showExplanation() {
+            const question = questions[currentQuestionIndex];
+            
+            explanationTextElement.textContent = question.explanation;
+            memoryTipElement.textContent = question.memoryTip;
+            explanationContainer.style.display = 'block';
+        }
+
+        // Navigate to previous question
+        function goToPreviousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
+            }
+        }
+
+        // Navigate to next question
+        function goToNextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion();
+            }
+        }
+
+        // Submit the quiz
+        function submitQuiz() {
+            quizCompleted = true;
+            
+            // Calculate score
+            const correctCount = userCorrect.filter(correct => correct).length;
+            const incorrectCount = userAnswers.filter((answer, index) => 
+                answer !== null && !userCorrect[index]
+            ).length;
+            const unansweredCount = userAnswers.filter(answer => answer === null).length;
+            
+            const scorePercentage = Math.round((correctCount / questions.length) * 100);
+            const accuracy = userAnswers.filter(answer => answer !== null).length > 0 
+                ? Math.round((correctCount / (userAnswers.filter(answer => answer !== null).length)) * 100) 
+                : 0;
+            
+            // Update results UI
+            scoreCircle.style.background = `conic-gradient(var(--success) 0% ${scorePercentage}%, var(--light) ${scorePercentage}% 100%)`;
+            scorePercentageElement.textContent = `${scorePercentage}%`;
+            scoreTextElement.textContent = correctCount;
+            correctCountElement.textContent = correctCount;
+            incorrectCountElement.textContent = incorrectCount;
+            unansweredCountElement.textContent = unansweredCount;
+            accuracyElement.textContent = `${accuracy}%`;
+            
+            // Hide quiz, show results
+            document.getElementById('quiz-container').style.display = 'none';
+            resultsContainer.style.display = 'block';
+        }
+
+        // Show question review
+        function showReview() {
+            resultsContainer.style.display = 'none';
+            reviewContainer.style.display = 'block';
+            
+            // Clear previous review
+            reviewQuestionsElement.innerHTML = '';
+            
+            // Add review items
+            questions.forEach((question, index) => {
+                const reviewItem = document.createElement('div');
+                reviewItem.className = 'review-item';
+                
+                const userAnswerIndex = userAnswers[index];
+                const userAnswer = userAnswerIndex !== null ? question.options[userAnswerIndex] : 'Not answered';
+                const isCorrect = userCorrect[index];
+                const correctAnswer = question.options[question.correctAnswer];
+                
+                reviewItem.innerHTML = `
+                    <div class="review-question">${index + 1}. ${question.question}</div>
+                    <div class="review-answer">
+                        Your answer: <span class="user-answer ${isCorrect ? 'correct' : 'incorrect'}">${userAnswer}</span>
+                    </div>
+                    <div class="review-answer correct-answer">
+                        Correct answer: ${correctAnswer}
+                    </div>
+                    <div class="review-answer">
+                        <strong>Explanation:</strong> ${question.explanation}
+                    </div>
+                    <div class="memory-tip">
+                        <div class="memory-tip-title">Memory Tip:</div>
+                        ${question.memoryTip}
+                    </div>
+                `;
+                
+                reviewQuestionsElement.appendChild(reviewItem);
+            });
+        }
+
+        // Show results after review
+        function showResults() {
+            reviewContainer.style.display = 'none';
+            resultsContainer.style.display = 'block';
+        }
+
+        // Restart the quiz
+        function restartQuiz() {
+            // Reset quiz state
+            currentQuestionIndex = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            userCorrect = new Array(questions.length).fill(false);
+            quizCompleted = false;
+            
+            // Shuffle questions and options again
+            shuffleArray(questions);
+            questions.forEach(question => {
+                // Store the correct answer before shuffling
+                const correctAnswer = question.correctAnswer;
+                // Shuffle all options
+                question.options = shuffleArray(question.options);
+                // Update the correct answer index after shuffling
+                question.correctAnswer = question.options.indexOf(question.options.find((opt, idx) => 
+                    idx === correctAnswer
+                ));
+            });
+            
+            // Reset UI
+            document.getElementById('quiz-container').style.display = 'block';
+            resultsContainer.style.display = 'none';
+            reviewContainer.style.display = 'none';
+            
+            // Display first question
+            displayQuestion();
+        }
+
+        // Initialize the quiz when the page loads
+        window.addEventListener('load', initQuiz);
+    </script>
+</body>
+    </html>
