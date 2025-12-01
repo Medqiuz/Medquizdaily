@@ -3,1602 +3,1956 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inflammation Quiz | Haramaya University Pharmacy</title>
+    <title>Advanced Microbiology Quiz - MedQuiz Pro</title>
     <style>
         :root {
-            --primary: #3498db;
-            --secondary: #2c3e50;
-            --success: #2ecc71;
-            --danger: #e74c3c;
-            --warning: #f39c12;
-            --light: #ecf0f1;
-            --dark: #34495e;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
+            --primary: #1a237e;
+            --secondary: #0d47a1;
+            --accent: #2962ff;
+            --success: #00c853;
+            --warning: #ffab00;
+            --danger: #d50000;
+            --light: #f5f7ff;
+            --dark: #0a1931;
+            --highlight: #4fc3f7;
+            --neon: #00e5ff;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
-
+        
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: var(--dark);
-            line-height: 1.6;
+            background: linear-gradient(135deg, #0a1931 0%, #1a237e 100%);
+            color: #fff;
             min-height: 100vh;
-            padding: 20px;
+            overflow-x: hidden;
         }
-
+        
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(74, 20, 140, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(0, 150, 255, 0.2) 0%, transparent 20%);
+        }
+        
+        .floating-microbes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .microbe {
+            position: absolute;
+            background: rgba(79, 195, 247, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+        
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
+            padding: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px;
+            background: rgba(26, 35, 126, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
             overflow: hidden;
         }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--neon), var(--accent), var(--neon));
+            animation: shimmer 3s infinite linear;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200px 0; }
+            100% { background-position: 200px 0; }
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, var(--neon), var(--highlight));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 229, 255, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--highlight);
+            margin-bottom: 20px;
+        }
+        
+        .difficulty-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .badge {
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        
+        .badge.medium {
+            background: linear-gradient(45deg, var(--warning), #ff9100);
+            color: var(--dark);
+        }
+        
+        .badge.hard {
+            background: linear-gradient(45deg, var(--danger), #ff1744);
             color: white;
-            padding: 25px;
+        }
+        
+        .badge.expert {
+            background: linear-gradient(45deg, #aa00ff, #e040fb);
+            color: white;
+        }
+        
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 20px;
+            border-radius: 15px;
             text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
-
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--neon);
+            margin-bottom: 5px;
         }
-
-        .quiz-info {
+        
+        .quiz-wrapper {
+            background: rgba(26, 35, 126, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(79, 195, 247, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+        
+        .question-header {
             display: flex;
             justify-content: space-between;
-            padding: 15px 25px;
-            background-color: var(--light);
-            border-bottom: 1px solid #ddd;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(79, 195, 247, 0.3);
         }
-
+        
+        .question-counter {
+            font-size: 1.1rem;
+            color: var(--highlight);
+        }
+        
         .timer {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--danger);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--neon);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: 2px solid var(--neon);
         }
-
-        .progress {
+        
+        .question-card {
+            margin-bottom: 40px;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent), var(--neon));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .question-text {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border-left: 5px solid var(--accent);
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .option.selected {
+            border-color: var(--accent);
+            background: rgba(41, 98, 255, 0.2);
+            box-shadow: 0 0 20px rgba(41, 98, 255, 0.3);
+        }
+        
+        .option.correct {
+            border-color: var(--success);
+            background: rgba(0, 200, 83, 0.2);
+            animation: pulseCorrect 1.5s infinite;
+        }
+        
+        @keyframes pulseCorrect {
+            0% { box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 200, 83, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 200, 83, 0); }
+        }
+        
+        .option.incorrect {
+            border-color: var(--danger);
+            background: rgba(213, 0, 0, 0.2);
+        }
+        
+        .option-letter {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--highlight);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: 700;
+            margin-right: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .explanation-panel {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            display: none;
+            border-left: 5px solid var(--warning);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .explanation-title {
+            color: var(--warning);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-
-        .progress-bar {
-            width: 200px;
-            height: 10px;
-            background-color: #ddd;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background-color: var(--primary);
-            width: 0%;
-            transition: var(--transition);
-        }
-
-        .quiz-container {
-            padding: 30px;
-        }
-
-        .question-container {
-            margin-bottom: 30px;
-        }
-
-        .question-number {
-            font-size: 1.1rem;
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-
-        .question-text {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-
-        .options-container {
-            display: grid;
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-
-        .option {
+        
+        .concept-highlight {
+            background: rgba(79, 195, 247, 0.2);
             padding: 15px;
-            background-color: var(--light);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: var(--transition);
-            border: 2px solid transparent;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid var(--highlight);
         }
-
-        .option:hover {
-            background-color: #e0e7ee;
-            transform: translateY(-2px);
-        }
-
-        .option.selected {
-            border-color: var(--primary);
-            background-color: rgba(52, 152, 219, 0.1);
-        }
-
-        .option.correct {
-            border-color: var(--success);
-            background-color: rgba(46, 204, 113, 0.1);
-        }
-
-        .option.incorrect {
-            border-color: var(--danger);
-            background-color: rgba(231, 76, 60, 0.1);
-        }
-
-        .explanation-container {
-            padding: 20px;
-            background-color: rgba(52, 152, 219, 0.05);
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: none;
-        }
-
-        .explanation-title {
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .memory-tip {
-            background-color: rgba(243, 156, 18, 0.1);
-            padding: 15px;
-            border-left: 4px solid var(--warning);
-            margin-top: 15px;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .memory-tip-title {
-            font-weight: 600;
-            color: var(--warning);
-            margin-bottom: 5px;
-        }
-
+        
         .navigation {
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
+            gap: 20px;
+            margin-top: 40px;
         }
-
-        button {
-            padding: 12px 25px;
+        
+        .btn {
+            padding: 15px 30px;
             border: none;
-            border-radius: 8px;
-            font-weight: 600;
+            border-radius: 12px;
             cursor: pointer;
-            transition: var(--transition);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 160px;
+            justify-content: center;
         }
-
-        .btn-prev {
-            background-color: var(--light);
-            color: var(--dark);
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
-
-        .btn-next {
-            background-color: var(--primary);
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--accent), var(--neon));
             color: white;
         }
-
-        .btn-submit {
-            background-color: var(--success);
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
             color: white;
-            display: none;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
+        
+        .btn-success {
+            background: linear-gradient(45deg, var(--success), #00e676);
+            color: white;
         }
-
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
+        
+        .btn-danger {
+            background: linear-gradient(45deg, var(--danger), #ff5252);
+            color: white;
         }
-
-        .results-container {
-            padding: 30px;
+        
+        .results-screen {
+            background: rgba(26, 35, 126, 0.9);
+            backdrop-filter: blur(30px);
+            border-radius: 20px;
+            padding: 50px;
             text-align: center;
             display: none;
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            animation: scaleIn 0.5s ease;
         }
-
-        .results-title {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: var(--secondary);
+        
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
-
-        .score {
+        
+        .score-display {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 40px auto;
+        }
+        
+        .score-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 15px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .score-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 15px solid;
+            border-image-slice: 1;
+            clip-path: inset(0 0 0 50%);
+            transform: rotate(0deg);
+        }
+        
+        .score-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             font-size: 4rem;
-            font-weight: bold;
-            color: var(--primary);
-            margin: 20px 0;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon), var(--highlight));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        .score-text {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
+        
+        .performance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
         }
-
-        .summary {
-            text-align: left;
-            background-color: var(--light);
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
+        
+        .performance-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
         }
-
-        .summary-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--secondary);
+        
+        .motivation-section {
+            background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(74, 20, 140, 0.1));
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            text-align: center;
+            border: 1px solid rgba(0, 229, 255, 0.3);
         }
-
-        .restart-btn {
-            background-color: var(--primary);
-            color: white;
-            margin-top: 20px;
-            padding: 15px 30px;
-            font-size: 1.1rem;
-        }
-
-        .question-review {
+        
+        .medquiz-signature {
+            font-size: 2.5rem;
+            font-weight: 700;
             margin-top: 30px;
-            text-align: left;
+            background: linear-gradient(45deg, var(--neon), #18ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        .review-item {
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .review-question {
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .review-answer {
-            margin-bottom: 5px;
-        }
-
-        .correct-answer {
-            color: var(--success);
-            font-weight: 600;
-        }
-
-        .user-answer {
-            color: var(--danger);
-            font-weight: 600;
-        }
-
+        
         @media (max-width: 768px) {
-            .quiz-info {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
+            .container {
+                padding: 15px;
             }
-
-            .progress-bar {
-                width: 100%;
+            
+            .header {
+                padding: 20px;
             }
-
-            .question-text {
-                font-size: 1.2rem;
+            
+            h1 {
+                font-size: 2.2rem;
             }
-
+            
+            .quiz-wrapper {
+                padding: 20px;
+            }
+            
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            
             .navigation {
                 flex-direction: column;
-                gap: 10px;
             }
-
-            button {
+            
+            .btn {
                 width: 100%;
+            }
+            
+            .score-display {
+                width: 250px;
+                height: 250px;
             }
         }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <div class="background-animation"></div>
+    <div class="floating-microbes" id="microbes-container"></div>
+    
     <div class="container">
-        <header>
-            <h1>Inflammation Quiz</h1>
-            <p>Unit 3 - Pharmacy Year 2 | Haramaya University</p>
+        <header class="header">
+            <h1><i class="fas fa-microscope"></i> Advanced Microbiology Quiz</h1>
+            <p class="subtitle">Challenge Your Knowledge - Pharmacy Edition</p>
+            
+            <div class="difficulty-badges">
+                <div class="badge medium"><i class="fas fa-brain"></i> Medium</div>
+                <div class="badge hard"><i class="fas fa-fire"></i> Hard</div>
+                <div class="badge expert"><i class="fas fa-crown"></i> Expert</div>
+            </div>
+            
+            <div class="stats-bar">
+                <div class="stat-card">
+                    <div class="stat-value" id="total-questions">65</div>
+                    <div>Total Questions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">90</div>
+                    <div>Minutes Timer</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">8</div>
+                    <div>Topic Areas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">85%</div>
+                    <div>Passing Score</div>
+                </div>
+            </div>
         </header>
-
-        <div class="quiz-info">
-            <div class="timer">Time: <span id="time">80:00</span></div>
-            <div class="progress">
-                <span>Progress:</span>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progress-fill"></div>
+        
+        <div class="quiz-wrapper" id="quiz-wrapper">
+            <div class="question-header">
+                <div class="question-counter">
+                    Question <span id="current-q">1</span> of <span id="total-q">65</span>
+                    <div style="font-size: 0.9rem; color: var(--highlight); margin-top: 5px;" id="category-label">Bacterial Pathogenesis</div>
                 </div>
-                <span id="progress-text">0/80</span>
-            </div>
-        </div>
-
-        <div class="quiz-container" id="quiz-container">
-            <div class="question-container">
-                <div class="question-number" id="question-number">Question 1 of 80</div>
-                <div class="question-text" id="question-text"></div>
-                <div class="options-container" id="options-container"></div>
-            </div>
-
-            <div class="explanation-container" id="explanation-container">
-                <div class="explanation-title">Explanation</div>
-                <div id="explanation-text"></div>
-                <div class="memory-tip" id="memory-tip">
-                    <div class="memory-tip-title">Memory Tip</div>
-                    <div id="memory-tip-text"></div>
+                <div class="timer">
+                    <i class="fas fa-clock"></i> <span id="timer">90:00</span>
                 </div>
             </div>
-
-            <div class="navigation">
-                <button class="btn-prev" id="prev-btn" disabled>Previous</button>
-                <button class="btn-next" id="next-btn">Next Question</button>
-                <button class="btn-submit" id="submit-btn">Submit Quiz</button>
+            
+            <div class="progress-bar" style="height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; margin: 20px 0 40px 0;">
+                <div id="progress" style="height: 100%; background: linear-gradient(90deg, var(--accent), var(--neon)); width: 2%; border-radius: 2px; transition: width 0.5s ease;"></div>
+            </div>
+            
+            <div id="quiz-content">
+                <div class="question-card">
+                    <div class="question-number">Question #<span id="q-number">1</span></div>
+                    <div class="question-text" id="question-text"></div>
+                    
+                    <div class="options-grid" id="options-container"></div>
+                    
+                    <div class="explanation-panel" id="explanation-panel">
+                        <div class="explanation-title">
+                            <i class="fas fa-lightbulb"></i> Detailed Explanation
+                        </div>
+                        <div id="explanation-content"></div>
+                        <div class="concept-highlight" id="concept-highlight"></div>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" id="prev-btn">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="btn btn-secondary" id="hint-btn">
+                        <i class="fas fa-question-circle"></i> Get Hint
+                    </button>
+                    <button class="btn btn-primary" id="next-btn">
+                        Next Question <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="btn btn-success" id="submit-btn" style="display: none;">
+                        <i class="fas fa-flag-checkered"></i> Submit Quiz
+                    </button>
+                </div>
             </div>
         </div>
-
-        <div class="results-container" id="results-container">
-            <h2 class="results-title">Quiz Results</h2>
-            <div class="score" id="score">0/80</div>
-            <div class="score-text" id="score-text"></div>
-
-            <div class="summary">
-                <div class="summary-title">Performance Summary</div>
-                <p>Total Questions: <span id="total-questions">80</span></p>
-                <p>Correct Answers: <span id="correct-answers">0</span></p>
-                <p>Incorrect Answers: <span id="incorrect-answers">0</span></p>
-                <p>Percentage: <span id="percentage">0%</span></p>
-                <p>Time Taken: <span id="time-taken">80:00</span></p>
+        
+        <div class="results-screen" id="results-screen">
+            <h2 style="font-size: 2.5rem; margin-bottom: 10px;">Quiz Complete! 🎉</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; color: var(--highlight);">Your Performance Analysis</p>
+            
+            <div class="score-display">
+                <div class="score-ring"></div>
+                <div class="score-fill" id="score-fill"></div>
+                <div class="score-value" id="score-percentage">0%</div>
             </div>
-
-            <div class="question-review" id="question-review">
-                <h3>Question Review</h3>
-                <!-- Review content will be generated by JavaScript -->
+            
+            <h3 style="font-size: 2rem; margin: 20px 0;">
+                Score: <span id="final-score">0</span>/<span id="max-score">65</span>
+            </h3>
+            
+            <div class="performance-grid">
+                <div class="performance-card">
+                    <div style="font-size: 2rem; color: var(--success); font-weight: 700;" id="correct-count">0</div>
+                    <div>Correct Answers</div>
+                </div>
+                <div class="performance-card">
+                    <div style="font-size: 2rem; color: var(--danger); font-weight: 700;" id="incorrect-count">0</div>
+                    <div>Incorrect Answers</div>
+                </div>
+                <div class="performance-card">
+                    <div style="font-size: 2rem; color: var(--highlight); font-weight: 700;" id="accuracy-rate">0%</div>
+                    <div>Accuracy Rate</div>
+                </div>
+                <div class="performance-card">
+                    <div style="font-size: 2rem; color: var(--neon); font-weight: 700;" id="time-taken">0:00</div>
+                    <div>Time Taken</div>
+                </div>
             </div>
-
-            <button class="restart-btn" id="restart-btn">Restart Quiz</button>
+            
+            <div class="motivation-section">
+                <h3 style="font-size: 1.8rem; margin-bottom: 20px;">
+                    <i class="fas fa-award"></i> Excellence in Microbiology
+                </h3>
+                <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">
+                    "The more you understand microbes, the better pharmacist you become. Every question you answered today brings you closer to saving lives tomorrow."
+                </p>
+                <p style="font-size: 1.1rem; line-height: 1.6; font-weight: 600;">
+                    Keep pushing your boundaries. The world needs pharmacists who understand the invisible world!
+                </p>
+                <div class="medquiz-signature">
+                    - MedQuiz Pro Team <i class="fas fa-stethoscope"></i>
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px;">
+                <button class="btn btn-primary" id="review-btn" style="margin-right: 15px;">
+                    <i class="fas fa-chart-bar"></i> Detailed Review
+                </button>
+                <button class="btn btn-success" id="restart-btn">
+                    <i class="fas fa-redo"></i> Try Again
+                </button>
+            </div>
         </div>
     </div>
 
     <script>
-        // Quiz questions array
+        // Advanced Medical Microbiology Questions (65 challenging questions)
         const questions = [
-            // Basic Questions (1-20)
+            // Category 1: Advanced Bacterial Pathogenesis (8 questions)
             {
-                question: "Which of the following is NOT a cardinal sign of acute inflammation?",
+                id: 1,
+                question: "Which mechanism allows Neisseria meningitidis to cross the blood-brain barrier?",
                 options: [
-                    "Rubor (redness)",
-                    "Tumor (swelling)",
-                    "Calor (heat)",
-                    "Febris (fever)"
+                    "A. Type IV pili-mediated transcytosis",
+                    "B. Capsule-assisted phagocytosis",
+                    "C. LPS-induced endothelial disruption",
+                    "D. IgA protease secretion"
                 ],
-                correct: 3,
-                explanation: "The five cardinal signs of acute inflammation are rubor (redness), tumor (swelling), calor (heat), dolor (pain), and functio laesa (loss of function). Febris (fever) is a systemic response, not a local cardinal sign.",
-                memoryTip: "Remember the 5 R's: Redness, Swelling, Heat, Pain, and Loss of function. Fever is systemic, not local."
+                correctAnswer: "A",
+                explanation: "N. meningitidis uses type IV pili to bind to endothelial cells and initiate transcytosis across the blood-brain barrier. The pilus retraction pulls the bacteria close to endothelial cells, facilitating invasion.",
+                concept: "Bacterial invasion mechanisms and CNS penetration",
+                category: "Bacterial Pathogenesis",
+                difficulty: "Hard"
             },
             {
-                question: "The process by which leukocytes move from the bloodstream to the tissue is called:",
+                id: 2,
+                question: "What is the primary role of the M protein in Streptococcus pyogenes virulence?",
                 options: [
-                    "Chemotaxis",
-                    "Phagocytosis",
-                    "Diapedesis",
-                    "Opsonization"
+                    "A. Complement activation via alternative pathway",
+                    "B. Prevention of phagocytosis by binding fibrinogen",
+                    "C. Direct lysis of erythrocytes",
+                    "D. Inhibition of neutrophil chemotaxis"
                 ],
-                correct: 2,
-                explanation: "Diapedesis is the process where leukocytes migrate through the walls of blood vessels into the tissues. Chemotaxis is movement toward chemical attractants, phagocytosis is engulfment of particles, and opsonization is coating of pathogens to enhance phagocytosis.",
-                memoryTip: "Diapedesis = 'Dia' (through) + 'pedesis' (leaping) = leaping through vessel walls."
+                correctAnswer: "B",
+                explanation: "M protein binds fibrinogen, which coats the bacterial surface and prevents opsonization by complement C3b, thus inhibiting phagocytosis. Different M protein serotypes provide type-specific immunity.",
+                concept: "Anti-phagocytic mechanisms and antigenic variation",
+                category: "Bacterial Pathogenesis",
+                difficulty: "Medium"
             },
             {
-                question: "Which cell type is the primary effector in acute inflammation?",
+                id: 3,
+                question: "Which toxin mechanism involves ADP-ribosylation of EF-2?",
                 options: [
-                    "Lymphocytes",
-                    "Macrophages",
-                    "Neutrophils",
-                    "Eosinophils"
+                    "A. Cholera toxin",
+                    "B. Diphtheria toxin",
+                    "C. Tetanus toxin",
+                    "D. Shiga toxin"
                 ],
-                correct: 2,
-                explanation: "Neutrophils are the primary cells in acute inflammation, arriving first at the site of injury. They are highly efficient at phagocytosis and release of inflammatory mediators.",
-                memoryTip: "Neutrophils = 'First responders' in acute inflammation. They arrive within 6-24 hours."
+                correctAnswer: "B",
+                explanation: "Diphtheria toxin catalyzes ADP-ribosylation of elongation factor 2 (EF-2), inhibiting protein synthesis and causing cell death. This is a classic example of A-B toxin mechanism.",
+                concept: "Bacterial toxin mechanisms at molecular level",
+                category: "Bacterial Pathogenesis",
+                difficulty: "Medium"
             },
             {
-                question: "The increased vascular permeability in acute inflammation is primarily mediated by:",
+                id: 4,
+                question: "What unique feature allows Helicobacter pylori to survive in stomach acid?",
                 options: [
-                    "Histamine",
-                    "Prostaglandins",
-                    "Leukotrienes",
-                    "Cytokines"
+                    "A. Production of ammonium ions via urease",
+                    "B. Thick peptidoglycan layer",
+                    "C. Intracellular localization in parietal cells",
+                    "D. Secretion of bicarbonate-rich mucus"
                 ],
-                correct: 0,
-                explanation: "Histamine, released by mast cells, basophils, and platelets, is a key mediator that causes vasodilation and increased vascular permeability in the early stages of acute inflammation.",
-                memoryTip: "Histamine causes the 'H' effects: Heat, Hyperemia, and increased permeability."
+                correctAnswer: "A",
+                explanation: "H. pylori produces urease that converts urea to ammonia and CO2, creating a neutralizing cloud of ammonium ions around the bacterium, allowing survival in acidic stomach environment.",
+                concept: "Bacterial adaptation to extreme environments",
+                category: "Bacterial Pathogenesis",
+                difficulty: "Medium"
             },
             {
-                question: "Which of the following is a characteristic feature of chronic inflammation?",
+                id: 5,
+                question: "Which virulence factor of Pseudomonas aeruginosa is associated with cystic fibrosis pathogenesis?",
                 options: [
-                    "Predominance of neutrophils",
-                    "Formation of pus",
-                    "Tissue destruction and repair occurring simultaneously",
-                    "Rapid onset and short duration"
+                    "A. Alginate capsule formation",
+                    "B. Type III secretion system",
+                    "C. Elastase production",
+                    "D. All of the above"
                 ],
-                correct: 2,
-                explanation: "Chronic inflammation is characterized by prolonged duration (weeks to months) with active inflammation, tissue destruction, and attempts at repair occurring simultaneously.",
-                memoryTip: "Chronic = Long duration + Tissue destruction + Repair happening together."
+                correctAnswer: "D",
+                explanation: "P. aeruginosa in CF patients exhibits alginate capsule (mucoid phenotype), type III secretion for toxin delivery, and elastase for tissue destruction - all contributing to chronic infection.",
+                concept: "Bacterial adaptations in chronic infections",
+                category: "Bacterial Pathogenesis",
+                difficulty: "Hard"
             },
             {
-                question: "Granulomatous inflammation is typically associated with:",
+                id: 6,
+                question: "How does Staphylococcus aureus protein A contribute to immune evasion?",
                 options: [
-                    "Viral infections",
-                    "Acute bacterial infections",
-                    "Intracellular pathogens or foreign bodies",
-                    "Allergic reactions"
+                    "A. Binds Fc region of IgG, preventing opsonization",
+                    "B. Cleaves IgA antibodies",
+                    "C. Inhibits complement C3 convertase",
+                    "D. Degrades C5a chemotactic factor"
                 ],
-                correct: 2,
-                explanation: "Granulomatous inflammation is a specific type of chronic inflammation characterized by the formation of granulomas, which are typically seen in response to intracellular pathogens (like Mycobacterium tuberculosis) or foreign bodies that are difficult to eliminate.",
-                memoryTip: "Granulomas form when the immune system 'walls off' something it can't eliminate - think TB, sarcoidosis, foreign bodies."
+                correctAnswer: "A",
+                explanation: "Protein A binds the Fc portion of IgG antibodies, positioning them 'backwards' so the Fab regions cannot interact with antigens, preventing opsonization and phagocytosis.",
+                concept: "Molecular mechanisms of immune evasion",
+                category: "Bacterial Pathogenesis",
+                difficulty: "Medium"
             },
             {
-                question: "Which of the following is NOT a function of macrophages in inflammation?",
+                id: 7,
+                question: "What is the mechanism of anthrax lethal factor?",
                 options: [
-                    "Phagocytosis of pathogens and debris",
-                    "Antigen presentation to lymphocytes",
-                    "Production of antibodies",
-                    "Secretion of cytokines and growth factors"
+                    "A. Proteolytic cleavage of MAP kinase kinases",
+                    "B. Inhibition of protein synthesis",
+                    "C. Pore formation in cell membranes",
+                    "D. ADP-ribosylation of G proteins"
                 ],
-                correct: 2,
-                explanation: "Macrophages perform many functions including phagocytosis, antigen presentation, and secretion of various mediators, but they do not produce antibodies. Antibody production is the function of B lymphocytes and plasma cells.",
-                memoryTip: "Macrophages are phagocytic 'big eaters' and antigen presenters, but B-cells make antibodies."
+                correctAnswer: "A",
+                explanation: "Anthrax lethal factor is a zinc metalloprotease that cleaves MAP kinase kinases, disrupting intracellular signaling and causing macrophage apoptosis and cytokine storm.",
+                concept: "Bacterial toxin enzymatic activities",
+                category: "Bacterial Pathogenesis",
+                difficulty: "Hard"
             },
             {
-                question: "The complement component C5a is primarily responsible for:",
+                id: 8,
+                question: "Which bacterium uses actin-based motility for cell-to-cell spread?",
                 options: [
-                    "Opsonization of pathogens",
-                    "Formation of membrane attack complex",
-                    "Chemotaxis of neutrophils",
-                    "Vasodilation"
+                    "A. Listeria monocytogenes",
+                    "B. Salmonella typhi",
+                    "C. Shigella flexneri",
+                    "D. Both A and C"
                 ],
-                correct: 2,
-                explanation: "C5a is a powerful chemotactic factor that attracts neutrophils to the site of inflammation. C3b is involved in opsonization, C5b-9 forms the membrane attack complex, and C3a and C5a both contribute to vasodilation.",
-                memoryTip: "C5a = Chemotaxis (both start with 'C')"
-            },
-            {
-                question: "Which of the following mediators is derived from arachidonic acid via the lipoxygenase pathway?",
-                options: [
-                    "Prostaglandins",
-                    "Leukotrienes",
-                    "Thromboxanes",
-                    "Prostacyclins"
-                ],
-                correct: 1,
-                explanation: "Leukotrienes are derived from arachidonic acid via the lipoxygenase pathway. Prostaglandins, thromboxanes, and prostacyclins are derived via the cyclooxygenase pathway.",
-                memoryTip: "Lipoxygenase → Leukotrienes (both start with 'L')"
-            },
-            {
-                question: "The process of coating microorganisms to enhance phagocytosis is called:",
-                options: [
-                    "Chemotaxis",
-                    "Diapedesis",
-                    "Opsonization",
-                    "Margination"
-                ],
-                correct: 2,
-                explanation: "Opsonization is the process of coating pathogens with opsonins (such as antibodies or complement proteins) to enhance their recognition and phagocytosis by immune cells.",
-                memoryTip: "Opsonization makes pathogens 'tasty' for phagocytes to eat."
-            },
-            {
-                question: "Which type of inflammation is characterized by the formation of pus?",
-                options: [
-                    "Serous inflammation",
-                    "Fibrinous inflammation",
-                    "Suppurative inflammation",
-                    "Catarrhal inflammation"
-                ],
-                correct: 2,
-                explanation: "Suppurative (or purulent) inflammation is characterized by the formation of pus, which consists of dead neutrophils, tissue debris, and fluid.",
-                memoryTip: "Suppurative = Pus formation. Think abscesses and boils."
-            },
-            {
-                question: "The migration of leukocytes along the endothelial surface in a tumbling motion is called:",
-                options: [
-                    "Adhesion",
-                    "Rolling",
-                    "Pavementing",
-                    "Margination"
-                ],
-                correct: 1,
-                explanation: "Rolling is the process where leukocytes tumble slowly along the endothelium, mediated by selectins, before firm adhesion and transmigration.",
-                memoryTip: "Rolling → Adhesion → Transmigration. Remember the sequence: RAT."
-            },
-            {
-                question: "Which of the following is a key difference between exudate and transudate?",
-                options: [
-                    "Exudate has lower protein content",
-                    "Transudate has higher specific gravity",
-                    "Exudate results from increased vascular permeability",
-                    "Transudate contains more inflammatory cells"
-                ],
-                correct: 2,
-                explanation: "Exudate is an inflammatory fluid with high protein content and cells, resulting from increased vascular permeability. Transudate is a non-inflammatory fluid with low protein content, resulting from hemodynamic imbalances.",
-                memoryTip: "Exudate = Inflammatory, protein-rich. Transudate = Non-inflammatory, protein-poor."
-            },
-            {
-                question: "The most efficient bactericidal system in neutrophils is:",
-                options: [
-                    "Oxygen-independent mechanisms",
-                    "Lysozyme action",
-                    "H2O2-halide-myeloperoxidase system",
-                    "Lactoferrin"
-                ],
-                correct: 2,
-                explanation: "The H2O2-halide-myeloperoxidase system is the most efficient bactericidal mechanism in neutrophils, producing hypochlorous acid (similar to household bleach) that is highly toxic to microorganisms.",
-                memoryTip: "Myeloperoxidase system = Neutrophil's 'bleach factory' for killing microbes."
-            },
-            {
-                question: "Which cytokine is primarily responsible for fever in systemic inflammation?",
-                options: [
-                    "IL-1",
-                    "IL-4",
-                    "IL-10",
-                    "TGF-β"
-                ],
-                correct: 0,
-                explanation: "IL-1 (interleukin-1) is a key pyrogenic cytokine that acts on the hypothalamus to raise the body's temperature set point, resulting in fever.",
-                memoryTip: "IL-1 = Inflammatory cytokine that induces fever (both start with 'F' sound)."
-            },
-            {
-                question: "Langhans giant cells are characteristically seen in:",
-                options: [
-                    "Rheumatoid arthritis",
-                    "Tuberculosis",
-                    "Acute appendicitis",
-                    "Asthma"
-                ],
-                correct: 1,
-                explanation: "Langhans giant cells, with peripherally arranged nuclei in a horseshoe pattern, are characteristic of tuberculous granulomas, although they can be seen in other granulomatous diseases.",
-                memoryTip: "Langhans giant cells = Think TB (Tuberculosis)."
-            },
-            {
-                question: "Which of the following is NOT a systemic effect of inflammation?",
-                options: [
-                    "Fever",
-                    "Leukocytosis",
-                    "Increased acute-phase proteins",
-                    "Vasoconstriction"
-                ],
-                correct: 3,
-                explanation: "Vasoconstriction is a local vascular response in acute inflammation, not a systemic effect. Fever, leukocytosis, and increased acute-phase proteins are all systemic manifestations of inflammation.",
-                memoryTip: "Systemic effects: FEVER (Fever, Elevated acute-phase proteins, White cell changes, Endocrine changes, Reduced appetite)."
-            },
-            {
-                question: "The process where leukocytes are attracted to the site of inflammation by chemical gradients is called:",
-                options: [
-                    "Margination",
-                    "Chemotaxis",
-                    "Phagocytosis",
-                    "Opsonization"
-                ],
-                correct: 1,
-                explanation: "Chemotaxis is the directed movement of cells along a chemical gradient. In inflammation, leukocytes are attracted to the site by chemotactic factors like C5a, LTB4, and bacterial products.",
-                memoryTip: "Chemotaxis = Chemical (chemo) + movement (taxis). Cells follow the chemical trail."
-            },
-            {
-                question: "Which of the following cells is primarily involved in chronic inflammation?",
-                options: [
-                    "Neutrophils",
-                    "Eosinophils",
-                    "Macrophages",
-                    "Basophils"
-                ],
-                correct: 2,
-                explanation: "Macrophages are the primary cells in chronic inflammation. They persist at the site, phagocytose debris, present antigens, and secrete mediators that perpetuate the inflammatory response.",
-                memoryTip: "Chronic inflammation = Macrophages as the 'orchestrators'."
-            },
-            {
-                question: "The initial transient vasoconstriction in acute inflammation is followed by:",
-                options: [
-                    "Vasodilation",
-                    "Increased vascular permeability",
-                    "Stasis",
-                    "Margination"
-                ],
-                correct: 0,
-                explanation: "After the initial brief vasoconstriction, there is sustained vasodilation of arterioles and venules, leading to increased blood flow (hyperemia) and the redness and heat of inflammation.",
-                memoryTip: "Vascular events sequence: Constriction → Dilation → Increased permeability → Stasis."
+                correctAnswer: "D",
+                explanation: "Both Listeria and Shigella use actin polymerization to propel themselves through cytoplasm and into adjacent cells, avoiding extracellular immune defenses.",
+                concept: "Intracellular bacterial motility mechanisms",
+                category: "Bacterial Pathogenesis",
+                difficulty: "Hard"
             },
 
-            // Intermediate Questions (21-40)
+            // Category 2: Antimicrobial Resistance Mechanisms (8 questions)
             {
-                question: "Which of the following is a characteristic of serous inflammation?",
+                id: 9,
+                question: "What is the mechanism of vancomycin resistance in VRE?",
                 options: [
-                    "Formation of pus",
-                    "Accumulation of fibrin",
-                    "Outpouring of thin, protein-poor fluid",
-                    "Extensive necrosis"
+                    "A. Alteration of penicillin-binding proteins",
+                    "B. Production of β-lactamase",
+                    "C. Modification of peptidoglycan precursor (D-Ala-D-Lac)",
+                    "D. Efflux pump overexpression"
                 ],
-                correct: 2,
-                explanation: "Serous inflammation is characterized by the outpouring of a thin, watery fluid (transudate or modified transudate) derived from plasma or mesothelial cell secretions.",
-                memoryTip: "Serous = Clear, watery fluid like in blisters or pleural effusions."
+                correctAnswer: "C",
+                explanation: "Vancomycin-resistant enterococci alter the peptidoglycan precursor from D-Ala-D-Ala to D-Ala-D-Lac, reducing vancomycin binding affinity by 1000-fold.",
+                concept: "Glycopeptide resistance mechanisms",
+                category: "Antimicrobial Resistance",
+                difficulty: "Medium"
             },
             {
-                question: "The Hageman factor (Factor XII) activates which of the following systems?",
+                id: 10,
+                question: "Which resistance mechanism involves enzymatic modification of aminoglycosides?",
                 options: [
-                    "Complement system only",
-                    "Coagulation system only",
-                    "Kinin system only",
-                    "Coagulation, kinin, and complement systems"
+                    "A. AAC enzymes (acetyltransferases)",
+                    "B. TEM β-lactamases",
+                    "C. MecA gene product",
+                    "D. Tet efflux pumps"
                 ],
-                correct: 3,
-                explanation: "Hageman factor (Factor XII) activation initiates multiple systems: the coagulation system, the kinin system (leading to bradykinin production), the fibrinolytic system, and the complement system.",
-                memoryTip: "Hageman factor = Master activator of multiple inflammatory pathways."
+                correctAnswer: "A",
+                explanation: "Aminoglycoside acetyltransferases (AAC) acetylate amino groups on aminoglycosides, preventing binding to bacterial ribosomes.",
+                concept: "Enzymatic antibiotic modification",
+                category: "Antimicrobial Resistance",
+                difficulty: "Medium"
             },
             {
-                question: "Which of the following is NOT an opsonin?",
+                id: 11,
+                question: "What genetic element commonly carries multiple antibiotic resistance genes?",
                 options: [
-                    "IgG antibody",
-                    "C3b complement component",
-                    "Histamine",
-                    "Mannose-binding lectin"
+                    "A. Transposons",
+                    "B. Integrons",
+                    "C. Plasmids",
+                    "D. All of the above"
                 ],
-                correct: 2,
-                explanation: "Histamine is a vasoactive amine that increases vascular permeability but does not function as an opsonin. IgG, C3b, and mannose-binding lectin are all opsonins that enhance phagocytosis.",
-                memoryTip: "Opsonins = Antibodies (IgG), Complement (C3b), Collectins (MBL). Histamine is not an opsonin."
+                correctAnswer: "D",
+                explanation: "All these genetic elements can carry resistance genes. Integrons specifically capture gene cassettes, plasmids transfer horizontally, and transposons mobilize genes.",
+                concept: "Genetic basis of multidrug resistance",
+                category: "Antimicrobial Resistance",
+                difficulty: "Hard"
             },
             {
-                question: "The transformation of macrophages into epithelioid cells is mediated by:",
+                id: 12,
+                question: "Which mechanism underlies MRSA resistance?",
                 options: [
-                    "IL-4",
-                    "IFN-γ",
-                    "IL-10",
-                    "TGF-β"
+                    "A. Modified penicillin-binding protein (PBP2a)",
+                    "B. β-lactamase production",
+                    "C. Porin mutations",
+                    "D. Ribosomal methylation"
                 ],
-                correct: 1,
-                explanation: "Interferon-gamma (IFN-γ), produced by activated T cells, is the key cytokine that transforms macrophages into epithelioid cells in granulomatous inflammation.",
-                memoryTip: "IFN-γ from T-cells transforms macrophages into epithelioid cells in granulomas."
+                correctAnswer: "A",
+                explanation: "MRSA produces PBP2a with low affinity for β-lactams, encoded by mecA gene on SCCmec mobile genetic element.",
+                concept: "β-lactam resistance in Gram-positives",
+                category: "Antimicrobial Resistance",
+                difficulty: "Medium"
             },
             {
-                question: "Which of the following is a feature of pseudomembranous inflammation?",
+                id: 13,
+                question: "What is the significance of ESBL production?",
                 options: [
-                    "Formation of a false membrane over mucosal surfaces",
-                    "Accumulation of serous fluid in body cavities",
-                    "Extensive hemorrhage",
-                    "Minimal tissue damage"
+                    "A. Resistance to all β-lactams except carbapenems",
+                    "B. Resistance to vancomycin",
+                    "C. Resistance to fluoroquinolones",
+                    "D. Resistance to macrolides"
                 ],
-                correct: 0,
-                explanation: "Pseudomembranous inflammation is characterized by the formation of a false membrane composed of fibrin, necrotic epithelial cells, and inflammatory cells over inflamed mucosal surfaces, as seen in diphtheria and pseudomembranous colitis.",
-                memoryTip: "Pseudomembranous = False membrane formation on mucosa."
+                correctAnswer: "A",
+                explanation: "Extended-spectrum β-lactamases hydrolyze penicillins, cephalosporins, and aztreonam but not carbapenems, posing significant treatment challenges.",
+                concept: "Extended-spectrum β-lactamases",
+                category: "Antimicrobial Resistance",
+                difficulty: "Medium"
             },
             {
-                question: "The pain in acute inflammation is primarily mediated by:",
+                id: 14,
+                question: "Which resistance mechanism involves target site modification?",
                 options: [
-                    "Histamine",
-                    "Bradykinin and prostaglandins",
-                    "Complement components",
-                    "Leukotrienes"
+                    "A. erm genes encoding ribosomal methylation",
+                    "B. bla genes encoding β-lactamases",
+                    "C. tet genes encoding efflux pumps",
+                    "D. aac genes encoding acetyltransferases"
                 ],
-                correct: 1,
-                explanation: "Pain (dolor) in acute inflammation is mediated by bradykinin and prostaglandins (especially PGE2), which sensitize nerve endings to painful stimuli.",
-                memoryTip: "Pain mediators: Bradykinin and Prostaglandins (remember BP for Blood Pressure and Pain)."
+                correctAnswer: "A",
+                explanation: "erm genes encode methylases that modify 23S rRNA, preventing macrolide, lincosamide, and streptogramin B binding (MLSᵦ phenotype).",
+                concept: "Target modification resistance",
+                category: "Antimicrobial Resistance",
+                difficulty: "Hard"
             },
             {
-                question: "Which of the following is a key characteristic of immune granulomas?",
+                id: 15,
+                question: "What is the mechanism of colistin resistance in mcr-1 carrying bacteria?",
                 options: [
-                    "Formation around inert foreign bodies",
-                    "Presence of T lymphocytes and macrophage activation",
-                    "Absence of giant cells",
-                    "Rapid resolution"
+                    "A. Modification of lipid A with phosphoethanolamine",
+                    "B. Efflux pump overexpression",
+                    "C. Enzymatic inactivation",
+                    "D. Target site mutation"
                 ],
-                correct: 1,
-                explanation: "Immune granulomas are characterized by T cell-mediated immune responses with activated macrophages (epithelioid cells) and often giant cells. Foreign body granulomas form around inert materials without significant immune activation.",
-                memoryTip: "Immune granulomas involve T-cells activating macrophages; Foreign body granulomas form around inert materials."
+                correctAnswer: "A",
+                explanation: "mcr-1 gene encodes phosphoethanolamine transferase that modifies lipid A, reducing colistin binding to outer membrane.",
+                concept: "Polymyxin resistance mechanisms",
+                category: "Antimicrobial Resistance",
+                difficulty: "Hard"
             },
             {
-                question: "The process of leukocytes moving to the periphery of blood vessels is called:",
+                id: 16,
+                question: "Which mechanism contributes to fluoroquinolone resistance?",
                 options: [
-                    "Rolling",
-                    "Adhesion",
-                    "Margination",
-                    "Diapedesis"
+                    "A. Mutations in DNA gyrase/topoisomerase IV",
+                    "B. Efflux pump upregulation",
+                    "C. Plasmid-mediated qnr genes",
+                    "D. All of the above"
                 ],
-                correct: 2,
-                explanation: "Margination is the process where leukocytes move from the central axial stream to the periphery of blood vessels, positioning them closer to the endothelium for subsequent adhesion and transmigration.",
-                memoryTip: "Margination = Moving to the 'margin' of the vessel."
-            },
-            {
-                question: "Which of the following is NOT a beneficial effect of acute inflammation?",
-                options: [
-                    "Dilution of toxins",
-                    "Delivery of nutrients and oxygen",
-                    "Prevention of infection spread",
-                    "Tissue destruction"
-                ],
-                correct: 3,
-                explanation: "Tissue destruction is a harmful effect of inflammation. The beneficial effects include dilution of toxins, delivery of nutrients and antibodies, containment of infection, and promotion of immunity.",
-                memoryTip: "Inflammation is a double-edged sword: Protective but can cause tissue damage."
-            },
-            {
-                question: "The primary cell type in acute inflammation arrives at the site within:",
-                options: [
-                    "Minutes to hours",
-                    "Days",
-                    "Weeks",
-                    "Months"
-                ],
-                correct: 0,
-                explanation: "Neutrophils, the primary cells in acute inflammation, begin to arrive at the site within minutes to hours after injury.",
-                memoryTip: "Acute inflammation = Rapid onset (minutes to hours) with neutrophils as first responders."
-            },
-            {
-                question: "Which mediator is responsible for the increased vascular permeability in the delayed sustained response?",
-                options: [
-                    "Histamine",
-                    "Bradykinin",
-                    "Leukotrienes C4, D4, E4",
-                    "All of the above"
-                ],
-                correct: 3,
-                explanation: "Increased vascular permeability in inflammation occurs in multiple phases. Histamine and bradykinin mediate the immediate transient response, while leukotrienes and other mediators contribute to the delayed sustained response.",
-                memoryTip: "Multiple mediators contribute to vascular permeability at different times."
-            },
-            {
-                question: "The resolution of acute inflammation involves all EXCEPT:",
-                options: [
-                    "Neutralization of chemical mediators",
-                    "Apoptosis of neutrophils",
-                    "Proliferation of fibroblasts",
-                    "Removal of edema fluid and debris"
-                ],
-                correct: 2,
-                explanation: "Resolution involves cessation of inflammation, removal of mediators, apoptosis of inflammatory cells, and clearance of fluid and debris. Fibroblast proliferation and collagen deposition occur in healing by fibrosis, not resolution.",
-                memoryTip: "Resolution = Return to normal; Fibrosis = Scar formation."
-            },
-            {
-                question: "Which of the following is a key feature of chronic inflammation?",
-                options: [
-                    "Predominance of neutrophils",
-                    "Absence of tissue destruction",
-                    "Simultaneous tissue destruction and repair",
-                    "Rapid resolution"
-                ],
-                correct: 2,
-                explanation: "Chronic inflammation is characterized by prolonged duration with simultaneous active inflammation, tissue destruction, and attempts at repair, often leading to fibrosis.",
-                memoryTip: "Chronic inflammation: Long duration + Tissue destruction + Attempted repair happening together."
-            },
-            {
-                question: "The most important chemotactic factor for neutrophils is:",
-                options: [
-                    "C5a",
-                    "IL-4",
-                    "TGF-β",
-                    "IL-10"
-                ],
-                correct: 0,
-                explanation: "C5a (a complement component) is one of the most potent chemotactic factors for neutrophils, along with bacterial products, LTB4, and chemokines like IL-8.",
-                memoryTip: "C5a = Powerful chemoattractant for neutrophils."
-            },
-            {
-                question: "Which of the following is characteristic of fibrinous inflammation?",
-                options: [
-                    "Accumulation of serous fluid",
-                    "Formation of pus",
-                    "Deposition of fibrin",
-                    "Minimal exudate"
-                ],
-                correct: 2,
-                explanation: "Fibrinous inflammation is characterized by the exudation of fibrinogen, which converts to fibrin and forms a meshwork at the site of injury, often seen in serous body cavities like the pericardium.",
-                memoryTip: "Fibrinous inflammation = Fibrin deposition, like in bread-and-butter pericarditis."
-            },
-            {
-                question: "The primary function of M2 macrophages in chronic inflammation is:",
-                options: [
-                    "Pro-inflammatory cytokine production",
-                    "Microbial killing",
-                    "Tissue repair and fibrosis",
-                    "Antigen presentation"
-                ],
-                correct: 2,
-                explanation: "M2 macrophages are alternatively activated macrophages that promote tissue repair, angiogenesis, and fibrosis through the production of growth factors and anti-inflammatory cytokines like IL-10 and TGF-β.",
-                memoryTip: "M1 macrophages = 'Fight' (pro-inflammatory); M2 macrophages = 'Fix' (repair and fibrosis)."
-            },
-            {
-                question: "Which of the following is NOT a source of chemical mediators in inflammation?",
-                options: [
-                    "Platelets",
-                    "Mast cells",
-                    "Erythrocytes",
-                    "Lymphocytes"
-                ],
-                correct: 2,
-                explanation: "Erythrocytes (red blood cells) are not significant sources of inflammatory mediators. Platelets, mast cells, lymphocytes, neutrophils, and macrophages all produce various inflammatory mediators.",
-                memoryTip: "RBCs transport oxygen, not inflammatory mediators."
-            },
-            {
-                question: "The process of leukocyte adhesion to endothelium is mediated by:",
-                options: [
-                    "Selectins only",
-                    "Integrins only",
-                    "Immunoglobulin superfamily only",
-                    "All of the above"
-                ],
-                correct: 3,
-                explanation: "Leukocyte adhesion involves multiple adhesion molecule families: selectins mediate rolling, integrins and immunoglobulin superfamily members mediate firm adhesion.",
-                memoryTip: "Adhesion molecules: Selectins (rolling), Integrins (adhesion), Immunoglobulin family (adhesion)."
-            },
-            {
-                question: "Which of the following is a characteristic of catarrhal inflammation?",
-                options: [
-                    "Formation of granulomas",
-                    "Accumulation of mucus",
-                    "Extensive tissue necrosis",
-                    "Formation of pus"
-                ],
-                correct: 1,
-                explanation: "Catarrhal inflammation is a mild inflammation of mucous membranes characterized by hypersecretion of mucus, commonly seen in the upper respiratory tract during viral infections.",
-                memoryTip: "Catarrhal = Mucus hypersecretion, like in common cold (rhinitis)."
-            },
-            {
-                question: "The systemic increase in white blood cell count during inflammation is called:",
-                options: [
-                    "Leukopenia",
-                    "Leukocytosis",
-                    "Thrombocytosis",
-                    "Anemia"
-                ],
-                correct: 1,
-                explanation: "Leukocytosis is an increase in the total white blood cell count, commonly seen in bacterial infections. Leukopenia is a decrease in white blood cell count.",
-                memoryTip: "Leukocytosis = Increased WBC count (common in bacterial infections)."
+                correctAnswer: "D",
+                explanation: "Fluoroquinolone resistance involves target mutations, efflux pumps (norA in S. aureus), and plasmid-borne qnr genes protecting DNA gyrase.",
+                concept: "Multiple mechanisms of quinolone resistance",
+                category: "Antimicrobial Resistance",
+                difficulty: "Medium"
             },
 
-            // Conceptual Questions (41-60)
+            // Category 3: Clinical Microbiology & Diagnostics (8 questions)
             {
-                question: "A patient with a genetic deficiency in NADPH oxidase would be most susceptible to infections with which type of microorganism?",
+                id: 17,
+                question: "What is the clinical significance of the 'satellite phenomenon'?",
                 options: [
-                    "Viruses",
-                    "Intracellular bacteria",
-                    "Extracellular pyogenic bacteria",
-                    "Fungi"
+                    "A. Identification of Haemophilus influenzae",
+                    "B. Detection of Staphylococcus aureus",
+                    "C. Confirmation of Streptococcus pneumoniae",
+                    "D. Diagnosis of Neisseria gonorrhoeae"
                 ],
-                correct: 2,
-                explanation: "NADPH oxidase deficiency (chronic granulomatous disease) impairs the respiratory burst in phagocytes, making patients highly susceptible to catalase-positive bacteria (like Staphylococcus aureus) that can survive inside phagocytes.",
-                memoryTip: "NADPH oxidase deficiency = Defective oxidative killing = Susceptibility to catalase-positive bacteria."
+                correctAnswer: "A",
+                explanation: "H. influenzae requires factors V (NAD) and X (hemin). When grown near S. aureus (which provides factor V), H. influenzae shows satelliting - larger colonies near staph.",
+                concept: "Bacterial growth requirements and identification",
+                category: "Clinical Microbiology",
+                difficulty: "Medium"
             },
             {
-                question: "Which of the following best explains why corticosteroids are effective in treating chronic inflammatory conditions but increase susceptibility to infections?",
+                id: 18,
+                question: "Which test differentiates S. aureus from other staphylococci?",
                 options: [
-                    "They enhance neutrophil function",
-                    "They inhibit phospholipase A2 and NF-κB pathways",
-                    "They promote antibody production",
-                    "They increase complement activation"
+                    "A. Coagulase test",
+                    "B. Catalase test",
+                    "C. Bacitracin sensitivity",
+                    "D. Optochin sensitivity"
                 ],
-                correct: 1,
-                explanation: "Corticosteroids inhibit phospholipase A2 (reducing arachidonic acid metabolites) and NF-κB (reducing cytokine production), which suppresses inflammation but also impairs host defense against infections.",
-                memoryTip: "Corticosteroids = Broad anti-inflammatory effects but immunosuppression = Increased infection risk."
+                correctAnswer: "A",
+                explanation: "Coagulase test (converts fibrinogen to fibrin) distinguishes S. aureus (coagulase+) from other staphylococci (coagulase-). Catalase test distinguishes staph (catalase+) from strep (catalase-).",
+                concept: "Microbial identification algorithms",
+                category: "Clinical Microbiology",
+                difficulty: "Easy"
             },
             {
-                question: "A patient with rheumatoid arthritis develops subcutaneous nodules. Which pathological process best explains their formation?",
+                id: 19,
+                question: "What does a positive CAMP test indicate?",
                 options: [
-                    "Suppurative inflammation",
-                    "Granulomatous inflammation",
-                    "Serous inflammation",
-                    "Fibrinous inflammation"
+                    "A. Group B Streptococcus (S. agalactiae)",
+                    "B. Listeria monocytogenes",
+                    "C. Clostridium perfringens",
+                    "D. Both A and B"
                 ],
-                correct: 1,
-                explanation: "Rheumatoid nodules are characterized by central fibrinoid necrosis surrounded by palisading macrophages and fibroblasts, representing a form of granulomatous inflammation.",
-                memoryTip: "Rheumatoid nodules = Palisading granulomas with central necrosis."
+                correctAnswer: "D",
+                explanation: "CAMP test shows synergistic hemolysis between S. agalactiae (produces CAMP factor) and S. aureus β-hemolysin. Listeria also shows a similar but inverse CAMP reaction.",
+                concept: "Specialized microbiological tests",
+                category: "Clinical Microbiology",
+                difficulty: "Hard"
             },
             {
-                question: "Why do NSAIDs reduce pain and fever but not affect the progression of chronic inflammatory diseases?",
+                id: 20,
+                question: "Which medium is selective for Gram-negative enterics?",
                 options: [
-                    "They only affect cyclooxygenase pathways",
-                    "They don't inhibit neutrophil migration",
-                    "They have no effect on cytokine production",
-                    "All of the above"
+                    "A. MacConkey agar",
+                    "B. Blood agar",
+                    "C. Chocolate agar",
+                    "D. Thayer-Martin agar"
                 ],
-                correct: 3,
-                explanation: "NSAIDs inhibit cyclooxygenase and reduce prostaglandin production (mediating pain and fever) but don't affect other inflammatory pathways like cytokine production or cell migration that drive chronic inflammation.",
-                memoryTip: "NSAIDs = Symptom relief (pain/fever) but don't modify disease progression in chronic inflammation."
+                correctAnswer: "A",
+                explanation: "MacConkey agar contains bile salts and crystal violet inhibiting Gram-positives, and lactose with neutral red to differentiate lactose fermenters (pink) from non-fermenters (colorless).",
+                concept: "Selective and differential media",
+                category: "Clinical Microbiology",
+                difficulty: "Easy"
             },
             {
-                question: "In a patient with tuberculosis, the formation of caseous necrosis in granulomas primarily results from:",
+                id: 21,
+                question: "What is the significance of 'school of fish' arrangement in microscopy?",
                 options: [
-                    "Direct bacterial cytotoxicity",
-                    "Ischemic injury due to vascular compression",
-                    "Enzyme release from necrotic neutrophils",
-                    "Host immune response to mycobacterial antigens"
+                    "A. Gardnerella vaginalis in clue cells",
+                    "B. Haemophilus ducreyi in chancroid",
+                    "C. Vibrio cholerae in stool",
+                    "D. Mycobacterium tuberculosis in sputum"
                 ],
-                correct: 3,
-                explanation: "Caseous necrosis in tuberculosis results from a hypersensitivity reaction to mycobacterial antigens, where the intense immune response causes tissue destruction.",
-                memoryTip: "Caseous necrosis in TB = Type IV hypersensitivity reaction causing tissue destruction."
+                correctAnswer: "B",
+                explanation: "H. ducreyi shows characteristic 'school of fish' or 'railroad track' arrangement in Gram stains from chancroid lesions.",
+                concept: "Microscopic morphological patterns",
+                category: "Clinical Microbiology",
+                difficulty: "Hard"
             },
             {
-                question: "A patient with a deficiency in C3 complement component would be most likely to experience:",
+                id: 22,
+                question: "Which serological test measures rising antibody titers?",
                 options: [
-                    "Impaired opsonization and recurrent pyogenic infections",
-                    "Defective membrane attack complex formation",
-                    "Reduced chemotaxis of neutrophils",
-                    "Decreased vascular permeability"
+                    "A. Agglutination tests",
+                    "B. Complement fixation",
+                    "C. ELISA for IgM",
+                    "D. All require paired sera"
                 ],
-                correct: 0,
-                explanation: "C3 is central to all complement pathways. Deficiency leads to impaired opsonization (C3b), reduced anaphylatoxin production (C3a), and impaired membrane attack complex formation, resulting in recurrent pyogenic infections.",
-                memoryTip: "C3 deficiency = Impaired opsonization = Recurrent pyogenic infections."
+                correctAnswer: "D",
+                explanation: "All these tests typically require acute and convalescent sera (2-3 weeks apart) showing 4-fold rise in titer to confirm recent infection.",
+                concept: "Serological diagnosis principles",
+                category: "Clinical Microbiology",
+                difficulty: "Medium"
             },
             {
-                question: "Which mechanism best explains why chronic inflammation can lead to fibrosis?",
+                id: 23,
+                question: "What does a positive nitrocefin test indicate?",
                 options: [
-                    "Persistent neutrophil infiltration",
-                    "Sustained mast cell degranulation",
-                    "Continuous macrophage activation and growth factor release",
-                    "Recurrent vascular permeability changes"
+                    "A. β-lactamase production",
+                    "B. Oxidase activity",
+                    "C. Urease production",
+                    "D. Coagulase activity"
                 ],
-                correct: 2,
-                explanation: "In chronic inflammation, activated macrophages continuously release growth factors (TGF-β, PDGF) that stimulate fibroblast proliferation and collagen deposition, leading to fibrosis.",
-                memoryTip: "Chronic inflammation → Macrophage activation → Growth factors → Fibroblast proliferation → Fibrosis."
+                correctAnswer: "A",
+                explanation: "Nitrocefin is a chromogenic cephalosporin that turns red when hydrolyzed by β-lactamase, providing rapid detection of enzyme production.",
+                concept: "Rapid enzymatic tests",
+                category: "Clinical Microbiology",
+                difficulty: "Medium"
             },
             {
-                question: "A patient with aspirin-exacerbated respiratory disease (AERD) experiences bronchospasm after taking NSAIDs. This is primarily due to:",
+                id: 24,
+                question: "Which test identifies S. pneumoniae?",
                 options: [
-                    "Increased histamine release",
-                    "Shunting of arachidonic acid to leukotriene production",
-                    "Direct complement activation",
-                    "Enhanced cytokine production"
+                    "A. Optochin sensitivity",
+                    "B. Bile solubility",
+                    "C. Quellung reaction",
+                    "D. All of the above"
                 ],
-                correct: 1,
-                explanation: "In AERD, inhibition of cyclooxygenase by NSAIDs shunts arachidonic acid metabolism to the lipoxygenase pathway, increasing leukotriene production which causes bronchospasm.",
-                memoryTip: "AERD = COX inhibition → Shunting to LOX pathway → Increased leukotrienes → Bronchospasm."
-            },
-            {
-                question: "Which characteristic best differentiates acute from chronic inflammation at the molecular level?",
-                options: [
-                    "Type of cellular infiltrate",
-                    "Pattern of cytokine production",
-                    "Duration of the response",
-                    "All of the above"
-                ],
-                correct: 3,
-                explanation: "Acute and chronic inflammation differ in cellular infiltrate (neutrophils vs macrophages/lymphocytes), cytokine patterns (IL-1/TNF vs IFN-γ/IL-17), and duration (short vs long).",
-                memoryTip: "Acute vs Chronic: Different cells, different cytokines, different duration."
-            },
-            {
-                question: "In a patient with sepsis, the systemic inflammatory response is primarily driven by:",
-                options: [
-                    "Massive histamine release",
-                    "Widespread complement activation",
-                    "Excessive cytokine production (cytokine storm)",
-                    "Generalized mast cell degranulation"
-                ],
-                correct: 2,
-                explanation: "Sepsis involves excessive production of pro-inflammatory cytokines (TNF-α, IL-1, IL-6) leading to a systemic inflammatory response that can progress to organ dysfunction.",
-                memoryTip: "Sepsis = Cytokine storm → SIRS (Systemic Inflammatory Response Syndrome)."
-            },
-            {
-                question: "Which of the following best explains why glucocorticoids are more effective than NSAIDs in treating autoimmune diseases?",
-                options: [
-                    "They inhibit both cyclooxygenase and lipoxygenase pathways",
-                    "They suppress T cell activation and cytokine production",
-                    "They enhance resolution of inflammation",
-                    "They promote apoptosis of inflammatory cells"
-                ],
-                correct: 1,
-                explanation: "Glucocorticoids have broad anti-inflammatory effects including suppression of T cell activation and cytokine gene expression, making them more effective than NSAIDs for autoimmune conditions.",
-                memoryTip: "Glucocorticoids = Broad immunosuppression; NSAIDs = Limited to prostaglandin inhibition."
-            },
-            {
-                question: "A patient with chronic granulomatous disease develops a liver abscess. The most likely pathogen is:",
-                options: [
-                    "Streptococcus pneumoniae",
-                    "Staphylococcus aureus",
-                    "Mycobacterium tuberculosis",
-                    "Candida albicans"
-                ],
-                correct: 1,
-                explanation: "Chronic granulomatous disease patients are particularly susceptible to catalase-positive organisms like Staphylococcus aureus that can survive inside phagocytes due to impaired oxidative killing.",
-                memoryTip: "CGD = Susceptibility to catalase-positive organisms (S. aureus, E. coli, Aspergillus)."
-            },
-            {
-                question: "Which mechanism best explains the anti-inflammatory effects of omega-3 fatty acids?",
-                options: [
-                    "Inhibition of cyclooxygenase",
-                    "Competition with arachidonic acid for enzyme binding",
-                    "Production of less inflammatory eicosanoids",
-                    "All of the above"
-                ],
-                correct: 3,
-                explanation: "Omega-3 fatty acids compete with arachidonic acid for cyclooxygenase and lipoxygenase, leading to production of less inflammatory eicosanoids (e.g., prostaglandin E3 instead of E2).",
-                memoryTip: "Omega-3s = Compete with arachidonic acid → Less inflammatory eicosanoids."
-            },
-            {
-                question: "In a patient with asthma, the characteristic airway inflammation is primarily mediated by:",
-                options: [
-                    "Neutrophils and IL-8",
-                    "Eosinophils and IL-5",
-                    "Macrophages and TNF-α",
-                    "Mast cells and histamine"
-                ],
-                correct: 1,
-                explanation: "Asthma involves Th2-mediated inflammation with eosinophil recruitment (via IL-5) and IgE production, leading to mast cell degranulation and bronchoconstriction.",
-                memoryTip: "Asthma = Th2 response → Eosinophils (IL-5) + IgE → Mast cells → Bronchoconstriction."
-            },
-            {
-                question: "Which of the following best explains why chronic inflammation is associated with increased cancer risk?",
-                options: [
-                    "DNA damage from reactive oxygen species",
-                    "Continuous cell proliferation",
-                    "Immune suppression",
-                    "All of the above"
-                ],
-                correct: 3,
-                explanation: "Chronic inflammation increases cancer risk through multiple mechanisms: ROS-induced DNA damage, growth factor-driven cell proliferation, and immune evasion.",
-                memoryTip: "Chronic inflammation → DNA damage + Proliferation + Immune evasion → Increased cancer risk."
-            },
-            {
-                question: "A patient with a defect in L-selectin would be expected to have impaired:",
-                options: [
-                    "Neutrophil adhesion to endothelium",
-                    "Neutrophil rolling on endothelium",
-                    "Neutrophil transmigration",
-                    "Neutrophil phagocytosis"
-                ],
-                correct: 1,
-                explanation: "L-selectin on neutrophils mediates the initial rolling interaction with endothelial cells. Defects impair this first step of leukocyte recruitment.",
-                memoryTip: "Selectins = Rolling; Integrins = Adhesion; ICAM/VCAM = Transmigration."
-            },
-            {
-                question: "Which of the following best explains the difference between innate and adaptive immunity in inflammation?",
-                options: [
-                    "Speed of response and specificity",
-                    "Type of cells involved",
-                    "Mechanisms of pathogen recognition",
-                    "All of the above"
-                ],
-                correct: 3,
-                explanation: "Innate immunity is rapid but non-specific (using pattern recognition receptors), while adaptive immunity is slower but highly specific (using antigen receptors on lymphocytes).",
-                memoryTip: "Innate = Fast, non-specific; Adaptive = Slow, specific."
-            },
-            {
-                question: "In a patient with systemic lupus erythematosus, the characteristic inflammation is primarily due to:",
-                options: [
-                    "Persistent bacterial infection",
-                    "Deposition of immune complexes",
-                    "Direct tissue toxicity by autoantibodies",
-                    "Defective neutrophil function"
-                ],
-                correct: 1,
-                explanation: "SLE involves widespread deposition of immune complexes in tissues, activating complement and causing inflammation in multiple organs.",
-                memoryTip: "SLE = Immune complex deposition → Complement activation → Inflammation."
-            },
-            {
-                question: "Which of the following best explains why some infections trigger granuloma formation while others cause suppurative inflammation?",
-                options: [
-                    "Type of immune response elicited",
-                    "Virulence factors of the pathogen",
-                    "Ability of pathogen to survive intracellularly",
-                    "All of the above"
-                ],
-                correct: 3,
-                explanation: "Granulomas form against pathogens that survive intracellularly and elicit cell-mediated immunity, while suppurative inflammation occurs with extracellular pathogens that attract neutrophils.",
-                memoryTip: "Granulomas = Cell-mediated immunity against intracellular pathogens; Suppuration = Neutrophil response to extracellular pathogens."
-            },
-            {
-                question: "A patient with a deficiency in IL-10 would be expected to have:",
-                options: [
-                    "Increased susceptibility to infections",
-                    "Excessive inflammatory responses",
-                    "Defective antibody production",
-                    "Impaired neutrophil function"
-                ],
-                correct: 1,
-                explanation: "IL-10 is an anti-inflammatory cytokine that suppresses immune responses. Deficiency leads to uncontrolled inflammation and autoimmune phenomena.",
-                memoryTip: "IL-10 deficiency = Loss of anti-inflammatory brake → Excessive inflammation."
+                correctAnswer: "D",
+                explanation: "S. pneumoniae is optochin sensitive, bile soluble, and shows Quellung reaction (capsular swelling with specific antisera).",
+                concept: "Pneumococcus identification",
+                category: "Clinical Microbiology",
+                difficulty: "Medium"
             },
 
-            // Advanced Conceptual Questions (61-80)
+            // Category 4: Viral Pathogenesis (8 questions)
             {
-                question: "In the context of pharmacological intervention, why might a drug targeting TNF-α be effective for rheumatoid arthritis but dangerous for tuberculosis?",
+                id: 25,
+                question: "Which HIV protein binds CD4 receptor?",
                 options: [
-                    "TNF-α inhibition impairs granuloma formation",
-                    "TNF-α is required for neutrophil recruitment",
-                    "TNF-α inhibition increases susceptibility to viral infections",
-                    "TNF-α is essential for antibody production"
+                    "A. gp120",
+                    "B. gp41",
+                    "C. p24",
+                    "D. Reverse transcriptase"
                 ],
-                correct: 0,
-                explanation: "TNF-α is crucial for maintaining granuloma integrity in tuberculosis. Inhibiting TNF-α can cause dissemination of latent TB by disrupting granulomas that contain the infection.",
-                memoryTip: "Anti-TNF therapy → Impaired granuloma formation → Reactivation of latent TB."
+                correctAnswer: "A",
+                explanation: "HIV gp120 binds CD4 on T-helper cells, macrophages, and dendritic cells. Subsequent binding to CCR5 or CXCR4 co-receptors triggers gp41-mediated fusion.",
+                concept: "Viral receptor interactions",
+                category: "Viral Pathogenesis",
+                difficulty: "Medium"
             },
             {
-                question: "A patient with chronic hepatitis B infection develops hepatocellular carcinoma. Which inflammatory mechanism most contributes to this progression?",
+                id: 26,
+                question: "What is the mechanism of action of neuraminidase inhibitors?",
                 options: [
-                    "Persistent neutrophil infiltration causing oxidative damage",
-                    "Continuous macrophage activation releasing growth factors",
-                    "Recurrent complement activation leading to cell lysis",
-                    "Sustained mast cell degranulation causing fibrosis"
+                    "A. Block viral uncoating",
+                    "B. Prevent viral release from cells",
+                    "C. Inhibit viral RNA polymerase",
+                    "D. Block viral attachment"
                 ],
-                correct: 1,
-                explanation: "Chronic hepatitis involves continuous immune-mediated liver cell injury and regeneration, with activated macrophages releasing growth factors that promote carcinogenesis.",
-                memoryTip: "Chronic hepatitis → Continuous inflammation → Regeneration + Growth factors → Increased cancer risk."
+                correctAnswer: "B",
+                explanation: "Neuraminidase (sialidase) cleaves sialic acid from glycoproteins, releasing new virions. Inhibitors like oseltamivir prevent this cleavage, trapping virions on cell surface.",
+                concept: "Antiviral drug mechanisms",
+                category: "Viral Pathogenesis",
+                difficulty: "Medium"
             },
             {
-                question: "Which of the following best explains the difference between acute and chronic inflammation in terms of tissue repair?",
+                id: 27,
+                question: "Which virus uses antigenic shift AND drift?",
                 options: [
-                    "Acute inflammation always leads to complete regeneration",
-                    "Chronic inflammation is associated with fibrosis and scarring",
-                    "Acute inflammation involves more tissue destruction",
-                    "Chronic inflammation has better healing outcomes"
+                    "A. Influenza virus",
+                    "B. HIV",
+                    "C. Hepatitis B virus",
+                    "D. Rotavirus"
                 ],
-                correct: 1,
-                explanation: "Chronic inflammation typically leads to fibrosis and scarring due to simultaneous tissue destruction and repair, while acute inflammation can resolve with complete regeneration if tissue damage is limited.",
-                memoryTip: "Acute inflammation → Resolution or fibrosis; Chronic inflammation → Fibrosis and scarring."
+                correctAnswer: "A",
+                explanation: "Influenza shows antigenic drift (point mutations in HA/NA) causing seasonal epidemics, and antigenic shift (reassortment of genome segments) causing pandemics.",
+                concept: "Viral genetic variation mechanisms",
+                category: "Viral Pathogenesis",
+                difficulty: "Medium"
             },
             {
-                question: "In a patient with atherosclerosis, the chronic inflammation in arterial walls is primarily driven by:",
+                id: 28,
+                question: "What is unique about hepatitis D virus replication?",
                 options: [
-                    "Bacterial infection of the endothelium",
-                    "Immune responses to oxidized LDL",
-                    "Autoantibodies against vascular tissue",
-                    "Complement deposition in vessel walls"
+                    "A. Requires hepatitis B surface antigen",
+                    "B. DNA genome with RNA intermediate",
+                    "C. Integrates into host genome",
+                    "D. Replicates in nucleus"
                 ],
-                correct: 1,
-                explanation: "Atherosclerosis involves chronic inflammation triggered by oxidized LDL accumulation in vessel walls, leading to macrophage recruitment and foam cell formation.",
-                memoryTip: "Atherosclerosis = Inflammation in response to oxidized LDL → Foam cells → Plaque formation."
+                correctAnswer: "A",
+                explanation: "Hepatitis D is a defective RNA virus requiring HBsAg from HBV for packaging and transmission. It cannot cause infection without HBV coinfection.",
+                concept: "Defective viral particles",
+                category: "Viral Pathogenesis",
+                difficulty: "Hard"
             },
             {
-                question: "Which of the following best explains why leukocyte adhesion deficiency increases susceptibility to infections?",
+                id: 29,
+                question: "Which herpesvirus establishes latency in sensory ganglia?",
                 options: [
-                    "Impaired phagocytosis",
-                    "Defective antibody production",
-                    "Inability to recruit neutrophils to sites of infection",
-                    "Reduced complement activation"
+                    "A. HSV-1 and HSV-2",
+                    "B. VZV",
+                    "C. Both A and B",
+                    "D. CMV"
                 ],
-                correct: 2,
-                explanation: "Leukocyte adhesion deficiency involves defects in adhesion molecules (like integrins), preventing neutrophils from migrating to sites of infection despite normal numbers in blood.",
-                memoryTip: "Leukocyte adhesion deficiency = Defective migration → Recurrent infections despite normal neutrophil count."
+                correctAnswer: "C",
+                explanation: "HSV-1/2 and VZV establish latency in sensory nerve ganglia (trigeminal and dorsal root respectively). CMV and EBV establish latency in monocytes and B cells.",
+                concept: "Herpesvirus latency sites",
+                category: "Viral Pathogenesis",
+                difficulty: "Medium"
             },
             {
-                question: "A patient with a genetic defect in MyD88 would be expected to have impaired responses to which type of pathogens?",
+                id: 30,
+                question: "What mechanism allows influenza virus to cap its mRNA?",
                 options: [
-                    "Gram-positive bacteria",
-                    "Gram-negative bacteria",
-                    "Intracellular viruses",
-                    "All of the above"
+                    "A. Cap snatching from host mRNA",
+                    "B. Viral capping enzymes",
+                    "C. Using host capping machinery",
+                    "D. Uncapped transcripts"
                 ],
-                correct: 3,
-                explanation: "MyD88 is a key adaptor protein for most TLR signaling pathways. Deficiency impairs recognition of diverse pathogens including bacteria, viruses, and fungi.",
-                memoryTip: "MyD88 deficiency = Defective TLR signaling → Impaired recognition of multiple pathogen types."
+                correctAnswer: "A",
+                explanation: "Influenza virus RNA polymerase 'snatches' 5' caps from host pre-mRNAs to prime viral transcription - a unique mechanism among RNA viruses.",
+                concept: "Viral transcription strategies",
+                category: "Viral Pathogenesis",
+                difficulty: "Hard"
             },
             {
-                question: "Which mechanism best explains the anti-inflammatory effects of colchicine in gout?",
+                id: 31,
+                question: "Which papillomavirus proteins are oncogenic?",
                 options: [
-                    "Inhibition of neutrophil migration",
-                    "Reduction of uric acid production",
-                    "Inhibition of cytokine production",
-                    "Enhanced uric acid excretion"
+                    "A. E6 and E7",
+                    "B. L1 and L2",
+                    "C. E1 and E2",
+                    "D. E4 and E5"
                 ],
-                correct: 0,
-                explanation: "Colchicine inhibits microtubule polymerization, impairing neutrophil migration and phagocytosis, which are key to the inflammatory response in acute gout.",
-                memoryTip: "Colchicine = Microtubule inhibition → Impaired neutrophil migration → Reduced inflammation in gout."
+                correctAnswer: "A",
+                explanation: "HPV E6 binds p53 promoting degradation, while E7 binds Rb releasing E2F, both disrupting cell cycle control and promoting oncogenesis.",
+                concept: "Viral oncogenesis mechanisms",
+                category: "Viral Pathogenesis",
+                difficulty: "Medium"
             },
             {
-                question: "In a patient with sepsis, the transition from systemic inflammation to immunosuppression is characterized by:",
+                id: 32,
+                question: "What is unique about retrovirus replication?",
                 options: [
-                    "Increased pro-inflammatory cytokine production",
-                    "Massive neutrophil recruitment to tissues",
-                    "Apoptosis of lymphocytes and immune paralysis",
-                    "Enhanced antigen presentation"
+                    "A. RNA → DNA → RNA → protein",
+                    "B. DNA → RNA → DNA → protein",
+                    "C. RNA → protein → DNA",
+                    "D. Direct RNA to protein"
                 ],
-                correct: 2,
-                explanation: "Sepsis often involves an initial hyperinflammatory phase followed by immunosuppression due to lymphocyte apoptosis and immune cell exhaustion, increasing susceptibility to secondary infections.",
-                memoryTip: "Sepsis → Initial cytokine storm → Later immunosuppression (lymphocyte apoptosis) → Secondary infections."
+                correctAnswer: "A",
+                explanation: "Retroviruses use reverse transcriptase to convert RNA to DNA, which integrates into host genome (provirus), then transcribes back to RNA for translation.",
+                concept: "Retrovirus replication cycle",
+                category: "Viral Pathogenesis",
+                difficulty: "Medium"
+            },
+
+            // Category 5: Fungal & Parasitic Infections (8 questions)
+            {
+                id: 33,
+                question: "What is the mechanism of amphotericin B?",
+                options: [
+                    "A. Binds ergosterol forming membrane pores",
+                    "B. Inhibits β-glucan synthesis",
+                    "C. Blocks ergosterol synthesis",
+                    "D. Inhibits nucleic acid synthesis"
+                ],
+                correctAnswer: "A",
+                explanation: "Amphotericin B binds ergosterol in fungal membranes forming pores that leak ions, causing cell death. Selective toxicity due to higher affinity for ergosterol than cholesterol.",
+                concept: "Antifungal drug mechanisms",
+                category: "Fungal/Parasitic",
+                difficulty: "Medium"
             },
             {
-                question: "Which of the following best explains why chronic inflammatory diseases often have flare-ups and remissions?",
+                id: 34,
+                question: "Which parasite shows hypnozoites in liver?",
                 options: [
-                    "Cyclical pathogen exposure",
-                    "Varying levels of autoantibodies",
-                    "Dynamic balance between pro- and anti-inflammatory mechanisms",
-                    "Changes in environmental triggers"
+                    "A. Plasmodium vivax and ovale",
+                    "B. Plasmodium falciparum",
+                    "C. Plasmodium malariae",
+                    "D. Babesia microti"
                 ],
-                correct: 2,
-                explanation: "Chronic inflammatory diseases show periods of activity and quiescence due to the dynamic balance between pro-inflammatory drivers and anti-inflammatory/repair mechanisms.",
-                memoryTip: "Chronic inflammation flare-ups = Imbalance favoring pro-inflammatory mechanisms over regulation."
+                correctAnswer: "A",
+                explanation: "P. vivax and P. ovale form dormant hypnozoites in hepatocytes causing relapses months/years later. P. falciparum and P. malariae do not form hypnozoites.",
+                concept: "Malaria parasite life cycles",
+                category: "Fungal/Parasitic",
+                difficulty: "Medium"
             },
             {
-                question: "A patient with a defect in the NLRP3 inflammasome would be expected to have impaired:",
+                id: 35,
+                question: "What is the significance of Cryptococcus neoformans capsule?",
                 options: [
-                    "Antibody production",
-                    "Complement activation",
-                    "IL-1β processing and secretion",
-                    "Neutrophil chemotaxis"
+                    "A. Major virulence factor inhibiting phagocytosis",
+                    "B. Diagnostic feature in India ink prep",
+                    "C. Antigen detected in CSF",
+                    "D. All of the above"
                 ],
-                correct: 2,
-                explanation: "The NLRP3 inflammasome processes pro-IL-1β into active IL-1β. Defects impair this key inflammatory cytokine production.",
-                memoryTip: "NLRP3 inflammasome = IL-1β activation platform; Defects → Impaired IL-1β production."
+                correctAnswer: "D",
+                explanation: "Capsular polysaccharide inhibits phagocytosis, appears as clear halo in India ink, and can be detected as cryptococcal antigen in CSF for diagnosis.",
+                concept: "Fungal virulence factors",
+                category: "Fungal/Parasitic",
+                difficulty: "Medium"
             },
             {
-                question: "Which of the following best explains the difference between infection and inflammation?",
+                id: 36,
+                question: "Which antifungal inhibits ergosterol synthesis?",
                 options: [
-                    "Infection always causes inflammation",
-                    "Inflammation can occur without infection",
-                    "Infection involves microbial invasion",
-                    "All of the above"
+                    "A. Azoles (fluconazole)",
+                    "B. Echinocandins (caspofungin)",
+                    "C. Polyenes (amphotericin)",
+                    "D. Griseofulvin"
                 ],
-                correct: 3,
-                explanation: "Infection involves microbial invasion and may cause inflammation, but inflammation can occur without infection (e.g., in autoimmune diseases or tissue injury).",
-                memoryTip: "Infection = Microbial invasion; Inflammation = Response to injury/infection; Not all inflammation is due to infection."
+                correctAnswer: "A",
+                explanation: "Azoles inhibit lanosterol 14α-demethylase (CYP51), blocking ergosterol synthesis. Echinocandins inhibit β-glucan synthase, polyenes bind existing ergosterol.",
+                concept: "Antifungal drug classes and targets",
+                category: "Fungal/Parasitic",
+                difficulty: "Medium"
             },
             {
-                question: "In a patient with Crohn's disease, the characteristic 'skip lesions' in the intestine result from:",
+                id: 37,
+                question: "What distinguishes Entamoeba histolytica from E. dispar?",
                 options: [
-                    "Segmental distribution of pathogenic bacteria",
-                    "Patchy immune activation and transmural inflammation",
-                    "Variable blood supply to different intestinal segments",
-                    "Random distribution of autoimmune antibodies"
+                    "A. Pathogenicity and erythrophagocytosis",
+                    "B. Cyst morphology",
+                    "C. Geographic distribution",
+                    "D. All of the above"
                 ],
-                correct: 1,
-                explanation: "Crohn's disease involves transmural inflammation that can affect discontinuous segments of the gastrointestinal tract ('skip lesions'), unlike ulcerative colitis which shows continuous inflammation.",
-                memoryTip: "Crohn's disease = Transmural inflammation + Skip lesions; Ulcerative colitis = Mucosal inflammation + Continuous involvement."
+                correctAnswer: "A",
+                explanation: "E. histolytica is pathogenic (causes invasive disease, shows erythrophagocytosis), while E. dispar is non-pathogenic. Morphologically identical, requiring antigen/PCR differentiation.",
+                concept: "Pathogenic vs non-pathogenic amoebae",
+                category: "Fungal/Parasitic",
+                difficulty: "Hard"
             },
             {
-                question: "Which of the following best explains why chronic inflammation is considered a 'double-edged sword'?",
+                id: 38,
+                question: "Which fungal infection shows 'spaghetti and meatball' appearance?",
                 options: [
-                    "It protects against infection but can cause tissue damage",
-                    "It involves both innate and adaptive immunity",
-                    "It can be both acute and chronic",
-                    "It requires balance between different cell types"
+                    "A. Tinea versicolor (Malassezia)",
+                    "B. Candidiasis",
+                    "C. Aspergillosis",
+                    "D. Histoplasmosis"
                 ],
-                correct: 0,
-                explanation: "Inflammation is protective against pathogens and promotes repair, but when chronic or excessive, it can cause significant tissue damage and contribute to various diseases.",
-                memoryTip: "Inflammation = Protective but potentially damaging → Double-edged sword."
+                correctAnswer: "A",
+                explanation: "Malassezia furfur in tinea versicolor shows short hyphae and spherical yeast cells resembling 'spaghetti and meatballs' in KOH preparation.",
+                concept: "Characteristic fungal morphologies",
+                category: "Fungal/Parasitic",
+                difficulty: "Medium"
             },
             {
-                question: "A patient with a defect in the C1 esterase inhibitor would be expected to have:",
+                id: 39,
+                question: "What is the mechanism of chloroquine resistance in malaria?",
                 options: [
-                    "Impaired classical complement pathway",
-                    "Excessive bradykinin production",
-                    "Defective alternative complement pathway",
-                    "Reduced inflammatory cytokine production"
+                    "A. Mutations in PfCRT transporter",
+                    "B. Increased drug efflux",
+                    "C. Altered drug target",
+                    "D. Enzymatic inactivation"
                 ],
-                correct: 1,
-                explanation: "C1 esterase inhibitor deficiency leads to uncontrolled activation of the complement and contact systems, resulting in excessive bradykinin production and angioedema.",
-                memoryTip: "C1 esterase inhibitor deficiency → Uncontrolled bradykinin production → Hereditary angioedema."
+                correctAnswer: "A",
+                explanation: "Mutations in Plasmodium falciparum chloroquine resistance transporter (PfCRT) reduce drug accumulation in food vacuole where it inhibits heme polymerization.",
+                concept: "Antimalarial resistance mechanisms",
+                category: "Fungal/Parasitic",
+                difficulty: "Hard"
             },
             {
-                question: "Which of the following best explains the difference between physiological and pathological inflammation?",
+                id: 40,
+                question: "Which parasite causes 'river blindness'?",
                 options: [
-                    "Duration and magnitude of the response",
-                    "Types of cells involved",
-                    "Mediators produced",
-                    "All of the above"
+                    "A. Onchocerca volvulus",
+                    "B. Loa loa",
+                    "C. Wuchereria bancrofti",
+                    "D. Brugia malayi"
                 ],
-                correct: 3,
-                explanation: "Physiological inflammation is appropriate, self-limited, and protective, while pathological inflammation is excessive, prolonged, and causes tissue damage.",
-                memoryTip: "Physiological inflammation = Appropriate, protective; Pathological inflammation = Excessive, damaging."
+                correctAnswer: "A",
+                explanation: "Onchocerca volvulus microfilariae in eye cause inflammation and scarring leading to blindness. Transmitted by Simulium blackflies near rivers.",
+                concept: "Filariasis epidemiology and manifestations",
+                category: "Fungal/Parasitic",
+                difficulty: "Medium"
+            },
+
+            // Category 6: Immunology & Host Defense (8 questions)
+            {
+                id: 41,
+                question: "What is the function of MHC class II molecules?",
+                options: [
+                    "A. Present exogenous antigens to CD4+ T cells",
+                    "B. Present endogenous antigens to CD8+ T cells",
+                    "C. Present lipid antigens to NKT cells",
+                    "D. Present antigens to B cells"
+                ],
+                correctAnswer: "A",
+                explanation: "MHC class II on APCs presents processed exogenous antigens to CD4+ helper T cells. MHC class I presents endogenous antigens to CD8+ cytotoxic T cells.",
+                concept: "Antigen presentation pathways",
+                category: "Immunology",
+                difficulty: "Medium"
             },
             {
-                question: "In a patient with multiple sclerosis, the characteristic CNS inflammation is primarily mediated by:",
+                id: 42,
+                question: "Which complement pathway is antibody-independent?",
                 options: [
-                    "Neutrophils and IL-8",
-                    "Macrophages and TNF-α",
-                    "T cells and antibodies against myelin",
-                    "Eosinophils and IL-5"
+                    "A. Alternative pathway",
+                    "B. Classical pathway",
+                    "C. Lectin pathway",
+                    "D. Both A and C"
                 ],
-                correct: 2,
-                explanation: "Multiple sclerosis involves autoimmune T cell responses against CNS myelin, with antibody-mediated damage also contributing to demyelination.",
-                memoryTip: "Multiple sclerosis = Autoimmune T cell response against myelin + Antibodies → Demyelination."
+                correctAnswer: "D",
+                explanation: "Alternative pathway is activated by microbial surfaces, lectin pathway by mannose-binding lectin binding microbial carbohydrates. Classical pathway requires antigen-antibody complexes.",
+                concept: "Complement activation pathways",
+                category: "Immunology",
+                difficulty: "Medium"
             },
             {
-                question: "Which of the following best explains why chronic inflammation can lead to systemic symptoms like fatigue and weight loss?",
+                id: 43,
+                question: "What is the role of toll-like receptors (TLRs)?",
                 options: [
-                    "Direct tissue damage in multiple organs",
-                    "Systemic effects of inflammatory cytokines",
-                    "Impaired nutrient absorption",
-                    "Increased metabolic demands"
+                    "A. Recognize pathogen-associated molecular patterns",
+                    "B. Activate adaptive immunity",
+                    "C. Induce cytokine production",
+                    "D. All of the above"
                 ],
-                correct: 1,
-                explanation: "Chronic inflammation leads to systemic symptoms through the actions of inflammatory cytokines (TNF-α, IL-1, IL-6) that affect the brain (fatigue) and metabolism (weight loss).",
-                memoryTip: "Chronic inflammation → Cytokine effects on CNS and metabolism → Fatigue + Weight loss."
+                correctAnswer: "D",
+                explanation: "TLRs recognize microbial components (LPS, flagellin, nucleic acids), trigger signaling cascades producing cytokines/chemokines, and initiate adaptive immune responses.",
+                concept: "Innate immune recognition",
+                category: "Immunology",
+                difficulty: "Medium"
             },
             {
-                question: "A patient with a defect in the receptor for IFN-γ would be expected to have increased susceptibility to:",
+                id: 44,
+                question: "Which immunodeficiency involves defective NADPH oxidase?",
                 options: [
-                    "Viral infections",
-                    "Intracellular bacterial infections",
-                    "Extracellular bacterial infections",
-                    "Fungal infections"
+                    "A. Chronic granulomatous disease",
+                    "B. Chediak-Higashi syndrome",
+                    "C. Leukocyte adhesion deficiency",
+                    "D. Myeloperoxidase deficiency"
                 ],
-                correct: 1,
-                explanation: "IFN-γ is crucial for macrophage activation against intracellular pathogens. Defects in IFN-γ signaling increase susceptibility to intracellular bacteria like mycobacteria.",
-                memoryTip: "IFN-γ receptor defect → Impaired macrophage activation → Susceptibility to intracellular pathogens (mycobacteria, salmonella)."
+                correctAnswer: "A",
+                explanation: "CGD results from mutations in NADPH oxidase components, preventing respiratory burst and bacterial killing. Characterized by granuloma formation with catalase-positive organisms.",
+                concept: "Phagocyte disorders",
+                category: "Immunology",
+                difficulty: "Hard"
             },
             {
-                question: "Which of the following best explains the difference between innate and adaptive immune memory in inflammation?",
+                id: 45,
+                question: "What characterizes type I hypersensitivity?",
                 options: [
-                    "Innate immunity has no memory",
-                    "Adaptive immunity has specific memory",
-                    "Innate memory involves epigenetic changes",
-                    "All of the above"
+                    "A. IgE-mediated, mast cell degranulation",
+                    "B. IgG/IgM-mediated cell destruction",
+                    "C. Immune complex deposition",
+                    "D. T-cell mediated delayed reaction"
                 ],
-                correct: 3,
-                explanation: "Traditional view held that only adaptive immunity has memory, but recent evidence shows innate immunity can have 'trained immunity' through epigenetic reprogramming, though it's non-specific.",
-                memoryTip: "Adaptive immunity = Specific memory; Innate immunity = Non-specific 'trained immunity' via epigenetic changes."
+                correctAnswer: "A",
+                explanation: "Type I (immediate) involves IgE binding mast cells/basophils, cross-linked by antigen causing degranulation (histamine, leukotrienes). Examples: anaphylaxis, allergic rhinitis.",
+                concept: "Hypersensitivity reactions",
+                category: "Immunology",
+                difficulty: "Medium"
             },
             {
-                question: "In a patient with systemic sclerosis, the widespread fibrosis results from:",
+                id: 46,
+                question: "Which cells are primarily infected by HIV?",
                 options: [
-                    "Persistent neutrophil activation",
-                    "Continuous mast cell degranulation",
-                    "Sustained fibroblast activation by TGF-β",
-                    "Recurrent complement deposition"
+                    "A. CD4+ T lymphocytes",
+                    "B. Macrophages",
+                    "C. Dendritic cells",
+                    "D. All of the above"
                 ],
-                correct: 2,
-                explanation: "Systemic sclerosis involves persistent fibroblast activation and excessive collagen production driven primarily by TGF-β, leading to widespread fibrosis.",
-                memoryTip: "Systemic sclerosis = TGF-β-driven fibroblast activation → Excessive collagen → Fibrosis."
+                correctAnswer: "D",
+                explanation: "HIV infects all cells expressing CD4 and appropriate co-receptors: CCR5 on macrophages/dendritic cells, CXCR4 or CCR5 on T cells.",
+                concept: "HIV cellular tropism",
+                category: "Immunology",
+                difficulty: "Medium"
+            },
+            {
+                id: 47,
+                question: "What is the mechanism of action of corticosteroids?",
+                options: [
+                    "A. Bind glucocorticoid receptors affecting gene transcription",
+                    "B. Direct lysis of immune cells",
+                    "C. Inhibition of complement activation",
+                    "D. Blockade of cytokine receptors"
+                ],
+                correctAnswer: "A",
+                explanation: "Corticosteroids enter cells, bind glucocorticoid receptors, translocate to nucleus, and modulate transcription of anti-inflammatory proteins and inhibit pro-inflammatory genes.",
+                concept: "Immunosuppressant mechanisms",
+                category: "Immunology",
+                difficulty: "Hard"
+            },
+            {
+                id: 48,
+                question: "Which cytokine is anti-inflammatory?",
+                options: [
+                    "A. IL-10",
+                    "B. TNF-α",
+                    "C. IL-1",
+                    "D. IL-6"
+                ],
+                correctAnswer: "A",
+                explanation: "IL-10 inhibits macrophage activation and Th1 cytokine production. TNF-α, IL-1, IL-6 are pro-inflammatory cytokines.",
+                concept: "Cytokine functions",
+                category: "Immunology",
+                difficulty: "Medium"
+            },
+
+            // Category 7: Pharmacotherapy (8 questions)
+            {
+                id: 49,
+                question: "Which antibiotic requires renal dose adjustment?",
+                options: [
+                    "A. Vancomycin",
+                    "B. Aminoglycosides",
+                    "C. Both A and B",
+                    "D. Neither"
+                ],
+                correctAnswer: "C",
+                explanation: "Both vancomycin and aminoglycosides are renally cleared and require dosage adjustment in renal impairment. Therapeutic drug monitoring is recommended.",
+                concept: "Antibiotic pharmacokinetics",
+                category: "Pharmacotherapy",
+                difficulty: "Medium"
+            },
+            {
+                id: 50,
+                question: "What is the mechanism of trimethoprim-sulfamethoxazole synergy?",
+                options: [
+                    "A. Sequential blockade of folate synthesis",
+                    "B. Inhibition of cell wall synthesis",
+                    "C. Disruption of protein synthesis",
+                    "D. Inhibition of DNA gyrase"
+                ],
+                correctAnswer: "A",
+                explanation: "Sulfamethoxazole inhibits dihydropteroate synthase, trimethoprim inhibits dihydrofolate reductase - sequential blockade of folate synthesis with bactericidal synergy.",
+                concept: "Antibiotic combinations and synergy",
+                category: "Pharmacotherapy",
+                difficulty: "Medium"
+            },
+            {
+                id: 51,
+                question: "Which antiviral inhibits HIV integrase?",
+                options: [
+                    "A. Raltegravir",
+                    "B. Zidovudine",
+                    "C. Nevirapine",
+                    "D. Indinavir"
+                ],
+                correctAnswer: "A",
+                explanation: "Raltegravir, dolutegravir, and elvitegravir are integrase strand transfer inhibitors (INSTIs) blocking HIV DNA integration into host genome.",
+                concept: "Antiretroviral drug classes",
+                category: "Pharmacotherapy",
+                difficulty: "Medium"
+            },
+            {
+                id: 52,
+                question: "What is the 'red man syndrome' associated with?",
+                options: [
+                    "A. Rapid vancomycin infusion",
+                    "B. Penicillin allergy",
+                    "C. Sulfa drug reaction",
+                    "D. Aminoglycoside toxicity"
+                ],
+                correctAnswer: "A",
+                explanation: "Rapid vancomycin infusion causes histamine release leading to erythema, pruritus, hypotension - 'red man syndrome'. Slower infusion (over 1-2 hours) prevents this.",
+                concept: "Antibiotic adverse effects",
+                category: "Pharmacotherapy",
+                difficulty: "Medium"
+            },
+            {
+                id: 53,
+                question: "Which drug combination treats Helicobacter pylori?",
+                options: [
+                    "A. PPI + clarithromycin + amoxicillin/metronidazole",
+                    "B. PPI + ciprofloxacin + doxycycline",
+                    "C. H2 blocker + penicillin + metronidazole",
+                    "D. Antacid + erythromycin + tetracycline"
+                ],
+                correctAnswer: "A",
+                explanation: "Standard triple therapy: PPI + clarithromycin + amoxicillin or metronidazole for 10-14 days. Quadruple therapy adds bismuth for resistant cases.",
+                concept: "Combination therapy for specific pathogens",
+                category: "Pharmacotherapy",
+                difficulty: "Medium"
+            },
+            {
+                id: 54,
+                question: "What is the mechanism of daptomycin?",
+                options: [
+                    "A. Calcium-dependent membrane depolarization",
+                    "B. Inhibition of protein synthesis",
+                    "C. Inhibition of cell wall synthesis",
+                    "D. Inhibition of nucleic acid synthesis"
+                ],
+                correctAnswer: "A",
+                explanation: "Daptomycin binds bacterial membranes in calcium-dependent manner causing rapid depolarization and cell death. Active against Gram-positives including MRSA and VRE.",
+                concept: "Novel antibiotic mechanisms",
+                category: "Pharmacotherapy",
+                difficulty: "Hard"
+            },
+            {
+                id: 55,
+                question: "Which antifungal has significant drug interactions via CYP3A4?",
+                options: [
+                    "A. Itraconazole",
+                    "B. Fluconazole",
+                    "C. Voriconazole",
+                    "D. All of the above"
+                ],
+                correctAnswer: "D",
+                explanation: "Azole antifungals inhibit CYP3A4 (itraconazole > voriconazole > fluconazole), increasing levels of statins, cyclosporine, warfarin, and many other drugs.",
+                concept: "Antifungal drug interactions",
+                category: "Pharmacotherapy",
+                difficulty: "Medium"
+            },
+            {
+                id: 56,
+                question: "What is the treatment for MRSA pneumonia?",
+                options: [
+                    "A. Vancomycin or linezolid",
+                    "B. Ceftriaxone",
+                    "C. Piperacillin-tazobactam",
+                    "D. Ciprofloxacin"
+                ],
+                correctAnswer: "A",
+                explanation: "MRSA pneumonia treated with vancomycin (target trough 15-20 mg/L) or linezolid. Ceftaroline is also an option. Beta-lactams and fluoroquinolones ineffective.",
+                concept: "MRSA treatment guidelines",
+                category: "Pharmacotherapy",
+                difficulty: "Medium"
+            },
+
+            // Category 8: Epidemiology & Prevention (9 questions)
+            {
+                id: 57,
+                question: "What does 'R₀' represent?",
+                options: [
+                    "A. Basic reproduction number",
+                    "B. Attack rate",
+                    "C. Case fatality rate",
+                    "D. Incidence rate"
+                ],
+                correctAnswer: "A",
+                explanation: "R₀ (basic reproduction number) = average number secondary cases from one infected in susceptible population. R₀ > 1 leads to epidemic, < 1 to decline.",
+                concept: "Epidemiological measures",
+                category: "Epidemiology",
+                difficulty: "Medium"
+            },
+            {
+                id: 58,
+                question: "Which vaccine is a live attenuated virus?",
+                options: [
+                    "A. MMR (measles, mumps, rubella)",
+                    "B. Hepatitis B",
+                    "C. Tetanus toxoid",
+                    "D. Pneumococcal conjugate"
+                ],
+                correctAnswer: "A",
+                explanation: "MMR contains live attenuated viruses. Hepatitis B is recombinant protein, tetanus is toxoid, pneumococcal is polysaccharide or conjugate.",
+                concept: "Vaccine types",
+                category: "Epidemiology",
+                difficulty: "Easy"
+            },
+            {
+                id: 59,
+                question: "What is the 'iceberg concept' of infection?",
+                options: [
+                    "A. Most infections are subclinical",
+                    "B. Infections spread from cold climates",
+                    "C. Pathogens survive freezing",
+                    "D. Vaccines require cold chain"
+                ],
+                correctAnswer: "A",
+                explanation: "For many infections (polio, hepatitis A), clinical cases are the 'tip of iceberg' with many more subclinical infections maintaining transmission.",
+                concept: "Infection dynamics",
+                category: "Epidemiology",
+                difficulty: "Medium"
+            },
+            {
+                id: 60,
+                question: "Which is NOT a recommended antimicrobial stewardship strategy?",
+                options: [
+                    "A. Automatic stop orders after 7 days",
+                    "B. Procalcitonin-guided therapy",
+                    "C. Broad-spectrum empiric therapy for all infections",
+                    "D. Antibiotic cycling"
+                ],
+                correctAnswer: "C",
+                explanation: "Stewardship promotes targeted therapy, not indiscriminate broad-spectrum use. Strategies include de-escalation, shortest effective duration, and biomarker guidance.",
+                concept: "Antimicrobial stewardship",
+                category: "Epidemiology",
+                difficulty: "Medium"
+            },
+            {
+                id: 61,
+                question: "What characterizes a pandemic?",
+                options: [
+                    "A. Worldwide spread of new disease",
+                    "B. Excess cases in a region",
+                    "C. Constant presence in community",
+                    "D. Animal-to-human transmission"
+                ],
+                correctAnswer: "A",
+                explanation: "Pandemic = worldwide epidemic. Epidemic = excess cases in region. Endemic = constant presence. Zoonotic = animal origin.",
+                concept: "Disease transmission patterns",
+                category: "Epidemiology",
+                difficulty: "Easy"
+            },
+            {
+                id: 62,
+                question: "Which is a key feature of herd immunity?",
+                options: [
+                    "A. Protects susceptible individuals",
+                    "B. Requires high vaccine coverage",
+                    "C. Depends on R₀ and vaccine efficacy",
+                    "D. All of the above"
+                ],
+                correctAnswer: "D",
+                explanation: "Herd immunity = indirect protection when high proportion immune, reducing transmission. Threshold = 1 - 1/R₀. Requires effective vaccines and high coverage.",
+                concept: "Herd immunity principles",
+                category: "Epidemiology",
+                difficulty: "Medium"
+            },
+            {
+                id: 63,
+                question: "What does WHONET software track?",
+                options: [
+                    "A. Antimicrobial resistance patterns",
+                    "B. Vaccine coverage",
+                    "C. Outbreak detection",
+                    "D. All of the above"
+                ],
+                correctAnswer: "A",
+                explanation: "WHONET is WHO software for microbiology lab data management and antimicrobial resistance surveillance, used globally for resistance pattern analysis.",
+                concept: "Public health microbiology",
+                category: "Epidemiology",
+                difficulty: "Hard"
+            },
+            {
+                id: 64,
+                question: "Which organization classifies antibiotics as Access, Watch, Reserve?",
+                options: [
+                    "A. WHO",
+                    "B. CDC",
+                    "C. FDA",
+                    "D. ECDC"
+                ],
+                correctAnswer: "A",
+                explanation: "WHO AWaRe classification: Access (1st/2nd line), Watch (higher resistance risk), Reserve (last resort). Guides antibiotic stewardship.",
+                concept: "Global antibiotic classification",
+                category: "Epidemiology",
+                difficulty: "Medium"
+            },
+            {
+                id: 65,
+                question: "What is the significance of KPC carbapenemase?",
+                options: [
+                    "A. Hydrolyzes all β-lactams including carbapenems",
+                    "B. Plasmid-mediated spreading globally",
+                    "C. Associated with high mortality",
+                    "D. All of the above"
+                ],
+                correctAnswer: "D",
+                explanation: "Klebsiella pneumoniae carbapenemase (KPC) is a serine β-lactamase hydrolyzing all β-lactams, often plasmid-borne with other resistance genes, causing difficult-to-treat infections.",
+                concept: "Global resistance threats",
+                category: "Epidemiology",
+                difficulty: "Hard"
             }
         ];
 
-        // DOM elements
-        const quizContainer = document.getElementById('quiz-container');
-        const resultsContainer = document.getElementById('results-container');
-        const questionNumber = document.getElementById('question-number');
-        const questionText = document.getElementById('question-text');
-        const optionsContainer = document.getElementById('options-container');
-        const explanationContainer = document.getElementById('explanation-container');
-        const explanationText = document.getElementById('explanation-text');
-        const memoryTipText = document.getElementById('memory-tip-text');
+        // DOM Elements
+        const currentQEl = document.getElementById('current-q');
+        const totalQEl = document.getElementById('total-q');
+        const categoryLabel = document.getElementById('category-label');
+        const timerEl = document.getElementById('timer');
+        const progressEl = document.getElementById('progress');
+        const qNumberEl = document.getElementById('q-number');
+        const questionTextEl = document.getElementById('question-text');
+        const optionsContainerEl = document.getElementById('options-container');
+        const explanationPanelEl = document.getElementById('explanation-panel');
+        const explanationContentEl = document.getElementById('explanation-content');
+        const conceptHighlightEl = document.getElementById('concept-highlight');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
+        const hintBtn = document.getElementById('hint-btn');
         const submitBtn = document.getElementById('submit-btn');
-        const progressFill = document.getElementById('progress-fill');
-        const progressText = document.getElementById('progress-text');
-        const timeDisplay = document.getElementById('time');
-        const scoreDisplay = document.getElementById('score');
-        const scoreText = document.getElementById('score-text');
-        const totalQuestions = document.getElementById('total-questions');
-        const correctAnswers = document.getElementById('correct-answers');
-        const incorrectAnswers = document.getElementById('incorrect-answers');
-        const percentage = document.getElementById('percentage');
-        const timeTaken = document.getElementById('time-taken');
-        const questionReview = document.getElementById('question-review');
+        const quizWrapper = document.getElementById('quiz-wrapper');
+        const resultsScreen = document.getElementById('results-screen');
+        const scoreFill = document.getElementById('score-fill');
+        const scorePercentageEl = document.getElementById('score-percentage');
+        const finalScoreEl = document.getElementById('final-score');
+        const maxScoreEl = document.getElementById('max-score');
+        const correctCountEl = document.getElementById('correct-count');
+        const incorrectCountEl = document.getElementById('incorrect-count');
+        const accuracyRateEl = document.getElementById('accuracy-rate');
+        const timeTakenEl = document.getElementById('time-taken');
+        const reviewBtn = document.getElementById('review-btn');
         const restartBtn = document.getElementById('restart-btn');
+        const microbesContainer = document.getElementById('microbes-container');
 
-        // Quiz state
-        let currentQuestion = 0;
+        // Quiz State
+        let currentIndex = 0;
         let userAnswers = new Array(questions.length).fill(null);
+        let timerInterval;
+        let timeRemaining = 90 * 60; // 90 minutes
+        let startTime = Date.now();
         let score = 0;
-        let timer;
-        let timeLeft = 80 * 60; // 80 minutes in seconds
-        let quizCompleted = false;
 
-        // Initialize quiz
+        // Create floating microbes animation
+        function createMicrobes() {
+            for (let i = 0; i < 20; i++) {
+                const microbe = document.createElement('div');
+                microbe.className = 'microbe';
+                const size = Math.random() * 40 + 10;
+                microbe.style.width = `${size}px`;
+                microbe.style.height = `${size}px`;
+                microbe.style.left = `${Math.random() * 100}vw`;
+                microbe.style.animationDelay = `${Math.random() * 20}s`;
+                microbe.style.animationDuration = `${Math.random() * 20 + 20}s`;
+                microbesContainer.appendChild(microbe);
+            }
+        }
+
+        // Initialize Quiz
         function initQuiz() {
+            totalQEl.textContent = questions.length;
+            maxScoreEl.textContent = questions.length;
+            createMicrobes();
             displayQuestion();
             startTimer();
-            updateProgress();
+            
+            // Event Listeners
+            prevBtn.addEventListener('click', prevQuestion);
+            nextBtn.addEventListener('click', nextQuestion);
+            hintBtn.addEventListener('click', showHint);
+            submitBtn.addEventListener('click', submitQuiz);
+            reviewBtn.addEventListener('click', showReview);
+            restartBtn.addEventListener('click', restartQuiz);
         }
 
-        // Display current question
+        // Display Current Question
         function displayQuestion() {
-            const question = questions[currentQuestion];
-            questionNumber.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
-            questionText.textContent = question.question;
+            const q = questions[currentIndex];
             
-            optionsContainer.innerHTML = '';
-            question.options.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.className = 'option';
-                if (userAnswers[currentQuestion] === index) {
-                    optionElement.classList.add('selected');
+            qNumberEl.textContent = q.id;
+            currentQEl.textContent = currentIndex + 1;
+            questionTextEl.textContent = q.question;
+            categoryLabel.textContent = q.category;
+            
+            // Update progress bar
+            progressEl.style.width = `${((currentIndex + 1) / questions.length) * 100}%`;
+            
+            // Clear previous options
+            optionsContainerEl.innerHTML = '';
+            
+            // Add new options
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                
+                const optionLetter = option.charAt(0);
+                if (userAnswers[currentIndex] === optionLetter) {
+                    optionEl.classList.add('selected');
                 }
-                optionElement.textContent = option;
-                optionElement.addEventListener('click', () => selectOption(index));
-                optionsContainer.appendChild(optionElement);
+                
+                optionEl.innerHTML = `
+                    <span class="option-letter">${optionLetter}</span>
+                    <span>${option.substring(3)}</span>
+                `;
+                
+                optionEl.addEventListener('click', () => selectOption(optionLetter));
+                optionsContainerEl.appendChild(optionEl);
             });
             
-            // Show/hide explanation
-            if (userAnswers[currentQuestion] !== null) {
-                showExplanation();
-            } else {
-                explanationContainer.style.display = 'none';
-            }
+            // Hide explanation
+            explanationPanelEl.style.display = 'none';
             
-            // Update button states
-            prevBtn.disabled = currentQuestion === 0;
-            nextBtn.disabled = false;
-            submitBtn.style.display = currentQuestion === questions.length - 1 ? 'block' : 'none';
+            // Update navigation buttons
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.style.display = currentIndex === questions.length - 1 ? 'none' : 'block';
+            submitBtn.style.display = currentIndex === questions.length - 1 ? 'block' : 'none';
         }
 
-        // Select an option
-        function selectOption(index) {
-            if (quizCompleted) return;
-            
-            userAnswers[currentQuestion] = index;
+        // Select an Option
+        function selectOption(option) {
+            userAnswers[currentIndex] = option;
             
             // Update UI
-            const options = document.querySelectorAll('.option');
-            options.forEach(option => option.classList.remove('selected'));
-            options[index].classList.add('selected');
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+                const optLetter = opt.querySelector('.option-letter').textContent;
+                if (optLetter === option) {
+                    opt.classList.add('selected');
+                }
+            });
             
+            // Show explanation
             showExplanation();
         }
 
-        // Show explanation for current question
+        // Show Explanation
         function showExplanation() {
-            const question = questions[currentQuestion];
-            explanationText.textContent = question.explanation;
-            memoryTipText.textContent = question.memoryTip;
-            explanationContainer.style.display = 'block';
+            const q = questions[currentIndex];
+            const userAnswer = userAnswers[currentIndex];
             
-            // Highlight correct/incorrect answers
-            const options = document.querySelectorAll('.option');
-            options.forEach((option, index) => {
-                option.classList.remove('correct', 'incorrect');
-                if (index === question.correct) {
-                    option.classList.add('correct');
-                } else if (index === userAnswers[currentQuestion] && index !== question.correct) {
-                    option.classList.add('incorrect');
-                }
-            });
+            if (userAnswer) {
+                explanationContentEl.textContent = q.explanation;
+                conceptHighlightEl.innerHTML = `<strong>Key Concept:</strong> ${q.concept} | <strong>Difficulty:</strong> ${q.difficulty}`;
+                explanationPanelEl.style.display = 'block';
+                
+                // Highlight correct/incorrect
+                document.querySelectorAll('.option').forEach(opt => {
+                    const optLetter = opt.querySelector('.option-letter').textContent;
+                    if (optLetter === q.correctAnswer) {
+                        opt.classList.add('correct');
+                    } else if (optLetter === userAnswer && userAnswer !== q.correctAnswer) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+            }
         }
 
-        // Navigate to next question
+        // Show Hint
+        function showHint() {
+            const q = questions[currentIndex];
+            const hints = [
+                `Category: ${q.category}`,
+                `Difficulty: ${q.difficulty}`,
+                `Key Concept: ${q.concept}`,
+                `Eliminate obviously wrong options first`,
+                `Consider clinical relevance of each option`
+            ];
+            
+            const randomHint = hints[Math.floor(Math.random() * hints.length)];
+            alert(`💡 Hint: ${randomHint}\n\nTake your time with this one!`);
+        }
+
+        // Navigation
         function nextQuestion() {
-            if (currentQuestion < questions.length - 1) {
-                currentQuestion++;
+            if (currentIndex < questions.length - 1) {
+                currentIndex++;
                 displayQuestion();
-                updateProgress();
             }
         }
 
-        // Navigate to previous question
         function prevQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
+            if (currentIndex > 0) {
+                currentIndex--;
                 displayQuestion();
-                updateProgress();
             }
         }
 
-        // Update progress bar
-        function updateProgress() {
-            const progress = ((currentQuestion + 1) / questions.length) * 100;
-            progressFill.style.width = `${progress}%`;
-            progressText.textContent = `${currentQuestion + 1}/${questions.length}`;
-        }
-
-        // Start timer
+        // Timer Functions
         function startTimer() {
-            timer = setInterval(() => {
-                timeLeft--;
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
                 
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
                     submitQuiz();
                 }
             }, 1000);
         }
 
-        // Submit quiz
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            timerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Submit Quiz
         function submitQuiz() {
-            clearInterval(timer);
-            quizCompleted = true;
+            clearInterval(timerInterval);
             
             // Calculate score
-            score = 0;
-            for (let i = 0; i < questions.length; i++) {
-                if (userAnswers[i] === questions[i].correct) {
-                    score++;
+            let correct = 0;
+            questions.forEach((q, index) => {
+                if (userAnswers[index] === q.correctAnswer) {
+                    correct++;
                 }
-            }
-            
-            // Display results
-            quizContainer.style.display = 'none';
-            resultsContainer.style.display = 'block';
-            
-            scoreDisplay.textContent = `${score}/${questions.length}`;
-            totalQuestions.textContent = questions.length;
-            correctAnswers.textContent = score;
-            incorrectAnswers.textContent = questions.length - score;
-            percentage.textContent = `${((score / questions.length) * 100).toFixed(1)}%`;
-            
-            const minutesTaken = Math.floor((80 * 60 - timeLeft) / 60);
-            const secondsTaken = (80 * 60 - timeLeft) % 60;
-            timeTaken.textContent = `${minutesTaken.toString().padStart(2, '0')}:${secondsTaken.toString().padStart(2, '0')}`;
-            
-            // Set score text
-            if (score >= questions.length * 0.8) {
-                scoreText.textContent = "Excellent! You have a strong understanding of inflammation.";
-            } else if (score >= questions.length * 0.6) {
-                scoreText.textContent = "Good job! You have a solid foundation in inflammation concepts.";
-            } else if (score >= questions.length * 0.5) {
-                scoreText.textContent = "You passed! Review the explanations to strengthen your knowledge.";
-            } else {
-                scoreText.textContent = "You need more study. Review the material and try again.";
-            }
-            
-            // Generate question review
-            generateQuestionReview();
-        }
-
-        // Generate question review
-        function generateQuestionReview() {
-            questionReview.innerHTML = '<h3>Question Review</h3>';
-            
-            questions.forEach((question, index) => {
-                const reviewItem = document.createElement('div');
-                reviewItem.className = 'review-item';
-                
-                const reviewQuestion = document.createElement('div');
-                reviewQuestion.className = 'review-question';
-                reviewQuestion.textContent = `${index + 1}. ${question.question}`;
-                
-                const userAnswer = document.createElement('div');
-                userAnswer.className = 'review-answer';
-                if (userAnswers[index] !== null) {
-                    userAnswer.innerHTML = `Your answer: <span class="user-answer">${question.options[userAnswers[index]]}</span>`;
-                } else {
-                    userAnswer.innerHTML = `Your answer: <span class="user-answer">Not answered</span>`;
-                }
-                
-                const correctAnswer = document.createElement('div');
-                correctAnswer.className = 'review-answer';
-                correctAnswer.innerHTML = `Correct answer: <span class="correct-answer">${question.options[question.correct]}</span>`;
-                
-                reviewItem.appendChild(reviewQuestion);
-                reviewItem.appendChild(userAnswer);
-                reviewItem.appendChild(correctAnswer);
-                
-                questionReview.appendChild(reviewItem);
             });
+            
+            score = correct;
+            const percentage = Math.round((correct / questions.length) * 100);
+            const timeUsed = 90 * 60 - timeRemaining;
+            const minutesUsed = Math.floor(timeUsed / 60);
+            const secondsUsed = timeUsed % 60;
+            
+            // Update results
+            const rotation = (percentage / 100) * 360;
+            scoreFill.style.borderImage = `conic-gradient(var(--neon) 0deg, var(--accent) ${rotation}deg, transparent ${rotation}deg, transparent 360deg) 1`;
+            scoreFill.style.transform = `rotate(${rotation}deg)`;
+            scorePercentageEl.textContent = `${percentage}%`;
+            finalScoreEl.textContent = correct;
+            correctCountEl.textContent = correct;
+            incorrectCountEl.textContent = questions.length - correct;
+            accuracyRateEl.textContent = `${percentage}%`;
+            timeTakenEl.textContent = `${minutesUsed}:${secondsUsed.toString().padStart(2, '0')}`;
+            
+            // Show results
+            quizWrapper.style.display = 'none';
+            resultsScreen.style.display = 'block';
+            
+            // Add celebration effect
+            celebrate(percentage);
         }
 
-        // Restart quiz
+        // Celebrate Completion
+        function celebrate(percentage) {
+            if (percentage >= 85) {
+                // Excellence celebration
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.top = '0';
+                confetti.style.left = '0';
+                confetti.style.width = '100%';
+                confetti.style.height = '100%';
+                confetti.style.zIndex = '1000';
+                confetti.style.pointerEvents = 'none';
+                confetti.innerHTML = '🎉🌟🏆🎓✨';
+                confetti.style.fontSize = '2rem';
+                confetti.style.opacity = '0.7';
+                confetti.style.animation = 'fadeOut 3s forwards';
+                document.body.appendChild(confetti);
+                
+                // Add fadeOut animation
+                const style = document.createElement('style');
+                style.textContent = '@keyframes fadeOut { to { opacity: 0; } }';
+                document.head.appendChild(style);
+                
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        // Show Review
+        function showReview() {
+            let reviewText = "📊 QUESTION REVIEW 📊\n\n";
+            questions.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === q.correctAnswer;
+                const status = isCorrect ? "✓ CORRECT" : "✗ INCORRECT";
+                reviewText += `Q${index + 1}: ${status}\n`;
+                if (!isCorrect) {
+                    reviewText += `   Your answer: ${userAnswer || 'Unanswered'}\n`;
+                    reviewText += `   Correct answer: ${q.correctAnswer}\n`;
+                }
+                reviewText += `   Category: ${q.category}\n\n`;
+            });
+            
+            alert(reviewText + "\nUse this review to focus your studies on weak areas!");
+        }
+
+        // Restart Quiz
         function restartQuiz() {
-            currentQuestion = 0;
+            currentIndex = 0;
             userAnswers = new Array(questions.length).fill(null);
+            timeRemaining = 90 * 60;
             score = 0;
-            timeLeft = 80 * 60;
-            quizCompleted = false;
             
-            quizContainer.style.display = 'block';
-            resultsContainer.style.display = 'none';
+            // Reset UI
+            resultsScreen.style.display = 'none';
+            quizWrapper.style.display = 'block';
             
-            initQuiz();
+            // Restart
+            displayQuestion();
+            startTimer();
+            updateTimerDisplay();
         }
 
-        // Event listeners
-        prevBtn.addEventListener('click', prevQuestion);
-        nextBtn.addEventListener('click', nextQuestion);
-        submitBtn.addEventListener('click', submitQuiz);
-        restartBtn.addEventListener('click', restartQuiz);
-
-        // Start the quiz
-        initQuiz();
+        // Initialize when page loads
+        window.addEventListener('load', initQuiz);
     </script>
 </body>
-    </html>
+                                       </html>
