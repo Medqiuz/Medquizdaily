@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digestive System Quiz | Haramaya University Pharmacy</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 25px;
+            background-color: var(--light);
+            border-bottom: 1px solid #ddd;
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--danger);
+        }
+
+        .progress {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: var(--transition);
+        }
+
+        .quiz-container {
+            padding: 30px;
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+        }
+
+        .question-number {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .option {
+            padding: 15px;
+            background-color: var(--light);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background-color: #e0e7ee;
+            transform: translateY(-2px);
+        }
+
+        .option.selected {
+            border-color: var(--primary);
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .option.correct {
+            border-color: var(--success);
+            background-color: rgba(46, 204, 113, 0.1);
+        }
+
+        .option.incorrect {
+            border-color: var(--danger);
+            background-color: rgba(231, 76, 60, 0.1);
+        }
+
+        .explanation-container {
+            padding: 20px;
+            background-color: rgba(52, 152, 219, 0.05);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .explanation-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .memory-tip {
+            background-color: rgba(243, 156, 18, 0.1);
+            padding: 15px;
+            border-left: 4px solid var(--warning);
+            margin-top: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .memory-tip-title {
+            font-weight: 600;
+            color: var(--warning);
+            margin-bottom: 5px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-prev {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+
+        .btn-next {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-submit {
+            background-color: var(--success);
+            color: white;
+            display: none;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .results-container {
+            padding: 30px;
+            text-align: center;
+            display: none;
+        }
+
+        .results-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .score {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 20px 0;
+        }
+
+        .score-text {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+        }
+
+        .summary {
+            text-align: left;
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .summary-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .restart-btn {
+            background-color: var(--primary);
+            color: white;
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+        }
+
+        .question-review {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .review-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .review-question {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .review-answer {
+            margin-bottom: 5px;
+        }
+
+        .correct-answer {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .user-answer {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-info {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .progress-bar {
+                width: 100%;
+            }
+
+            .question-text {
+                font-size: 1.2rem;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Digestive System Quiz</h1>
+            <p>Based on GIT Anatomy | Haramaya University</p>
+        </header>
+
+        <div class="quiz-info">
+            <div class="timer">Time: <span id="time">40:00</span></div>
+            <div class="progress">
+                <span>Progress:</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <span id="progress-text">0/40</span>
+            </div>
+        </div>
+
+        <div class="quiz-container" id="quiz-container">
+            <div class="question-container">
+                <div class="question-number" id="question-number">Question 1 of 40</div>
+                <div class="question-text" id="question-text"></div>
+                <div class="options-container" id="options-container"></div>
+            </div>
+
+            <div class="explanation-container" id="explanation-container">
+                <div class="explanation-title">Explanation</div>
+                <div id="explanation-text"></div>
+                <div class="memory-tip" id="memory-tip">
+                    <div class="memory-tip-title">Memory Tip</div>
+                    <div id="memory-tip-text"></div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn-prev" id="prev-btn" disabled>Previous</button>
+                <button class="btn-next" id="next-btn">Next Question</button>
+                <button class="btn-submit" id="submit-btn">Submit Quiz</button>
+            </div>
+        </div>
+
+        <div class="results-container" id="results-container">
+            <h2 class="results-title">Quiz Results</h2>
+            <div class="score" id="score">0/40</div>
+            <div class="score-text" id="score-text"></div>
+
+            <div class="summary">
+                <div class="summary-title">Performance Summary</div>
+                <p>Total Questions: <span id="total-questions">40</span></p>
+                <p>Correct Answers: <span id="correct-answers">0</span></p>
+                <p>Incorrect Answers: <span id="incorrect-answers">0</span></p>
+                <p>Percentage: <span id="percentage">0%</span></p>
+                <p>Time Taken: <span id="time-taken">40:00</span></p>
+            </div>
+
+            <div class="question-review" id="question-review">
+                <h3>Question Review</h3>
+                <!-- Review content will be generated by JavaScript -->
+            </div>
+
+            <button class="restart-btn" id="restart-btn">Restart Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        // Digestive System Quiz Questions (40 questions based on the PDF)
+        const questions = [
+            {
+                question: "What is the medical specialty that deals with the structure, function, diagnosis, and treatment of diseases of the stomach and intestines?",
+                options: [
+                    "Gastroenterology",
+                    "Hepatology",
+                    "Proctology",
+                    "Endocrinology"
+                ],
+                correct: 0,
+                explanation: "Gastroenterology is the medical specialty focused on the digestive system, particularly the stomach and intestines. Hepatology deals with the liver, proctology with the rectum/anus, and endocrinology with hormones.",
+                memoryTip: "Gastro (stomach) + entero (intestine) + logy (study) = Gastroenterology."
+            },
+            {
+                question: "Which of the following is NOT part of the gastrointestinal (GI) tract?",
+                options: [
+                    "Mouth",
+                    "Esophagus",
+                    "Liver",
+                    "Large intestine"
+                ],
+                correct: 2,
+                explanation: "The liver is an accessory digestive organ, not part of the GI tract itself. The GI tract is a continuous tube from mouth to anus including mouth, pharynx, esophagus, stomach, small intestine, and large intestine.",
+                memoryTip: "Accessory organs: Teeth, tongue, salivary glands, liver, gallbladder, pancreas."
+            },
+            {
+                question: "What is the approximate length of the GI tract in a living person?",
+                options: [
+                    "3-4 meters",
+                    "5-7 meters",
+                    "8-10 meters",
+                    "11-13 meters"
+                ],
+                correct: 1,
+                explanation: "The GI tract is about 5-7 meters long in a living person. It appears longer (7-9 meters) in cadavers because the muscles are relaxed without muscle tonus.",
+                memoryTip: "Living: 5-7m (shorter due to muscle tone). Cadaver: 7-9m (relaxed)."
+            },
+            {
+                question: "Which layer of the GI tract wall contains blood vessels and glands?",
+                options: [
+                    "Mucosa",
+                    "Submucosa",
+                    "Muscularis",
+                    "Serosa"
+                ],
+                correct: 1,
+                explanation: "The submucosa layer contains blood vessels, lymphatic vessels, nerves, and glands. The mucosa is the innermost layer, muscularis contains muscle layers, and serosa is the outermost layer.",
+                memoryTip: "Submucosa = 'Under the mucosa' containing vessels and glands."
+            },
+            {
+                question: "What is the primary function of the uvula during swallowing?",
+                options: [
+                    "Produce saliva",
+                    "Close off the nasopharynx",
+                    "Taste food",
+                    "Start peristalsis"
+                ],
+                correct: 1,
+                explanation: "During swallowing, the uvula and soft palate elevate to close off the nasopharynx, preventing food/liquid from entering the nasal cavity.",
+                memoryTip: "Uvula blocks the nasal passage during swallowing - think of it as a 'door' to the nose."
+            },
+            {
+                question: "Which salivary gland produces the majority (60-70%) of saliva?",
+                options: [
+                    "Parotid gland",
+                    "Submandibular gland",
+                    "Sublingual gland",
+                    "Buccal gland"
+                ],
+                correct: 1,
+                explanation: "The submandibular gland produces 60-70% of saliva. Parotid produces 25-30%, sublingual 3-5%, and minor glands the remainder.",
+                memoryTip: "Submandibular = MAJOR saliva producer (60-70%)."
+            },
+            {
+                question: "What is the hardest substance in the human body?",
+                options: [
+                    "Dentin",
+                    "Bone",
+                    "Enamel",
+                    "Cementum"
+                ],
+                correct: 2,
+                explanation: "Tooth enamel is the hardest substance in the human body, even harder than bone. It covers the crown of teeth to protect them.",
+                memoryTip: "Enamel = Extremely hard protective covering on teeth."
+            },
+            {
+                question: "Which tooth type is specialized for tearing food?",
+                options: [
+                    "Incisors",
+                    "Canines",
+                    "Premolars",
+                    "Molars"
+                ],
+                correct: 1,
+                explanation: "Canines (cuspids) are pointed teeth designed for tearing and grasping food. Incisors cut, premolars and molars grind.",
+                memoryTip: "Canines = 'Fang-like' for tearing, like a dog's teeth."
+            },
+            {
+                question: "At which vertebral level does the esophagus connect to the stomach?",
+                options: [
+                    "T8",
+                    "T10",
+                    "T12",
+                    "L1"
+                ],
+                correct: 1,
+                explanation: "The esophagus passes through the diaphragm at T10 and connects to the stomach at the level of the 10th thoracic vertebra.",
+                memoryTip: "Esophagus to stomach = T10 (10th thoracic vertebra)."
+            },
+            {
+                question: "What is the name of the three anatomic constrictions in the esophagus?",
+                options: [
+                    "Pharyngeal, bronchial, diaphragmatic",
+                    "Upper, middle, lower",
+                    "Cervical, thoracic, abdominal",
+                    "Proximal, medial, distal"
+                ],
+                correct: 0,
+                explanation: "The esophagus has three constrictions: pharyngoesophageal junction (upper), crossing with aortic arch/left bronchus (middle), and diaphragmatic/esophagogastric junction (lower).",
+                memoryTip: "Constrictions at: 1) Neck, 2) Chest (by aorta/bronchus), 3) Diaphragm."
+            },
+            {
+                question: "Which region of the stomach is the dome-shaped area beneath the diaphragm?",
+                options: [
+                    "Cardia",
+                    "Fundus",
+                    "Body",
+                    "Pylorus"
+                ],
+                correct: 1,
+                explanation: "The fundus is the dome-shaped region of the stomach beneath the diaphragm. Cardia surrounds the esophageal opening, body is the main part, pylorus connects to duodenum.",
+                memoryTip: "Fundus = 'Top' or 'dome' of stomach (like the fundus of the uterus)."
+            },
+            {
+                question: "What do the longitudinal folds in the empty stomach called?",
+                options: [
+                    "Villi",
+                    "Rugae",
+                    "Plicae circulares",
+                    "Haustra"
+                ],
+                correct: 1,
+                explanation: "Rugae are the longitudinal folds in the stomach mucosa that flatten when the stomach fills, allowing for expansion.",
+                memoryTip: "Rugae = Stomach folds that flatten when full (like accordion pleats)."
+            },
+            {
+                question: "Which stomach cells secrete hydrochloric acid and intrinsic factor?",
+                options: [
+                    "Mucous neck cells",
+                    "Parietal cells",
+                    "Chief cells",
+                    "Enteroendocrine cells"
+                ],
+                correct: 1,
+                explanation: "Parietal (oxyntic) cells secrete HCl (for digestion and killing bacteria) and intrinsic factor (for vitamin B12 absorption).",
+                memoryTip: "Parietal cells = Produce HCl (acid) and IF (intrinsic factor)."
+            },
+            {
+                question: "Which stomach cells secrete pepsinogen?",
+                options: [
+                    "Mucous neck cells",
+                    "Parietal cells",
+                    "Chief cells",
+                    "Enteroendocrine cells"
+                ],
+                correct: 2,
+                explanation: "Chief (zymogenic) cells secrete pepsinogen, which is converted to active pepsin in the acidic stomach environment for protein digestion.",
+                memoryTip: "Chief cells = Produce pepsinogen → pepsin (protein digestion)."
+            },
+            {
+                question: "Approximately how long does food typically remain in the stomach?",
+                options: [
+                    "30 minutes",
+                    "2 hours",
+                    "4 hours",
+                    "8 hours"
+                ],
+                correct: 2,
+                explanation: "Food remains in the stomach for about 4 hours, where it is mixed with gastric juices to form chyme before passing to the small intestine.",
+                memoryTip: "Stomach residence time = About 4 hours (varies by meal composition)."
+            },
+            {
+                question: "Which segment of the small intestine is primarily responsible for nutrient absorption?",
+                options: [
+                    "Duodenum",
+                    "Jejunum",
+                    "Ileum",
+                    "All equally"
+                ],
+                correct: 1,
+                explanation: "The jejunum is the primary site for nutrient absorption. The duodenum receives secretions, and the ileum absorbs remaining nutrients and bile salts.",
+                memoryTip: "Jejunum = 'J' for 'Just right' for absorption (main absorptive site)."
+            },
+            {
+                question: "What structure controls entry of material from the ileum into the large intestine?",
+                options: [
+                    "Pyloric sphincter",
+                    "Ileocecal valve",
+                    "Hepatopancreatic ampulla",
+                    "Anal sphincter"
+                ],
+                correct: 1,
+                explanation: "The ileocecal valve (sphincter) controls the passage of material from the ileum (end of small intestine) into the cecum (beginning of large intestine).",
+                memoryTip: "Ileocecal valve = Gateway between small and large intestine."
+            },
+            {
+                question: "What are the finger-like projections in the small intestine that increase surface area for absorption?",
+                options: [
+                    "Rugae",
+                    "Villi",
+                    "Microvilli",
+                    "Plicae circulares"
+                ],
+                correct: 1,
+                explanation: "Villi are finger-like projections in the small intestine mucosa that greatly increase surface area for nutrient absorption. Microvilli are on individual cells, plicae are circular folds.",
+                memoryTip: "Villi = Small intestine 'fingers' for absorption (think: 'villi' = 'village' of absorbers)."
+            },
+            {
+                question: "Which part of the large intestine has a blind pouch and appendix attachment?",
+                options: [
+                    "Ascending colon",
+                    "Transverse colon",
+                    "Descending colon",
+                    "Cecum"
+                ],
+                correct: 3,
+                explanation: "The cecum is a blind pouch at the beginning of the large intestine where the vermiform appendix attaches. It receives material from the ileum.",
+                memoryTip: "Cecum = 'Beginning' of large intestine with appendix attached."
+            },
+            {
+                question: "What is the main function of the large intestine?",
+                options: [
+                    "Nutrient absorption",
+                    "Water and electrolyte absorption",
+                    "Protein digestion",
+                    "Fat emulsification"
+                ],
+                correct: 1,
+                explanation: "The primary function of the large intestine is to absorb water and electrolytes from the remaining indigestible food matter, converting it to solid feces.",
+                memoryTip: "Large intestine = Water absorption and feces formation."
+            },
+            {
+                question: "Which ligament attaches the liver to the anterior abdominal wall?",
+                options: [
+                    "Falciform ligament",
+                    "Coronary ligament",
+                    "Hepatoduodenal ligament",
+                    "Round ligament"
+                ],
+                correct: 0,
+                explanation: "The falciform ligament is a peritoneal fold that attaches the liver to the anterior abdominal wall. The round ligament is within its free edge.",
+                memoryTip: "Falciform = 'Sickle-shaped' ligament attaching liver to front abdominal wall."
+            },
+            {
+                question: "What is the functional unit of the liver?",
+                options: [
+                    "Acini",
+                    "Islets",
+                    "Lobules",
+                    "Nephrons"
+                ],
+                correct: 2,
+                explanation: "The liver lobule is the classical functional unit of the liver, hexagonal in shape with hepatocytes radiating from a central vein.",
+                memoryTip: "Liver lobule = Hexagonal unit with central vein in middle."
+            },
+            {
+                question: "What do Kupffer cells in the liver do?",
+                options: [
+                    "Produce bile",
+                    "Store glycogen",
+                    "Phagocytose bacteria",
+                    "Detoxify drugs"
+                ],
+                correct: 2,
+                explanation: "Kupffer cells are hepatic macrophages located in liver sinusoids that phagocytose (eat) bacteria, debris, and old blood cells.",
+                memoryTip: "Kupffer cells = Liver's 'clean-up crew' (macrophages)."
+            },
+            {
+                question: "What is the primary digestive function of the liver?",
+                options: [
+                    "Produce digestive enzymes",
+                    "Produce bile",
+                    "Absorb nutrients",
+                    "Store vitamins"
+                ],
+                correct: 1,
+                explanation: "The liver's main digestive function is bile production. Bile emulsifies fats, making them easier to digest by pancreatic lipase.",
+                memoryTip: "Liver → Bile → Fat emulsification."
+            },
+            {
+                question: "What structure stores and concentrates bile?",
+                options: [
+                    "Liver",
+                    "Gallbladder",
+                    "Pancreas",
+                    "Common bile duct"
+                ],
+                correct: 1,
+                explanation: "The gallbladder stores and concentrates bile produced by the liver. When needed, it contracts to release bile into the duodenum.",
+                memoryTip: "Gallbladder = Bile storage tank (stores and concentrates)."
+            },
+            {
+                question: "What is the exocrine secretion of the pancreas called?",
+                options: [
+                    "Bile",
+                    "Pancreatic juice",
+                    "Insulin",
+                    "Glucagon"
+                ],
+                correct: 1,
+                explanation: "Pancreatic juice is the exocrine secretion containing digestive enzymes (amylase, lipase, proteases) and bicarbonate. Insulin/glucagon are endocrine secretions.",
+                memoryTip: "Exocrine pancreas = Pancreatic juice (digestive enzymes). Endocrine pancreas = Insulin/glucagon (hormones)."
+            },
+            {
+                question: "Where do the pancreatic and common bile ducts empty into the duodenum?",
+                options: [
+                    "Minor duodenal papilla",
+                    "Major duodenal papilla",
+                    "Pyloric sphincter",
+                    "Ileocecal valve"
+                ],
+                correct: 1,
+                explanation: "The major duodenal papilla is where the hepatopancreatic ampulla (formed by union of common bile duct and main pancreatic duct) empties into the duodenum.",
+                memoryTip: "Major duodenal papilla = Entry point for bile and pancreatic juices."
+            },
+            {
+                question: "What is the main cause of peptic ulcers according to current understanding?",
+                options: [
+                    "Stress",
+                    "Spicy food",
+                    "Helicobacter pylori infection",
+                    "Excess stomach acid"
+                ],
+                correct: 2,
+                explanation: "Helicobacter pylori infection is the primary cause of most peptic ulcers. This bacteria damages the protective mucosal lining, allowing acid to erode the tissue.",
+                memoryTip: "H. pylori = Major cause of peptic ulcers (Nobel Prize 2005 for this discovery)."
+            },
+            {
+                question: "Which cells in the stomach produce gastrin?",
+                options: [
+                    "Parietal cells",
+                    "Chief cells",
+                    "G cells",
+                    "Mucous cells"
+                ],
+                correct: 2,
+                explanation: "G cells (a type of enteroendocrine cell) in the stomach produce gastrin, which stimulates gastric acid secretion.",
+                memoryTip: "G cells → Gastrin → Gastric acid secretion."
+            },
+            {
+                question: "What is the term for the semifluid mass of partly digested food in the stomach?",
+                options: [
+                    "Bolus",
+                    "Chyme",
+                    "Feces",
+                    "Chyle"
+                ],
+                correct: 1,
+                explanation: "Chyme is the semifluid mass of partly digested food that passes from the stomach to the small intestine. Bolus is the mass of food in the mouth.",
+                memoryTip: "Bolus → Stomach → Chyme → Small intestine."
+            },
+            {
+                question: "Which structure forms the superior boundary of the oral cavity?",
+                options: [
+                    "Tongue",
+                    "Teeth",
+                    "Hard and soft palate",
+                    "Uvula"
+                ],
+                correct: 2,
+                explanation: "The hard palate (anterior) and soft palate (posterior) form the superior boundary (roof) of the oral cavity.",
+                memoryTip: "Palate = Roof of mouth (hard = bone, soft = muscle)."
+            },
+            {
+                question: "What percentage of saliva is water?",
+                options: [
+                    "85%",
+                    "90%",
+                    "95%",
+                    "99%"
+                ],
+                correct: 3,
+                explanation: "Saliva is approximately 99% water. The remaining 1% contains electrolytes, mucus, antibacterial compounds, and enzymes.",
+                memoryTip: "Saliva = 99% water + 1% 'other stuff'."
+            },
+            {
+                question: "What enzyme in saliva begins carbohydrate digestion?",
+                options: [
+                    "Lysozyme",
+                    "Amylase",
+                    "Lipase",
+                    "Pepsin"
+                ],
+                correct: 1,
+                explanation: "Salivary amylase (ptyalin) begins the chemical digestion of starch (carbohydrates) in the mouth. It continues working in the stomach until inactivated by acid.",
+                memoryTip: "Salivary amylase = Starts starch digestion in mouth ('amyl' = starch)."
+            },
+            {
+                question: "What type of joint connects teeth to their sockets?",
+                options: [
+                    "Synovial",
+                    "Cartilaginous",
+                    "Fibrous (gomphosis)",
+                    "Suture"
+                ],
+                correct: 2,
+                explanation: "Teeth are attached to their sockets (dental alveoli) by periodontal ligaments, forming a gomphosis joint (a type of fibrous joint).",
+                memoryTip: "Tooth attachment = Gomphosis (fibrous joint)."
+            },
+            {
+                question: "Which of the following is NOT an accessory digestive organ?",
+                options: [
+                    "Liver",
+                    "Pancreas",
+                    "Gallbladder",
+                    "Stomach"
+                ],
+                correct: 3,
+                explanation: "The stomach is part of the GI tract, not an accessory organ. Accessory organs aid digestion but food doesn't pass through them: teeth, tongue, salivary glands, liver, gallbladder, pancreas.",
+                memoryTip: "Accessory organs HELP but food doesn't PASS THROUGH them."
+            },
+            {
+                question: "What nerve provides parasympathetic innervation to most of the GI tract?",
+                options: [
+                    "Phrenic nerve",
+                    "Vagus nerve",
+                    "Splanchnic nerves",
+                    "Hypoglossal nerve"
+                ],
+                correct: 1,
+                explanation: "The vagus nerve (CN X) provides parasympathetic innervation to most of the GI tract from esophagus to transverse colon, stimulating digestion.",
+                memoryTip: "Vagus nerve = 'Wandering nerve' for parasympathetic GI control."
+            },
+            {
+                question: "What is the medical term for inflammation of the appendix?",
+                options: [
+                    "Appendicitis",
+                    "Diverticulitis",
+                    "Peritonitis",
+                    "Hepatitis"
+                ],
+                correct: 0,
+                explanation: "Appendicitis is inflammation of the vermiform appendix, often requiring surgical removal (appendectomy).",
+                memoryTip: "Appendicitis = Appendix inflammation (common emergency surgery)."
+            },
+            {
+                question: "Which layer of the GI tract contains the myenteric nerve plexus?",
+                options: [
+                    "Mucosa",
+                    "Submucosa",
+                    "Muscularis",
+                    "Serosa"
+                ],
+                correct: 2,
+                explanation: "The myenteric (Auerbach's) plexus is located between the inner circular and outer longitudinal muscle layers of the muscularis externa.",
+                memoryTip: "Myenteric plexus = In muscularis layer (controls motility). Submucosal plexus = In submucosa (controls secretions)."
+            },
+            {
+                question: "What are the two sets of teeth humans develop?",
+                options: [
+                    "Primary and secondary",
+                    "Deciduous and permanent",
+                    "Milk and adult",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Humans have two sets: deciduous (primary/milk) teeth (20) replaced by permanent (secondary/adult) teeth (32). All terms refer to the same two sets.",
+                memoryTip: "Two dentitions: Deciduous (20) → Permanent (32)."
+            },
+            {
+                question: "What vitamin requires intrinsic factor for absorption in the ileum?",
+                options: [
+                    "Vitamin A",
+                    "Vitamin B12",
+                    "Vitamin C",
+                    "Vitamin D"
+                ],
+                correct: 1,
+                explanation: "Vitamin B12 (cobalamin) requires intrinsic factor (from parietal cells) for absorption in the ileum. Deficiency causes pernicious anemia.",
+                memoryTip: "Intrinsic factor + B12 = Ileal absorption (deficiency → pernicious anemia)."
+            }
+        ];
+
+        // DOM elements
+        const quizContainer = document.getElementById('quiz-container');
+        const resultsContainer = document.getElementById('results-container');
+        const questionNumber = document.getElementById('question-number');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const explanationText = document.getElementById('explanation-text');
+        const memoryTipText = document.getElementById('memory-tip-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
+        const timeDisplay = document.getElementById('time');
+        const scoreDisplay = document.getElementById('score');
+        const scoreText = document.getElementById('score-text');
+        const totalQuestions = document.getElementById('total-questions');
+        const correctAnswers = document.getElementById('correct-answers');
+        const incorrectAnswers = document.getElementById('incorrect-answers');
+        const percentage = document.getElementById('percentage');
+        const timeTaken = document.getElementById('time-taken');
+        const questionReview = document.getElementById('question-review');
+        const restartBtn = document.getElementById('restart-btn');
+
+        // Quiz state
+        let currentQuestion = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let score = 0;
+        let timer;
+        let timeLeft = 40 * 60; // 40 minutes in seconds
+        let quizCompleted = false;
+
+        // Initialize quiz
+        function initQuiz() {
+            displayQuestion();
+            startTimer();
+            updateProgress();
+        }
+
+        // Display current question
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            questionNumber.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            questionText.textContent = question.question;
+            
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                if (userAnswers[currentQuestion] === index) {
+                    optionElement.classList.add('selected');
+                }
+                optionElement.textContent = option;
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Show/hide explanation
+            if (userAnswers[currentQuestion] !== null) {
+                showExplanation();
+            } else {
+                explanationContainer.style.display = 'none';
+            }
+            
+            // Update button states
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.disabled = false;
+            submitBtn.style.display = currentQuestion === questions.length - 1 ? 'block' : 'none';
+        }
+
+        // Select an option
+        function selectOption(index) {
+            if (quizCompleted) return;
+            
+            userAnswers[currentQuestion] = index;
+            
+            // Update UI
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[index].classList.add('selected');
+            
+            showExplanation();
+        }
+
+        // Show explanation for current question
+        function showExplanation() {
+            const question = questions[currentQuestion];
+            explanationText.textContent = question.explanation;
+            memoryTipText.textContent = question.memoryTip;
+            explanationContainer.style.display = 'block';
+            
+            // Highlight correct/incorrect answers
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, index) => {
+                option.classList.remove('correct', 'incorrect');
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === userAnswers[currentQuestion] && index !== question.correct) {
+                    option.classList.add('incorrect');
+                }
+            });
+        }
+
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+                updateProgress();
+            }
+        }
+
+        // Navigate to previous question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+                updateProgress();
+            }
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = `${currentQuestion + 1}/${questions.length}`;
+        }
+
+        // Start timer
+        function startTimer() {
+            timer = setInterval(() => {
+                timeLeft--;
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        // Submit quiz
+        function submitQuiz() {
+            clearInterval(timer);
+            quizCompleted = true;
+            
+            // Calculate score
+            score = 0;
+            for (let i = 0; i < questions.length; i++) {
+                if (userAnswers[i] === questions[i].correct) {
+                    score++;
+                }
+            }
+            
+            // Display results
+            quizContainer.style.display = 'none';
+            resultsContainer.style.display = 'block';
+            
+            scoreDisplay.textContent = `${score}/${questions.length}`;
+            totalQuestions.textContent = questions.length;
+            correctAnswers.textContent = score;
+            incorrectAnswers.textContent = questions.length - score;
+            percentage.textContent = `${((score / questions.length) * 100).toFixed(1)}%`;
+            
+            const minutesTaken = Math.floor((40 * 60 - timeLeft) / 60);
+            const secondsTaken = (40 * 60 - timeLeft) % 60;
+            timeTaken.textContent = `${minutesTaken.toString().padStart(2, '0')}:${secondsTaken.toString().padStart(2, '0')}`;
+            
+            // Set score text
+            if (score >= questions.length * 0.8) {
+                scoreText.textContent = "Excellent! You have mastered the digestive system anatomy.";
+            } else if (score >= questions.length * 0.6) {
+                scoreText.textContent = "Good job! You have a solid understanding of digestive anatomy.";
+            } else if (score >= questions.length * 0.5) {
+                scoreText.textContent = "You passed! Review the explanations to strengthen your knowledge.";
+            } else {
+                scoreText.textContent = "You need more study. Review the material and try again.";
+            }
+            
+            // Generate question review
+            generateQuestionReview();
+        }
+
+        // Generate question review
+        function generateQuestionReview() {
+            questionReview.innerHTML = '<h3>Question Review</h3>';
+            
+            questions.forEach((question, index) => {
+                const reviewItem = document.createElement('div');
+                reviewItem.className = 'review-item';
+                
+                const reviewQuestion = document.createElement('div');
+                reviewQuestion.className = 'review-question';
+                reviewQuestion.textContent = `${index + 1}. ${question.question}`;
+                
+                const userAnswer = document.createElement('div');
+                userAnswer.className = 'review-answer';
+                if (userAnswers[index] !== null) {
+                    userAnswer.innerHTML = `Your answer: <span class="user-answer">${question.options[userAnswers[index]]}</span>`;
+                } else {
+                    userAnswer.innerHTML = `Your answer: <span class="user-answer">Not answered</span>`;
+                }
+                
+                const correctAnswer = document.createElement('div');
+                correctAnswer.className = 'review-answer';
+                correctAnswer.innerHTML = `Correct answer: <span class="correct-answer">${question.options[question.correct]}</span>`;
+                
+                reviewItem.appendChild(reviewQuestion);
+                reviewItem.appendChild(userAnswer);
+                reviewItem.appendChild(correctAnswer);
+                
+                questionReview.appendChild(reviewItem);
+            });
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            score = 0;
+            timeLeft = 40 * 60;
+            quizCompleted = false;
+            
+            quizContainer.style.display = 'block';
+            resultsContainer.style.display = 'none';
+            
+            initQuiz();
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        submitBtn.addEventListener('click', submitQuiz);
+        restartBtn.addEventListener('click', restartQuiz);
+
+        // Start the quiz
+        initQuiz();
+    </script>
+</body>
+</html>

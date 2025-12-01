@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muscular System Quiz | Haramaya University</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      /* style.css - Universal quiz styling */
+:root {
+    --primary: #3498db;
+    --secondary: #2c3e50;
+    --success: #2ecc71;
+    --danger: #e74c3c;
+    --warning: #f39c12;
+    --light: #ecf0f1;
+    --dark: #34495e;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: var(--dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.quiz-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 25px;
+    background-color: var(--light);
+    border-bottom: 1px solid #ddd;
+}
+
+.timer {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--danger);
+}
+
+.progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress-bar {
+    width: 200px;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--primary);
+    width: 0%;
+    transition: var(--transition);
+}
+
+.quiz-container {
+    padding: 30px;
+}
+
+.question-container {
+    margin-bottom: 30px;
+}
+
+.question-number {
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+
+.question-text {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.options-container {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.option {
+    padding: 15px;
+    background-color: var(--light);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.option:hover {
+    background-color: #e0e7ee;
+    transform: translateY(-2px);
+}
+
+.option.selected {
+    border-color: var(--primary);
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.option.correct {
+    border-color: var(--success);
+    background-color: rgba(46, 204, 113, 0.1);
+}
+
+.option.incorrect {
+    border-color: var(--danger);
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+.explanation-container {
+    padding: 20px;
+    background-color: rgba(52, 152, 219, 0.05);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.explanation-title {
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.memory-tip {
+    background-color: rgba(243, 156, 18, 0.1);
+    padding: 15px;
+    border-left: 4px solid var(--warning);
+    margin-top: 15px;
+    border-radius: 0 8px 8px 0;
+}
+
+.memory-tip-title {
+    font-weight: 600;
+    color: var(--warning);
+    margin-bottom: 5px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-prev {
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+.btn-next {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-submit {
+    background-color: var(--success);
+    color: white;
+    display: none;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.results-container {
+    padding: 30px;
+    text-align: center;
+    display: none;
+}
+
+.results-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--secondary);
+}
+
+.score {
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin: 20px 0;
+}
+
+.score-text {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+}
+
+.summary {
+    text-align: left;
+    background-color: var(--light);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.summary-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--secondary);
+}
+
+.restart-btn {
+    background-color: var(--primary);
+    color: white;
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+}
+
+.question-review {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.review-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.review-question {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.review-answer {
+    margin-bottom: 5px;
+}
+
+.correct-answer {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.user-answer {
+    color: var(--danger);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .quiz-info {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .progress-bar {
+        width: 100%;
+    }
+
+    .question-text {
+        font-size: 1.2rem;
+    }
+
+    .navigation {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+/* Welcome page styling */
+.welcome-container {
+    padding: 40px;
+    text-align: center;
+}
+
+.quiz-selection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 40px 0;
+}
+
+.quiz-card {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.quiz-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+
+.quiz-card h3 {
+    color: var(--secondary);
+    margin-bottom: 15px;
+}
+
+.quiz-card p {
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.quiz-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: var(--dark);
+}
+
+.btn-start {
+    background-color: var(--primary);
+    color: white;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.back-btn {
+    background-color: var(--light);
+    color: var(--dark);
+    margin-top: 20px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Muscular System Quiz</h1>
+            <p>Unit 4 - Muscular System | Haramaya University</p>
+        </header>
+
+        <div class="quiz-info">
+            <div class="timer">Time: <span id="time">45:00</span></div>
+            <div class="progress">
+                <span>Progress:</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <span id="progress-text">0/45</span>
+            </div>
+        </div>
+
+        <div class="quiz-container" id="quiz-container">
+            <div class="question-container">
+                <div class="question-number" id="question-number">Question 1 of 45</div>
+                <div class="question-text" id="question-text"></div>
+                <div class="options-container" id="options-container"></div>
+            </div>
+
+            <div class="explanation-container" id="explanation-container">
+                <div class="explanation-title">Explanation</div>
+                <div id="explanation-text"></div>
+                <div class="memory-tip" id="memory-tip">
+                    <div class="memory-tip-title">Memory Tip</div>
+                    <div id="memory-tip-text"></div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn-prev" id="prev-btn" disabled>Previous</button>
+                <button class="btn-next" id="next-btn">Next Question</button>
+                <button class="btn-submit" id="submit-btn">Submit Quiz</button>
+            </div>
+        </div>
+
+        <div class="results-container" id="results-container">
+            <h2 class="results-title">Quiz Results</h2>
+            <div class="score" id="score">0/45</div>
+            <div class="score-text" id="score-text"></div>
+
+            <div class="summary">
+                <div class="summary-title">Performance Summary</div>
+                <p>Total Questions: <span id="total-questions">45</span></p>
+                <p>Correct Answers: <span id="correct-answers">0</span></p>
+                <p>Incorrect Answers: <span id="incorrect-answers">0</span></p>
+                <p>Percentage: <span id="percentage">0%</span></p>
+                <p>Time Taken: <span id="time-taken">45:00</span></p>
+            </div>
+
+            <div class="question-review" id="question-review">
+                <h3>Question Review</h3>
+                <!-- Review content will be generated by JavaScript -->
+            </div>
+
+            <button class="restart-btn" id="restart-btn">Restart Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        // Muscular System Quiz Questions (45 questions)
+        const questions = [
+            {
+                question: "What is the study of muscles and their accessory parts called?",
+                options: [
+                    "Myology",
+                    "Neurology",
+                    "Cardiology",
+                    "Osteology"
+                ],
+                correct: 0,
+                explanation: "Myology (also called Sarcology) is the scientific study of muscles and their accessory structures like tendons, aponeurosis, bursae, and fasciae.",
+                memoryTip: "Myology = Myo (muscle) + logy (study) = Study of muscles."
+            },
+            {
+                question: "Which of the following is NOT one of the four main functions of muscles?",
+                options: [
+                    "Movement",
+                    "Thermogenesis",
+                    "Digestion",
+                    "Stabilization of joints"
+                ],
+                correct: 2,
+                explanation: "The four main functions are: 1) Movement, 2) Maintenance of posture, 3) Thermogenesis (heat production), 4) Stabilization of joints. Digestion is a specific function of smooth muscle but not a primary category.",
+                memoryTip: "Four muscle functions: Move, Maintain posture, Make heat, Maintain joint stability."
+            },
+            {
+                question: "What type of muscle is found attached to bones?",
+                options: [
+                    "Smooth muscle",
+                    "Cardiac muscle",
+                    "Skeletal muscle",
+                    "All of the above"
+                ],
+                correct: 2,
+                explanation: "Skeletal muscles are attached to bones. Smooth muscle surrounds organs and tubes. Cardiac muscle forms the heart wall.",
+                memoryTip: "Skeletal = attached to skeleton (bones)."
+            },
+            {
+                question: "Which characteristic of muscle tissue refers to its ability to receive and respond to stimuli?",
+                options: [
+                    "Contractility",
+                    "Excitability",
+                    "Extensibility",
+                    "Elasticity"
+                ],
+                correct: 1,
+                explanation: "Excitability (irritability) is the ability to receive and respond to stimuli. Contractility is shortening, extensibility is stretching, elasticity is recoiling.",
+                memoryTip: "Excitability = Excite-able (can be stimulated)."
+            },
+            {
+                question: "Which type of muscle tissue has intercalated discs?",
+                options: [
+                    "Skeletal muscle",
+                    "Smooth muscle",
+                    "Cardiac muscle",
+                    "Both skeletal and cardiac"
+                ],
+                correct: 2,
+                explanation: "Cardiac muscle has intercalated discs that connect cardiac muscle cells end-to-end, allowing rapid transmission of electrical impulses.",
+                memoryTip: "Cardiac muscle = has intercalated discs (like little 'discs' connecting heart cells)."
+            },
+            {
+                question: "What is the outermost connective tissue layer surrounding an entire muscle?",
+                options: [
+                    "Endomysium",
+                    "Perimysium",
+                    "Epimysium",
+                    "Fascia"
+                ],
+                correct: 2,
+                explanation: "Epimysium surrounds the entire muscle. Perimysium surrounds fascicles (bundles of fibers). Endomysium surrounds individual muscle fibers.",
+                memoryTip: "Epi- (upon/outer), Peri- (around), Endo- (within)."
+            },
+            {
+                question: "Which connective tissue layer surrounds individual muscle fibers?",
+                options: [
+                    "Epimysium",
+                    "Perimysium",
+                    "Endomysium",
+                    "Sarcolemma"
+                ],
+                correct: 2,
+                explanation: "Endomysium is the fine sheath of connective tissue surrounding each muscle fiber. Sarcolemma is the cell membrane of the muscle fiber itself.",
+                memoryTip: "Endomysium = ENDO (inside) the muscle, around individual fibers."
+            },
+            {
+                question: "A muscle named 'brachialis' is named according to what characteristic?",
+                options: [
+                    "Shape",
+                    "Location",
+                    "Action",
+                    "Number of origins"
+                ],
+                correct: 1,
+                explanation: "Brachialis refers to the arm (brachium). Location is a common naming method (e.g., intercostal = between ribs).",
+                memoryTip: "Brachialis = in the brachium (arm). Location-based naming."
+            },
+            {
+                question: "Which muscle name indicates it is the largest of its group?",
+                options: [
+                    "Longus",
+                    "Brevis",
+                    "Maximus",
+                    "Minimus"
+                ],
+                correct: 2,
+                explanation: "Maximus means largest (e.g., Gluteus maximus). Minimus means smallest, longus means long, brevis means short.",
+                memoryTip: "Maximus = MAXimum size. Minimus = MINImum size."
+            },
+            {
+                question: "What does 'rectus' mean in muscle names?",
+                options: [
+                    "Straight",
+                    "Diagonal",
+                    "Circular",
+                    "Crosswise"
+                ],
+                correct: 0,
+                explanation: "Rectus means straight (e.g., Rectus abdominis = straight muscle of abdomen). Transversus means crosswise, oblique means diagonal.",
+                memoryTip: "Rectus = RECTangle (straight lines) = straight."
+            },
+            {
+                question: "A muscle with 'biceps' in its name has how many origins?",
+                options: [
+                    "One",
+                    "Two",
+                    "Three",
+                    "Four"
+                ],
+                correct: 1,
+                explanation: "Biceps = two heads/origins (bi = two). Triceps = three, quadriceps = four.",
+                memoryTip: "Biceps = BI (two) heads. Triceps = TRI (three) heads. Quadriceps = QUAD (four) heads."
+            },
+            {
+                question: "Which muscle architecture type has fascicles arranged in concentric rings?",
+                options: [
+                    "Parallel",
+                    "Convergent",
+                    "Pennate",
+                    "Circular"
+                ],
+                correct: 3,
+                explanation: "Circular muscles have fascicles arranged in concentric rings, often forming sphincters that close openings.",
+                memoryTip: "Circular = like a circle (forms rings around openings)."
+            },
+            {
+                question: "What type of pennate muscle has fibers on only one side of the tendon?",
+                options: [
+                    "Unipennate",
+                    "Bipennate",
+                    "Multipennate",
+                    "Circumpennate"
+                ],
+                correct: 0,
+                explanation: "Unipennate = fibers on one side of tendon. Bipennate = fibers on both sides. Multipennate = multiple tendons with fibers.",
+                memoryTip: "Uni = one side, Bi = two sides, Multi = multiple."
+            },
+            {
+                question: "Which muscle is typically fusiform (spindle-shaped)?",
+                options: [
+                    "Sartorius",
+                    "Biceps brachii",
+                    "Orbicularis oris",
+                    "Rectus abdominis"
+                ],
+                correct: 1,
+                explanation: "Biceps brachii is fusiform (thick in middle, tapered at ends). Sartorius is strap-like, orbicularis oris is circular, rectus abdominis is parallel.",
+                memoryTip: "Fusiform = like a spindle or football shape (biceps brachii)."
+            },
+            {
+                question: "What is the less movable attachment point of a muscle called?",
+                options: [
+                    "Insertion",
+                    "Origin",
+                    "Belly",
+                    "Tendon"
+                ],
+                correct: 1,
+                explanation: "Origin is the less movable, typically proximal attachment. Insertion is the more movable, typically distal attachment that moves toward the origin.",
+                memoryTip: "Origin = ORiginal (fixed) point. Insertion = INserted (moving) point."
+            },
+            {
+                question: "Which muscle is primarily responsible for a specific movement?",
+                options: [
+                    "Synergist",
+                    "Antagonist",
+                    "Prime mover (agonist)",
+                    "Fixator"
+                ],
+                correct: 2,
+                explanation: "Prime mover (agonist) is primarily responsible for a movement. Synergists assist, antagonists oppose, fixators stabilize.",
+                memoryTip: "Prime mover = PRIME (main) muscle for movement."
+            },
+            {
+                question: "What type of nerve fibers carry signals to skeletal muscles?",
+                options: [
+                    "Sensory (afferent) only",
+                    "Motor (efferent) only",
+                    "Both motor and sensory",
+                    "Autonomic only"
+                ],
+                correct: 2,
+                explanation: "Skeletal muscles have both motor (efferent) nerves for contraction and sensory (afferent) nerves for proprioception (sense of position).",
+                memoryTip: "Skeletal muscles = have both motor (to move) and sensory (to feel) nerves."
+            },
+            {
+                question: "Which muscle closes the eye?",
+                options: [
+                    "Frontalis",
+                    "Orbicularis oculi",
+                    "Zygomaticus",
+                    "Buccinator"
+                ],
+                correct: 1,
+                explanation: "Orbicularis oculi is the circular muscle around the eye that closes it. Frontalis raises eyebrows, zygomaticus raises corners of mouth, buccinator compresses cheek.",
+                memoryTip: "Orbicularis oculi = around the eye (oculi = eye)."
+            },
+            {
+                question: "What is the primary action of the masseter muscle?",
+                options: [
+                    "Close the eye",
+                    "Elevate the mandible (chewing)",
+                    "Depress the mandible",
+                    "Retract the tongue"
+                ],
+                correct: 1,
+                explanation: "Masseter is a powerful chewing muscle that elevates the mandible (closes the jaw). Temporalis also assists in jaw closure.",
+                memoryTip: "Masseter = MASticatory (chewing) muscle."
+            },
+            {
+                question: "Which muscle is known as the 'smiling muscle'?",
+                options: [
+                    "Platysma",
+                    "Buccinator",
+                    "Zygomaticus",
+                    "Orbicularis oris"
+                ],
+                correct: 2,
+                explanation: "Zygomaticus major draws the angle of the mouth upward and outward (smiling). Platysma tenses neck skin, buccinator compresses cheeks, orbicularis oris closes lips.",
+                memoryTip: "Zygomaticus = attached to zygomatic bone (cheekbone) = smiling muscle."
+            },
+            {
+                question: "Which abdominal muscle runs vertically and is responsible for flexing the trunk?",
+                options: [
+                    "External oblique",
+                    "Internal oblique",
+                    "Transversus abdominis",
+                    "Rectus abdominis"
+                ],
+                correct: 3,
+                explanation: "Rectus abdominis runs vertically and flexes the vertebral column (trunk flexion). The obliques run diagonally and rotate/laterally flex.",
+                memoryTip: "Rectus abdominis = 'six-pack' muscle, runs straight up and down."
+            },
+            {
+                question: "What is the function of the external oblique muscle?",
+                options: [
+                    "Flex trunk",
+                    "Extend trunk",
+                    "Laterally flex and rotate trunk",
+                    "Compress abdomen only"
+                ],
+                correct: 2,
+                explanation: "External oblique laterally flexes and rotates the trunk (contralateral rotation). Also compresses abdomen.",
+                memoryTip: "External oblique fibers run like hands in pockets = rotates to opposite side."
+            },
+            {
+                question: "Which back muscle is responsible for adducting, extending, and medially rotating the arm?",
+                options: [
+                    "Trapezius",
+                    "Latissimus dorsi",
+                    "Rhomboids",
+                    "Erector spinae"
+                ],
+                correct: 1,
+                explanation: "Latissimus dorsi is the broad back muscle that adducts, extends, and medially rotates the arm (like in swimming or climbing).",
+                memoryTip: "Latissimus dorsi = 'Lats' - wide back muscle for pulling movements."
+            },
+            {
+                question: "What is the primary action of the trapezius muscle?",
+                options: [
+                    "Flex the arm",
+                    "Extend the arm",
+                    "Elevate, retract, and rotate scapula",
+                    "Adduct the arm"
+                ],
+                correct: 2,
+                explanation: "Trapezius elevates (upper fibers), retracts (middle fibers), and depresses (lower fibers) the scapula, and rotates it during arm abduction.",
+                memoryTip: "Trapezius = shaped like a trapezoid, moves scapula in multiple directions."
+            },
+            {
+                question: "Which muscle is the main flexor of the elbow?",
+                options: [
+                    "Triceps brachii",
+                    "Biceps brachii",
+                    "Brachioradialis",
+                    "Both biceps and brachialis"
+                ],
+                correct: 3,
+                explanation: "Biceps brachii (primary) and brachialis (major) both flex the elbow. Brachioradialis assists. Triceps extends elbow.",
+                memoryTip: "Elbow flexors: Biceps brachii (famous), Brachialis (workhorse), Brachioradialis (assistant)."
+            },
+            {
+                question: "What is the function of the triceps brachii?",
+                options: [
+                    "Flex elbow",
+                    "Extend elbow",
+                    "Supinate forearm",
+                    "Pronate forearm"
+                ],
+                correct: 1,
+                explanation: "Triceps brachii is the primary extensor of the elbow (straightens the arm). Biceps flexes elbow.",
+                memoryTip: "Triceps = extends elbow (opposite of biceps)."
+            },
+            {
+                question: "Which muscle group forms the 'rotator cuff' of the shoulder?",
+                options: [
+                    "SITS muscles",
+                    "Quadriceps",
+                    "Hamstrings",
+                    "Gluteal muscles"
+                ],
+                correct: 0,
+                explanation: "Rotator cuff = SITS muscles: Supraspinatus, Infraspinatus, Teres minor, Subscapularis. They stabilize the shoulder joint.",
+                memoryTip: "Rotator cuff = SITS (Supraspinatus, Infraspinatus, Teres minor, Subscapularis)."
+            },
+            {
+                question: "What is the primary action of the gluteus maximus?",
+                options: [
+                    "Abduct the thigh",
+                    "Adduct the thigh",
+                    "Extend the thigh",
+                    "Flex the thigh"
+                ],
+                correct: 2,
+                explanation: "Gluteus maximus is the primary extensor of the thigh (hip extension) and laterally rotates the thigh. Important for climbing stairs and rising from sitting.",
+                memoryTip: "Gluteus maximus = largest buttock muscle, extends hip (like standing up)."
+            },
+            {
+                question: "Which muscle is the primary flexor of the hip?",
+                options: [
+                    "Gluteus maximus",
+                    "Hamstrings",
+                    "Iliopsoas",
+                    "Adductor magnus"
+                ],
+                correct: 2,
+                explanation: "Iliopsoas (iliacus + psoas major) is the primary hip flexor (lifts thigh toward abdomen).",
+                memoryTip: "Iliopsoas = major hip flexor (situps, lifting knees)."
+            },
+            {
+                question: "What group of muscles are known as the 'quadriceps'?",
+                options: [
+                    "Hamstrings",
+                    "Thigh adductors",
+                    "Thigh extensors at hip",
+                    "Thigh extensors at knee"
+                ],
+                correct: 3,
+                explanation: "Quadriceps femoris: rectus femoris, vastus lateralis, vastus medialis, vastus intermedius. They extend the knee (straighten leg).",
+                memoryTip: "Quadriceps = QUAD (four) muscles that extend the knee."
+            },
+            {
+                question: "Which muscles make up the hamstrings?",
+                options: [
+                    "Biceps femoris, semitendinosus, semimembranosus",
+                    "Rectus femoris, vastus lateralis, vastus medialis",
+                    "Adductor magnus, longus, brevis",
+                    "Gluteus maximus, medius, minimus"
+                ],
+                correct: 0,
+                explanation: "Hamstrings = Biceps femoris, Semitendinosus, Semimembranosus. They extend the hip and flex the knee.",
+                memoryTip: "Hamstrings = three muscles on back of thigh: Biceps femoris (two heads), Semitendinosus, Semimembranosus."
+            },
+            {
+                question: "What is the function of the gastrocnemius muscle?",
+                options: [
+                    "Dorsiflex the foot",
+                    "Plantarflex the foot",
+                    "Invert the foot",
+                    "Evert the foot"
+                ],
+                correct: 1,
+                explanation: "Gastrocnemius (with soleus) plantarflexes the foot (points toes downward) and flexes the knee. Forms the calf muscle.",
+                memoryTip: "Gastrocnemius = calf muscle, plantarflexes foot (standing on tiptoes)."
+            },
+            {
+                question: "Which muscle is responsible for dorsiflexion of the foot?",
+                options: [
+                    "Gastrocnemius",
+                    "Soleus",
+                    "Tibialis anterior",
+                    "Fibularis longus"
+                ],
+                correct: 2,
+                explanation: "Tibialis anterior dorsiflexes the foot (lifts toes upward) and inverts the foot. Prevents foot slap when walking.",
+                memoryTip: "Tibialis anterior = front of shin, dorsiflexes foot (lifting toes)."
+            },
+            {
+                question: "What is the largest muscle in the human body?",
+                options: [
+                    "Gluteus maximus",
+                    "Latissimus dorsi",
+                    "Quadriceps femoris",
+                    "Sartorius"
+                ],
+                correct: 0,
+                explanation: "Gluteus maximus is the largest muscle by volume. It forms the bulk of the buttocks and is important for posture and locomotion.",
+                memoryTip: "Gluteus maximus = MAXimus (largest) muscle."
+            },
+            {
+                question: "Which muscle is the longest in the human body?",
+                options: [
+                    "Sartorius",
+                    "Rectus femoris",
+                    "Gracilis",
+                    "Adductor magnus"
+                ],
+                correct: 0,
+                explanation: "Sartorius is the longest muscle, running from the anterior superior iliac spine to the medial side of the tibia. It flexes, abducts, and laterally rotates the thigh.",
+                memoryTip: "Sartorius = tailor's muscle (crosses legs), longest muscle."
+            },
+            {
+                question: "What type of muscle contraction maintains posture?",
+                options: [
+                    "Isotonic contraction",
+                    "Isometric contraction",
+                    "Concentric contraction",
+                    "Eccentric contraction"
+                ],
+                correct: 1,
+                explanation: "Isometric contraction (muscle tension without length change) maintains posture. Muscle tone (partial contraction) stabilizes joints and maintains posture continuously.",
+                memoryTip: "Posture maintenance = Isometric contractions (no movement, just tension)."
+            },
+            {
+                question: "Which characteristic allows muscle to return to its original length after stretching?",
+                options: [
+                    "Contractility",
+                    "Excitability",
+                    "Extensibility",
+                    "Elasticity"
+                ],
+                correct: 3,
+                explanation: "Elasticity allows muscle to recoil and resume original length after being stretched. Like a rubber band returning to shape.",
+                memoryTip: "Elasticity = like an elastic band, returns to original length."
+            },
+            {
+                question: "What does the term 'striated' refer to in muscle tissue?",
+                options: [
+                    "Smooth appearance",
+                    "Striped appearance",
+                    "Branching pattern",
+                    "Single nucleus"
+                ],
+                correct: 1,
+                explanation: "Striated means striped appearance due to organized arrangement of actin and myosin filaments in sarcomeres. Seen in skeletal and cardiac muscle.",
+                memoryTip: "Striated = STRIpes (striped appearance under microscope)."
+            },
+            {
+                question: "Which muscle naming category would describe the 'adductor longus'?",
+                options: [
+                    "Location",
+                    "Shape",
+                    "Action",
+                    "Size"
+                ],
+                correct: 2,
+                explanation: "Adductor longus is named for its action (adduction of thigh) and size (longus = long).",
+                memoryTip: "Adductor = ADducts (brings toward midline). Action-based naming."
+            },
+            {
+                question: "What is a group of muscle fibers surrounded by perimysium called?",
+                options: [
+                    "Myofibril",
+                    "Fascicle",
+                    "Sarcomere",
+                    "Muscle belly"
+                ],
+                correct: 1,
+                explanation: "A fascicle is a bundle of muscle fibers surrounded by perimysium. Many fascicles make up a muscle, surrounded by epimysium.",
+                memoryTip: "Fascicle = bundle of fibers (like a bundle of sticks)."
+            },
+            {
+                question: "Which muscle works opposite to the prime mover?",
+                options: [
+                    "Synergist",
+                    "Antagonist",
+                    "Fixator",
+                    "Agonist"
+                ],
+                correct: 1,
+                explanation: "Antagonist opposes the action of the prime mover (agonist). Provides resistance for smooth movement and prevents overstretching.",
+                memoryTip: "Antagonist = ANTI (against) the prime mover."
+            },
+            {
+                question: "What muscle assists the prime mover by reducing unnecessary movement?",
+                options: [
+                    "Antagonist",
+                    "Synergist",
+                    "Fixator",
+                    "Assistant"
+                ],
+                correct: 1,
+                explanation: "Synergists assist the prime mover by stabilizing intermediate joints or providing additional force in the same direction.",
+                memoryTip: "Synergist = SYN (together) with prime mover, helps the action."
+            },
+            {
+                question: "Which muscle type is under voluntary control?",
+                options: [
+                    "Skeletal only",
+                    "Cardiac only",
+                    "Smooth only",
+                    "Both skeletal and cardiac"
+                ],
+                correct: 0,
+                explanation: "Skeletal muscle is under voluntary (conscious) control. Cardiac and smooth muscles are involuntary (autonomic control).",
+                memoryTip: "Voluntary control = SKELETAL muscle (you decide to move it)."
+            },
+            {
+                question: "What is the function of the diaphragm?",
+                options: [
+                    "Flex trunk",
+                    "Extend trunk",
+                    "Inspiration (breathing in)",
+                    "Expiration (breathing out)"
+                ],
+                correct: 2,
+                explanation: "Diaphragm is the primary muscle of inspiration (breathing in). When it contracts, it flattens and increases thoracic volume.",
+                memoryTip: "Diaphragm = main breathing muscle (inspiration)."
+            },
+            {
+                question: "Which muscle is responsible for puckering the lips?",
+                options: [
+                    "Buccinator",
+                    "Orbicularis oris",
+                    "Zygomaticus",
+                    "Mentalis"
+                ],
+                correct: 1,
+                explanation: "Orbicularis oris is the circular muscle around the mouth that closes and protrudes lips (kissing, whistling).",
+                memoryTip: "Orbicularis oris = around the mouth, purses lips (like saying 'O')."
+            },
+            {
+                question: "What is the action of the sternocleidomastoid muscle?",
+                options: [
+                    "Extend neck",
+                    "Flex neck and rotate head",
+                    "Elevate scapula",
+                    "Depress hyoid bone"
+                ],
+                correct: 1,
+                explanation: "Sternocleidomastoid flexes the neck (both sides) and rotates head to opposite side (one side). Also elevates sternum during forced inspiration.",
+                memoryTip: "SCM = turns head to opposite side (checking over shoulder)."
+            },
+            {
+                question: "Which muscle plantarflexes and everts the foot?",
+                options: [
+                    "Tibialis anterior",
+                    "Tibialis posterior",
+                    "Fibularis (peroneus) longus",
+                    "Soleus"
+                ],
+                correct: 2,
+                explanation: "Fibularis (peroneus) longus plantarflexes and everts the foot. Helps maintain balance and supports arches.",
+                memoryTip: "Fibularis muscles = on lateral leg, evert foot (turn sole outward)."
+            },
+            {
+                question: "What is the calcaneal tendon commonly known as?",
+                options: [
+                    "Patellar tendon",
+                    "Achilles tendon",
+                    "Rotator cuff",
+                    "Iliotibial band"
+                ],
+                correct: 1,
+                explanation: "Calcaneal tendon = Achilles tendon. Connects calf muscles (gastrocnemius and soleus) to calcaneus (heel bone).",
+                memoryTip: "Calcaneal tendon = Achilles tendon (Greek hero's weak spot)."
+            }
+        ];
+
+        // DOM elements
+        const quizContainer = document.getElementById('quiz-container');
+        const resultsContainer = document.getElementById('results-container');
+        const questionNumber = document.getElementById('question-number');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const explanationText = document.getElementById('explanation-text');
+        const memoryTipText = document.getElementById('memory-tip-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
+        const timeDisplay = document.getElementById('time');
+        const scoreDisplay = document.getElementById('score');
+        const scoreText = document.getElementById('score-text');
+        const totalQuestions = document.getElementById('total-questions');
+        const correctAnswers = document.getElementById('correct-answers');
+        const incorrectAnswers = document.getElementById('incorrect-answers');
+        const percentage = document.getElementById('percentage');
+        const timeTaken = document.getElementById('time-taken');
+        const questionReview = document.getElementById('question-review');
+        const restartBtn = document.getElementById('restart-btn');
+
+        // Quiz state
+        let currentQuestion = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let score = 0;
+        let timer;
+        let timeLeft = 45 * 60; // 45 minutes in seconds
+        let quizCompleted = false;
+
+        // Initialize quiz
+        function initQuiz() {
+            displayQuestion();
+            startTimer();
+            updateProgress();
+        }
+
+        // Display current question
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            questionNumber.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            questionText.textContent = question.question;
+            
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                if (userAnswers[currentQuestion] === index) {
+                    optionElement.classList.add('selected');
+                }
+                optionElement.textContent = option;
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Show/hide explanation
+            if (userAnswers[currentQuestion] !== null) {
+                showExplanation();
+            } else {
+                explanationContainer.style.display = 'none';
+            }
+            
+            // Update button states
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.disabled = false;
+            submitBtn.style.display = currentQuestion === questions.length - 1 ? 'block' : 'none';
+        }
+
+        // Select an option
+        function selectOption(index) {
+            if (quizCompleted) return;
+            
+            userAnswers[currentQuestion] = index;
+            
+            // Update UI
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[index].classList.add('selected');
+            
+            showExplanation();
+        }
+
+        // Show explanation for current question
+        function showExplanation() {
+            const question = questions[currentQuestion];
+            explanationText.textContent = question.explanation;
+            memoryTipText.textContent = question.memoryTip;
+            explanationContainer.style.display = 'block';
+            
+            // Highlight correct/incorrect answers
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, index) => {
+                option.classList.remove('correct', 'incorrect');
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === userAnswers[currentQuestion] && index !== question.correct) {
+                    option.classList.add('incorrect');
+                }
+            });
+        }
+
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+                updateProgress();
+            }
+        }
+
+        // Navigate to previous question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+                updateProgress();
+            }
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = `${currentQuestion + 1}/${questions.length}`;
+        }
+
+        // Start timer
+        function startTimer() {
+            timer = setInterval(() => {
+                timeLeft--;
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        // Submit quiz
+        function submitQuiz() {
+            clearInterval(timer);
+            quizCompleted = true;
+            
+            // Calculate score
+            score = 0;
+            for (let i = 0; i < questions.length; i++) {
+                if (userAnswers[i] === questions[i].correct) {
+                    score++;
+                }
+            }
+            
+            // Display results
+            quizContainer.style.display = 'none';
+            resultsContainer.style.display = 'block';
+            
+            scoreDisplay.textContent = `${score}/${questions.length}`;
+            totalQuestions.textContent = questions.length;
+            correctAnswers.textContent = score;
+            incorrectAnswers.textContent = questions.length - score;
+            percentage.textContent = `${((score / questions.length) * 100).toFixed(1)}%`;
+            
+            const minutesTaken = Math.floor((45 * 60 - timeLeft) / 60);
+            const secondsTaken = (45 * 60 - timeLeft) % 60;
+            timeTaken.textContent = `${minutesTaken.toString().padStart(2, '0')}:${secondsTaken.toString().padStart(2, '0')}`;
+            
+            // Set score text
+            if (score >= questions.length * 0.8) {
+                scoreText.textContent = "Excellent! You have mastered the muscular system.";
+            } else if (score >= questions.length * 0.6) {
+                scoreText.textContent = "Good job! You have a solid understanding of muscles.";
+            } else if (score >= questions.length * 0.5) {
+                scoreText.textContent = "You passed! Review the explanations to strengthen your knowledge.";
+            } else {
+                scoreText.textContent = "You need more study. Review the material and try again.";
+            }
+            
+            // Generate question review
+            generateQuestionReview();
+        }
+
+        // Generate question review
+        function generateQuestionReview() {
+            questionReview.innerHTML = '<h3>Question Review</h3>';
+            
+            questions.forEach((question, index) => {
+                const reviewItem = document.createElement('div');
+                reviewItem.className = 'review-item';
+                
+                const reviewQuestion = document.createElement('div');
+                reviewQuestion.className = 'review-question';
+                reviewQuestion.textContent = `${index + 1}. ${question.question}`;
+                
+                const userAnswer = document.createElement('div');
+                userAnswer.className = 'review-answer';
+                if (userAnswers[index] !== null) {
+                    userAnswer.innerHTML = `Your answer: <span class="user-answer">${question.options[userAnswers[index]]}</span>`;
+                } else {
+                    userAnswer.innerHTML = `Your answer: <span class="user-answer">Not answered</span>`;
+                }
+                
+                const correctAnswer = document.createElement('div');
+                correctAnswer.className = 'review-answer';
+                correctAnswer.innerHTML = `Correct answer: <span class="correct-answer">${question.options[question.correct]}</span>`;
+                
+                reviewItem.appendChild(reviewQuestion);
+                reviewItem.appendChild(userAnswer);
+                reviewItem.appendChild(correctAnswer);
+                
+                questionReview.appendChild(reviewItem);
+            });
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            score = 0;
+            timeLeft = 45 * 60;
+            quizCompleted = false;
+            
+            quizContainer.style.display = 'block';
+            resultsContainer.style.display = 'none';
+            
+            initQuiz();
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        submitBtn.addEventListener('click', submitQuiz);
+        restartBtn.addEventListener('click', restartQuiz);
+
+        // Start the quiz
+        initQuiz();
+    </script>
+</body>
+</html>
