@@ -3,550 +3,384 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pathology Mastery Quiz</title>
+    <title>Medical Microbiology Quiz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        :root {
-            --primary: #8A2BE2;
-            --primary-light: #9B4DFF;
-            --secondary: #00CED1;
-            --accent: #FF6B6B;
-            --dark: #121212;
-            --darker: #0A0A0A;
-            --light: #F8F9FA;
-            --gray: #6C757D;
-            --success: #20C997;
-            --warning: #FFD166;
-            --danger: #EF476F;
-        }
-
+        
         body {
-            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
-            color: var(--light);
-            min-height: 100vh;
-            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
             line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 40px;
         }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 20px;
         }
-
+        
         header {
             text-align: center;
-            padding: 30px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
+            padding: 30px 0;
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            color: white;
+            border-radius: 15px;
             margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-
+        
         h1 {
             font-size: 2.8rem;
             margin-bottom: 10px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 10px rgba(138, 43, 226, 0.3);
         }
-
+        
         .subtitle {
             font-size: 1.2rem;
-            color: var(--gray);
-            margin-bottom: 20px;
+            opacity: 0.9;
+            font-weight: 300;
         }
-
-        .stats-bar {
+        
+        .quiz-info {
             display: flex;
             justify-content: space-between;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 15px 20px;
-            margin-bottom: 25px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
-
-        .stat-item {
+        
+        .info-item {
             text-align: center;
             flex: 1;
         }
-
-        .stat-value {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--secondary);
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--gray);
-            margin-top: 5px;
-        }
-
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 350px;
-            gap: 25px;
-        }
-
-        .quiz-area {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 30px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .question-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .question-number {
-            font-size: 1.2rem;
-            color: var(--secondary);
-            font-weight: 600;
-        }
-
-        .question-text {
-            font-size: 1.4rem;
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .option {
-            background: rgba(255, 255, 255, 0.08);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 18px 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-        }
-
-        .option:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: var(--primary-light);
-            transform: translateY(-2px);
-        }
-
-        .option.selected {
-            background: rgba(138, 43, 226, 0.2);
-            border-color: var(--primary);
-        }
-
-        .option.correct {
-            background: rgba(32, 201, 151, 0.2);
-            border-color: var(--success);
-        }
-
-        .option.incorrect {
-            background: rgba(239, 71, 111, 0.2);
-            border-color: var(--danger);
-        }
-
-        .option-letter {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            background: var(--dark);
-            border-radius: 50%;
-            margin-right: 15px;
-            font-weight: bold;
-            color: var(--light);
-            flex-shrink: 0;
-        }
-
-        .option.selected .option-letter {
-            background: var(--primary);
-        }
-
-        .option.correct .option-letter {
-            background: var(--success);
-        }
-
-        .option.incorrect .option-letter {
-            background: var(--danger);
-        }
-
-        .feedback-area {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 20px;
-            display: none;
-        }
-
-        .feedback-area.show {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .feedback-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .feedback-title.correct {
-            color: var(--success);
-        }
-
-        .feedback-title.incorrect {
-            color: var(--danger);
-        }
-
-        .explanation {
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        .study-tip {
-            background: rgba(255, 209, 102, 0.1);
-            border-left: 4px solid var(--warning);
-            padding: 15px;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-
-        .btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-light);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--light);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
-
-        .btn-success:hover {
-            background: #1abf8d;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(32, 201, 151, 0.4);
-        }
-
-        .sidebar {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 25px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            height: fit-content;
-        }
-
-        .sidebar-title {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            color: var(--secondary);
-            text-align: center;
-        }
-
-        .question-palette {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        .palette-item {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.08);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .palette-item:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: scale(1.1);
-        }
-
-        .palette-item.answered {
-            background: var(--primary);
-        }
-
-        .palette-item.current {
-            border: 2px solid var(--secondary);
-            transform: scale(1.1);
-        }
-
-        .palette-item.correct {
-            background: var(--success);
-        }
-
-        .palette-item.incorrect {
-            background: var(--danger);
-        }
-
-        .timer-container {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .timer {
+        
+        .info-item i {
             font-size: 2rem;
-            font-weight: bold;
-            color: var(--secondary);
-            margin: 10px 0;
+            color: #1a2980;
+            margin-bottom: 10px;
         }
-
-        .timer-warning {
-            color: var(--danger);
+        
+        .question-counter {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1a2980;
         }
-
+        
         .progress-container {
-            margin-bottom: 25px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
-
+        
         .progress-bar {
-            height: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
+            height: 15px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
             overflow: hidden;
             margin-bottom: 10px;
         }
-
-        .progress {
+        
+        .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background: linear-gradient(to right, #1a2980, #26d0ce);
             width: 0%;
             transition: width 0.5s ease;
         }
-
-        .progress-text {
+        
+        .quiz-container {
             display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: var(--gray);
+            gap: 30px;
+            flex-wrap: wrap;
         }
-
-        .quick-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+        
+        .questions-section {
+            flex: 3;
+            min-width: 300px;
         }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 15px;
+        
+        .question-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .question-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             text-align: center;
-        }
-
-        .stat-card-value {
-            font-size: 1.5rem;
+            line-height: 40px;
             font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .stat-card-label {
-            font-size: 0.8rem;
-            color: var(--gray);
-        }
-
-        .results-container {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 40px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            display: none;
-        }
-
-        .results-container.show {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .results-title {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-            color: var(--secondary);
-        }
-
-        .score-display {
-            font-size: 4rem;
-            font-weight: bold;
-            margin: 20px 0;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .performance-message {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .results-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .result-stat {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 15px;
-            padding: 20px;
-        }
-
-        .result-stat-value {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .result-stat-label {
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-
-        .review-section {
-            text-align: left;
-            margin-top: 40px;
-        }
-
-        .review-title {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--secondary);
-            text-align: center;
-        }
-
-        .review-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 20px;
             margin-bottom: 15px;
         }
-
-        .review-question {
+        
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #222;
             font-weight: 600;
-            margin-bottom: 10px;
         }
-
-        .review-answer {
-            margin: 5px 0;
+        
+        .options-container {
+            display: grid;
+            gap: 12px;
         }
-
-        .review-correct {
-            color: var(--success);
+        
+        .option {
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
         }
-
-        .review-incorrect {
-            color: var(--danger);
+        
+        .option:hover {
+            background-color: #f5f9ff;
+            border-color: #1a2980;
         }
-
-        .review-explanation {
-            margin-top: 10px;
-            font-size: 0.9rem;
-            color: var(--gray);
+        
+        .option.selected {
+            background-color: #e3f2fd;
+            border-color: #1a2980;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        
+        .option.correct {
+            background-color: #e8f5e9;
+            border-color: #4caf50;
         }
-
-        @media (max-width: 992px) {
-            .main-content {
-                grid-template-columns: 1fr;
+        
+        .option.incorrect {
+            background-color: #ffebee;
+            border-color: #f44336;
+        }
+        
+        .option-letter {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 15px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .selected .option-letter {
+            background-color: #1a2980;
+            color: white;
+        }
+        
+        .feedback-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: none;
+        }
+        
+        .feedback-title {
+            font-size: 1.3rem;
+            color: #1a2980;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feedback-title i {
+            font-size: 1.5rem;
+        }
+        
+        .feedback-correct {
+            color: #4caf50;
+        }
+        
+        .feedback-incorrect {
+            color: #f44336;
+        }
+        
+        .explanation, .tips {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .explanation {
+            background-color: #f5f9ff;
+            border-left: 4px solid #1a2980;
+        }
+        
+        .tips {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .explanation h4, .tips h4 {
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .sidebar {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .sidebar-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .sidebar-card h3 {
+            color: #1a2980;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .topics-list {
+            list-style-type: none;
+        }
+        
+        .topics-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .topics-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .topics-list i {
+            color: #1a2980;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-prev {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        .btn-prev:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .btn-next {
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            color: white;
+        }
+        
+        .btn-next:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-reset {
+            background-color: #ff9800;
+            color: white;
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        .btn-reset:hover {
+            background-color: #f57c00;
+        }
+        
+        .results-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .results-icon {
+            font-size: 5rem;
+            color: #1a2980;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1a2980;
+            margin-bottom: 20px;
+        }
+        
+        .score-text {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: #666;
+        }
+        
+        .review-btn {
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            color: white;
+            margin: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .quiz-container {
+                flex-direction: column;
             }
             
-            .options-grid {
-                grid-template-columns: 1fr;
+            .quiz-info {
+                flex-direction: column;
+                gap: 20px;
             }
             
-            .results-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 576px) {
             h1 {
                 font-size: 2.2rem;
-            }
-            
-            .stats-bar {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .question-palette {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .results-stats {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -554,1164 +388,1178 @@
 <body>
     <div class="container">
         <header>
-            <a href="https://t.me/yerotechno"><h1 style=" color: black ;">MedQuiz</h1></a>
-            <h1>Pathology Quiz</h1>
-            <h2>U-1 introduction to pathology </h2>
-            <p class="subtitle">Test your knowledge with 50+ challenging questions</p>
+            <h1><i class="fas fa-microscope"></i> Medical Microbiology Quiz</h1>
+            <p class="subtitle">Test your knowledge with 65+ multiple choice questions from the course material</p>
         </header>
-
-        <div class="stats-bar">
-            <div class="stat-item">
-                <div class="stat-value" id="score-value">0</div>
-                <div class="stat-label">Score</div>
+        
+        <div class="quiz-info">
+            <div class="info-item">
+                <i class="fas fa-book-open"></i>
+                <p>Based on Pharmacy Students' PPT</p>
             </div>
-            <div class="stat-item">
-                <div class="stat-value" id="progress-value">0%</div>
-                <div class="stat-label">Progress</div>
+            <div class="info-item">
+                <i class="fas fa-question-circle"></i>
+                <p><span id="total-questions">65</span> Questions Total</p>
             </div>
-            <div class="stat-item">
-                <div class="stat-value" id="correct-value">0</div>
-                <div class="stat-label">Correct</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value" id="incorrect-value">0</div>
-                <div class="stat-label">Incorrect</div>
+            <div class="info-item">
+                <i class="fas fa-check-circle"></i>
+                <p><span id="answered-count">0</span> Answered</p>
             </div>
         </div>
-
-        <div class="main-content">
-            <div class="quiz-area">
-                <div class="question-header">
-                    <div class="question-number" id="question-number">Question 1 of 50</div>
+        
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="question-counter">Question <span id="current-question">1</span> of <span id="total-questions-display">65</span></div>
+        </div>
+        
+        <div class="quiz-container">
+            <div class="questions-section">
+                <div id="question-container"></div>
+                
+                <div class="feedback-container" id="feedback-container">
+                    <div class="feedback-title" id="feedback-title">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="feedback-text">Your answer is correct!</span>
+                    </div>
+                    <div class="explanation">
+                        <h4><i class="fas fa-lightbulb"></i> Explanation</h4>
+                        <p id="explanation-text">Explanation will appear here...</p>
+                    </div>
+                    <div class="tips">
+                        <h4><i class="fas fa-tips"></i> Study Tip</h4>
+                        <p id="tips-text">Study tip will appear here...</p>
+                    </div>
                 </div>
                 
-                <div class="question-text" id="question-text"></div>
-                
-                <div class="options-grid" id="options-container"></div>
-                
-                <div class="feedback-area" id="feedback-area">
-                    <div class="feedback-title" id="feedback-title"></div>
-                    <div class="explanation" id="explanation"></div>
-                    <div class="study-tip" id="study-tip"></div>
+                <div class="controls">
+                    <button class="btn btn-prev" id="prev-btn">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="btn btn-next" id="next-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
                 
-                <div class="navigation">
-                    <button class="btn btn-secondary" id="prev-btn">Previous</button>
-                    <button class="btn btn-primary" id="next-btn">Next Question</button>
-                    <button class="btn btn-success" id="submit-btn" style="display: none;">Submit Quiz</button>
-                </div>
+                <button class="btn btn-reset" id="reset-btn">
+                    <i class="fas fa-redo"></i> Reset Quiz
+                </button>
             </div>
             
             <div class="sidebar">
-                <h3 class="sidebar-title">Question Palette</h3>
-                <div class="question-palette" id="question-palette"></div>
-                
-                <div class="timer-container">
-                    <div>Time Remaining</div>
-                    <div class="timer" id="timer">30:00</div>
+                <div class="sidebar-card">
+                    <h3><i class="fas fa-list"></i> Quiz Topics</h3>
+                    <ul class="topics-list">
+                        <li><i class="fas fa-virus"></i> Introduction to Microbiology</li>
+                        <li><i class="fas fa-history"></i> Historical Background</li>
+                        <li><i class="fas fa-sitemap"></i> Classification of Microbes</li>
+                        <li><i class="fas fa-bacterium"></i> Bacterial Cell Structure</li>
+                        <li><i class="fas fa-utensils"></i> Bacterial Nutrition & Growth</li>
+                        <li><i class="fas fa-user-md"></i> Host-Parasite Relationship</li>
+                        <li><i class="fas fa-pump-medical"></i> Sterilization & Disinfection</li>
+                        <li><i class="fas fa-vial"></i> Microbiological Methods</li>
+                        <li><i class="fas fa-cogs"></i> Bacterial Pathogenesis</li>
+                        <li><i class="fas fa-stethoscope"></i> Clinical Microbiology</li>
+                    </ul>
                 </div>
                 
-                <div class="progress-container">
-                    <div class="progress-bar">
-                        <div class="progress" id="progress-bar"></div>
-                    </div>
-                    <div class="progress-text">
-                        <span>Progress</span>
-                        <span id="progress-percent">0%</span>
-                    </div>
-                </div>
-                
-                <div class="quick-stats">
-                    <div class="stat-card">
-                        <div class="stat-card-value" id="answered-value">0</div>
-                        <div class="stat-card-label">Answered</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-card-value" id="remaining-value">50</div>
-                        <div class="stat-card-label">Remaining</div>
+                <div class="sidebar-card">
+                    <h3><i class="fas fa-chart-line"></i> Your Progress</h3>
+                    <div id="score-display">
+                        <p>Correct Answers: <span id="correct-count">0</span>/<span id="total-answered">0</span></p>
+                        <p>Accuracy: <span id="accuracy">0</span>%</p>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="results-container" id="results-container">
-            <h2 class="results-title">Quiz Completed!</h2>
-            <div class="score-display" id="final-score">0/50</div>
-            <div class="performance-message" id="performance-message"></div>
-            
-            <div class="results-stats">
-                <div class="result-stat">
-                    <div class="result-stat-value" id="final-correct">0</div>
-                    <div class="result-stat-label">Correct Answers</div>
-                </div>
-                <div class="result-stat">
-                    <div class="result-stat-value" id="final-incorrect">0</div>
-                    <div class="result-stat-label">Incorrect Answers</div>
-                </div>
-                <div class="result-stat">
-                    <div class="result-stat-value" id="final-skipped">0</div>
-                    <div class="result-stat-label">Skipped Questions</div>
-                </div>
-                <div class="result-stat">
-                    <div class="result-stat-value" id="final-time">0:00</div>
-                    <div class="result-stat-label">Time Taken</div>
-                </div>
+        
+        <div class="results-section" id="results-section">
+            <div class="results-icon">
+                <i class="fas fa-trophy"></i>
             </div>
-            
-            <button class="btn btn-primary" id="retake-btn">Retake Quiz</button>
-            
-            <div class="review-section">
-                <h3 class="review-title">Question Review</h3>
-                <div id="question-review"></div>
+            <h2>Quiz Completed!</h2>
+            <div class="score" id="final-score">0%</div>
+            <p class="score-text" id="final-message">You've completed all questions in the quiz.</p>
+            <div>
+                <button class="btn review-btn" id="review-btn">
+                    <i class="fas fa-redo"></i> Review Questions
+                </button>
             </div>
         </div>
     </div>
 
     <script>
-        // Comprehensive pathology questions (50+)
-        const questions = [
+        // Quiz data - 65 questions based on the PPT content
+        const quizData = [
             {
-                question: "What is the primary focus of pathology?",
+                question: "What is the definition of Microbiology?",
                 options: [
-                    "The study of drug interactions",
-                    "The scientific study of disease",
-                    "The analysis of genetic disorders",
-                    "The examination of physiological processes"
+                    "Study of microscopic forms of life and their relationship with other living things",
+                    "Study of human diseases and their treatments",
+                    "Study of chemical processes in living organisms",
+                    "Study of genetics and heredity in microorganisms"
                 ],
-                correct: 1,
-                explanation: "Pathology is the scientific study of disease through examination of organs, tissues, bodily fluids, and whole bodies.",
-                studyTip: "Remember: Pathology = pathos (suffering) + logos (study) = study of suffering/disease"
+                correct: 0,
+                explanation: "Microbiology is defined as the science which deals with living organisms that are individually too small to be seen with the naked eye.",
+                tip: "Remember that microbiology encompasses all microscopic forms of life, not just pathogens."
             },
             {
-                question: "Which of the following is NOT a subdivision of pathology?",
+                question: "Who is considered the 'Father of Microbiology'?",
                 options: [
-                    "Histopathology",
-                    "Chemical pathology",
-                    "Molecular pathology",
-                    "Physiological pathology"
+                    "Louis Pasteur",
+                    "Robert Koch",
+                    "Antonie van Leeuwenhoek",
+                    "Alexander Fleming"
+                ],
+                correct: 2,
+                explanation: "Antonie van Leeuwenhoek (1632-1723) is considered the Father of Microbiology for constructing his own microscope and first observing bacteria.",
+                tip: "Van Leeuwenhoek called bacteria 'animalcules' and was the first to describe different bacterial shapes."
+            },
+            {
+                question: "What theory states that life comes from pre-existing life?",
+                options: [
+                    "Theory of Abiogenesis",
+                    "Theory of Spontaneous Generation",
+                    "Theory of Biogenesis",
+                    "Germ Theory of Disease"
+                ],
+                correct: 2,
+                explanation: "The Theory of Biogenesis states that life comes from pre-existing life, in contrast to abiogenesis or spontaneous generation.",
+                tip: "Louis Pasteur's experiments with swan-necked flasks disproved spontaneous generation and supported biogenesis."
+            },
+            {
+                question: "Which scientist definitively disproved the theory of spontaneous generation?",
+                options: [
+                    "Francesco Redi",
+                    "Louis Pasteur",
+                    "Robert Koch",
+                    "Edward Jenner"
+                ],
+                correct: 1,
+                explanation: "Louis Pasteur (1822-1895) designed the swan-necked flask experiment that disproved spontaneous generation of microbes once and for all.",
+                tip: "Pasteur's experiment prevented dust particles from reaching sterile broth, showing microbes came from outside."
+            },
+            {
+                question: "What does Koch's Postulate establish?",
+                options: [
+                    "Methods for vaccine development",
+                    "Criteria for identifying causative agents of infectious diseases",
+                    "Principles of antibiotic resistance",
+                    "Techniques for bacterial staining"
+                ],
+                correct: 1,
+                explanation: "Koch's Postulate establishes experimental criteria to prove a specific microorganism is the causative agent of a specific disease.",
+                tip: "The four conditions include: presence in all cases, isolation in pure culture, reproduction in lab animals, and re-isolation."
+            },
+            {
+                question: "Which of the following is NOT a subdivision of microbiology?",
+                options: [
+                    "Bacteriology",
+                    "Virology",
+                    "Cardiology",
+                    "Mycology"
+                ],
+                correct: 2,
+                explanation: "Cardiology is the study of the heart and cardiovascular system, not a subdivision of microbiology.",
+                tip: "Major subdivisions include bacteriology, virology, mycology, parasitology (protozoology and helminthology), and immunology."
+            },
+            {
+                question: "What are the three basic shapes of bacteria?",
+                options: [
+                    "Square, triangular, circular",
+                    "Cocci, bacilli, spirilla",
+                    "Round, oval, tubular",
+                    "Spherical, cylindrical, conical"
+                ],
+                correct: 1,
+                explanation: "The three basic bacterial shapes are cocci (spherical), bacilli (rod-shaped), and spirilla (spiral-shaped).",
+                tip: "Cocci can be arranged in clusters (staphylococci), chains (streptococci), pairs (diplococci), or single (micrococcus)."
+            },
+            {
+                question: "What is the main component of bacterial cell walls?",
+                options: [
+                    "Cellulose",
+                    "Chitin",
+                    "Peptidoglycan (murein)",
+                    "Lipopolysaccharide"
+                ],
+                correct: 2,
+                explanation: "Bacterial cell walls are primarily composed of peptidoglycan (murein), which provides rigidity and determines cell shape.",
+                tip: "Gram-positive bacteria have thick peptidoglycan layers, while gram-negative have thin layers plus an outer membrane."
+            },
+            {
+                question: "Which component is unique to gram-negative bacterial cell walls?",
+                options: [
+                    "Teichoic acid",
+                    "Peptidoglycan",
+                    "Outer membrane",
+                    "Mycolic acid"
+                ],
+                correct: 2,
+                explanation: "The outer membrane containing lipopolysaccharide (LPS) is unique to gram-negative bacteria.",
+                tip: "The lipid A component of LPS is also called endotoxin, which stimulates strong immune responses."
+            },
+            {
+                question: "What is the function of bacterial capsules?",
+                options: [
+                    "Protein synthesis",
+                    "Genetic material storage",
+                    "Protection from phagocytosis",
+                    "Energy production"
+                ],
+                correct: 2,
+                explanation: "Capsules protect bacterial cells from engulfment by white blood cells (phagocytes) and mediate adherence to surfaces.",
+                tip: "Capsules are loose polysaccharide or protein layers surrounding some bacteria and serve as virulence factors."
+            },
+            {
+                question: "What are bacterial flagella made of?",
+                options: [
+                    "Cellulose",
+                    "Flagellin subunits",
+                    "Peptidoglycan",
+                    "Lipoproteins"
+                ],
+                correct: 1,
+                explanation: "Flagella are filamentous protein structures made from flagellin subunits that provide swimming movement for motile bacteria.",
+                tip: "Flagellar arrangements include monotrichous (single), lophotrichous (tuft), amphitrichous (both ends), and peritrichous (all over)."
+            },
+            {
+                question: "What is the purpose of bacterial endospores?",
+                options: [
+                    "Reproduction",
+                    "Nutrient storage",
+                    "Survival under adverse conditions",
+                    "Genetic exchange"
+                ],
+                correct: 2,
+                explanation: "Endospores are highly resistant, dehydrated forms that allow bacteria to survive adverse conditions like heat, drying, and chemicals.",
+                tip: "Endospores are formed under conditions of limited nutrition and can remain dormant for extended periods."
+            },
+            {
+                question: "What temperature range is optimal for most pathogenic bacteria?",
+                options: [
+                    "0-20°C",
+                    "20-45°C",
+                    "50-80°C",
+                    "Above 80°C"
+                ],
+                correct: 1,
+                explanation: "Most pathogenic bacteria are mesophilic, growing best at 20-45°C with optimum growth at 37°C (human body temperature).",
+                tip: "Psychrophiles grow in cold (-5 to 20°C), thermophiles in heat (50-80°C), and hyperthermophiles above 80°C."
+            },
+            {
+                question: "Which type of bacteria can grow in both aerobic and anaerobic conditions?",
+                options: [
+                    "Obligate aerobes",
+                    "Obligate anaerobes",
+                    "Facultative aerobes",
+                    "Microaerophiles"
+                ],
+                correct: 2,
+                explanation: "Facultative aerobes can grow under both aerobic and anaerobic conditions, like members of Enterobacteriaceae.",
+                tip: "Obligate aerobes require oxygen, obligate anaerobes cannot tolerate oxygen, and microaerophiles need low oxygen tension."
+            },
+            {
+                question: "What is the typical pH requirement for most pathogenic bacteria?",
+                options: [
+                    "pH 3-5 (acidic)",
+                    "pH 7.2-7.6 (neutral to slightly alkaline)",
+                    "pH 8-9 (alkaline)",
+                    "pH 2-3 (highly acidic)"
+                ],
+                correct: 1,
+                explanation: "Most pathogenic bacteria require a pH of 7.2-7.6 for optimal growth, which is near neutral to slightly alkaline.",
+                tip: "Acidophilic bacteria prefer acidic pH (<7), alkalophilic prefer alkaline pH (>7), and neutrophilic prefer neutral pH (~7)."
+            },
+            {
+                question: "During which phase of bacterial growth does population increase exponentially?",
+                options: [
+                    "Lag phase",
+                    "Log (exponential) phase",
+                    "Stationary phase",
+                    "Death phase"
+                ],
+                correct: 1,
+                explanation: "During the log or exponential phase, bacterial population increases exponentially as nutrients are abundant.",
+                tip: "The lag phase is for adaptation, stationary phase occurs when nutrients deplete, and death phase when more cells die than divide."
+            },
+            {
+                question: "What term describes bacteria that cause disease only when host defenses are compromised?",
+                options: [
+                    "Primary pathogens",
+                    "Opportunistic bacteria",
+                    "Commensal bacteria",
+                    "Symbiotic bacteria"
+                ],
+                correct: 1,
+                explanation: "Opportunistic bacteria take advantage of pre-existing conditions like immunosuppression to cause disease.",
+                tip: "Normal flora can become opportunistic pathogens if they enter sterile sites or if host immunity is weakened."
+            },
+            {
+                question: "Which of the following is NOT a portal of entry for pathogens?",
+                options: [
+                    "Mucous membranes",
+                    "Skin",
+                    "Parenteral routes",
+                    "Bone marrow"
                 ],
                 correct: 3,
-                explanation: "Physiological pathology is not a standard subdivision. The main branches are anatomical pathology, clinical pathology, chemical pathology, hematopathology, etc.",
-                studyTip: "Pathology subdivisions typically focus on diagnostic methods rather than physiological processes"
+                explanation: "Bone marrow is not a typical portal of entry for pathogens. Common portals include mucous membranes, skin, and parenteral routes.",
+                tip: "Mucous membranes of the respiratory, gastrointestinal, and urogenital tracts are common entry points for pathogens."
             },
             {
-                question: "What does histopathology primarily examine?",
+                question: "What are bacterial surface molecules that facilitate attachment to host cells called?",
                 options: [
-                    "Blood cells and bone marrow",
-                    "Chemical components of body fluids",
-                    "Microscopic structure of tissues",
-                    "Genetic and molecular changes"
+                    "Toxins",
+                    "Adhesins or ligands",
+                    "Enzymes",
+                    "Receptors"
+                ],
+                correct: 1,
+                explanation: "Adhesins or ligands are surface molecules on pathogens that bind specifically to receptors on host cells for attachment.",
+                tip: "Adherence is a necessary first step in pathogenesis for most bacteria, often mediated by pili (fimbriae)."
+            },
+            {
+                question: "Which virulence factor helps bacteria evade phagocytosis?",
+                options: [
+                    "Endotoxin",
+                    "Capsule",
+                    "Exotoxin",
+                    "Flagella"
+                ],
+                correct: 1,
+                explanation: "Capsules protect bacteria from engulfment by phagocytic white blood cells, helping them evade this host defense.",
+                tip: "Capsules are often polysaccharide layers that make it difficult for phagocytes to recognize and engulf bacteria."
+            },
+            {
+                question: "What type of bacterial toxin is released into the extracellular environment?",
+                options: [
+                    "Endotoxin",
+                    "Exotoxin",
+                    "Enterotoxin",
+                    "Neurotoxin"
+                ],
+                correct: 1,
+                explanation: "Exotoxins are proteins released by bacteria into the extracellular environment, while endotoxins are part of the cell wall.",
+                tip: "Exotoxins are produced by both gram-positive and gram-negative bacteria and are often more potent than endotoxins."
+            },
+            {
+                question: "Which component of gram-negative bacterial cell walls is also known as endotoxin?",
+                options: [
+                    "Teichoic acid",
+                    "Lipid A of LPS",
+                    "O antigen",
+                    "Peptidoglycan"
+                ],
+                correct: 1,
+                explanation: "Lipid A, part of lipopolysaccharide (LPS) in the outer membrane of gram-negative bacteria, is also called endotoxin.",
+                tip: "Endotoxin causes fever, leukopenia followed by leukocytosis, complement activation, and can lead to septic shock."
+            },
+            {
+                question: "What is the term for the population of microorganisms that inhabit healthy individuals?",
+                options: [
+                    "Pathogenic flora",
+                    "Transient flora",
+                    "Normal microbial flora",
+                    "Parasitic flora"
                 ],
                 correct: 2,
-                explanation: "Histopathology involves the microscopic examination of tissues to study disease manifestations.",
-                studyTip: "Histo- = tissue, so histopathology = study of diseased tissues"
+                explanation: "Normal microbial flora denotes microorganisms that inhabit the skin and mucous membranes of healthy individuals.",
+                tip: "Normal flora includes resident flora (fixed types) and transient flora (temporary inhabitants)."
             },
             {
-                question: "Which staining method is most commonly used in histopathology?",
+                question: "Which of the following is a benefit of normal flora?",
+                options: [
+                    "Production of vitamin K and B vitamins",
+                    "Always causing disease",
+                    "Suppressing immune function",
+                    "Consuming all host nutrients"
+                ],
+                correct: 0,
+                explanation: "Normal flora provides benefits like synthesizing vitamin K and B vitamins, competing with pathogens, and maintaining protective pH.",
+                tip: "Normal flora only causes infection when misplaced (e.g., fecal flora to urinary tract) or when the host is compromised."
+            },
+            {
+                question: "What is the complete destruction or removal of all microorganisms including spores called?",
+                options: [
+                    "Disinfection",
+                    "Antisepsis",
+                    "Sterilization",
+                    "Decontamination"
+                ],
+                correct: 2,
+                explanation: "Sterilization is the destruction or complete removal of all forms of microorganisms including their spores.",
+                tip: "Disinfection destroys disease-causing microbes but may not kill spores; antisepsis is on living tissue."
+            },
+            {
+                question: "Which sterilization method uses moist heat at 121°C under pressure?",
+                options: [
+                    "Pasteurization",
+                    "Tyndallization",
+                    "Autoclaving",
+                    "Hot air oven"
+                ],
+                correct: 2,
+                explanation: "Autoclaving uses steam under pressure at 121°C for 15 minutes to achieve sterilization.",
+                tip: "Autoclaves use pressure (typically 15 psi) to raise the boiling point of water for more effective sterilization."
+            },
+            {
+                question: "What is the purpose of pasteurization?",
+                options: [
+                    "Complete sterilization of medical equipment",
+                    "Killing all bacteria in food",
+                    "Reducing pathogen numbers in heat-sensitive liquids",
+                    "Decontaminating surgical instruments"
+                ],
+                correct: 2,
+                explanation: "Pasteurization (62°C for 30 min or 72°C for 15 sec) reduces pathogen numbers in heat-sensitive liquids like milk.",
+                tip: "Pasteurization doesn't sterilize but reduces microbial load to safe levels while preserving product quality."
+            },
+            {
+                question: "Which staining method differentiates bacteria based on cell wall structure?",
+                options: [
+                    "Simple stain",
+                    "Gram stain",
+                    "Acid-fast stain",
+                    "Capsule stain"
+                ],
+                correct: 1,
+                explanation: "Gram staining differentiates bacteria into gram-positive (purple) and gram-negative (pink/red) based on cell wall differences.",
+                tip: "Gram-positive bacteria retain crystal violet-iodine complex after alcohol decolorization due to thick peptidoglycan."
+            },
+            {
+                question: "What type of bacteria are identified using Ziehl-Neelsen staining?",
+                options: [
+                    "Gram-positive cocci",
+                    "Gram-negative rods",
+                    "Acid-fast bacilli (Mycobacteria)",
+                    "Spirochetes"
+                ],
+                correct: 2,
+                explanation: "Ziehl-Neelsen staining is used for acid-fast bacilli like Mycobacteria that resist decolorization with acid-alcohol.",
+                tip: "Mycobacteria have mycolic acid in their cell walls, making them acid-fast (retain carbol fuchsin despite acid wash)."
+            },
+            {
+                question: "What is the main source of nitrogen in culture media?",
+                options: [
+                    "Agar",
+                    "Peptone",
+                    "Carbohydrates",
+                    "Mineral salts"
+                ],
+                correct: 1,
+                explanation: "Peptone, derived from animal or plant protein breakdown, is the main source of nitrogen in culture media.",
+                tip: "Culture media also contain water, meat extract, yeast extract, carbohydrates, mineral salts, and solidifying agents like agar."
+            },
+            {
+                question: "Which type of culture media suppresses unwanted organisms while encouraging desired ones?",
+                options: [
+                    "Basic media",
+                    "Enriched media",
+                    "Selective media",
+                    "Indicator media"
+                ],
+                correct: 2,
+                explanation: "Selective media contain substances that suppress unwanted organisms while encouraging growth of desired ones.",
+                tip: "Examples include MacConkey agar (selects for gram-negative bacteria) and Mannitol salt agar (selects for Staphylococci)."
+            },
+            {
+                question: "What characteristic of Staphylococcus aureus helps distinguish it from other staphylococci?",
+                options: [
+                    "Catalase production",
+                    "Coagulase production",
+                    "Gram-positive staining",
+                    "Cocci in clusters"
+                ],
+                correct: 1,
+                explanation: "Staphylococcus aureus produces coagulase, which differentiates it from other staphylococci (coagulase-negative staphylococci).",
+                tip: "S. aureus is coagulase-positive, while S. epidermidis and S. saprophyticus are coagulase-negative."
+            },
+            {
+                question: "Which toxin produced by S. aureus causes toxic shock syndrome?",
+                options: [
+                    "Enterotoxin",
+                    "Exfoliative toxin",
+                    "Toxic shock syndrome toxin (TSST-1)",
+                    "Cytolytic toxin"
+                ],
+                correct: 2,
+                explanation: "Toxic shock syndrome toxin-1 (TSST-1) produced by S. aureus causes toxic shock syndrome.",
+                tip: "S. aureus also produces enterotoxins (food poisoning), exfoliative toxins (scalded skin syndrome), and cytolytic toxins."
+            },
+            {
+                question: "What is the most common coagulase-negative staphylococcus causing urinary tract infections in young women?",
+                options: [
+                    "S. epidermidis",
+                    "S. saprophyticus",
+                    "S. haemolyticus",
+                    "S. aureus"
+                ],
+                correct: 1,
+                explanation: "S. saprophyticus is the second most common cause of UTI after E. coli in young women and is coagulase-negative.",
+                tip: "S. saprophyticus is resistant to novobiocin, which helps distinguish it from other coagulase-negative staphylococci."
+            },
+            {
+                question: "How are streptococci classified based on their hemolytic pattern on blood agar?",
+                options: [
+                    "A, B, C, D groups",
+                    "Alpha, beta, gamma hemolysis",
+                    "Catalase positive/negative",
+                    "Coagulase positive/negative"
+                ],
+                correct: 1,
+                explanation: "Streptococci are classified as alpha (partial hemolysis, green), beta (complete hemolysis, clear), or gamma (no hemolysis).",
+                tip: "Beta-hemolytic streptococci include S. pyogenes (Group A) and S. agalactiae (Group B)."
+            },
+            {
+                question: "Which streptococcal species is the most common cause of bacterial pharyngitis?",
+                options: [
+                    "S. pneumoniae",
+                    "S. agalactiae",
+                    "S. pyogenes",
+                    "Enterococcus faecalis"
+                ],
+                correct: 2,
+                explanation: "Streptococcus pyogenes (Group A beta-hemolytic) is the most common cause of bacterial pharyngitis.",
+                tip: "S. pyogenes can also cause scarlet fever (via pyrogenic exotoxin), rheumatic fever, and glomerulonephritis as sequelae."
+            },
+            {
+                question: "What is the leading cause of neonatal meningitis and septicemia among streptococci?",
+                options: [
+                    "S. pyogenes",
+                    "S. agalactiae",
+                    "S. pneumoniae",
+                    "Viridans streptococci"
+                ],
+                correct: 1,
+                explanation: "Streptococcus agalactiae (Group B streptococcus) is a leading cause of meningitis and septicemia in neonates.",
+                tip: "GBS is found in the vaginocervical tract and can be transmitted to infants during birth."
+            },
+            {
+                question: "Which characteristic helps identify Streptococcus pneumoniae?",
+                options: [
+                    "Beta-hemolysis on blood agar",
+                    "Catalase production",
+                    "Optochin sensitivity and bile solubility",
+                    "Coagulase production"
+                ],
+                correct: 2,
+                explanation: "S. pneumoniae is alpha-hemolytic, sensitive to optochin, and bile soluble (lysed by bile acids).",
+                tip: "S. pneumoniae appears as lancet-shaped diplococci and is encapsulated, causing pneumonia, otitis media, and meningitis."
+            },
+            {
+                question: "Which of the following is a post-streptococcal sequelae?",
+                options: [
+                    "Toxic shock syndrome",
+                    "Scalded skin syndrome",
+                    "Acute rheumatic fever",
+                    "Food poisoning"
+                ],
+                correct: 2,
+                explanation: "Acute rheumatic fever is an autoimmune disease that can occur 2-3 weeks after S. pyogenes pharyngitis.",
+                tip: "Post-streptococcal sequelae include acute rheumatic fever (heart and joints) and acute glomerulonephritis (kidneys)."
+            },
+            {
+                question: "Which bacteria are known for their ability to survive inside phagocytic cells?",
+                options: [
+                    "Streptococcus pyogenes",
+                    "Staphylococcus aureus",
+                    "Mycobacterium tuberculosis",
+                    "Escherichia coli"
+                ],
+                correct: 2,
+                explanation: "Mycobacterium tuberculosis can survive and multiply inside macrophages by preventing phagosome-lysosome fusion.",
+                tip: "Intracellular growth is a virulence mechanism that helps bacteria evade host immune defenses."
+            },
+            {
+                question: "What is the primary function of bacterial pili?",
+                options: [
+                    "Motility",
+                    "Attachment to surfaces",
+                    "Nutrient uptake",
+                    "Energy production"
+                ],
+                correct: 1,
+                explanation: "Pili (fimbriae) are hair-like structures primarily involved in attachment to surfaces, including host cells.",
+                tip: "There are two types: common pili (adhesion) and sex pili (conjugation for genetic material transfer)."
+            },
+            {
+                question: "Which term describes bacteria that require oxygen for growth?",
+                options: [
+                    "Obligate anaerobes",
+                    "Facultative anaerobes",
+                    "Obligate aerobes",
+                    "Microaerophiles"
+                ],
+                correct: 2,
+                explanation: "Obligate aerobes require oxygen for growth and cannot grow without it.",
+                tip: "Examples include Pseudomonas aeruginosa and Mycobacterium tuberculosis."
+            },
+            {
+                question: "What is the typical arrangement of Staphylococcus bacteria?",
+                options: [
+                    "Chains",
+                    "Pairs (diplococci)",
+                    "Clusters like grapes",
+                    "Single cells only"
+                ],
+                correct: 2,
+                explanation: "Staphylococcus bacteria typically appear in clusters resembling grapes, though they can also occur singly, in pairs, or short chains.",
+                tip: "The name 'Staphylococcus' comes from Greek: 'staphylē' meaning bunch of grapes and 'coccus' meaning grain/berry."
+            },
+            {
+                question: "Which component of the bacterial cell is the site of protein synthesis?",
+                options: [
+                    "Nucleoid",
+                    "Ribosomes",
+                    "Cytoplasmic membrane",
+                    "Cell wall"
+                ],
+                correct: 1,
+                explanation: "Ribosomes are cytoplasmic particles that serve as the sites of protein synthesis in bacterial cells.",
+                tip: "Prokaryotic ribosomes are 70S in size, composed of 30S and 50S subunits (unlike eukaryotic 80S ribosomes)."
+            },
+            {
+                question: "What is the term for extrachromosomal DNA in bacteria that often carries antibiotic resistance genes?",
+                options: [
+                    "Chromosome",
+                    "Ribosome",
+                    "Plasmid",
+                    "Nucleoid"
+                ],
+                correct: 2,
+                explanation: "Plasmids are extrachromosomal genetic material in bacteria that can carry virulence or resistance genes.",
+                tip: "R plasmids carry antibiotic resistance genes, while virulence plasmids carry genes for pathogenicity factors."
+            },
+            {
+                question: "Which staining method would be used to visualize bacterial capsules?",
                 options: [
                     "Gram stain",
-                    "H&E stain",
-                    "Ziehl-Neelsen stain",
-                    "Periodic acid-Schiff stain"
-                ],
-                correct: 1,
-                explanation: "Hematoxylin and eosin (H&E) stain is the most widely used staining technique in histopathology.",
-                studyTip: "H&E stain: Hematoxylin stains nuclei blue, eosin stains cytoplasm pink"
-            },
-            {
-                question: "What is the purpose of tissue fixation?",
-                options: [
-                    "To enhance staining properties",
-                    "To prevent autolysis and putrefaction",
-                    "To increase tissue transparency",
-                    "To remove cellular debris"
-                ],
-                correct: 1,
-                explanation: "Fixation preserves tissues in a lifelike state, preventing degradation and maintaining structural integrity for examination.",
-                studyTip: "Formalin is the most common fixative used in pathology laboratories"
-            },
-            {
-                question: "Which of the following best describes cytopathology?",
-                options: [
-                    "Study of disease at the tissue level",
-                    "Study of disease at the cellular level",
-                    "Study of chemical changes in disease",
-                    "Study of genetic alterations in disease"
-                ],
-                correct: 1,
-                explanation: "Cytopathology involves the examination of individual cells for diagnostic purposes.",
-                studyTip: "Common cytopathology techniques include Pap smears and fine needle aspiration"
-            },
-            {
-                question: "What is the main advantage of Fine Needle Aspiration Cytology (FNAC)?",
-                options: [
-                    "It provides large tissue samples",
-                    "It is minimally invasive and rapid",
-                    "It allows for molecular testing",
-                    "It preserves tissue architecture"
-                ],
-                correct: 1,
-                explanation: "FNAC is a quick, minimally invasive procedure that can provide diagnostic information without the need for surgical biopsy.",
-                studyTip: "FNAC is particularly useful for evaluating palpable masses in organs like thyroid and breast"
-            },
-            {
-                question: "Which term describes the cause of a disease?",
-                options: [
-                    "Pathogenesis",
-                    "Etiology",
-                    "Morphology",
-                    "Prognosis"
-                ],
-                correct: 1,
-                explanation: "Etiology refers to the cause or origin of a disease.",
-                studyTip: "Etiology = cause, Pathogenesis = mechanism, Morphology = structural changes"
-            },
-            {
-                question: "What does pathogenesis refer to?",
-                options: [
-                    "The structural changes in disease",
-                    "The cause of a disease",
-                    "The mechanism of disease development",
-                    "The expected outcome of a disease"
+                    "Acid-fast stain",
+                    "Negative stain (India ink)",
+                    "Spore stain"
                 ],
                 correct: 2,
-                explanation: "Pathogenesis describes the sequence of events from the initial stimulus to the ultimate expression of disease.",
-                studyTip: "Pathogenesis explains HOW a disease develops, while etiology explains WHY"
+                explanation: "Negative staining with India ink is used to visualize capsules, which appear as clear halos around cells against a dark background.",
+                tip: "Capsules are non-ionic and don't take up most stains, so negative staining is used to visualize them indirectly."
             },
             {
-                question: "Which of the following is an example of a congenital disease?",
+                question: "What is the purpose of the Quellung reaction test?",
                 options: [
-                    "Tuberculosis",
-                    "Down syndrome",
-                    "Coronary artery disease",
-                    "Rheumatoid arthritis"
+                    "To identify Gram-positive bacteria",
+                    "To demonstrate capsule swelling in pneumococci",
+                    "To test for antibiotic sensitivity",
+                    "To detect bacterial motility"
                 ],
                 correct: 1,
-                explanation: "Down syndrome is a congenital condition present at birth, caused by chromosomal abnormality.",
-                studyTip: "Congenital = present at birth; can be genetic or due to intrauterine factors"
+                explanation: "The Quellung reaction involves capsule swelling when pneumococci are treated with type-specific antisera, helping identify serotypes.",
+                tip: "This test is specific for Streptococcus pneumoniae and helps determine the capsule serotype for epidemiological purposes."
             },
             {
-                question: "What is the term for a disease that is acquired in a hospital setting?",
-                options: [
-                    "Iatrogenic",
-                    "Nosocomial",
-                    "Idiopathic",
-                    "Sporadic"
-                ],
-                correct: 1,
-                explanation: "Nosocomial infections are those acquired in a hospital or healthcare setting.",
-                studyTip: "Nosocomial comes from Greek 'nosos' (disease) + 'komein' (to take care of)"
-            },
-            {
-                question: "Which of the following is a characteristic feature of reversible cell injury?",
-                options: [
-                    "Nuclear pyknosis",
-                    "Cellular swelling",
-                    "Membrane rupture",
-                    "Enzyme leakage"
-                ],
-                correct: 1,
-                explanation: "Cellular swelling due to fluid influx is an early, reversible change in cell injury.",
-                studyTip: "Reversible injury: swelling, fatty change; Irreversible injury: membrane damage, nuclear changes"
-            },
-            {
-                question: "What is hypertrophy?",
-                options: [
-                    "Increase in cell number",
-                    "Decrease in cell size",
-                    "Increase in cell size",
-                    "Change in cell type"
-                ],
-                correct: 2,
-                explanation: "Hypertrophy refers to an increase in the size of cells, leading to an increase in organ size.",
-                studyTip: "Hyper- = excessive, -trophy = growth → excessive growth of cells"
-            },
-            {
-                question: "Which adaptation involves an increase in the number of cells?",
-                options: [
-                    "Hypertrophy",
-                    "Hyperplasia",
-                    "Atrophy",
-                    "Metaplasia"
-                ],
-                correct: 1,
-                explanation: "Hyperplasia is an increase in the number of cells in an organ or tissue.",
-                studyTip: "Hyper- = excessive, -plasia = formation → excessive cell formation"
-            },
-            {
-                question: "What is metaplasia?",
-                options: [
-                    "Reversible change from one cell type to another",
-                    "Irreversible cellular transformation",
-                    "Disordered cellular growth",
-                    "Reduction in cell size and number"
-                ],
-                correct: 0,
-                explanation: "Metaplasia is the reversible replacement of one differentiated cell type with another.",
-                studyTip: "Common example: Squamous metaplasia in respiratory epithelium of smokers"
-            },
-            {
-                question: "Which of the following is a characteristic of dysplasia?",
-                options: [
-                    "Reversible cellular adaptation",
-                    "Orderly cellular proliferation",
-                    "Loss of cellular uniformity",
-                    "Increase in specialized functions"
-                ],
-                correct: 2,
-                explanation: "Dysplasia is characterized by disordered cell growth with loss of uniformity and architectural orientation.",
-                studyTip: "Dysplasia is a premalignant condition that can progress to cancer if untreated"
-            },
-            {
-                question: "What is the most common cause of cell injury?",
-                options: [
-                    "Genetic mutations",
-                    "Hypoxia",
-                    "Toxin exposure",
-                    "Physical trauma"
-                ],
-                correct: 1,
-                explanation: "Hypoxia (oxygen deficiency) is the most common cause of cell injury.",
-                studyTip: "Cells vary in their sensitivity to hypoxia: neurons > cardiac myocytes > skeletal muscle"
-            },
-            {
-                question: "Which organ is most sensitive to hypoxic injury?",
-                options: [
-                    "Liver",
-                    "Kidney",
-                    "Brain",
-                    "Skeletal muscle"
-                ],
-                correct: 2,
-                explanation: "Neurons in the brain are highly sensitive to hypoxia and can suffer irreversible damage within minutes.",
-                studyTip: "Neurons have high metabolic demands and poor anaerobic capacity"
-            },
-            {
-                question: "What is the hallmark of irreversible cell injury?",
-                options: [
-                    "Cellular swelling",
-                    "Fatty change",
-                    "Membrane damage",
-                    "Glycogen depletion"
-                ],
-                correct: 2,
-                explanation: "Severe membrane damage with rupture is a key feature of irreversible injury.",
-                studyTip: "Membrane damage leads to enzyme leakage, a diagnostic marker for cell death"
-            },
-            {
-                question: "Which type of necrosis is characterized by preservation of tissue architecture?",
-                options: [
-                    "Coagulative necrosis",
-                    "Liquefactive necrosis",
-                    "Caseous necrosis",
-                    "Fat necrosis"
-                ],
-                correct: 0,
-                explanation: "In coagulative necrosis, the basic tissue architecture is preserved despite cell death.",
-                studyTip: "Coagulative necrosis is typical of ischemic injury in most solid organs except the brain"
-            },
-            {
-                question: "What type of necrosis is typically seen in tuberculous infections?",
-                options: [
-                    "Coagulative necrosis",
-                    "Liquefactive necrosis",
-                    "Caseous necrosis",
-                    "Gangrenous necrosis"
-                ],
-                correct: 2,
-                explanation: "Caseous necrosis, with its characteristic cheese-like appearance, is typical of tuberculosis.",
-                studyTip: "Caseous = cheese-like; combination of coagulative and liquefactive necrosis"
-            },
-            {
-                question: "Which necrosis type involves enzymatic digestion of tissue?",
-                options: [
-                    "Coagulative necrosis",
-                    "Liquefactive necrosis",
-                    "Fat necrosis",
-                    "Fibrinoid necrosis"
-                ],
-                correct: 1,
-                explanation: "Liquefactive necrosis involves digestion of dead cells, resulting in liquid viscous mass.",
-                studyTip: "Liquefactive necrosis is characteristic of brain infarcts and bacterial infections"
-            },
-            {
-                question: "What is apoptosis?",
-                options: [
-                    "Pathologic cell death with inflammation",
-                    "Programmed cell death without inflammation",
-                    "Cell death due to ischemia",
-                    "Cell death caused by toxins"
-                ],
-                correct: 1,
-                explanation: "Apoptosis is a programmed, energy-dependent process of cell death that does not elicit inflammation.",
-                studyTip: "Apoptosis = 'falling off' (like leaves from a tree); a controlled process"
-            },
-            {
-                question: "Which of the following is a key morphological feature of apoptosis?",
-                options: [
-                    "Cell swelling",
-                    "Inflammation",
-                    "Formation of apoptotic bodies",
-                    "Karyolysis"
-                ],
-                correct: 2,
-                explanation: "Formation of membrane-bound apoptotic bodies that are phagocytosed is characteristic of apoptosis.",
-                studyTip: "Apoptosis: cell shrinkage, chromatin condensation, apoptotic bodies, NO inflammation"
-            },
-            {
-                question: "What is the main difference between necrosis and apoptosis?",
-                options: [
-                    "Necrosis affects single cells, apoptosis affects groups",
-                    "Apoptosis is always pathological, necrosis can be physiological",
-                    "Necrosis elicits inflammation, apoptosis does not",
-                    "Apoptosis requires ATP, necrosis does not"
-                ],
-                correct: 2,
-                explanation: "Necrosis triggers an inflammatory response, while apoptosis is a clean, controlled process without inflammation.",
-                studyTip: "Necrosis = 'accidental' cell death with inflammation; Apoptosis = 'programmed' cell death without inflammation"
-            },
-            {
-                question: "Which intracellular accumulation is associated with alcohol abuse?",
-                options: [
-                    "Glycogen",
-                    "Protein",
-                    "Fat",
-                    "Calcium"
-                ],
-                correct: 2,
-                explanation: "Fat accumulation (steatosis) in hepatocytes is a characteristic finding in alcoholic liver disease.",
-                studyTip: "Alcohol metabolism disrupts fat metabolism, leading to triglyceride accumulation in liver cells"
-            },
-            {
-                question: "What pigment accumulation causes jaundice?",
-                options: [
-                    "Hemosiderin",
-                    "Melanin",
-                    "Bilirubin",
-                    "Lipofuscin"
-                ],
-                correct: 2,
-                explanation: "Excess bilirubin deposition in tissues causes the yellow discoloration characteristic of jaundice.",
-                studyTip: "Jaundice can be pre-hepatic (hemolytic), hepatic, or post-hepatic (obstructive)"
-            },
-            {
-                question: "Which type of calcification occurs in normal tissues with hypercalcemia?",
-                options: [
-                    "Dystrophic calcification",
-                    "Metastatic calcification",
-                    "Physiological calcification",
-                    "Pathological calcification"
-                ],
-                correct: 1,
-                explanation: "Metastatic calcification occurs in normal tissues as a result of hypercalcemia.",
-                studyTip: "Dystrophic = calcification in damaged tissues with normal calcium; Metastatic = calcification in normal tissues with high calcium"
-            },
-            {
-                question: "What is the most common cause of metastatic calcification?",
-                options: [
-                    "Hyperparathyroidism",
-                    "Atherosclerosis",
-                    "Tuberculosis",
-                    "Renal failure"
-                ],
-                correct: 0,
-                explanation: "Hyperparathyroidism is the most common cause of hypercalcemia leading to metastatic calcification.",
-                studyTip: "Metastatic calcification typically affects blood vessels, kidneys, lungs, and gastric mucosa"
-            },
-            {
-                question: "Which of the following is a feature of cellular aging?",
-                options: [
-                    "Increased regenerative capacity",
-                    "Accumulation of lipofuscin",
-                    "Enhanced DNA repair",
-                    "Decreased protein cross-linking"
-                ],
-                correct: 1,
-                explanation: "Accumulation of lipofuscin, the 'wear and tear' pigment, is a characteristic of cellular aging.",
-                studyTip: "Lipofuscin is an indigestible residue of lysosomal digestion that accumulates with age"
-            },
-            {
-                question: "What is the primary mechanism of free radical-induced cell injury?",
-                options: [
-                    "DNA methylation",
-                    "Protein glycosylation",
-                    "Lipid peroxidation",
-                    "Carbohydrate polymerization"
-                ],
-                correct: 2,
-                explanation: "Free radicals primarily cause cell injury through lipid peroxidation of membranes.",
-                studyTip: "Free radicals have unpaired electrons that make them highly reactive with membrane lipids"
-            },
-            {
-                question: "Which antioxidant enzyme converts superoxide to hydrogen peroxide?",
-                options: [
-                    "Catalase",
-                    "Glutathione peroxidase",
-                    "Superoxide dismutase",
-                    "Peroxiredoxin"
-                ],
-                correct: 2,
-                explanation: "Superoxide dismutase converts superoxide radicals to hydrogen peroxide.",
-                studyTip: "SOD is the first line of defense against oxygen-derived free radicals"
-            },
-            {
-                question: "What is the role of catalase in antioxidant defense?",
-                options: [
-                    "Neutralizes superoxide radicals",
-                    "Converts hydrogen peroxide to water and oxygen",
-                    "Repairs oxidized glutathione",
-                    "Detoxifies lipid peroxides"
-                ],
-                correct: 1,
-                explanation: "Catalase converts hydrogen peroxide to water and molecular oxygen.",
-                studyTip: "Catalase is particularly important in peroxisomes where fatty acid oxidation occurs"
-            },
-            {
-                question: "Which vitamin is a potent antioxidant?",
-                options: [
-                    "Vitamin A",
-                    "Vitamin B12",
-                    "Vitamin C",
-                    "Vitamin D"
-                ],
-                correct: 2,
-                explanation: "Vitamin C (ascorbic acid) is a water-soluble antioxidant that scavenges free radicals.",
-                studyTip: "Vitamins C, E, and A all have antioxidant properties"
-            },
-            {
-                question: "What is the most common type of gangrene?",
-                options: [
-                    "Dry gangrene",
-                    "Wet gangrene",
-                    "Gas gangrene",
-                    "Fournier's gangrene"
-                ],
-                correct: 0,
-                explanation: "Dry gangrene, characterized by coagulative necrosis without infection, is the most common type.",
-                studyTip: "Dry gangrene = coagulative necrosis; Wet gangrene = liquefactive necrosis with infection"
-            },
-            {
-                question: "Which organism is commonly associated with gas gangrene?",
+                question: "Which bacteria are described as acid-fast bacilli?",
                 options: [
                     "Staphylococcus aureus",
-                    "Clostridium perfringens",
+                    "Escherichia coli",
+                    "Mycobacterium tuberculosis",
+                    "Streptococcus pneumoniae"
+                ],
+                correct: 2,
+                explanation: "Mycobacteria are acid-fast bacilli due to their waxy cell walls containing mycolic acid that resist decolorization with acid-alcohol.",
+                tip: "Acid-fast staining (Ziehl-Neelsen) is crucial for diagnosing tuberculosis and leprosy caused by mycobacteria."
+            },
+            {
+                question: "What is the primary difference between resident and transient flora?",
+                options: [
+                    "Resident flora are always pathogenic",
+                    "Transient flora are permanently established",
+                    "Resident flora reestablish if disturbed",
+                    "Transient flora are never harmful"
+                ],
+                correct: 2,
+                explanation: "Resident flora consists of relatively fixed microorganisms that promptly reestablish if disturbed, while transient flora are temporary.",
+                tip: "Transient flora may include pathogens that don't establish permanently but can cause disease during their presence."
+            },
+            {
+                question: "Which of the following is a physical method of sterilization?",
+                options: [
+                    "Glutaraldehyde treatment",
+                    "Ethylene oxide gas",
+                    "Autoclaving (moist heat)",
+                    "Hydrogen peroxide vapor"
+                ],
+                correct: 2,
+                explanation: "Autoclaving using moist heat under pressure is a physical method of sterilization, while the others are chemical methods.",
+                tip: "Physical sterilization methods include heat (moist and dry), filtration, and radiation (UV, gamma)."
+            },
+            {
+                question: "What is the mechanism of action for moist heat sterilization?",
+                options: [
+                    "Denaturation of proteins",
+                    "Disruption of cell membranes",
+                    "Inhibition of DNA synthesis",
+                    "Oxidation of cellular components"
+                ],
+                correct: 0,
+                explanation: "Moist heat acts by coagulation and denaturation of proteins, leading to microbial death.",
+                tip: "Moist heat is more effective than dry heat at the same temperature because water conducts heat better than air."
+            },
+            {
+                question: "What does HEPA stand for in the context of air filtration?",
+                options: [
+                    "High Efficiency Particle Arrestance",
+                    "High Efficiency Particulate Air",
+                    "High Energy Particle Absorption",
+                    "Highly Effective Pathogen Arrestor"
+                ],
+                correct: 1,
+                explanation: "HEPA stands for High Efficiency Particulate Air filters, which are at least 99.97% efficient for removing particles >0.3 μm.",
+                tip: "HEPA filters are used in biological safety cabinets and clean rooms to maintain sterile environments."
+            },
+            {
+                question: "Which of the following is NOT a typical characteristic used to describe bacterial colonies?",
+                options: [
+                    "Size and shape",
+                    "Elevation and margin",
+                    "Color and transparency",
+                    "Gram stain reaction"
+                ],
+                correct: 3,
+                explanation: "Gram stain reaction is determined microscopically, not by observing colony characteristics on agar plates.",
+                tip: "Colony characteristics include size, shape, elevation, margin, surface texture, color, transparency, and odor."
+            },
+            {
+                question: "What is the purpose of the catalase test?",
+                options: [
+                    "To differentiate Staphylococcus from Streptococcus",
+                    "To identify acid-fast bacteria",
+                    "To determine oxygen requirements",
+                    "To detect capsule production"
+                ],
+                correct: 0,
+                explanation: "The catalase test differentiates Staphylococcus (catalase-positive) from Streptococcus (catalase-negative) by detecting bubble production with H₂O₂.",
+                tip: "Catalase breaks down hydrogen peroxide into water and oxygen, producing bubbles when bacteria are added to H₂O₂."
+            },
+            {
+                question: "Which medium would be most appropriate for isolating Neisseria gonorrhoeae?",
+                options: [
+                    "Blood agar",
+                    "MacConkey agar",
+                    "Chocolate agar with CO₂",
+                    "Sabouraud dextrose agar"
+                ],
+                correct: 2,
+                explanation: "Neisseria gonorrhoeae requires enriched media like chocolate agar and increased CO₂ for optimal growth.",
+                tip: "Chocolate agar contains heated blood (turning it chocolate brown) which releases growth factors needed by fastidious organisms."
+            },
+            {
+                question: "What is the significance of finding intracellular bacteria in a Gram stain of pus?",
+                options: [
+                    "It indicates contamination",
+                    "It suggests the bacteria are dead",
+                    "It shows active infection with phagocytosis",
+                    "It means the bacteria are non-pathogenic"
+                ],
+                correct: 2,
+                explanation: "Finding bacteria inside white blood cells (intracellular) in pus indicates active infection with phagocytosis occurring.",
+                tip: "Intracellular location can protect bacteria from some antibiotics and host defenses, contributing to chronic infections."
+            },
+            {
+                question: "Which of the following is a common cause of nosocomial (hospital-acquired) infections?",
+                options: [
+                    "Streptococcus pyogenes",
+                    "Staphylococcus epidermidis",
+                    "Mycobacterium tuberculosis",
+                    "Treponema pallidum"
+                ],
+                correct: 1,
+                explanation: "Staphylococcus epidermidis is a common cause of nosocomial infections, particularly associated with indwelling medical devices.",
+                tip: "S. epidermidis forms biofilms on catheters, prosthetics, and shunts, making these infections difficult to treat."
+            },
+            {
+                question: "What is the term for bacteria that grow best at high salt concentrations?",
+                options: [
+                    "Halophiles",
+                    "Acidophiles",
+                    "Thermophiles",
+                    "Mesophiles"
+                ],
+                correct: 0,
+                explanation: "Halophiles are bacteria that grow best at high salt concentrations, like Staphylococcus which can tolerate 7.5-10% NaCl.",
+                tip: "Mannitol salt agar contains 7.5% NaCl, making it selective for Staphylococci which can tolerate high salt."
+            },
+            {
+                question: "Which bacterial structure is primarily responsible for antigenic variation?",
+                options: [
+                    "Ribosomes",
+                    "Flagella",
+                    "Capsule",
+                    "Cell membrane"
+                ],
+                correct: 2,
+                explanation: "Capsules are often responsible for antigenic variation in bacteria, allowing them to evade host immune responses.",
+                tip: "Some bacteria like Streptococcus pneumoniae have over 90 different capsular serotypes, complicating vaccine development."
+            },
+            {
+                question: "What is the function of bacterial spores?",
+                options: [
+                    "Reproduction",
+                    "Nutrient storage",
+                    "Survival in harsh conditions",
+                    "Genetic exchange"
+                ],
+                correct: 2,
+                explanation: "Bacterial spores (endospores) allow survival under harsh conditions like heat, drying, radiation, and chemicals.",
+                tip: "Spores are formed by some gram-positive bacteria like Bacillus and Clostridium when nutrients are limited."
+            },
+            {
+                question: "Which of the following is NOT a typical growth requirement for bacteria?",
+                options: [
+                    "Carbon source",
+                    "Nitrogen source",
+                    "Organic vitamins",
+                    "Sunlight"
+                ],
+                correct: 3,
+                explanation: "Most bacteria do not require sunlight for growth (except photosynthetic bacteria), but they need carbon, nitrogen, and often vitamins.",
+                tip: "Bacterial growth requirements include water, energy source, carbon, nitrogen, minerals, and appropriate environmental conditions."
+            },
+            {
+                question: "What is the term for bacteria that obtain energy from chemical compounds?",
+                options: [
+                    "Phototrophs",
+                    "Chemotrophs",
+                    "Autotrophs",
+                    "Heterotrophs"
+                ],
+                correct: 1,
+                explanation: "Chemotrophs obtain energy from chemical compounds, while phototrophs use light, autotrophs use CO₂, and heterotrophs use organic carbon.",
+                tip: "Most pathogenic bacteria are chemoorganoheterotrophs: they use organic compounds for both energy and carbon."
+            },
+            {
+                question: "Which component of gram-positive cell walls is associated with virulence?",
+                options: [
+                    "Lipopolysaccharide",
+                    "Teichoic acids",
+                    "Outer membrane",
+                    "Porin proteins"
+                ],
+                correct: 1,
+                explanation: "Teichoic acids in gram-positive cell walls are important virulence factors that mediate adherence to host tissues.",
+                tip: "Teichoic acids extend through the peptidoglycan layer and are unique to gram-positive bacteria."
+            },
+            {
+                question: "What is the term for the clear zone around colonies on blood agar indicating complete hemolysis?",
+                options: [
+                    "Alpha hemolysis",
+                    "Beta hemolysis",
+                    "Gamma hemolysis",
+                    "Delta hemolysis"
+                ],
+                correct: 1,
+                explanation: "Beta hemolysis shows complete lysis of red blood cells, creating a clear zone around colonies on blood agar.",
+                tip: "Beta-hemolytic streptococci include important pathogens like S. pyogenes (Group A) and S. agalactiae (Group B)."
+            },
+            {
+                question: "Which bacteria are typically associated with dental caries?",
+                options: [
+                    "Staphylococcus aureus",
+                    "Streptococcus mutans",
                     "Escherichia coli",
                     "Pseudomonas aeruginosa"
                 ],
                 correct: 1,
-                explanation: "Clostridium perfringens, an anaerobic bacterium, is the most common cause of gas gangrene.",
-                studyTip: "Gas gangrene produces gas bubbles in tissues due to bacterial fermentation"
+                explanation: "Streptococcus mutans, part of the viridans streptococci group, is primarily associated with dental caries (cavities).",
+                tip: "S. mutans produces acid from sucrose that demineralizes tooth enamel and forms sticky dextran for plaque formation."
             },
             {
-                question: "What is the primary function of autopsy?",
+                question: "What is the primary treatment for MRSA (Methicillin-resistant Staphylococcus aureus)?",
                 options: [
-                    "To diagnose diseases in living patients",
-                    "To determine cause of death",
-                    "To perform surgical procedures",
-                    "To analyze genetic disorders"
-                ],
-                correct: 1,
-                explanation: "The primary purpose of autopsy is to determine the cause of death and understand disease processes.",
-                studyTip: "Autopsy = 'seeing for oneself'; provides valuable information for medical education and quality assurance"
-            },
-            {
-                question: "Which of the following is a postmortem change?",
-                options: [
-                    "Rigor mortis",
-                    "Hypertrophy",
-                    "Hyperplasia",
-                    "Metaplasia"
-                ],
-                correct: 0,
-                explanation: "Rigor mortis, the stiffening of muscles after death, is a classic postmortem change.",
-                studyTip: "Postmortem changes: pallor mortis, algor mortis, rigor mortis, livor mortis, decomposition"
-            },
-            {
-                question: "What is algor mortis?",
-                options: [
-                    "Postmortem lividity",
-                    "Postmortem cooling",
-                    "Postmortem stiffening",
-                    "Postmortem digestion"
-                ],
-                correct: 1,
-                explanation: "Algor mortis is the gradual cooling of the body to ambient temperature after death.",
-                studyTip: "Algor mortis can help estimate time since death in forensic pathology"
-            },
-            {
-                question: "Which diagnostic technique is considered the gold standard in pathology?",
-                options: [
-                    "Radiology",
-                    "Histopathology",
-                    "Biochemical analysis",
-                    "Molecular testing"
-                ],
-                correct: 1,
-                explanation: "Histopathological examination of tissue remains the gold standard for definitive diagnosis of most diseases.",
-                studyTip: "Histopathology provides both architectural and cellular details not available through other methods"
-            },
-            {
-                question: "What is the purpose of gross examination in pathology?",
-                options: [
-                    "Molecular analysis of tissues",
-                    "Microscopic evaluation of cells",
-                    "Macroscopic inspection of specimens",
-                    "Chemical testing of fluids"
+                    "Penicillin",
+                    "Methicillin",
+                    "Vancomycin",
+                    "Tetracycline"
                 ],
                 correct: 2,
-                explanation: "Gross examination involves the macroscopic inspection of tissues and organs to identify abnormalities visible to the naked eye.",
-                studyTip: "Gross examination provides the first diagnostic impression and guides sampling for microscopy"
+                explanation: "Vancomycin is the treatment of choice for MRSA infections, though alternatives include linezolid, daptomycin, and newer agents.",
+                tip: "MRSA resistance is due to altered penicillin-binding protein (PBP2a) encoded by the mecA gene."
             },
             {
-                question: "Which of the following is an example of immunohistochemistry?",
+                question: "Which test is used to detect recent streptococcal infection?",
                 options: [
-                    "H&E staining",
-                    "Detection of specific antigens in tissues",
-                    "Chromosomal analysis",
-                    "DNA sequencing"
-                ],
-                correct: 1,
-                explanation: "Immunohistochemistry uses antibodies to detect specific antigens in tissue sections.",
-                studyTip: "IHC is invaluable for tumor classification and identifying infectious agents"
-            },
-            {
-                question: "What is the main application of molecular pathology?",
-                options: [
-                    "Tissue architecture analysis",
-                    "Detection of genetic alterations",
-                    "Chemical composition analysis",
-                    "Cell counting and differentiation"
-                ],
-                correct: 1,
-                explanation: "Molecular pathology focuses on detecting disease-related genetic and molecular alterations.",
-                studyTip: "Molecular techniques include PCR, FISH, and DNA sequencing for personalized medicine"
-            },
-            {
-                question: "Which term describes a disease of unknown cause?",
-                options: [
-                    "Iatrogenic",
-                    "Idiopathic",
-                    "Nosocomial",
-                    "Sporadic"
-                ],
-                correct: 1,
-                explanation: "Idiopathic refers to diseases with unknown causes.",
-                studyTip: "Idio- = one's own, -pathic = disease → disease of unknown origin"
-            },
-            {
-                question: "What does the term 'iatrogenic' mean?",
-                options: [
-                    "Disease caused by medical treatment",
-                    "Disease present at birth",
-                    "Disease of unknown cause",
-                    "Disease acquired in hospital"
-                ],
-                correct: 0,
-                explanation: "Iatrogenic conditions are those caused by medical examination or treatment.",
-                studyTip: "Iatro- = physician, -genic = produced by → physician-produced condition"
-            },
-            {
-                question: "Which of the following is a characteristic of benign tumors?",
-                options: [
-                    "Invasion of surrounding tissues",
-                    "Metastasis to distant sites",
-                    "Slow growth with encapsulation",
-                    "Poorly differentiated cells"
+                    "Catalase test",
+                    "Coagulase test",
+                    "ASO titer (Anti-streptolysin O)",
+                    "C-reactive protein"
                 ],
                 correct: 2,
-                explanation: "Benign tumors typically grow slowly, remain localized, and are often encapsulated.",
-                studyTip: "Benign = well-differentiated, slow growth, no invasion/metastasis"
-            },
-            {
-                question: "What is carcinoma?",
-                options: [
-                    "Malignant tumor of mesenchymal tissue",
-                    "Malignant tumor of epithelial tissue",
-                    "Benign tumor of glandular tissue",
-                    "Tumor of blood-forming cells"
-                ],
-                correct: 1,
-                explanation: "Carcinoma is a malignant tumor arising from epithelial tissues.",
-                studyTip: "Carcinoma = epithelial cancer; Sarcoma = mesenchymal cancer"
-            },
-            {
-                question: "Which grading system is used for cancer?",
-                options: [
-                    "ABCDE rule",
-                    "Gleason score",
-                    "Apgar score",
-                    "Child-Pugh classification"
-                ],
-                correct: 1,
-                explanation: "The Gleason score is used specifically for grading prostate adenocarcinoma.",
-                studyTip: "Cancer grading evaluates differentiation; staging evaluates extent of spread"
-            },
-            {
-                question: "What is the most common cause of inflammation?",
-                options: [
-                    "Physical injury",
-                    "Chemical irritation",
-                    "Microbial infection",
-                    "Immunological reactions"
-                ],
-                correct: 2,
-                explanation: "Microbial infections are the most common cause of inflammation.",
-                studyTip: "Inflammation can be triggered by infections, trauma, chemicals, physical agents, or immune reactions"
-            },
-            {
-                question: "Which cells are the first responders in acute inflammation?",
-                options: [
-                    "Lymphocytes",
-                    "Neutrophils",
-                    "Macrophages",
-                    "Eosinophils"
-                ],
-                correct: 1,
-                explanation: "Neutrophils are the first leukocytes to arrive at sites of acute inflammation.",
-                studyTip: "Acute inflammation: neutrophils predominate; Chronic inflammation: lymphocytes/macrophages predominate"
-            },
-            {
-                question: "What is the main function of neutrophils in inflammation?",
-                options: [
-                    "Antibody production",
-                    "Phagocytosis of microbes",
-                    "Antigen presentation",
-                    "Tissue repair"
-                ],
-                correct: 1,
-                explanation: "Neutrophils are professional phagocytes that engulf and destroy microorganisms.",
-                studyTip: "Neutrophils have a short lifespan and form pus when they die at inflammatory sites"
-            },
-            {
-                question: "Which of the following is a cardinal sign of inflammation?",
-                options: [
-                    "Pallor",
-                    "Numbness",
-                    "Rubor",
-                    "Bruising"
-                ],
-                correct: 2,
-                explanation: "Rubor (redness) is one of the five cardinal signs of inflammation, along with calor, dolor, tumor, and functio laesa.",
-                studyTip: "Cardinal signs: Redness (rubor), Heat (calor), Swelling (tumor), Pain (dolor), Loss of function (functio laesa)"
-            },
-            {
-                question: "What is the primary role of macrophages in inflammation?",
-                options: [
-                    "Rapid phagocytosis of bacteria",
-                    "Antibody-mediated immunity",
-                    "Phagocytosis of debris and antigen presentation",
-                    "Immediate vasoconstriction"
-                ],
-                correct: 2,
-                explanation: "Macrophages phagocytose debris, dead cells, and microbes, and present antigens to lymphocytes.",
-                studyTip: "Macrophages are derived from blood monocytes and are key players in both inflammation and immunity"
-            },
-            {
-                question: "Which type of immunity involves antibody production?",
-                options: [
-                    "Cell-mediated immunity",
-                    "Humoral immunity",
-                    "Innate immunity",
-                    "Complement immunity"
-                ],
-                correct: 1,
-                explanation: "Humoral immunity involves the production of antibodies by B lymphocytes.",
-                studyTip: "Humoral immunity = antibody-mediated; Cell-mediated immunity = T lymphocyte-mediated"
-            },
-            {
-                question: "What is the function of cytotoxic T cells?",
-                options: [
-                    "Antibody production",
-                    "Killing of infected cells",
-                    "Antigen presentation",
-                    "Histamine release"
-                ],
-                correct: 1,
-                explanation: "Cytotoxic T cells directly kill virus-infected cells, tumor cells, and transplanted cells.",
-                studyTip: "CD8+ T cells are cytotoxic T cells that recognize antigens presented by MHC class I molecules"
-            },
-            {
-                question: "Which antibody class is most abundant in serum?",
-                options: [
-                    "IgA",
-                    "IgD",
-                    "IgE",
-                    "IgG"
-                ],
-                correct: 3,
-                explanation: "IgG is the most abundant antibody in blood and extracellular fluid.",
-                studyTip: "IgG: most abundant, crosses placenta; IgA: mucosal immunity; IgM: first responder; IgE: allergies; IgD: B cell receptor"
-            },
-            {
-                question: "What is hypersensitivity?",
-                options: [
-                    "Reduced immune response",
-                    "Exaggerated immune response",
-                    "Absent immune response",
-                    "Selective immune response"
-                ],
-                correct: 1,
-                explanation: "Hypersensitivity refers to excessive, inappropriate immune responses that cause tissue damage.",
-                studyTip: "Four types of hypersensitivity: I (immediate), II (antibody-mediated), III (immune complex), IV (delayed)"
-            },
-            {
-                question: "Which type of hypersensitivity is involved in anaphylaxis?",
-                options: [
-                    "Type I",
-                    "Type II",
-                    "Type III",
-                    "Type IV"
-                ],
-                correct: 0,
-                explanation: "Type I (immediate) hypersensitivity, mediated by IgE, is responsible for anaphylactic reactions.",
-                studyTip: "Type I = allergies/anaphylaxis; Type II = antibody-mediated cytotoxicity; Type III = immune complex; Type IV = delayed/cell-mediated"
+                explanation: "ASO titer detects antibodies against streptolysin O, indicating recent streptococcal infection, useful for diagnosing post-streptococcal sequelae.",
+                tip: "Rising ASO titers over several weeks support diagnosis of rheumatic fever or glomerulonephritis following streptococcal infection."
             }
         ];
 
         // Quiz state variables
         let currentQuestion = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
         let score = 0;
-        let userAnswers = new Array(questions.length).fill(null);
-        let timer;
-        let timeLeft = 30 * 60; // 30 minutes in seconds
         let quizCompleted = false;
-        let startTime;
-        let correctAnswers = 0;
-        let incorrectAnswers = 0;
 
         // DOM elements
-        const questionNumberEl = document.getElementById('question-number');
-        const questionTextEl = document.getElementById('question-text');
-        const optionsContainer = document.getElementById('options-container');
-        const feedbackArea = document.getElementById('feedback-area');
+        const questionContainer = document.getElementById('question-container');
+        const feedbackContainer = document.getElementById('feedback-container');
         const feedbackTitle = document.getElementById('feedback-title');
-        const explanationEl = document.getElementById('explanation');
-        const studyTipEl = document.getElementById('study-tip');
-        const nextBtn = document.getElementById('next-btn');
+        const feedbackText = document.getElementById('feedback-text');
+        const explanationText = document.getElementById('explanation-text');
+        const tipsText = document.getElementById('tips-text');
         const prevBtn = document.getElementById('prev-btn');
-        const submitBtn = document.getElementById('submit-btn');
-        const scoreValue = document.getElementById('score-value');
-        const progressValue = document.getElementById('progress-value');
-        const correctValue = document.getElementById('correct-value');
-        const incorrectValue = document.getElementById('incorrect-value');
-        const progressBar = document.getElementById('progress-bar');
-        const progressPercent = document.getElementById('progress-percent');
-        const answeredValue = document.getElementById('answered-value');
-        const remainingValue = document.getElementById('remaining-value');
-        const timerEl = document.getElementById('timer');
-        const questionPalette = document.getElementById('question-palette');
-        const resultsContainer = document.getElementById('results-container');
-        const finalScore = document.getElementById('final-score');
-        const performanceMessage = document.getElementById('performance-message');
-        const finalCorrect = document.getElementById('final-correct');
-        const finalIncorrect = document.getElementById('final-incorrect');
-        const finalSkipped = document.getElementById('final-skipped');
-        const finalTime = document.getElementById('final-time');
-        const questionReview = document.getElementById('question-review');
-        const retakeBtn = document.getElementById('retake-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const reviewBtn = document.getElementById('review-btn');
+        const progressFill = document.getElementById('progress-fill');
+        const currentQuestionSpan = document.getElementById('current-question');
+        const totalQuestionsDisplay = document.getElementById('total-questions-display');
+        const totalQuestionsSpan = document.getElementById('total-questions');
+        const answeredCountSpan = document.getElementById('answered-count');
+        const correctCountSpan = document.getElementById('correct-count');
+        const totalAnsweredSpan = document.getElementById('total-answered');
+        const accuracySpan = document.getElementById('accuracy');
+        const resultsSection = document.getElementById('results-section');
+        const finalScoreSpan = document.getElementById('final-score');
+        const finalMessageSpan = document.getElementById('final-message');
 
         // Initialize quiz
         function initQuiz() {
-            scoreValue.textContent = score;
-            correctValue.textContent = correctAnswers;
-            incorrectValue.textContent = incorrectAnswers;
-            startTime = new Date();
-            createQuestionPalette();
-            loadQuestion(currentQuestion);
-            startTimer();
+            totalQuestionsDisplay.textContent = quizData.length;
+            totalQuestionsSpan.textContent = quizData.length;
+            displayQuestion();
             updateProgress();
         }
 
-        // Create question palette
-        function createQuestionPalette() {
-            questionPalette.innerHTML = '';
-            for (let i = 0; i < questions.length; i++) {
-                const paletteItem = document.createElement('div');
-                paletteItem.className = 'palette-item';
-                if (i === currentQuestion) {
-                    paletteItem.classList.add('current');
-                }
-                if (userAnswers[i] !== null) {
-                    paletteItem.classList.add('answered');
-                }
-                paletteItem.textContent = i + 1;
-                paletteItem.addEventListener('click', () => navigateToQuestion(i));
-                questionPalette.appendChild(paletteItem);
-            }
-        }
-
-        // Navigate to specific question
-        function navigateToQuestion(index) {
-            currentQuestion = index;
-            loadQuestion(currentQuestion);
-            createQuestionPalette();
-        }
-
-        // Load question
-        function loadQuestion(index) {
-            const question = questions[index];
-            questionNumberEl.textContent = `Question ${index + 1} of ${questions.length}`;
-            questionTextEl.textContent = question.question;
+        // Display current question
+        function displayQuestion() {
+            const question = quizData[currentQuestion];
+            currentQuestionSpan.textContent = currentQuestion + 1;
             
-            optionsContainer.innerHTML = '';
-            question.options.forEach((option, i) => {
-                const optionElement = document.createElement('div');
-                optionElement.className = 'option';
-                if (userAnswers[index] === i) {
-                    optionElement.classList.add('selected');
-                }
+            let optionsHtml = '';
+            const options = ['A', 'B', 'C', 'D'];
+            
+            question.options.forEach((option, index) => {
+                const isSelected = userAnswers[currentQuestion] === index;
+                const optionClass = isSelected ? 'option selected' : 'option';
                 
-                const optionLetter = document.createElement('div');
-                optionLetter.className = 'option-letter';
-                optionLetter.textContent = String.fromCharCode(65 + i);
-                
-                const optionText = document.createElement('div');
-                optionText.className = 'option-text';
-                optionText.textContent = option;
-                
-                optionElement.appendChild(optionLetter);
-                optionElement.appendChild(optionText);
-                optionElement.dataset.index = i;
-                optionElement.addEventListener('click', () => selectOption(i));
-                optionsContainer.appendChild(optionElement);
-            });
-            
-            feedbackArea.classList.remove('show');
-            updateProgress();
-            updatePalette();
-            
-            // Update button states
-            prevBtn.disabled = index === 0;
-            nextBtn.style.display = index === questions.length - 1 ? 'none' : 'block';
-            submitBtn.style.display = index === questions.length - 1 ? 'block' : 'none';
-        }
-
-        // Select option
-        function selectOption(optionIndex) {
-            if (quizCompleted) return;
-            
-            const options = document.querySelectorAll('.option');
-            options.forEach(opt => opt.classList.remove('selected', 'correct', 'incorrect'));
-            
-            options[optionIndex].classList.add('selected');
-            userAnswers[currentQuestion] = optionIndex;
-            
-            const isCorrect = optionIndex === questions[currentQuestion].correct;
-            
-            if (isCorrect) {
-                options[optionIndex].classList.add('correct');
-                if (userAnswers[currentQuestion] === null) {
-                    score++;
-                    correctAnswers++;
-                    scoreValue.textContent = score;
-                    correctValue.textContent = correctAnswers;
-                }
-            } else {
-                options[optionIndex].classList.add('incorrect');
-                options[questions[currentQuestion].correct].classList.add('correct');
-                if (userAnswers[currentQuestion] === null) {
-                    incorrectAnswers++;
-                    incorrectValue.textContent = incorrectAnswers;
-                }
-            }
-            
-            // Show feedback
-            feedbackTitle.textContent = isCorrect ? 'Correct!' : 'Incorrect!';
-            feedbackTitle.className = `feedback-title ${isCorrect ? 'correct' : 'incorrect'}`;
-            explanationEl.textContent = questions[currentQuestion].explanation;
-            studyTipEl.textContent = questions[currentQuestion].studyTip;
-            feedbackArea.classList.add('show');
-            
-            updatePalette();
-            updateProgress();
-        }
-
-        // Update question palette
-        function updatePalette() {
-            const paletteItems = document.querySelectorAll('.palette-item');
-            paletteItems.forEach((item, i) => {
-                item.classList.remove('current', 'answered', 'correct', 'incorrect');
-                
-                if (i === currentQuestion) {
-                    item.classList.add('current');
-                }
-                
-                if (userAnswers[i] !== null) {
-                    item.classList.add('answered');
-                    if (userAnswers[i] === questions[i].correct) {
-                        item.classList.add('correct');
-                    } else {
-                        item.classList.add('incorrect');
-                    }
-                }
-            });
-        }
-
-        // Update progress
-        function updateProgress() {
-            const answered = userAnswers.filter(answer => answer !== null).length;
-            const progress = (answered / questions.length) * 100;
-            
-            progressBar.style.width = `${progress}%`;
-            progressPercent.textContent = `${Math.round(progress)}%`;
-            progressValue.textContent = `${Math.round(progress)}%`;
-            answeredValue.textContent = answered;
-            remainingValue.textContent = questions.length - answered;
-        }
-
-        // Next question
-        nextBtn.addEventListener('click', () => {
-            if (currentQuestion < questions.length - 1) {
-                currentQuestion++;
-                loadQuestion(currentQuestion);
-            }
-        });
-
-        // Previous question
-        prevBtn.addEventListener('click', () => {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                loadQuestion(currentQuestion);
-            }
-        });
-
-        // Submit quiz
-        submitBtn.addEventListener('click', showResults);
-
-        // Timer function
-        function startTimer() {
-            updateTimerDisplay();
-            timer = setInterval(() => {
-                timeLeft--;
-                updateTimerDisplay();
-                
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    if (!quizCompleted) {
-                        showResults();
-                    }
-                }
-            }, 1000);
-        }
-
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            timerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            // Change color when time is running low
-            if (timeLeft < 300) { // 5 minutes
-                timerEl.classList.add('timer-warning');
-            }
-        }
-
-        // Show results
-        function showResults() {
-            quizCompleted = true;
-            clearInterval(timer);
-            
-            // Calculate final score
-            score = 0;
-            correctAnswers = 0;
-            incorrectAnswers = 0;
-            
-            for (let i = 0; i < questions.length; i++) {
-                if (userAnswers[i] === questions[i].correct) {
-                    score++;
-                    correctAnswers++;
-                } else if (userAnswers[i] !== null) {
-                    incorrectAnswers++;
-                }
-            }
-            
-            // Calculate time taken
-            const endTime = new Date();
-            const timeTaken = Math.floor((endTime - startTime) / 1000);
-            const minutesTaken = Math.floor(timeTaken / 60);
-            const secondsTaken = timeTaken % 60;
-            
-            // Update results display
-            finalScore.textContent = `${score}/${questions.length}`;
-            finalCorrect.textContent = correctAnswers;
-            finalIncorrect.textContent = incorrectAnswers;
-            finalSkipped.textContent = questions.length - (correctAnswers + incorrectAnswers);
-            finalTime.textContent = `${minutesTaken}:${secondsTaken.toString().padStart(2, '0')}`;
-            
-            // Performance feedback
-            const percentage = (score / questions.length) * 100;
-            if (percentage >= 90) {
-                performanceMessage.textContent = "Outstanding! You have mastered the fundamentals of pathology.";
-            } else if (percentage >= 80) {
-                performanceMessage.textContent = "Excellent work! You have a strong understanding of pathology concepts.";
-            } else if (percentage >= 70) {
-                performanceMessage.textContent = "Good job! You have a solid foundation in pathology.";
-            } else if (percentage >= 60) {
-                performanceMessage.textContent = "Not bad! Review the concepts you missed to strengthen your knowledge.";
-            } else {
-                performanceMessage.textContent = "Keep studying! Focus on the core concepts of pathology to improve.";
-            }
-            
-            // Generate question review
-            questionReview.innerHTML = '';
-            questions.forEach((question, index) => {
-                const reviewItem = document.createElement('div');
-                reviewItem.className = 'review-item';
-                
-                const isCorrect = userAnswers[index] === question.correct;
-                const userAnswerText = userAnswers[index] !== null ? 
-                    `${String.fromCharCode(65 + userAnswers[index])}. ${question.options[userAnswers[index]]}` : 
-                    'Not answered';
-                
-                const correctAnswerText = `${String.fromCharCode(65 + question.correct)}. ${question.options[question.correct]}`;
-                
-                let reviewHTML = `
-                    <div class="review-question">${index + 1}. ${question.question}</div>
-                    <div class="review-answer ${isCorrect ? 'review-correct' : 'review-incorrect'}">
-                        <strong>Your answer:</strong> ${userAnswerText}
-                    </div>
-                    <div class="review-answer review-correct">
-                        <strong>Correct answer:</strong> ${correctAnswerText}
-                    </div>
-                    <div class="review-explanation">
-                        <strong>Explanation:</strong> ${question.explanation}
+                optionsHtml += `
+                    <div class="${optionClass}" data-index="${index}">
+                        <div class="option-letter">${options[index]}</div>
+                        <div class="option-text">${option}</div>
                     </div>
                 `;
-                
-                reviewItem.innerHTML = reviewHTML;
-                questionReview.appendChild(reviewItem);
             });
             
-            // Show results, hide quiz
-            document.querySelector('.main-content').style.display = 'none';
-            resultsContainer.classList.add('show');
+            questionContainer.innerHTML = `
+                <div class="question-card">
+                    <div class="question-number">${currentQuestion + 1}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options-container">
+                        ${optionsHtml}
+                    </div>
+                </div>
+            `;
+            
+            // Add event listeners to options
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', () => {
+                    if (quizCompleted) return;
+                    
+                    const selectedIndex = parseInt(option.getAttribute('data-index'));
+                    selectOption(selectedIndex);
+                });
+            });
+            
+            // Update button states
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.textContent = currentQuestion === quizData.length - 1 ? 'Finish Quiz' : 'Next';
+            
+            // Hide feedback initially
+            feedbackContainer.style.display = 'none';
         }
 
-        // Retake quiz
-        retakeBtn.addEventListener('click', () => {
-            // Reset quiz state
+        // Select an option
+        function selectOption(selectedIndex) {
+            // Remove selection from all options
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Mark selected option
+            const selectedOption = document.querySelector(`.option[data-index="${selectedIndex}"]`);
+            selectedOption.classList.add('selected');
+            
+            // Save answer
+            userAnswers[currentQuestion] = selectedIndex;
+            
+            // Check if answer is correct
+            const isCorrect = selectedIndex === quizData[currentQuestion].correct;
+            
+            // Show feedback
+            showFeedback(isCorrect);
+            
+            // Update progress
+            updateProgress();
+        }
+
+        // Show feedback for selected answer
+        function showFeedback(isCorrect) {
+            const question = quizData[currentQuestion];
+            
+            // Update feedback content
+            if (isCorrect) {
+                feedbackTitle.innerHTML = '<i class="fas fa-check-circle feedback-correct"></i> Correct Answer!';
+                feedbackText.textContent = 'Your answer is correct!';
+                feedbackTitle.className = 'feedback-title feedback-correct';
+            } else {
+                feedbackTitle.innerHTML = '<i class="fas fa-times-circle feedback-incorrect"></i> Incorrect Answer';
+                feedbackText.textContent = 'Your answer is incorrect.';
+                feedbackTitle.className = 'feedback-title feedback-incorrect';
+                
+                // Highlight correct answer
+                const correctOption = document.querySelector(`.option[data-index="${question.correct}"]`);
+                correctOption.classList.add('correct');
+                
+                // Highlight incorrect answer if selected
+                if (userAnswers[currentQuestion] !== null && userAnswers[currentQuestion] !== question.correct) {
+                    const selectedOption = document.querySelector(`.option[data-index="${userAnswers[currentQuestion]}"]`);
+                    selectedOption.classList.add('incorrect');
+                }
+            }
+            
+            explanationText.textContent = question.explanation;
+            tipsText.textContent = question.tip;
+            
+            // Show feedback container
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Update progress bar and counters
+        function updateProgress() {
+            // Update progress bar
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            progressFill.style.width = `${progress}%`;
+            
+            // Count answered questions
+            const answeredCount = userAnswers.filter(answer => answer !== null).length;
+            answeredCountSpan.textContent = answeredCount;
+            
+            // Count correct answers
+            let correctCount = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer !== null && answer === quizData[index].correct) {
+                    correctCount++;
+                }
+            });
+            
+            // Update score display
+            correctCountSpan.textContent = correctCount;
+            totalAnsweredSpan.textContent = answeredCount;
+            
+            // Calculate accuracy
+            const accuracy = answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) : 0;
+            accuracySpan.textContent = accuracy;
+            
+            // Update score
+            score = correctCount;
+        }
+
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        // Navigate to previous question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+                
+                // Show feedback if question was answered
+                if (userAnswers[currentQuestion] !== null) {
+                    const isCorrect = userAnswers[currentQuestion] === quizData[currentQuestion].correct;
+                    showFeedback(isCorrect);
+                }
+            }
+        }
+
+        // Finish quiz and show results
+        function finishQuiz() {
+            quizCompleted = true;
+            
+            // Calculate final score
+            const percentage = Math.round((score / quizData.length) * 100);
+            finalScoreSpan.textContent = `${percentage}%`;
+            
+            // Set message based on score
+            let message = '';
+            if (percentage >= 90) {
+                message = 'Excellent! You have mastered Medical Microbiology concepts.';
+            } else if (percentage >= 75) {
+                message = 'Great job! You have a strong understanding of Medical Microbiology.';
+            } else if (percentage >= 60) {
+                message = 'Good work! You have a solid foundation in Medical Microbiology.';
+            } else {
+                message = 'Keep studying! Review the concepts to improve your understanding.';
+            }
+            
+            finalMessageSpan.textContent = message;
+            
+            // Hide quiz and show results
+            document.querySelector('.questions-section').style.display = 'none';
+            document.querySelector('.progress-container').style.display = 'none';
+            document.querySelector('.quiz-info').style.display = 'none';
+            resultsSection.style.display = 'block';
+        }
+
+        // Reset quiz
+        function resetQuiz() {
             currentQuestion = 0;
+            userAnswers = new Array(quizData.length).fill(null);
             score = 0;
-            userAnswers = new Array(questions.length).fill(null);
-            timeLeft = 30 * 60;
             quizCompleted = false;
-            correctAnswers = 0;
-            incorrectAnswers = 0;
             
             // Reset UI
-            scoreValue.textContent = score;
-            correctValue.textContent = correctAnswers;
-            incorrectValue.textContent = incorrectAnswers;
-            timerEl.textContent = '30:00';
-            timerEl.classList.remove('timer-warning');
-            document.querySelector('.main-content').style.display = 'grid';
-            resultsContainer.classList.remove('show');
+            document.querySelector('.questions-section').style.display = 'block';
+            document.querySelector('.progress-container').style.display = 'block';
+            document.querySelector('.quiz-info').style.display = 'flex';
+            resultsSection.style.display = 'none';
             
-            // Restart quiz
-            initQuiz();
-        });
+            displayQuestion();
+            updateProgress();
+        }
 
-        // Initialize the quiz when page loads
+        // Review questions after quiz completion
+        function reviewQuestions() {
+            quizCompleted = false;
+            
+            // Reset UI
+            document.querySelector('.questions-section').style.display = 'block';
+            document.querySelector('.progress-container').style.display = 'block';
+            document.querySelector('.quiz-info').style.display = 'flex';
+            resultsSection.style.display = 'none';
+            
+            displayQuestion();
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        resetBtn.addEventListener('click', resetQuiz);
+        reviewBtn.addEventListener('click', reviewQuestions);
+
+        // Initialize the quiz
         document.addEventListener('DOMContentLoaded', initQuiz);
     </script>
 </body>
-    </html>
+</html>
