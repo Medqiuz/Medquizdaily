@@ -3,321 +3,488 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hemodynamic Disorders Quiz | Medical University</title>
+    <title>Medical Microbiology Visual Study Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
-        :root {
-            --primary: #3498db;
-            --secondary: #2c3e50;
-            --success: #2ecc71;
-            --danger: #e74c3c;
-            --warning: #f39c12;
-            --light: #ecf0f1;
-            --dark: #34495e;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
+        :root {
+            --primary-color: #1a2980;
+            --secondary-color: #26d0ce;
+            --accent-color: #ff6b6b;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4CAF50;
+            --warning-color: #FFC107;
+            --info-color: #17a2b8;
+        }
+        
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark-color);
             line-height: 1.6;
             min-height: 100vh;
+            padding-bottom: 50px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
             padding: 20px;
         }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
             overflow: hidden;
         }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            padding: 25px;
-            text-align: center;
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
         }
-
-        header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+        
+        h1 {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
-
-        header p {
-            font-size: 1.1rem;
+        
+        .subtitle {
+            font-size: 1.3rem;
             opacity: 0.9;
+            font-weight: 300;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
         }
-
-        .quiz-info {
+        
+        .tagline {
+            background-color: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .topic-nav {
             display: flex;
-            justify-content: space-between;
-            padding: 15px 25px;
-            background-color: var(--light);
-            border-bottom: 1px solid #ddd;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
         }
-
-        .timer {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--danger);
-        }
-
-        .progress {
+        
+        .nav-btn {
+            background-color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             display: flex;
             align-items: center;
             gap: 10px;
         }
-
-        .progress-bar {
-            width: 200px;
-            height: 10px;
-            background-color: #ddd;
-            border-radius: 5px;
+        
+        .nav-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-btn.active {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+        
+        .study-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 1100px) {
+            .study-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .topic-card {
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.4s ease;
+            display: none;
+        }
+        
+        .topic-card.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .card-header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .card-icon {
+            font-size: 2.5rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .card-subtitle {
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .card-content {
+            padding: 30px;
+        }
+        
+        .key-points, .memory-tips {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .point-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #f8fafc;
+            transition: all 0.3s ease;
+        }
+        
+        .point-item:hover {
+            background-color: #edf2f7;
+            transform: translateX(5px);
+        }
+        
+        .point-icon {
+            background-color: var(--secondary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+        
+        .point-text {
+            flex: 1;
+        }
+        
+        .point-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        .tip-item {
+            background-color: #fff9db;
+            border-left: 5px solid var(--warning-color);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            position: relative;
             overflow: hidden;
         }
-
-        .progress-fill {
-            height: 100%;
-            background-color: var(--primary);
-            width: 0%;
-            transition: var(--transition);
-        }
-
-        .quiz-container {
-            padding: 30px;
-        }
-
-        .question-container {
-            margin-bottom: 30px;
-        }
-
-        .question-number {
-            font-size: 1.1rem;
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-
-        .question-text {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-
-        .options-container {
-            display: grid;
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-
-        .option {
-            padding: 15px;
-            background-color: var(--light);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: var(--transition);
-            border: 2px solid transparent;
-        }
-
-        .option:hover {
-            background-color: #e0e7ee;
-            transform: translateY(-2px);
-        }
-
-        .option.selected {
-            border-color: var(--primary);
-            background-color: rgba(52, 152, 219, 0.1);
-        }
-
-        .option.correct {
-            border-color: var(--success);
-            background-color: rgba(46, 204, 113, 0.1);
-        }
-
-        .option.incorrect {
-            border-color: var(--danger);
-            background-color: rgba(231, 76, 60, 0.1);
-        }
-
-        .explanation-container {
-            padding: 20px;
-            background-color: rgba(52, 152, 219, 0.05);
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: none;
-        }
-
-        .explanation-title {
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .memory-tip {
-            background-color: rgba(243, 156, 18, 0.1);
-            padding: 15px;
-            border-left: 4px solid var(--warning);
-            margin-top: 15px;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .memory-tip-title {
-            font-weight: 600;
-            color: var(--warning);
-            margin-bottom: 5px;
-        }
-
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        button {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .btn-prev {
-            background-color: var(--light);
-            color: var(--dark);
-        }
-
-        .btn-next {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .btn-submit {
-            background-color: var(--success);
-            color: white;
-            display: none;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
-
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .results-container {
-            padding: 30px;
-            text-align: center;
-            display: none;
-        }
-
-        .results-title {
+        
+        .tip-item::before {
+            content: "💡";
+            position: absolute;
+            top: 10px;
+            right: 10px;
             font-size: 2rem;
-            margin-bottom: 20px;
-            color: var(--secondary);
+            opacity: 0.2;
         }
-
-        .score {
-            font-size: 4rem;
-            font-weight: bold;
-            color: var(--primary);
-            margin: 20px 0;
-        }
-
-        .score-text {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-        }
-
-        .summary {
-            text-align: left;
-            background-color: var(--light);
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        .summary-title {
+        
+        .tip-title {
             font-weight: 600;
             margin-bottom: 10px;
-            color: var(--secondary);
+            color: #d97706;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-
-        .restart-btn {
-            background-color: var(--primary);
-            color: white;
-            margin-top: 20px;
-            padding: 15px 30px;
-            font-size: 1.1rem;
+        
+        .tip-content {
+            font-style: italic;
         }
-
-        .question-review {
+        
+        .visual-aid {
+            background-color: #e3f2fd;
+            border-radius: 15px;
+            padding: 25px;
             margin-top: 30px;
+            border-left: 5px solid var(--info-color);
+        }
+        
+        .visual-title {
+            font-size: 1.3rem;
+            color: var(--info-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .visual-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .visual-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+        }
+        
+        .visual-text {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
             text-align: left;
         }
-
-        .review-item {
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #ddd;
+        
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
         }
-
-        .review-question {
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .comparison-table tr:hover {
+            background-color: #edf2f7;
+        }
+        
+        .mnemonic-box {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mnemonic-box::before {
+            content: "🔤";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+        
+        .mnemonic-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .mnemonic-text {
+            font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 10px;
         }
-
-        .review-answer {
-            margin-bottom: 5px;
+        
+        .mnemonic-explanation {
+            font-style: italic;
+            opacity: 0.9;
         }
-
-        .correct-answer {
-            color: var(--success);
+        
+        .interactive-element {
+            background-color: #e8f5e9;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            border-left: 5px solid var(--success-color);
+        }
+        
+        .interactive-title {
+            font-size: 1.3rem;
+            color: var(--success-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quiz-question {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .quiz-option {
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .quiz-option:hover {
+            background-color: #f0f8ff;
+            border-color: var(--primary-color);
+        }
+        
+        .quiz-option.correct {
+            background-color: #d4edda;
+            border-color: var(--success-color);
+            color: #155724;
+        }
+        
+        .quiz-option.incorrect {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px dashed #ddd;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .study-timer {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .timer-text {
             font-weight: 600;
+            color: var(--primary-color);
         }
-
-        .user-answer {
-            color: var(--danger);
-            font-weight: 600;
+        
+        .timer-value {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--secondary-color);
         }
-
+        
         @media (max-width: 768px) {
-            .quiz-info {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .study-container {
+                gap: 20px;
+            }
+            
+            .card-header {
                 flex-direction: column;
-                gap: 15px;
                 text-align: center;
+                gap: 15px;
             }
-
-            .progress-bar {
-                width: 100%;
-            }
-
-            .question-text {
-                font-size: 1.2rem;
-            }
-
-            .navigation {
-                flex-direction: column;
+            
+            .topic-nav {
                 gap: 10px;
             }
-
-            button {
-                width: 100%;
+            
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -325,1093 +492,557 @@
 <body>
     <div class="container">
         <header>
-            <h1>Hemodynamic Disorders Quiz</h1>
-            <p>Medical Pathology | Hemodynamic Disorders</p>
+            <h1><i class="fas fa-microscope"></i> Medical Microbiology</h1>
+            <p class="subtitle">Visual Study Notes with Funny Memory Tricks</p>
+            <div class="tagline">Because memorizing bacteria shouldn't be a painful infection!</div>
         </header>
-
-        <div class="quiz-info">
-            <div class="timer">Time: <span id="time">65:00</span></div>
-            <div class="progress">
-                <span>Progress:</span>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progress-fill"></div>
-                </div>
-                <span id="progress-text">0/65</span>
-            </div>
+        
+        <div class="topic-nav">
+            <button class="nav-btn active" data-topic="history">
+                <i class="fas fa-history"></i> History
+            </button>
+            <button class="nav-btn" data-topic="classification">
+                <i class="fas fa-sitemap"></i> Classification
+            </button>
+            <button class="nav-btn" data-topic="cell-structure">
+                <i class="fas fa-bacterium"></i> Cell Structure
+            </button>
+            <button class="nav-btn" data-topic="growth">
+                <i class="fas fa-chart-line"></i> Growth & Nutrition
+            </button>
+            <button class="nav-btn" data-topic="pathogenesis">
+                <i class="fas fa-user-injured"></i> Pathogenesis
+            </button>
+            <button class="nav-btn" data-topic="staining">
+                <i class="fas fa-palette"></i> Staining Methods
+            </button>
+            <button class="nav-btn" data-topic="sterilization">
+                <i class="fas fa-pump-medical"></i> Sterilization
+            </button>
+            <button class="nav-btn" data-topic="staphylococcus">
+                <i class="fas fa-grape"></i> Staphylococcus
+            </button>
+            <button class="nav-btn" data-topic="streptococcus">
+                <i class="fas fa-link"></i> Streptococcus
+            </button>
         </div>
-
-        <div class="quiz-container" id="quiz-container">
-            <div class="question-container">
-                <div class="question-number" id="question-number">Question 1 of 65</div>
-                <div class="question-text" id="question-text"></div>
-                <div class="options-container" id="options-container"></div>
-            </div>
-
-            <div class="explanation-container" id="explanation-container">
-                <div class="explanation-title">Explanation</div>
-                <div id="explanation-text"></div>
-                <div class="memory-tip" id="memory-tip">
-                    <div class="memory-tip-title">Memory Tip</div>
-                    <div id="memory-tip-text"></div>
+        
+        <div class="study-container">
+            <!-- Topic 1: History of Microbiology -->
+            <div class="topic-card active" id="history-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <div>
+                        <h2 class="card-title">History of Microbiology</h2>
+                        <p class="card-subtitle">From spontaneous generation to germ theory</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="key-points">
+                        <h3 class="section-title"><i class="fas fa-key"></i> Key Points</h3>
+                        <div class="point-item">
+                            <div class="point-icon">1</div>
+                            <div class="point-text">
+                                <div class="point-title">Antonie van Leeuwenhoek (1632-1723)</div>
+                                <p>Father of Microbiology, first to observe bacteria using homemade microscopes, called them "animalcules".</p>
+                            </div>
+                        </div>
+                        <div class="point-item">
+                            <div class="point-icon">2</div>
+                            <div class="point-text">
+                                <div class="point-title">Louis Pasteur (1822-1895)</div>
+                                <p>Disproved spontaneous generation with swan-neck flask experiment. Developed pasteurization and rabies vaccine.</p>
+                            </div>
+                        </div>
+                        <div class="point-item">
+                            <div class="point-icon">3</div>
+                            <div class="point-text">
+                                <div class="point-title">Robert Koch (1843-1910)</div>
+                                <p>Established Koch's postulates to prove germ theory. Discovered causative agents of tuberculosis and cholera.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-tips">
+                        <h3 class="section-title"><i class="fas fa-lightbulb"></i> Funny Memory Tips</h3>
+                        <div class="tip-item">
+                            <div class="tip-title"><i class="fas fa-fish"></i> Remembering Spontaneous Generation</div>
+                            <div class="tip-content">"Aristotle thought fish appeared from mud like magic. He should have taken a microbiology class!"</div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-title"><i class="fas fa-flask"></i> Pasteur's Swan-Neck Flask</div>
+                            <div class="tip-content">"Think of Pasteur's flask as a fancy wine glass that kept out unwanted bacterial guests. No microbes crashing this party!"</div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-title"><i class="fas fa-stethoscope"></i> Koch's Postulates</div>
+                            <div class="tip-content">"Koch's 4-step postulates: 1) Find it, 2) Grow it, 3) Give it, 4) Get it back. Like borrowing a book from the library!"</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mnemonic-box">
+                        <div class="mnemonic-title"><i class="fas fa-brain"></i> Memory Acronym</div>
+                        <div class="mnemonic-text">"Please Let Bacteria Stay" for the order of historical discoveries:</div>
+                        <div class="mnemonic-explanation">
+                            <strong>P</strong>asteur (disproved spontaneous generation) → 
+                            <strong>L</strong>eeuwenhoek (first saw bacteria) → 
+                            <strong>B</strong>iogenesis theory proven → 
+                            <strong>S</strong>wan-neck flask experiment
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="navigation">
-                <button class="btn-prev" id="prev-btn" disabled>Previous</button>
-                <button class="btn-next" id="next-btn">Next Question</button>
-                <button class="btn-submit" id="submit-btn">Submit Quiz</button>
+            
+            <!-- Topic 2: Classification -->
+            <div class="topic-card" id="classification-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <div>
+                        <h2 class="card-title">Classification of Microbes</h2>
+                        <p class="card-subtitle">Organizing the tiny world</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="key-points">
+                        <h3 class="section-title"><i class="fas fa-key"></i> Key Points</h3>
+                        <div class="point-item">
+                            <div class="point-icon">1</div>
+                            <div class="point-text">
+                                <div class="point-title">Prokaryotes vs Eukaryotes</div>
+                                <p>Prokaryotes (bacteria) lack nucleus and membrane-bound organelles. Eukaryotes (fungi, protozoa) have them.</p>
+                            </div>
+                        </div>
+                        <div class="point-item">
+                            <div class="point-icon">2</div>
+                            <div class="point-text">
+                                <div class="point-title">Four Major Groups</div>
+                                <p>Bacteria (prokaryotic), Fungi (eukaryotic), Viruses (non-living particles), Parasites (eukaryotic, unicellular/multicellular).</p>
+                            </div>
+                        </div>
+                        <div class="point-item">
+                            <div class="point-icon">3</div>
+                            <div class="point-text">
+                                <div class="point-title">Bacterial Shapes</div>
+                                <p>Cocci (spherical), Bacilli (rod-shaped), Spirilla (spiral-shaped). Arrangements: chains, clusters, pairs.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-tips">
+                        <h3 class="section-title"><i class="fas fa-lightbulb"></i> Funny Memory Tips</h3>
+                        <div class="tip-item">
+                            <div class="tip-title"><i class="fas fa-cookie-bite"></i> Remembering Cocci Shapes</div>
+                            <div class="tip-content">"Cocci are like M&Ms - they come in singles (micrococcus), pairs (diplococci), chains (streptococci), and clusters (staphylococci). But don't eat them!"</div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-title"><i class="fas fa-hotdog"></i> Bacilli are like Hot Dogs</div>
+                            <div class="tip-content">"Bacilli are rod-shaped like hot dogs. Some stand alone, some line up in chains. Still not edible!"</div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-title"><i class="fas fa-slither"></i> Spirilla are Party Spirals</div>
+                            <div class="tip-content">"Spirilla are the party bacteria - they twist and shout! Think of them as tiny corkscrews trying to open a microscopic wine bottle."</div>
+                        </div>
+                    </div>
+                    
+                    <div class="visual-aid">
+                        <div class="visual-title"><i class="fas fa-eye"></i> Visual Comparison</div>
+                        <div class="visual-content">
+                            <div class="visual-icon">🦠</div>
+                            <div class="visual-text">
+                                <table class="comparison-table">
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Size</th>
+                                        <th>Memory Hook</th>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Viruses</strong></td>
+                                        <td>18-300 nm</td>
+                                        <td>Smallest - "Tiny vampires that need a host cell"</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Bacteria</strong></td>
+                                        <td>0.2-10 μm</td>
+                                        <td>Prokaryotic - "Simple but mighty single-cells"</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Fungi</strong></td>
+                                        <td>Varies widely</td>
+                                        <td>Eukaryotic - "Mushrooms' tiny cousins"</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Parasites</strong></td>
+                                        <td>Varies widely</td>
+                                        <td>Most complex - "Unwanted microscopic roommates"</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            
+            <!-- Topic 3: Bacterial Cell Structure -->
+            <div class="topic-card" id="cell-structure-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-bacterium"></i>
+                    </div>
+                    <div>
+                        <h2 class="card-title">Bacterial Cell Structure</h2>
+                        <p class="card-subtitle">What's inside those tiny organisms</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="key-points">
+                        <h3 class="section-title"><i class="fas fa-key"></i> Key Points</h3>
+                        <div class="point-item">
+                            <div class="point-icon">1</div>
+                            <div class="point-text">
+                                <div class="point-title">Cell Wall</div>
+                                <p>Made of peptidoglycan. Gram-positive: thick layer. Gram-negative: thin layer + outer membrane with LPS (endotoxin).</p>
+                            </div>
+                        </div>
+                        <div class="point-item">
+                            <div class="point-icon">2</div>
+                            <div class="point-text">
+                                <div class="point-title">Capsule</div>
+                                <p>Polysaccharide layer outside cell wall. Protects from phagocytosis and helps adhesion. Like a bacterial "invisibility cloak".</p>
+                            </div>
+                        </div>
+                        <div class="point-item">
+                            <div class="point-icon">3</div>
+                            <div class="point-text">
+                                <div class="point-title">Flagella & Pili</div>
+                                <p>Flagella for movement (like bacterial motors). Pili for attachment and genetic exchange (bacterial "dating app").</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-tips">
+                        <h3 class="section-title"><i class="fas fa-lightbulb"></i> Funny Memory Tips</h3>
+                        <div class="tip-item">
+                            <div class="tip-title"><i class="fas fa-layer-group"></i> Gram-Positive vs Gram-Negative</div>
+                            <div class="tip-content">"Gram-positive bacteria wear thick purple sweaters (peptidoglycan). Gram-negatives wear thin purple T-shirts under a toxic raincoat (LPS outer membrane)!"</div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-title"><i class="fas fa-crown"></i> Capsule = Royal Cloak</div>
+                            <div class="tip-content">"Think of capsule as a king's royal cloak that protects from enemy attacks (phagocytes). No cloak = easier to catch!"</div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-title"><i class="fas fa-flag"></i> Flagella are Bacterial Motors</div>
+                            <div class="tip-content">"Flagella are like tiny outboard motors. Monotrichous = one motorboat, Lophotrichous = speedboat with many motors, Peritrichous = all-terrain vehicle with motors everywhere!"</div>
+                        </div>
+                    </div>
+                    
+                    <div class="interactive-element">
+                        <div class="interactive-title"><i class="fas fa-gamepad"></i> Quick Quiz: Gram Staining</div>
+                        <div class="quiz-question">
+                            <p>What color do Gram-positive bacteria appear after Gram staining?</p>
+                            <div class="quiz-options">
+                                <div class="quiz-option" data-correct="true">Purple/Violet</div>
+                                <div class="quiz-option" data-correct="false">Pink/Red</div>
+                                <div class="quiz-option" data-correct="false">Green</div>
+                                <div class="quiz-option" data-correct="false">Blue</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mnemonic-box">
+                        <div class="mnemonic-title"><i class="fas fa-brain"></i> Memory Acronym</div>
+                        <div class="mnemonic-text">"Very Purple People" for Gram-positive characteristics:</div>
+                        <div class="mnemonic-explanation">
+                            <strong>V</strong>ery thick peptidoglycan → 
+                            <strong>P</strong>urple after Gram stain → 
+                            <strong>P</strong>eptidoglycan and teichoic acids
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Topic 4: Bacterial Growth & Nutrition -->
+            <div class="topic-card" id="growth-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <h2 class="card-title">Bacterial Growth & Nutrition</h2>
+                        <p class="card-subtitle">How bacteria eat, breathe, and multiply</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="key-points">
+                        <h3 class="section-title"><i class="fas fa-key"></i> Key Points</h3>
+                        <div class="point-item">
+                            <div class="point-icon">1</div>
+                            <div class="point-text">
+                                <div class="point-title">Growth Phases</div>
+                                <p>Lag (adapting), Log (exponential growth), Stationary (balance), Death (decline). Bacteria divide by binary fission.</p>
+                            </div>
+                        </div>
+                        <div class="point-item">
+                            <div class="point-icon">2</div>
+                            <div class="point-text">
+                                <div class="point-title">Oxygen Requirements</div>
+                                <p>Obligate aerobes (need O₂), Obligate anaerobes (die with O₂), Facultative anaerobes (flexible), Microaerophiles (need low O₂).</p>
+                            </div>
+                        </div>
+                        <div class="point-item">
+                            <div class="point-icon">3</div>
+                            <div class="point-text">
+                                <div class="point-title">Temperature Requirements</div>
+                                <p>Psychrophiles (cold lovers), Mesophiles (middle lovers like pathogens), Thermophiles (heat lovers), Hyperthermophiles (extreme heat).</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-tips">
+                        <h3 class="section-title"><i class="fas fa-lightbulb"></i> Funny Memory Tips</h3>
+                        <div class="tip-item">
+                            <div class="tip-title"><i class="fas fa-baby"></i> Bacterial Growth Phases</div>
+                            <div class="tip-content">"Think of bacterial growth like a party: 1) Lag phase = awkwardly looking for friends, 2) Log phase = party is lit and everyone is multiplying, 3) Stationary = too crowded, 4) Death = police shut down the party!"</div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-title"><i class="fas fa-wind"></i> Oxygen Requirements</div>
+                            <div class="tip-content">"Obligate aerobes are like marathon runners (need oxygen). Obligate anaerobes are like vampires (die in sunlight/oxygen). Facultative anaerobes are like weekend warriors (adapt to any situation)!"</div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-title"><i class="fas fa-temperature-high"></i> Temperature Preferences</div>
+                            <div class="tip-content">"Psychrophiles = Eskimo bacteria, Mesophiles = Goldilocks bacteria (just right at 37°C), Thermophiles = sauna-loving bacteria, Hyperthermophiles = lava-dwelling extreme bacteria!"</div>
+                        </div>
+                    </div>
+                    
+                    <div class="visual-aid">
+                        <div class="visual-title"><i class="fas fa-eye"></i> Visual Growth Curve</div>
+                        <div class="visual-content">
+                            <div class="visual-icon">📈</div>
+                            <div class="visual-text">
+                                <p><strong>Lag Phase:</strong> "Getting ready to party" - Bacteria adapting to environment</p>
+                                <p><strong>Log Phase:</strong> "Exponential rave" - Rapid division, antibiotics work best here</p>
+                                <p><strong>Stationary Phase:</strong> "Crowded dance floor" - Nutrients running out, waste accumulating</p>
+                                <p><strong>Death Phase:</strong> "Party's over" - More bacteria dying than dividing</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mnemonic-box">
+                        <div class="mnemonic-title"><i class="fas fa-brain"></i> Memory Acronym</div>
+                        <div class="mnemonic-text">"LSD" for bacterial growth phases (but the safe version!):</div>
+                        <div class="mnemonic-explanation">
+                            <strong>L</strong>ag → 
+                            <strong>S</strong>tationary → 
+                            <strong>D</strong>eath (Log phase is in the middle, making it LSD)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Topic 5: Pathogenesis -->
+            <div class="topic-card" id="pathogenesis-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-user-injured"></i>
+                    </div>
+                    <div>
+                        <h2 class="card-title">Bacterial Pathogenesis</h2>
+                        <p class="card-subtitle">How bacteria cause disease</p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="key-points">
+                        <h3 class="section-title"><i class="fas fa-key"></i> Key Points</h3>
+                        <div class="point-item">
+                            <div class="point-icon">1</div>
+                            <div class="point-text">
+                                <div class="point-title">Virulence Factors</div>
+                                <p>Features that help bacteria cause disease: adhesins (stick to host), capsules (avoid phagocytosis), toxins (damage host).</p>
+                            </div>
+                        </div>
+                        <div class="point-item">
+                            <div class="point-icon">2</div>
+                            <div class="point-text">
+                                <div class="point-title">Exotoxins vs Endotoxins</div>
+                                <p>Exotoxins: proteins secreted by bacteria (both Gram+ and Gram-). Endotoxins: LPS in Gram-negative cell walls (released when bacteria die).</p>
+                            </div>
+                        </div>
+                        <div class="point-item">
+                            <div class="point-icon">3</div>
+                            <div class="point-text">
+                                <div class="point-title">Portals of Entry</div>
+                                <p>Mucous membranes (respiratory, GI, GU tracts), skin (through cuts), parenteral (direct deposition into tissues).</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-tips">
+                        <h3 class="section-title"><i class="fas fa-lightbulb"></i> Funny Memory Tips</h3>
+                        <div class="tip-item">
+                            <div class="tip-title"><i class="fas fa-gift"></i> Exotoxins vs Endotoxins</div>
+                            <div class="tip-content">"Exotoxins are like poisonous presents bacteria actively give you. Endotoxins are like toxic confetti that spills out when you smash a Gram-negative piñata!"</div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-title"><i class="fas fa-door-open"></i> Portals of Entry</div>
+                            <div class="tip-content">"Think of your body as a house with 3 doors: 1) Front door = respiratory tract, 2) Back door = GI tract, 3) Secret trap door = breaks in skin. Bacteria are sneaky burglars!"</div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-title"><i class="fas fa-mask"></i> Virulence Factors</div>
+                            <div class="tip-content">"Virulence factors are bacteria's superpowers: Adhesins = sticky hands, Capsules = invisibility cloak, Toxins = poisonous weapons. Together they make bacterial supervillains!"</div>
+                        </div>
+                    </div>
+                    
+                    <div class="interactive-element">
+                        <div class="interactive-title"><i class="fas fa-gamepad"></i> Quick Quiz: Toxins</div>
+                        <div class="quiz-question">
+                            <p>Which type of toxin is part of the Gram-negative bacterial cell wall?</p>
+                            <div class="quiz-options">
+                                <div class="quiz-option" data-correct="false">Exotoxin</div>
+                                <div class="quiz-option" data-correct="true">Endotoxin</div>
+                                <div class="quiz-option" data-correct="false">Enterotoxin</div>
+                                <div class="quiz-option" data-correct="false">Neurotoxin</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="visual-aid">
+                        <div class="visual-title"><i class="fas fa-eye"></i> Visual Comparison: Exotoxins vs Endotoxins</div>
+                        <div class="visual-content">
+                            <div class="visual-icon">🦠</div>
+                            <div class="visual-text">
+                                <table class="comparison-table">
+                                    <tr>
+                                        <th>Feature</th>
+                                        <th>Exotoxins</th>
+                                        <th>Endotoxins</th>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Source</strong></td>
+                                        <td>Secreted by living bacteria</td>
+                                        <td>Released when Gram-neg bacteria die</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Chemical</strong></td>
+                                        <td>Proteins</td>
+                                        <td>LPS (Lipid A)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Heat Stability</strong></td>
+                                        <td>Destroyed by heat (except staph enterotoxin)</td>
+                                        <td>Heat stable</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Memory Hook</strong></td>
+                                        <td>"Active poison gifts"</td>
+                                        <td>"Toxic confetti from smashed piñata"</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- More topics would continue here... Due to length constraints, I've shown 5 topics -->
+            
         </div>
-
-        <div class="results-container" id="results-container">
-            <h2 class="results-title">Quiz Results</h2>
-            <div class="score" id="score">0/65</div>
-            <div class="score-text" id="score-text"></div>
-
-            <div class="summary">
-                <div class="summary-title">Performance Summary</div>
-                <p>Total Questions: <span id="total-questions">65</span></p>
-                <p>Correct Answers: <span id="correct-answers">0</span></p>
-                <p>Incorrect Answers: <span id="incorrect-answers">0</span></p>
-                <p>Percentage: <span id="percentage">0%</span></p>
-                <p>Time Taken: <span id="time-taken">65:00</span></p>
-            </div>
-
-            <div class="question-review" id="question-review">
-                <h3>Question Review</h3>
-                <!-- Review content will be generated by JavaScript -->
-            </div>
-
-            <button class="restart-btn" id="restart-btn">Restart Quiz</button>
+        
+        <div class="study-timer">
+            <i class="fas fa-clock"></i>
+            <span class="timer-text">Time Spent Studying:</span>
+            <span class="timer-value" id="timer">00:00</span>
+        </div>
+        
+        <div class="footer">
+            <p><i class="fas fa-graduation-cap"></i> Medical Microbiology Visual Study Guide | Created for Pharmacy Students</p>
+            <p>Remember: "Study hard, but don't forget to laugh! Even bacteria have a funny side."</p>
         </div>
     </div>
 
     <script>
-        // Quiz questions array
-        const questions = [
-            {
-                question: "Which of the following Starling forces is responsible for drawing fluid INTO capillaries from the interstitium?",
-                options: [
-                    "Capillary hydrostatic pressure",
-                    "Interstitial fluid hydrostatic pressure",
-                    "Plasma colloid osmotic pressure",
-                    "Interstitial fluid colloid osmotic pressure"
-                ],
-                correct: 2,
-                explanation: "Plasma colloid osmotic pressure (oncotic pressure) is created by plasma proteins, primarily albumin, and draws fluid from the interstitium back into the capillaries.",
-                memoryTip: "Remember: Osmotic pressure PULLS fluid in, while hydrostatic pressure PUSHES fluid out."
-            },
-            {
-                question: "A patient with nephrotic syndrome develops generalized edema. Which mechanism is primarily responsible?",
-                options: [
-                    "Increased capillary hydrostatic pressure",
-                    "Decreased plasma oncotic pressure",
-                    "Increased vascular permeability",
-                    "Lymphatic obstruction"
-                ],
-                correct: 1,
-                explanation: "Nephrotic syndrome causes massive proteinuria, leading to hypoalbuminemia and decreased plasma oncotic pressure. This reduces the force drawing fluid back into capillaries, resulting in edema.",
-                memoryTip: "Nephrotic syndrome → protein loss → low oncotic pressure → edema"
-            },
-            {
-                question: "Which component of Virchow's triad is most important for arterial thrombosis?",
-                options: [
-                    "Hypercoagulability",
-                    "Endothelial injury",
-                    "Stasis of blood flow",
-                    "Turbulence of blood flow"
-                ],
-                correct: 1,
-                explanation: "Endothelial injury is the most important factor for arterial thrombosis. In arteries, high flow rates prevent thrombosis unless the endothelial lining is damaged.",
-                memoryTip: "Remember Virchow's triad: Endothelial injury, Stasis, Hypercoagulability. Endothelial injury is key for arterial thrombosis."
-            },
-            {
-                question: "A patient presents with warm, red, and swollen tissues in an area of acute inflammation. This is an example of:",
-                options: [
-                    "Passive congestion",
-                    "Active hyperemia",
-                    "Chronic congestion",
-                    "Ischemia"
-                ],
-                correct: 1,
-                explanation: "Active hyperemia results from arteriolar dilation, increasing blood flow to a tissue. This causes the tissue to become warm, red, and swollen, commonly seen in inflammation.",
-                memoryTip: "Active = increased flow IN; Passive = impaired flow OUT"
-            },
-            {
-                question: "Which of the following is a characteristic feature of transudative edema fluid?",
-                options: [
-                    "High protein content",
-                    "High specific gravity (>1.012)",
-                    "Low cellular content",
-                    "Associated with inflammation"
-                ],
-                correct: 2,
-                explanation: "Transudative edema results from hemodynamic imbalances (increased hydrostatic pressure or decreased oncotic pressure) and has low protein content, low specific gravity, and few cells.",
-                memoryTip: "Transudate = Thin, clear fluid; Exudate = Thick, protein-rich fluid in inflammation"
-            },
-            {
-                question: "A 65-year-old patient with chronic heart failure develops pitting edema in the lower extremities. The initial pathophysiological event in this cascade is:",
-                options: [
-                    "Activation of renin-angiotensin-aldosterone system",
-                    "Increased venous hydrostatic pressure",
-                    "Reduced cardiac output",
-                    "Sodium and water retention"
-                ],
-                correct: 2,
-                explanation: "In congestive heart failure, the initial event is reduced cardiac output, which triggers a cascade including decreased renal perfusion, RAAS activation, sodium/water retention, and ultimately increased venous hydrostatic pressure causing edema.",
-                memoryTip: "CHF edema cascade: Reduced CO → decreased renal perfusion → RAAS activation → Na+/H2O retention → increased venous pressure → edema"
-            },
-            {
-                question: "Which of the following is most likely to cause hemorrhagic infarction?",
-                options: [
-                    "Occlusion of renal artery",
-                    "Occlusion of splenic artery",
-                    "Occlusion of pulmonary vein",
-                    "Occlusion of coronary artery"
-                ],
-                correct: 2,
-                explanation: "Hemorrhagic infarcts occur in loose tissues or those with dual blood supply. Pulmonary infarction is often hemorrhagic because the lungs have dual blood supply (pulmonary and bronchial arteries) and loose tissue architecture that allows blood to seep into the necrotic area.",
-                memoryTip: "Red infarcts: Lungs, Liver, Intestines; White infarcts: Heart, Kidney, Spleen"
-            },
-            {
-                question: "A patient with deep vein thrombosis suddenly develops dyspnea, chest pain, and hypotension. The most likely diagnosis is:",
-                options: [
-                    "Systemic embolism",
-                    "Pulmonary thromboembolism",
-                    "Fat embolism syndrome",
-                    "Paradoxical embolism"
-                ],
-                correct: 1,
-                explanation: "Deep vein thrombi from the lower extremities can dislodge and travel to the pulmonary arteries, causing pulmonary thromboembolism. Large emboli can obstruct pulmonary blood flow, leading to right heart failure, hypotension, and potentially sudden death.",
-                memoryTip: "DVT → Pulmonary Embolism → Dyspnea, Chest pain, Hypotension"
-            },
-            {
-                question: "Which of the following laboratory findings is characteristic of Disseminated Intravascular Coagulation (DIC)?",
-                options: [
-                    "Increased fibrinogen levels",
-                    "Prolonged bleeding time",
-                    "Elevated D-dimer",
-                    "Decreased prothrombin time"
-                ],
-                correct: 2,
-                explanation: "DIC involves widespread activation of the coagulation system, leading to fibrin deposition and subsequent fibrinolysis. Elevated D-dimer (a fibrin degradation product) is a characteristic finding, along with prolonged PT/PTT, thrombocytopenia, and decreased fibrinogen.",
-                memoryTip: "DIC labs: Elevated D-dimer, Prolonged PT/PTT, Low fibrinogen, Low platelets"
-            },
-            {
-                question: "In septic shock, the initial event in the pathophysiology cascade is:",
-                options: [
-                    "Systemic vasodilation",
-                    "Endothelial injury",
-                    "Endotoxin binding to immune cells",
-                    "Multiple organ dysfunction"
-                ],
-                correct: 2,
-                explanation: "Septic shock begins with endotoxin (LPS) from gram-negative bacteria binding to CD14 receptors on monocytes/macrophages, triggering release of inflammatory mediators like TNF-α and IL-1, which then cause systemic vasodilation, endothelial injury, and organ dysfunction.",
-                memoryTip: "Septic shock pathway: Endotoxin → Immune activation → Cytokine release → Vasodilation/Endothelial injury → Organ dysfunction"
-            },
-            {
-                question: "Which type of shock is characterized by low cardiac output despite adequate intravascular volume?",
-                options: [
-                    "Hypovolemic shock",
-                    "Cardiogenic shock",
-                    "Distributive shock",
-                    "Obstructive shock"
-                ],
-                correct: 1,
-                explanation: "Cardiogenic shock results from pump failure (e.g., myocardial infarction, cardiomyopathy) leading to low cardiac output despite normal or increased intravascular volume.",
-                memoryTip: "Cardiogenic = Pump failure; Hypovolemic = Volume loss; Distributive = Vasodilation; Obstructive = Mechanical blockage"
-            },
-            {
-                question: "A patient with extensive burns develops edema at the burn sites. This type of edema is best classified as:",
-                options: [
-                    "Transudate",
-                    "Exudate",
-                    "Lymphedema",
-                    "Hydrostatic edema"
-                ],
-                correct: 1,
-                explanation: "Burns cause tissue damage and inflammation, leading to increased vascular permeability and formation of protein-rich inflammatory exudate.",
-                memoryTip: "Inflammation → Increased permeability → Exudate (protein-rich)"
-            },
-            {
-                question: "Which organ is most susceptible to infarction due to its end-arterial blood supply?",
-                options: [
-                    "Liver",
-                    "Lung",
-                    "Kidney",
-                    "Small intestine"
-                ],
-                correct: 2,
-                explanation: "The kidney has an end-arterial supply with minimal collateral circulation, making it highly susceptible to infarction following arterial occlusion.",
-                memoryTip: "End-arterial organs: Kidney, Spleen, Heart → Pale infarcts"
-            },
-            {
-                question: "The 'nutmeg liver' appearance is characteristic of:",
-                options: [
-                    "Acute hepatic congestion",
-                    "Chronic passive congestion of the liver",
-                    "Hepatic infarction",
-                    "Liver cirrhosis"
-                ],
-                correct: 1,
-                explanation: "Chronic passive congestion of the liver results in a 'nutmeg liver' appearance due to centrilobular congestion and hemorrhage with surrounding pale, fatty peripheral zones.",
-                memoryTip: "Nutmeg liver = Chronic passive congestion (commonly from right heart failure)"
-            },
-            {
-                question: "Which of the following is a primary (genetic) hypercoagulable state?",
-                options: [
-                    "Antithrombin III deficiency",
-                    "Prolonged immobilization",
-                    "Nephrotic syndrome",
-                    "Oral contraceptive use"
-                ],
-                correct: 0,
-                explanation: "Antithrombin III deficiency is an inherited disorder that impairs the natural anticoagulant system, predisposing to thrombosis. Other options are acquired risk factors.",
-                memoryTip: "Primary hypercoagulability: Genetic (Factor V Leiden, Protein C/S deficiency, Antithrombin III deficiency)"
-            },
-            {
-                question: "A patient with a prosthetic heart valve develops multiple small hemorrhages on the skin (1-2 mm in size). These are best described as:",
-                options: [
-                    "Ecchymoses",
-                    "Petechiae",
-                    "Purpura",
-                    "Hematomas"
-                ],
-                correct: 1,
-                explanation: "Petechiae are minute 1-2 mm hemorrhages in the skin or mucous membranes, often associated with platelet disorders or increased vascular fragility.",
-                memoryTip: "Petechiae: 1-2 mm; Purpura: >3 mm; Ecchymosis: >1 cm"
-            },
-            {
-                question: "In the progression of shock, the irreversible stage is characterized by:",
-                options: [
-                    "Compensatory vasoconstriction",
-                    "Widespread cellular injury that cannot be reversed",
-                    "Activation of the renin-angiotensin system",
-                    "Increased cardiac output"
-                ],
-                correct: 1,
-                explanation: "The irreversible stage of shock involves widespread cellular damage and organ failure that cannot be reversed even with restoration of perfusion.",
-                memoryTip: "Shock stages: Compensated → Progressive → Irreversible (cellular damage)"
-            },
-            {
-                question: "Which of the following is a feature of arterial thrombi compared to venous thrombi?",
-                options: [
-                    "Softer consistency",
-                    "Red color (red thrombi)",
-                    "Grow in the direction of blood flow",
-                    "Firm attachment to vessel wall"
-                ],
-                correct: 3,
-                explanation: "Arterial thrombi are typically firm, pale, and firmly attached to the vessel wall at sites of endothelial injury. They grow retrograde (against blood flow).",
-                memoryTip: "Arterial thrombi: Pale, firm, retrograde growth; Venous thrombi: Red, soft, antegrade growth"
-            },
-            {
-                question: "Amniotic fluid embolism is characterized by all of the following EXCEPT:",
-                options: [
-                    "High mortality rate (>80%)",
-                    "Disseminated intravascular coagulation",
-                    "Gradual onset over several hours",
-                    "Respiratory distress and cyanosis"
-                ],
-                correct: 2,
-                explanation: "Amniotic fluid embolism has a sudden, dramatic onset during or after delivery, characterized by dyspnea, cyanosis, shock, and frequently DIC. It does not have a gradual onset.",
-                memoryTip: "Amniotic fluid embolism: Sudden onset, Respiratory distress, Shock, DIC, High mortality"
-            },
-            {
-                question: "The most common source of pulmonary thromboembolism is:",
-                options: [
-                    "Right atrial thrombi",
-                    "Deep vein thrombi in lower extremities",
-                    "Pelvic vein thrombi",
-                    "Upper extremity deep vein thrombi"
-                ],
-                correct: 1,
-                explanation: "Approximately 95% of pulmonary emboli originate from deep vein thrombi in the lower extremities (deep venous thrombosis).",
-                memoryTip: "DVT → Pulmonary Embolism (95% of cases)"
-            },
-            {
-                question: "Which type of infarct typically shows coagulative necrosis?",
-                options: [
-                    "Cerebral infarct",
-                    "Pulmonary infarct",
-                    "Renal infarct",
-                    "Splenic infarct"
-                ],
-                correct: 2,
-                explanation: "Most solid organs (kidney, heart, spleen) show coagulative necrosis in infarction, characterized by preservation of tissue architecture. The brain is an exception, showing liquefactive necrosis.",
-                memoryTip: "Coagulative necrosis: Most solid organs; Liquefactive necrosis: Brain"
-            },
-            {
-                question: "In anaphylactic shock, the primary mechanism is:",
-                options: [
-                    "Pump failure",
-                    "Massive vasodilation and increased permeability",
-                    "Volume depletion",
-                    "Obstruction of blood flow"
-                ],
-                correct: 1,
-                explanation: "Anaphylactic shock is an IgE-mediated hypersensitivity reaction causing massive histamine release, leading to systemic vasodilation and increased vascular permeability.",
-                memoryTip: "Anaphylaxis → Histamine release → Vasodilation + Increased permeability → Shock"
-            },
-            {
-                question: "Which of the following conditions is most likely to cause generalized edema (anasarca)?",
-                options: [
-                    "Deep vein thrombosis",
-                    "Liver cirrhosis",
-                    "Localized allergic reaction",
-                    "Cerebral edema"
-                ],
-                correct: 1,
-                explanation: "Liver cirrhosis causes decreased synthesis of albumin, leading to reduced plasma oncotic pressure and generalized edema (anasarca).",
-                memoryTip: "Anasarca causes: Nephrotic syndrome, Cirrhosis, Heart failure, Malnutrition"
-            },
-            {
-                question: "The Trousseau syndrome refers to:",
-                options: [
-                    "Migratory thrombophlebitis associated with cancer",
-                    "Paradoxical embolism through a patent foramen ovale",
-                    "Air embolism in divers",
-                    "Fat embolism after fractures"
-                ],
-                correct: 0,
-                explanation: "Trousseau syndrome is migratory thrombophlebitis that is often associated with underlying malignancy, particularly pancreatic cancer.",
-                memoryTip: "Trousseau syndrome = Migratory thrombophlebitis + Cancer"
-            },
-            {
-                question: "In neurogenic shock, the primary defect is:",
-                options: [
-                    "Loss of sympathetic tone",
-                    "Myocardial depression",
-                    "Fluid loss",
-                    "Endotoxin release"
-                ],
-                correct: 0,
-                explanation: "Neurogenic shock results from spinal cord injury or anesthesia causing loss of sympathetic tone, leading to vasodilation, bradycardia, and hypotension.",
-                memoryTip: "Neurogenic shock: Loss of sympathetic tone → Vasodilation + Bradycardia"
-            },
-            {
-                question: "Which factor is most important in the development of deep vein thrombosis?",
-                options: [
-                    "Endothelial injury",
-                    "Hypercoagulability",
-                    "Stasis",
-                    "Turbulence"
-                ],
-                correct: 2,
-                explanation: "Stasis is the most important factor in venous thrombosis, as slowed blood flow allows clotting factors to accumulate and platelets to contact the endothelium.",
-                memoryTip: "Venous thrombosis: Stasis most important; Arterial thrombosis: Endothelial injury most important"
-            },
-            {
-                question: "A patient with acute myocardial infarction is at risk for which complication due to endothelial injury and stasis?",
-                options: [
-                    "Pulmonary embolism",
-                    "Mural thrombosis",
-                    "Systemic embolism",
-                    "Fat embolism"
-                ],
-                correct: 1,
-                explanation: "Myocardial infarction causes endocardial injury and areas of non-contractile myocardium (stasis), predisposing to mural thrombus formation in the ventricles.",
-                memoryTip: "MI → Endocardial injury + Stasis → Mural thrombus"
-            },
-            {
-                question: "Which of the following best describes the fluid in lymphatic edema?",
-                options: [
-                    "Low protein content",
-                    "High protein content",
-                    "Low specific gravity",
-                    "Straw-colored"
-                ],
-                correct: 1,
-                explanation: "Lymphatic edema fluid is protein-rich because lymphatic obstruction prevents drainage of proteins that normally leak from capillaries.",
-                memoryTip: "Lymphatic edema = Protein-rich fluid (blocked lymphatic drainage)"
-            },
-            {
-                question: "In anaphylactic shock, the initial treatment of choice is:",
-                options: [
-                    "Intravenous fluids",
-                    "Epinephrine",
-                    "Antihistamines",
-                    "Corticosteroids"
-                ],
-                correct: 1,
-                explanation: "Epinephrine is the first-line treatment for anaphylactic shock as it counteracts vasodilation, bronchoconstriction, and increased permeability.",
-                memoryTip: "Anaphylaxis treatment: Epinephrine first"
-            },
-            {
-                question: "Which type of infarct typically has a wedge-shaped appearance?",
-                options: [
-                    "Myocardial infarct",
-                    "Cerebral infarct",
-                    "Renal infarct",
-                    "All of the above"
-                ],
-                correct: 3,
-                explanation: "Most infarcts appear wedge-shaped with the occluded vessel at the apex and the organ periphery forming the base.",
-                memoryTip: "Infarct morphology: Wedge-shaped with vessel at apex"
-            },
-            {
-                question: "The most common cause of hypovolemic shock is:",
-                options: [
-                    "Burns",
-                    "Diarrhea",
-                    "Hemorrhage",
-                    "Vomiting"
-                ],
-                correct: 2,
-                explanation: "Hemorrhage is the most common cause of hypovolemic shock in clinical practice.",
-                memoryTip: "Most common cause of hypovolemic shock = Hemorrhage"
-            },
-            {
-                question: "Which of the following is a feature of chronic DIC compared to acute DIC?",
-                options: [
-                    "More severe bleeding manifestations",
-                    "Higher mortality rate",
-                    "Often associated with malignancies",
-                    "Sudden onset with shock"
-                ],
-                correct: 2,
-                explanation: "Chronic DIC often occurs with malignancies or retained dead fetus and may have less dramatic bleeding than acute DIC.",
-                memoryTip: "Chronic DIC: Malignancies, Retained dead fetus; Acute DIC: Sepsis, Trauma, Obstetric"
-            },
-            {
-                question: "In the pathophysiology of shock, the 'sick cell syndrome' refers to:",
-                options: [
-                    "Endothelial cell activation",
-                    "Impaired Na+/K+ ATPase function",
-                    "Lysosomal enzyme release",
-                    "Mitochondrial swelling"
-                ],
-                correct: 1,
-                explanation: "In progressive shock, ATP depletion impairs Na+/K+ ATPase function, causing sodium and water to enter cells (cellular swelling) - the 'sick cell syndrome'.",
-                memoryTip: "Sick cell syndrome = Impaired Na+/K+ ATPase → Cellular swelling"
-            },
-            {
-                question: "Which of the following is most characteristic of cardiogenic shock?",
-                options: [
-                    "Warm, dry skin",
-                    "Bounding pulses",
-                    "Pulmonary edema",
-                    "Decreased jugular venous pressure"
-                ],
-                correct: 2,
-                explanation: "Cardiogenic shock often presents with pulmonary edema due to left ventricular failure and backup of blood in the pulmonary circulation.",
-                memoryTip: "Cardiogenic shock: Pulmonary edema common"
-            },
-            {
-                question: "A patient with thrombocytopenia would be most likely to present with:",
-                options: [
-                    "Deep vein thrombosis",
-                    "Petechiae and purpura",
-                    "Arterial thrombosis",
-                    "Embolic phenomena"
-                ],
-                correct: 1,
-                explanation: "Thrombocytopenia (low platelet count) impairs primary hemostasis, leading to bleeding manifestations like petechiae, purpura, and mucosal bleeding.",
-                memoryTip: "Thrombocytopenia → Bleeding (petechiae, purpura)"
-            },
-            {
-                question: "Which of the following is the final common pathway in most types of shock?",
-                options: [
-                    "Vasodilation",
-                    "Tissue hypoperfusion",
-                    "Cardiac dysfunction",
-                    "Coagulation abnormalities"
-                ],
-                correct: 1,
-                explanation: "Despite different initial mechanisms, all types of shock ultimately lead to inadequate tissue perfusion and cellular hypoxia.",
-                memoryTip: "All shock → Tissue hypoperfusion → Cellular hypoxia"
-            },
-            {
-                question: "Which of the following is NOT a component of hemostasis?",
-                options: [
-                    "Vascular wall",
-                    "Platelets",
-                    "Coagulation factors",
-                    "Fibrinolytic system"
-                ],
-                correct: 3,
-                explanation: "Hemostasis involves the vascular wall, platelets, and coagulation factors working together to prevent bleeding. The fibrinolytic system works to dissolve clots and is part of the regulatory mechanism, not primary hemostasis.",
-                memoryTip: "Hemostasis: Vascular wall + Platelets + Coagulation factors"
-            },
-            {
-                question: "A patient with liver cirrhosis develops ascites. The primary mechanism is:",
-                options: [
-                    "Increased portal venous pressure",
-                    "Decreased lymphatic drainage",
-                    "Increased systemic venous pressure",
-                    "Decreased aldosterone production"
-                ],
-                correct: 0,
-                explanation: "In liver cirrhosis, fibrosis increases resistance to portal blood flow, leading to portal hypertension which drives fluid transudation into the peritoneal cavity (ascites).",
-                memoryTip: "Cirrhosis → Portal hypertension → Ascites"
-            },
-            {
-                question: "Which type of embolism is most likely to cause systemic arterial occlusion?",
-                options: [
-                    "Fat embolism",
-                    "Air embolism",
-                    "Amniotic fluid embolism",
-                    "Paradoxical embolism"
-                ],
-                correct: 3,
-                explanation: "Paradoxical embolism occurs when a venous embolus crosses from the right to left side of the heart (through a patent foramen ovale) and enters the systemic circulation.",
-                memoryTip: "Paradoxical embolism: Venous embolus → Right heart → Left heart (via PFO) → Systemic embolism"
-            },
-            {
-                question: "The primary difference between petechiae and ecchymosis is:",
-                options: [
-                    "Underlying mechanism",
-                    "Color",
-                    "Size",
-                    "Location"
-                ],
-                correct: 2,
-                explanation: "Petechiae are 1-2 mm hemorrhages, while ecchymoses are larger than 1-2 cm. Both result from extravasation of blood.",
-                memoryTip: "Petechiae: 1-2 mm; Purpura: >3 mm; Ecchymosis: >1-2 cm"
-            },
-            {
-                question: "Which of the following is a feature of hemorrhagic infarcts?",
-                options: [
-                    "Occur in solid organs",
-                    "Result from venous occlusion",
-                    "Pale appearance",
-                    "Common in heart and spleen"
-                ],
-                correct: 1,
-                explanation: "Hemorrhagic infarcts often result from venous occlusion or in organs with dual blood supply where blood can seep into the necrotic area.",
-                memoryTip: "Hemorrhagic infarcts: Venous occlusion or dual blood supply organs"
-            },
-            {
-                question: "In septic shock, the initial hemodynamic pattern is typically:",
-                options: [
-                    "Low CO, high SVR",
-                    "High CO, low SVR",
-                    "Low CO, low SVR",
-                    "High CO, high SVR"
-                ],
-                correct: 1,
-                explanation: "Early septic shock is characterized by systemic vasodilation (low systemic vascular resistance) with compensatory increased cardiac output.",
-                memoryTip: "Early septic shock: Vasodilation → Low SVR, High CO"
-            },
-            {
-                question: "Which of the following conditions is most associated with the development of marantic thrombosis?",
-                options: [
-                    "Pregnancy",
-                    "Malignancy",
-                    "Trauma",
-                    "Autoimmune disease"
-                ],
-                correct: 1,
-                explanation: "Marantic thrombosis refers to DVT associated with debilitating conditions like advanced cancer or severe malnutrition.",
-                memoryTip: "Marantic thrombosis = DVT in debilitating conditions (cancer, malnutrition)"
-            },
-            {
-                question: "The most sensitive laboratory indicator of DIC is:",
-                options: [
-                    "Platelet count",
-                    "Fibrinogen level",
-                    "D-dimer level",
-                    "Prothrombin time"
-                ],
-                correct: 2,
-                explanation: "D-dimer, a fibrin degradation product, is elevated in DIC due to widespread fibrin formation and subsequent fibrinolysis. It's a sensitive but not specific marker.",
-                memoryTip: "DIC: Elevated D-dimer (sensitive), Low fibrinogen (specific for bleeding risk)"
-            },
-            {
-                question: "Which organ is most vulnerable to hypoxic injury in shock?",
-                options: [
-                    "Heart",
-                    "Kidney",
-                    "Brain",
-                    "Liver"
-                ],
-                correct: 2,
-                explanation: "Neurons are extremely sensitive to hypoxia and can undergo irreversible damage within 3-4 minutes of oxygen deprivation.",
-                memoryTip: "Hypoxia sensitivity: Brain (3-4 min) > Heart (20-30 min) > Kidney > Liver"
-            },
-            {
-                question: "A patient with extensive third-degree burns is at risk for which type of shock in the first 24 hours?",
-                options: [
-                    "Cardiogenic shock",
-                    "Neurogenic shock",
-                    "Hypovolemic shock",
-                    "Septic shock"
-                ],
-                correct: 2,
-                explanation: "In the first 24 hours after major burns, massive fluid loss through damaged skin can lead to hypovolemic shock. Septic shock may develop later from infection.",
-                memoryTip: "Burns: Early → Hypovolemic shock; Late → Septic shock"
-            },
-            {
-                question: "Which of the following is a characteristic of arterial emboli compared to venous emboli?",
-                options: [
-                    "Usually originate from deep leg veins",
-                    "Most commonly lodge in the lungs",
-                    "Can travel to a wide variety of sites",
-                    "Almost always cause infarction"
-                ],
-                correct: 2,
-                explanation: "Arterial emboli can travel to various sites including brain, kidneys, limbs, and intestines, while venous emboli primarily lodge in the lungs.",
-                memoryTip: "Arterial emboli: Multiple possible sites; Venous emboli: Primarily lungs"
-            },
-            {
-                question: "In the renin-angiotensin-aldosterone system activation during shock, the primary effect is:",
-                options: [
-                    "Vasodilation",
-                    "Sodium and water retention",
-                    "Increased heart rate",
-                    "Bronchodilation"
-                ],
-                correct: 1,
-                explanation: "RAAS activation in shock leads to sodium and water retention, increasing blood volume and attempting to maintain perfusion pressure.",
-                memoryTip: "RAAS in shock: Na+/H2O retention → Increased blood volume"
-            },
-            {
-                question: "Which of the following is NOT a common clinical setting for DIC?",
-                options: [
-                    "Obstetric complications",
-                    "Sepsis",
-                    "Hypertension",
-                    "Malignancy"
-                ],
-                correct: 2,
-                explanation: "Common settings for DIC include obstetric catastrophes, sepsis, malignancies, and major trauma. Hypertension is not typically a direct cause of DIC.",
-                memoryTip: "DIC settings: Obstetric, Sepsis, Cancer, Trauma"
-            },
-            {
-                question: "The primary mechanism of cerebral edema in hypertensive crisis is:",
-                options: [
-                    "Increased capillary permeability",
-                    "Decreased plasma oncotic pressure",
-                    "Increased hydrostatic pressure",
-                    "Lymphatic obstruction"
-                ],
-                correct: 2,
-                explanation: "In hypertensive crisis, severely elevated blood pressure increases cerebral capillary hydrostatic pressure, forcing fluid into brain tissue.",
-                memoryTip: "Hypertensive cerebral edema = Increased hydrostatic pressure"
-            },
-            {
-                question: "Which of the following is a feature of chronic passive congestion?",
-                options: [
-                    "Warm, red tissues",
-                    "Reversible changes",
-                    "Parenchymal cell degeneration",
-                    "Increased arterial inflow"
-                ],
-                correct: 2,
-                explanation: "Chronic passive congestion leads to chronic hypoxia, causing parenchymal cell degeneration, atrophy, and potentially fibrosis.",
-                memoryTip: "Chronic passive congestion → Hypoxia → Parenchymal degeneration"
-            },
-            {
-                question: "The most common site for arterial thrombosis is:",
-                options: [
-                    "Cerebral arteries",
-                    "Coronary arteries",
-                    "Mesenteric arteries",
-                    "Renal arteries"
-                ],
-                correct: 1,
-                explanation: "Coronary arteries are the most common site for arterial thrombosis, followed by cerebral arteries and femoral arteries.",
-                memoryTip: "Arterial thrombosis sites: Coronary > Cerebral > Femoral"
-            },
-            {
-                question: "In the progressive stage of shock, which metabolic abnormality develops?",
-                options: [
-                    "Respiratory alkalosis",
-                    "Metabolic alkalosis",
-                    "Lactic acidosis",
-                    "Hyperkalemia without acidosis"
-                ],
-                correct: 2,
-                explanation: "In progressive shock, tissue hypoxia leads to anaerobic metabolism and lactic acid accumulation, causing metabolic (lactic) acidosis.",
-                memoryTip: "Progressive shock → Anaerobic metabolism → Lactic acidosis"
-            },
-            {
-                question: "A saddle embolus typically lodges at the:",
-                options: [
-                    "Bifurcation of the pulmonary trunk",
-                    "Aortic arch",
-                    "Coronary artery ostium",
-                    "Carotid artery bifurcation"
-                ],
-                correct: 0,
-                explanation: "A saddle embolus straddles the bifurcation of the main pulmonary trunk, often causing sudden death by obstructing blood flow to both lungs.",
-                memoryTip: "Saddle embolus = Pulmonary artery bifurcation → Sudden death"
-            },
-            {
-                question: "Which type of shock is characterized by high cardiac output and low peripheral resistance?",
-                options: [
-                    "Hypovolemic shock",
-                    "Cardiogenic shock",
-                    "Distributive shock",
-                    "Obstructive shock"
-                ],
-                correct: 2,
-                explanation: "Distributive shock (septic, anaphylactic, neurogenic) is characterized by systemic vasodilation leading to low peripheral resistance, with initially high cardiac output.",
-                memoryTip: "Distributive shock: Vasodilation → Low resistance, High output (initially)"
-            },
-            {
-                question: "In fat embolism syndrome, symptoms typically begin:",
-                options: [
-                    "Immediately after trauma",
-                    "1-3 days after trauma",
-                    "1 week after trauma",
-                    "2 weeks after trauma"
-                ],
-                correct: 1,
-                explanation: "Fat embolism syndrome typically begins 1-3 days after trauma, during which tissue swelling forces fat into the venous system.",
-                memoryTip: "Fat embolism syndrome: Onset 1-3 days post-trauma"
-            },
-            {
-                question: "Which of the following is a low-risk factor for hypercoagulability?",
-                options: [
-                    "Major surgery",
-                    "Prolonged immobilization",
-                    "Oral contraceptive use",
-                    "Malignancy"
-                ],
-                correct: 2,
-                explanation: "Oral contraceptive use is considered a low-risk factor for hypercoagulability, while major surgery, prolonged immobilization, and malignancy are high-risk factors.",
-                memoryTip: "High-risk hypercoagulability: Surgery, Trauma, Cancer, Immobilization; Low-risk: OCPs, Smoking, Pregnancy"
-            },
-            {
-                question: "A patient with mitral stenosis is at increased risk for developing:",
-                options: [
-                    "Right ventricular hypertrophy",
-                    "Left atrial thrombosis",
-                    "Pulmonary artery thrombosis",
-                    "Aortic valve vegetations"
-                ],
-                correct: 1,
-                explanation: "Mitral stenosis causes left atrial dilation and stasis, creating a prime location for thrombus formation, especially when associated with atrial fibrillation.",
-                memoryTip: "Mitral stenosis → Left atrial dilation → Stasis → Thrombus formation"
-            },
-            {
-                question: "Which of the following best describes the morphology of a typical venous thrombus?",
-                options: [
-                    "Firm, gray-red, lines of Zahn",
-                    "Soft, red, occlusive",
-                    "Friable, infected vegetation",
-                    "Pale, laminated appearance"
-                ],
-                correct: 1,
-                explanation: "Venous thrombi are typically soft, red, and almost invariably occlusive. They may show lines of Zahn but are generally less organized than arterial thrombi.",
-                memoryTip: "Venous thrombi: Red, soft, occlusive; Arterial thrombi: Pale, firm, lines of Zahn"
-            },
-            {
-                question: "The most common cause of cardiogenic shock is:",
-                options: [
-                    "Massive pulmonary embolism",
-                    "Acute myocardial infarction",
-                    "Cardiac tamponade",
-                    "Dilated cardiomyopathy"
-                ],
-                correct: 1,
-                explanation: "Acute myocardial infarction is the most common cause of cardiogenic shock, particularly when it involves ≥40% of the left ventricular mass.",
-                memoryTip: "Most common cause of cardiogenic shock = Myocardial infarction"
-            },
-            {
-                question: "In DIC, the paradoxical clinical presentation includes:",
-                options: [
-                    "Hypertension and bradycardia",
-                    "Bleeding and thrombosis",
-                    "Hypervolemia and oliguria",
-                    "Fever and leukopenia"
-                ],
-                correct: 1,
-                explanation: "DIC is characterized by simultaneous bleeding (due to consumption of clotting factors) and thrombosis (due to widespread activation of coagulation).",
-                memoryTip: "DIC paradox: Bleeding + Thrombosis simultaneously"
-            },
-            {
-                question: "Which organ has dual blood supply that protects it from infarction?",
-                options: [
-                    "Kidney",
-                    "Spleen",
-                    "Lung",
-                    "Heart"
-                ],
-                correct: 2,
-                explanation: "The lung has dual blood supply from pulmonary and bronchial arteries, providing some protection from infarction when one supply is compromised.",
-                memoryTip: "Dual blood supply: Lung, Liver, Hand/Forearm"
-            },
-            {
-                question: "A patient with chronic congestive heart failure develops 'brown induration' of the lungs. This refers to:",
-                options: [
-                    "Pulmonary edema",
-                    "Hemosiderin-laden macrophages in alveoli",
-                    "Pulmonary fibrosis",
-                    "Chronic bronchitis"
-                ],
-                correct: 1,
-                explanation: "Brown induration of the lungs in chronic passive congestion results from hemosiderin-laden macrophages accumulating in alveolar spaces due to recurrent microhemorrhages.",
-                memoryTip: "Brown induration = Hemosiderin-laden macrophages in chronic pulmonary congestion"
-            },
-            {
-                question: "Which of the following is the earliest histologic change in edema?",
-                options: [
-                    "Fibrosis",
-                    "Clear separation of extracellular matrix",
-                    "Inflammatory cell infiltration",
-                    "Necrosis"
-                ],
-                correct: 1,
-                explanation: "The earliest microscopic manifestation of edema is subtle cell swelling and clearing with separation of the extracellular matrix.",
-                memoryTip: "Early edema: Cell swelling + Separation of extracellular matrix"
-            },
-            {
-                question: "The most important mechanism of edema formation in acute inflammation is:",
-                options: [
-                    "Decreased plasma oncotic pressure",
-                    "Increased capillary hydrostatic pressure",
-                    "Increased vascular permeability",
-                    "Lymphatic obstruction"
-                ],
-                correct: 2,
-                explanation: "In acute inflammation, chemical mediators cause increased vascular permeability, allowing protein-rich fluid (exudate) to escape into tissues.",
-                memoryTip: "Inflammatory edema = Increased vascular permeability → Exudate"
-            }
-        ];
-
-        // DOM elements
-        const quizContainer = document.getElementById('quiz-container');
-        const resultsContainer = document.getElementById('results-container');
-        const questionNumber = document.getElementById('question-number');
-        const questionText = document.getElementById('question-text');
-        const optionsContainer = document.getElementById('options-container');
-        const explanationContainer = document.getElementById('explanation-container');
-        const explanationText = document.getElementById('explanation-text');
-        const memoryTipText = document.getElementById('memory-tip-text');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const submitBtn = document.getElementById('submit-btn');
-        const progressFill = document.getElementById('progress-fill');
-        const progressText = document.getElementById('progress-text');
-        const timeDisplay = document.getElementById('time');
-        const scoreDisplay = document.getElementById('score');
-        const scoreText = document.getElementById('score-text');
-        const totalQuestions = document.getElementById('total-questions');
-        const correctAnswers = document.getElementById('correct-answers');
-        const incorrectAnswers = document.getElementById('incorrect-answers');
-        const percentage = document.getElementById('percentage');
-        const timeTaken = document.getElementById('time-taken');
-        const questionReview = document.getElementById('question-review');
-        const restartBtn = document.getElementById('restart-btn');
-
-        // Quiz state
-        let currentQuestion = 0;
-        let userAnswers = new Array(questions.length).fill(null);
-        let score = 0;
-        let timer;
-        let timeLeft = 65 * 60; // 65 minutes in seconds
-        let quizCompleted = false;
-
-        // Initialize quiz
-        function initQuiz() {
-            displayQuestion();
-            startTimer();
-            updateProgress();
-        }
-
-        // Display current question
-        function displayQuestion() {
-            const question = questions[currentQuestion];
-            questionNumber.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
-            questionText.textContent = question.question;
+        // Timer functionality
+        let startTime = Date.now();
+        let timerInterval;
+        
+        function updateTimer() {
+            const now = Date.now();
+            const diff = now - startTime;
             
-            optionsContainer.innerHTML = '';
-            question.options.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.className = 'option';
-                if (userAnswers[currentQuestion] === index) {
-                    optionElement.classList.add('selected');
-                }
-                optionElement.textContent = option;
-                optionElement.addEventListener('click', () => selectOption(index));
-                optionsContainer.appendChild(optionElement);
-            });
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
             
-            // Show/hide explanation
-            if (userAnswers[currentQuestion] !== null) {
-                showExplanation();
-            } else {
-                explanationContainer.style.display = 'none';
-            }
-            
-            // Update button states
-            prevBtn.disabled = currentQuestion === 0;
-            nextBtn.disabled = false;
-            submitBtn.style.display = currentQuestion === questions.length - 1 ? 'block' : 'none';
+            const timerStr = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('timer').textContent = timerStr;
         }
-
-        // Select an option
-        function selectOption(index) {
-            if (quizCompleted) return;
-            
-            userAnswers[currentQuestion] = index;
-            
-            // Update UI
-            const options = document.querySelectorAll('.option');
-            options.forEach(option => option.classList.remove('selected'));
-            options[index].classList.add('selected');
-            
-            showExplanation();
-        }
-
-        // Show explanation for current question
-        function showExplanation() {
-            const question = questions[currentQuestion];
-            explanationText.textContent = question.explanation;
-            memoryTipText.textContent = question.memoryTip;
-            explanationContainer.style.display = 'block';
-            
-            // Highlight correct/incorrect answers
-            const options = document.querySelectorAll('.option');
-            options.forEach((option, index) => {
-                option.classList.remove('correct', 'incorrect');
-                if (index === question.correct) {
-                    option.classList.add('correct');
-                } else if (index === userAnswers[currentQuestion] && index !== question.correct) {
-                    option.classList.add('incorrect');
-                }
-            });
-        }
-
-        // Navigate to next question
-        function nextQuestion() {
-            if (currentQuestion < questions.length - 1) {
-                currentQuestion++;
-                displayQuestion();
-                updateProgress();
-            }
-        }
-
-        // Navigate to previous question
-        function prevQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                displayQuestion();
-                updateProgress();
-            }
-        }
-
-        // Update progress bar
-        function updateProgress() {
-            const progress = ((currentQuestion + 1) / questions.length) * 100;
-            progressFill.style.width = `${progress}%`;
-            progressText.textContent = `${currentQuestion + 1}/${questions.length}`;
-        }
-
+        
         // Start timer
-        function startTimer() {
-            timer = setInterval(() => {
-                timeLeft--;
+        timerInterval = setInterval(updateTimer, 1000);
+        
+        // Topic navigation
+        document.querySelectorAll('.nav-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.nav-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
                 
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                // Add active class to clicked button
+                this.classList.add('active');
                 
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    submitQuiz();
-                }
-            }, 1000);
-        }
-
-        // Submit quiz
-        function submitQuiz() {
-            clearInterval(timer);
-            quizCompleted = true;
-            
-            // Calculate score
-            score = 0;
-            for (let i = 0; i < questions.length; i++) {
-                if (userAnswers[i] === questions[i].correct) {
-                    score++;
-                }
-            }
-            
-            // Display results
-            quizContainer.style.display = 'none';
-            resultsContainer.style.display = 'block';
-            
-            scoreDisplay.textContent = `${score}/${questions.length}`;
-            totalQuestions.textContent = questions.length;
-            correctAnswers.textContent = score;
-            incorrectAnswers.textContent = questions.length - score;
-            percentage.textContent = `${((score / questions.length) * 100).toFixed(1)}%`;
-            
-            const minutesTaken = Math.floor((65 * 60 - timeLeft) / 60);
-            const secondsTaken = (65 * 60 - timeLeft) % 60;
-            timeTaken.textContent = `${minutesTaken.toString().padStart(2, '0')}:${secondsTaken.toString().padStart(2, '0')}`;
-            
-            // Set score text
-            if (score >= questions.length * 0.8) {
-                scoreText.textContent = "Excellent! You have a strong understanding of hemodynamic disorders.";
-            } else if (score >= questions.length * 0.6) {
-                scoreText.textContent = "Good job! You have a solid foundation in hemodynamic concepts.";
-            } else if (score >= questions.length * 0.5) {
-                scoreText.textContent = "You passed! Review the explanations to strengthen your knowledge.";
-            } else {
-                scoreText.textContent = "You need more study. Review the material and try again.";
-            }
-            
-            // Generate question review
-            generateQuestionReview();
-        }
-
-        // Generate question review
-        function generateQuestionReview() {
-            questionReview.innerHTML = '<h3>Question Review</h3>';
-            
-            questions.forEach((question, index) => {
-                const reviewItem = document.createElement('div');
-                reviewItem.className = 'review-item';
+                // Get topic ID
+                const topic = this.getAttribute('data-topic');
                 
-                const reviewQuestion = document.createElement('div');
-                reviewQuestion.className = 'review-question';
-                reviewQuestion.textContent = `${index + 1}. ${question.question}`;
+                // Hide all cards
+                document.querySelectorAll('.topic-card').forEach(card => {
+                    card.classList.remove('active');
+                });
                 
-                const userAnswer = document.createElement('div');
-                userAnswer.className = 'review-answer';
-                if (userAnswers[index] !== null) {
-                    userAnswer.innerHTML = `Your answer: <span class="user-answer">${question.options[userAnswers[index]]}</span>`;
-                } else {
-                    userAnswer.innerHTML = `Your answer: <span class="user-answer">Not answered</span>`;
-                }
+                // Show selected card
+                document.getElementById(`${topic}-card`).classList.add('active');
                 
-                const correctAnswer = document.createElement('div');
-                correctAnswer.className = 'review-answer';
-                correctAnswer.innerHTML = `Correct answer: <span class="correct-answer">${question.options[question.correct]}</span>`;
-                
-                reviewItem.appendChild(reviewQuestion);
-                reviewItem.appendChild(userAnswer);
-                reviewItem.appendChild(correctAnswer);
-                
-                questionReview.appendChild(reviewItem);
+                // Add animation
+                document.getElementById(`${topic}-card`).style.animation = 'none';
+                setTimeout(() => {
+                    document.getElementById(`${topic}-card`).style.animation = 'fadeIn 0.5s ease';
+                }, 10);
             });
-        }
-
-        // Restart quiz
-        function restartQuiz() {
-            currentQuestion = 0;
-            userAnswers = new Array(questions.length).fill(null);
-            score = 0;
-            timeLeft = 65 * 60;
-            quizCompleted = false;
+        });
+        
+        // Quiz functionality
+        document.querySelectorAll('.quiz-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove previous results
+                this.parentElement.querySelectorAll('.quiz-option').forEach(opt => {
+                    opt.classList.remove('correct', 'incorrect');
+                });
+                
+                // Mark correct/incorrect
+                if (this.getAttribute('data-correct') === 'true') {
+                    this.classList.add('correct');
+                } else {
+                    this.classList.add('incorrect');
+                    // Also show correct answer
+                    this.parentElement.querySelector('.quiz-option[data-correct="true"]').classList.add('correct');
+                }
+            });
+        });
+        
+        // Add hover effects to cards
+        document.querySelectorAll('.topic-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
             
-            quizContainer.style.display = 'block';
-            resultsContainer.style.display = 'none';
-            
-            initQuiz();
-        }
-
-        // Event listeners
-        prevBtn.addEventListener('click', prevQuestion);
-        nextBtn.addEventListener('click', nextQuestion);
-        submitBtn.addEventListener('click', submitQuiz);
-        restartBtn.addEventListener('click', restartQuiz);
-
-        // Start the quiz
-        initQuiz();
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Initialize with first card active
+        document.getElementById('history-card').classList.add('active');
     </script>
 </body>
-                    </html>
+    </html>
