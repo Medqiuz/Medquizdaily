@@ -132,6 +132,8 @@
             font-size: 1.1rem;
             transition: all 0.3s;
             box-shadow: 0 4px 10px rgba(87, 197, 182, 0.3);
+            cursor: pointer;
+            border: none;
         }
 
         .cta-button:hover {
@@ -239,6 +241,10 @@
             text-decoration: none;
             font-weight: 600;
             transition: background-color 0.3s;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            font-size: 1rem;
         }
 
         .part-link:hover {
@@ -315,6 +321,151 @@
             opacity: 0.9;
         }
 
+        /* Registration Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            width: 90%;
+            max-width: 600px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--dark-color);
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--danger-color);
+        }
+
+        .modal-title {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .required {
+            color: var(--danger-color);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(87, 197, 182, 0.2);
+        }
+
+        .form-note {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .submit-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-message {
+            padding: 12px;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            display: none;
+        }
+
+        .success-message {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+        }
+
+        .error-message {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--danger-color);
+            border: 1px solid var(--danger-color);
+        }
+
         /* Footer */
         footer {
             background-color: var(--dark-color);
@@ -386,6 +537,10 @@
             .parts-grid {
                 grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -411,6 +566,11 @@
             
             .section-title {
                 font-size: 1.6rem;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                padding: 1.5rem;
             }
         }
 
@@ -480,7 +640,7 @@
         <div class="container">
             <h2>Master Medical Laboratory Science</h2>
             <p>Practice with realistic exam questions across all major disciplines. Test your knowledge, identify weak areas, and track your progress as you prepare for certification exams.</p>
-            <a href="#exam-parts" class="cta-button">Start Practicing Now</a>
+            <button id="registerHeroBtn" class="cta-button">Register to Start Practicing</button>
         </div>
     </section>
 
@@ -527,7 +687,7 @@
                             <li><i class="fas fa-chart-bar"></i> Detailed performance analytics</li>
                             <li><i class="fas fa-book"></i> Reference explanations</li>
                         </ul>
-                        <a href="part11.html" class="part-link">Start Part 1 Exam</a>
+                        <button class="part-link start-exam-btn" data-exam="Part 1" data-exam-link="part11.html">Start Part 1 Exam</button>
                     </div>
                 </div>
                 
@@ -544,7 +704,7 @@
                             <li><i class="fas fa-chart-bar"></i> Detailed performance analytics</li>
                             <li><i class="fas fa-book"></i> Reference explanations</li>
                         </ul>
-                        <a href="part22.html" class="part-link">Start Part 2 Exam</a>
+                        <button class="part-link start-exam-btn" data-exam="Part 2" data-exam-link="part22.html">Start Part 2 Exam</button>
                     </div>
                 </div>
                 
@@ -561,7 +721,7 @@
                             <li><i class="fas fa-chart-bar"></i> Detailed performance analytics</li>
                             <li><i class="fas fa-book"></i> Reference explanations</li>
                         </ul>
-                        <a href="part33.html" class="part-link">Start Part 3 Exam</a>
+                        <button class="part-link start-exam-btn" data-exam="Part 3" data-exam-link="part33.html">Start Part 3 Exam</button>
                     </div>
                 </div>
                 
@@ -578,7 +738,7 @@
                             <li><i class="fas fa-chart-bar"></i> Detailed performance analytics</li>
                             <li><i class="fas fa-book"></i> Reference explanations</li>
                         </ul>
-                        <a href="part4.html" class="part-link">Start Part 4 Exam</a>
+                        <button class="part-link start-exam-btn" data-exam="Part 4" data-exam-link="part44.html">Start Part 4 Exam</button>
                     </div>
                 </div>
                 
@@ -595,7 +755,7 @@
                             <li><i class="fas fa-chart-bar"></i> Detailed performance analytics</li>
                             <li><i class="fas fa-book"></i> Reference explanations</li>
                         </ul>
-                        <a href="part5.html" class="part-link">Start Part 5 Exam</a>
+                        <button class="part-link start-exam-btn" data-exam="Part 5" data-exam-link="part55.html">Start Part 5 Exam</button>
                     </div>
                 </div>
             </div>
@@ -642,6 +802,103 @@
         </div>
     </section>
 
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Register for MedQuiz</h2>
+            
+            <div id="formMessage" class="form-message"></div>
+            
+            <form id="registrationForm" action="https://formspree.io/f/manayznq" method="POST">
+                <input type="hidden" id="selectedExam" name="Selected Exam" value="">
+                <input type="hidden" id="selectedExamLink" name="Selected Exam Link" value="">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">Full Name <span class="required">*</span></label>
+                        <input type="text" id="fullName" name="Full Name" required placeholder="Enter your full name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="Email" required placeholder="Enter your email">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="department">Department <span class="required">*</span></label>
+                        <select id="department" name="Department" required>
+                            <option value="">Select Department</option>
+                            <option value="Medical Laboratory Science">Medical Laboratory Science</option>
+                            <option value="Clinical Pathology">Clinical Pathology</option>
+                            <option value="Hematology">Hematology</option>
+                            <option value="Microbiology">Microbiology</option>
+                            <option value="Biochemistry">Biochemistry</option>
+                            <option value="Immunology">Immunology</option>
+                            <option value="Blood Banking">Blood Banking</option>
+                            <option value="Histopathology">Histopathology</option>
+                            <option value="Cytology">Cytology</option>
+                            <option value="Molecular Diagnostics">Molecular Diagnostics</option>
+                            <option value="Radiology">Radiology</option>
+                            <option value="Nursing">Nursing</option>
+                            <option value="Pharmacy">Pharmacy</option>
+                            <option value="Medicine">Medicine</option>
+                            <option value="Dentistry">Dentistry</option>
+                            <option value="Public Health">Public Health</option>
+                            <option value="Other">Other Health Department</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="yearOfEducation">Year of Education <span class="required">*</span></label>
+                        <select id="yearOfEducation" name="Year of Education" required>
+                            <option value="">Select Year</option>
+                            <option value="1st Year">1st Year</option>
+                            <option value="2nd Year">2nd Year</option>
+                            <option value="3rd Year">3rd Year</option>
+                            <option value="4th Year">4th Year</option>
+                            <option value="5th Year">5th Year</option>
+                            <option value="Intern">Intern</option>
+                            <option value="Postgraduate">Postgraduate</option>
+                            <option value="Practicing Professional">Practicing Professional</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="Phone Number" required placeholder="Enter your phone number">
+                        <p class="form-note">Format: +1234567890 or 123-456-7890</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="institution">Institution/University (Optional)</label>
+                        <input type="text" id="institution" name="Institution" placeholder="Your institution name">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="goals">Learning Goals (Optional)</label>
+                    <textarea id="goals" name="Learning Goals" rows="3" placeholder="What are your learning goals? Which certification are you preparing for?"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span id="submitText">Complete Registration</span>
+                    <span id="loadingSpinner" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> Processing...
+                    </span>
+                </button>
+                
+                <p class="form-note" style="text-align: center; margin-top: 1rem;">
+                    By registering, you agree to our Terms of Service and Privacy Policy
+                </p>
+            </form>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -667,11 +924,11 @@
                 
                 <div class="footer-section">
                     <h3>Exam Parts</h3>
-                    <a href="part11.html">Part 1</a>
-                    <a href="part22.html">Part 2</a>
-                    <a href="part33.html">Part 3</a>
-                    <a href="part44.html">Part 4</a>
-                    <a href="part55.html">Part 5</a>
+                    <a href="#" class="start-exam-btn" data-exam="Part 1" data-exam-link="part11.html">Part 1</a>
+                    <a href="#" class="start-exam-btn" data-exam="Part 2" data-exam-link="part22.html">Part 2</a>
+                    <a href="#" class="start-exam-btn" data-exam="Part 3" data-exam-link="part33.html">Part 3</a>
+                    <a href="#" class="start-exam-btn" data-exam="Part 4" data-exam-link="part44.html">Part 4</a>
+                    <a href="#" class="start-exam-btn" data-exam="Part 5" data-exam-link="part55.html">Part 5</a>
                 </div>
                 
                 <div class="footer-section">
@@ -722,6 +979,162 @@
                 this.classList.add('active');
             });
         });
+
+        // Registration Modal Functionality
+        const modal = document.getElementById('registrationModal');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const registerHeroBtn = document.getElementById('registerHeroBtn');
+        const startExamBtns = document.querySelectorAll('.start-exam-btn');
+        const registrationForm = document.getElementById('registrationForm');
+        const selectedExamInput = document.getElementById('selectedExam');
+        const selectedExamLinkInput = document.getElementById('selectedExamLink');
+        const formMessage = document.getElementById('formMessage');
+        const submitBtn = document.getElementById('submitBtn');
+        const submitText = document.getElementById('submitText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        // Check if user is already registered
+        function isRegistered() {
+            return localStorage.getItem('medquizRegistered') === 'true';
+        }
+
+        // Open modal function
+        function openModal(examName = '', examLink = '') {
+            selectedExamInput.value = examName;
+            selectedExamLinkInput.value = examLink;
+            
+            // If user is already registered and trying to access a specific exam
+            if (isRegistered() && examLink) {
+                window.location.href = examLink;
+                return;
+            }
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        // Close modal function
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+            formMessage.style.display = 'none';
+            formMessage.className = 'form-message';
+        }
+
+        // Event Listeners
+        registerHeroBtn.addEventListener('click', () => openModal());
+
+        startExamBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const examName = this.getAttribute('data-exam');
+                const examLink = this.getAttribute('data-exam-link');
+                openModal(examName, examLink);
+            });
+        });
+
+        closeModalBtn.addEventListener('click', closeModal);
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Form submission handler
+        registrationForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitText.style.display = 'none';
+            loadingSpinner.style.display = 'inline';
+            
+            // Hide any previous messages
+            formMessage.style.display = 'none';
+            
+            try {
+                // Submit to Formspree
+                const formData = new FormData(this);
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // Show success message
+                    formMessage.textContent = 'Registration successful! You can now access the exams.';
+                    formMessage.className = 'form-message success-message';
+                    formMessage.style.display = 'block';
+                    
+                    // Mark user as registered in localStorage
+                    localStorage.setItem('medquizRegistered', 'true');
+                    
+                    // Store user info (without sensitive data)
+                    const userData = {
+                        name: document.getElementById('fullName').value,
+                        department: document.getElementById('department').value,
+                        year: document.getElementById('yearOfEducation').value,
+                        registeredAt: new Date().toISOString()
+                    };
+                    localStorage.setItem('medquizUserData', JSON.stringify(userData));
+                    
+                    // Redirect to exam if one was selected
+                    const examLink = selectedExamLinkInput.value;
+                    if (examLink) {
+                        setTimeout(() => {
+                            window.location.href = examLink;
+                        }, 1500);
+                    } else {
+                        // Reset form and close modal after 2 seconds
+                        setTimeout(() => {
+                            registrationForm.reset();
+                            closeModal();
+                        }, 2000);
+                    }
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                // Show error message
+                formMessage.textContent = 'Registration failed. Please try again or contact support.';
+                formMessage.className = 'form-message error-message';
+                formMessage.style.display = 'block';
+                
+                // Reset button state
+                submitBtn.disabled = false;
+                submitText.style.display = 'inline';
+                loadingSpinner.style.display = 'none';
+            }
+        });
+
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            if (value.length > 0) {
+                if (value.length <= 3) {
+                    value = value;
+                } else if (value.length <= 6) {
+                    value = `${value.slice(0, 3)}-${value.slice(3)}`;
+                } else {
+                    value = `${value.slice(0, 3)}-${value.slice(3, 6)}-${value.slice(6, 10)}`;
+                }
+            }
+            
+            e.target.value = value;
+        });
+
+        // Check on page load if user is already registered
+        document.addEventListener('DOMContentLoaded', function() {
+            if (isRegistered()) {
+                // User is registered, we could show a welcome message or adjust UI
+                console.log('Welcome back!');
+            }
+        });
     </script>
 </body>
-</html>
+    </html>
