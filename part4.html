@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medical Microbiology Visual Study Guide</title>
+    <title>Medical Microbiology Quiz: Gram-Positive Cocci</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         * {
             margin: 0;
@@ -14,477 +13,478 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        :root {
-            --primary-color: #1a2980;
-            --secondary-color: #26d0ce;
-            --accent-color: #ff6b6b;
-            --light-color: #f8f9fa;
-            --dark-color: #212529;
-            --success-color: #4CAF50;
-            --warning-color: #FFC107;
-            --info-color: #17a2b8;
-        }
-        
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
-            color: var(--dark-color);
+            background-color: #f5f9fc;
+            color: #333;
             line-height: 1.6;
-            min-height: 100vh;
-            padding-bottom: 50px;
+            padding: 20px;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
         
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
         
         header {
-            text-align: center;
-            padding: 40px 0;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(to right, #2c3e50, #4a6491);
             color: white;
-            border-radius: 20px;
-            margin-bottom: 40px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
+            padding: 25px 30px;
+            text-align: center;
+            border-bottom: 5px solid #1abc9c;
         }
         
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
-        }
-        
-        h1 {
-            font-size: 3.2rem;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        .subtitle {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            font-weight: 300;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .tagline {
-            background-color: rgba(255, 255, 255, 0.2);
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-weight: 500;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .topic-nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
-        }
-        
-        .nav-btn {
-            background-color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            gap: 15px;
         }
         
-        .nav-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        header h1 i {
+            color: #1abc9c;
         }
         
-        .nav-btn.active {
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 30px;
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #eaeaea;
+        }
+        
+        .info-card {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            flex: 1;
+            margin: 0 10px;
+        }
+        
+        .info-card h3 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .info-card .value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .quiz-container {
+            display: flex;
+            min-height: 600px;
+        }
+        
+        .question-section {
+            flex: 3;
+            padding: 30px;
+            border-right: 2px solid #f0f0f0;
+        }
+        
+        .question-counter {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        
+        .question-text {
+            font-size: 1.4rem;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+        
+        .options-container {
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            background-color: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 18px 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background-color: #edf7ff;
+            border-color: #a8d5ff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .option.selected {
+            border-color: #3498db;
+            background-color: #e1f0ff;
+        }
+        
+        .option.correct {
+            border-color: #27ae60;
+            background-color: #d5f4e6;
+        }
+        
+        .option.incorrect {
+            border-color: #e74c3c;
+            background-color: #fdeaea;
+        }
+        
+        .option-label {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: #3498db;
             color: white;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            flex-shrink: 0;
         }
         
-        .study-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+        .option.correct .option-label {
+            background-color: #27ae60;
         }
         
-        @media (max-width: 1100px) {
-            .study-container {
-                grid-template-columns: 1fr;
-            }
+        .option.incorrect .option-label {
+            background-color: #e74c3c;
         }
         
-        .topic-card {
-            background-color: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
-            transition: transform 0.4s ease;
+        .feedback-section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
             display: none;
-        }
-        
-        .topic-card.active {
-            display: block;
             animation: fadeIn 0.5s ease;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
-        .topic-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .card-header {
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 25px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .card-icon {
-            font-size: 2.5rem;
-            background-color: rgba(255, 255, 255, 0.2);
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .card-title {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-        }
-        
-        .card-subtitle {
-            opacity: 0.9;
-            font-weight: 300;
-        }
-        
-        .card-content {
-            padding: 30px;
-        }
-        
-        .key-points, .memory-tips {
-            margin-bottom: 30px;
-        }
-        
-        .section-title {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid var(--secondary-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .point-item {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            background-color: #f8fafc;
-            transition: all 0.3s ease;
-        }
-        
-        .point-item:hover {
-            background-color: #edf2f7;
-            transform: translateX(5px);
-        }
-        
-        .point-icon {
-            background-color: var(--secondary-color);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-weight: bold;
-        }
-        
-        .point-text {
-            flex: 1;
-        }
-        
-        .point-title {
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: var(--primary-color);
-        }
-        
-        .tip-item {
-            background-color: #fff9db;
-            border-left: 5px solid var(--warning-color);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .tip-item::before {
-            content: "💡";
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 2rem;
-            opacity: 0.2;
-        }
-        
-        .tip-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #d97706;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .tip-content {
-            font-style: italic;
-        }
-        
-        .visual-aid {
-            background-color: #e3f2fd;
-            border-radius: 15px;
-            padding: 25px;
-            margin-top: 30px;
-            border-left: 5px solid var(--info-color);
-        }
-        
-        .visual-title {
-            font-size: 1.3rem;
-            color: var(--info-color);
+        .feedback-title {
+            font-size: 1.2rem;
+            color: #2c3e50;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        .visual-content {
+        .feedback-title i {
+            color: #3498db;
+        }
+        
+        .explanation {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .tips {
+            background-color: #fff8e1;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .tips h4 {
+            color: #d35400;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            gap: 8px;
         }
         
-        .visual-icon {
-            font-size: 3rem;
-            color: var(--primary-color);
-        }
-        
-        .visual-text {
+        .sidebar {
             flex: 1;
-            min-width: 200px;
-        }
-        
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        .comparison-table th {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px;
-            text-align: left;
-        }
-        
-        .comparison-table td {
-            padding: 15px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        
-        .comparison-table tr:nth-child(even) {
+            padding: 30px;
             background-color: #f8f9fa;
         }
         
-        .comparison-table tr:hover {
-            background-color: #edf2f7;
+        .progress-container {
+            margin-bottom: 40px;
         }
         
-        .mnemonic-box {
-            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            margin-top: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .mnemonic-box::before {
-            content: "🔤";
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 3rem;
-            opacity: 0.3;
-        }
-        
-        .mnemonic-title {
-            font-size: 1.4rem;
+        .progress-title {
+            font-size: 1.2rem;
+            color: #2c3e50;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        .mnemonic-text {
-            font-size: 1.2rem;
-            font-weight: 600;
+        .progress-bar {
+            height: 12px;
+            background-color: #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
             margin-bottom: 10px;
         }
         
-        .mnemonic-explanation {
-            font-style: italic;
-            opacity: 0.9;
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #1abc9c, #3498db);
+            width: 0%;
+            transition: width 0.5s ease;
         }
         
-        .interactive-element {
-            background-color: #e8f5e9;
-            border-radius: 15px;
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 40px;
+        }
+        
+        .btn {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #d5dbdb;
+        }
+        
+        .btn-success {
+            background-color: #27ae60;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #219653;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+        }
+        
+        .score-summary {
+            background-color: white;
             padding: 25px;
-            margin-top: 30px;
-            border-left: 5px solid var(--success-color);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-top: 40px;
+            text-align: center;
+            display: none;
         }
         
-        .interactive-title {
-            font-size: 1.3rem;
-            color: var(--success-color);
+        .score-summary h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(#27ae60 0%, #e0e0e0 0%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            position: relative;
+        }
+        
+        .score-inner {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .score-percent {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .score-text {
+            font-size: 1rem;
+            color: #7f8c8d;
+        }
+        
+        .score-details {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        
+        .score-detail {
+            text-align: center;
+        }
+        
+        .score-detail .value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .score-detail .label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        .question-navigation {
+            margin-top: 30px;
+        }
+        
+        .nav-title {
+            font-size: 1.1rem;
+            color: #2c3e50;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        .quiz-question {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
-        }
-        
-        .quiz-options {
+        .nav-buttons {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         
-        .quiz-option {
-            padding: 12px 20px;
-            border-radius: 8px;
+        .nav-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             border: 2px solid #e0e0e0;
+            background-color: white;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
             transition: all 0.2s ease;
         }
         
-        .quiz-option:hover {
-            background-color: #f0f8ff;
-            border-color: var(--primary-color);
+        .nav-btn:hover {
+            border-color: #3498db;
+            background-color: #e1f0ff;
         }
         
-        .quiz-option.correct {
-            background-color: #d4edda;
-            border-color: var(--success-color);
-            color: #155724;
+        .nav-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
         }
         
-        .quiz-option.incorrect {
-            background-color: #f8d7da;
-            border-color: #f5c6cb;
-            color: #721c24;
+        .nav-btn.answered {
+            background-color: #27ae60;
+            color: white;
+            border-color: #27ae60;
         }
         
-        .footer {
+        .nav-btn.incorrect-answered {
+            background-color: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+        
+        footer {
             text-align: center;
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 2px dashed #ddd;
-            color: #666;
+            padding: 20px;
+            color: #7f8c8d;
             font-size: 0.9rem;
+            border-top: 1px solid #eaeaea;
+            background-color: #f8f9fa;
         }
         
-        .study-timer {
-            background-color: white;
-            border-radius: 10px;
-            padding: 15px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .timer-text {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-        
-        .timer-value {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--secondary-color);
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .study-container {
-                gap: 20px;
-            }
-            
-            .card-header {
+        @media (max-width: 992px) {
+            .quiz-container {
                 flex-direction: column;
-                text-align: center;
+            }
+            
+            .question-section {
+                border-right: none;
+                border-bottom: 2px solid #f0f0f0;
+            }
+            
+            .quiz-info {
+                flex-direction: column;
                 gap: 15px;
             }
             
-            .topic-nav {
-                gap: 10px;
+            .info-card {
+                margin: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .question-text {
+                font-size: 1.2rem;
             }
             
-            .nav-btn {
-                padding: 10px 15px;
-                font-size: 0.9rem;
+            .option {
+                padding: 15px;
+            }
+            
+            .score-details {
+                flex-direction: column;
+                gap: 15px;
             }
         }
     </style>
@@ -492,557 +492,1287 @@
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-microscope"></i> Medical Microbiology</h1>
-            <p class="subtitle">Visual Study Notes with Funny Memory Tricks</p>
-            <div class="tagline">Because memorizing bacteria shouldn't be a painful infection!</div>
+            <h1><i class="fas fa-microscope"></i> Medical Microbiology Quiz</h1>
+            <p>Test your knowledge of Gram-Positive Cocci with this interactive quiz featuring immediate feedback and detailed explanations.</p>
         </header>
         
-        <div class="topic-nav">
-            <button class="nav-btn active" data-topic="history">
-                <i class="fas fa-history"></i> History
-            </button>
-            <button class="nav-btn" data-topic="classification">
-                <i class="fas fa-sitemap"></i> Classification
-            </button>
-            <button class="nav-btn" data-topic="cell-structure">
-                <i class="fas fa-bacterium"></i> Cell Structure
-            </button>
-            <button class="nav-btn" data-topic="growth">
-                <i class="fas fa-chart-line"></i> Growth & Nutrition
-            </button>
-            <button class="nav-btn" data-topic="pathogenesis">
-                <i class="fas fa-user-injured"></i> Pathogenesis
-            </button>
-            <button class="nav-btn" data-topic="staining">
-                <i class="fas fa-palette"></i> Staining Methods
-            </button>
-            <button class="nav-btn" data-topic="sterilization">
-                <i class="fas fa-pump-medical"></i> Sterilization
-            </button>
-            <button class="nav-btn" data-topic="staphylococcus">
-                <i class="fas fa-grape"></i> Staphylococcus
-            </button>
-            <button class="nav-btn" data-topic="streptococcus">
-                <i class="fas fa-link"></i> Streptococcus
-            </button>
+        <div class="quiz-info">
+            <div class="info-card">
+                <h3>Questions</h3>
+                <div class="value" id="total-questions">65</div>
+            </div>
+            <div class="info-card">
+                <h3>Correct</h3>
+                <div class="value" id="correct-count">0</div>
+            </div>
+            <div class="info-card">
+                <h3>Score</h3>
+                <div class="value" id="current-score">0%</div>
+            </div>
         </div>
         
-        <div class="study-container">
-            <!-- Topic 1: History of Microbiology -->
-            <div class="topic-card active" id="history-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-history"></i>
-                    </div>
-                    <div>
-                        <h2 class="card-title">History of Microbiology</h2>
-                        <p class="card-subtitle">From spontaneous generation to germ theory</p>
-                    </div>
+        <div class="quiz-container">
+            <div class="question-section">
+                <div class="question-counter">
+                    Question <span id="current-question">1</span> of <span id="total-questions-display">65</span>
                 </div>
-                <div class="card-content">
-                    <div class="key-points">
-                        <h3 class="section-title"><i class="fas fa-key"></i> Key Points</h3>
-                        <div class="point-item">
-                            <div class="point-icon">1</div>
-                            <div class="point-text">
-                                <div class="point-title">Antonie van Leeuwenhoek (1632-1723)</div>
-                                <p>Father of Microbiology, first to observe bacteria using homemade microscopes, called them "animalcules".</p>
-                            </div>
-                        </div>
-                        <div class="point-item">
-                            <div class="point-icon">2</div>
-                            <div class="point-text">
-                                <div class="point-title">Louis Pasteur (1822-1895)</div>
-                                <p>Disproved spontaneous generation with swan-neck flask experiment. Developed pasteurization and rabies vaccine.</p>
-                            </div>
-                        </div>
-                        <div class="point-item">
-                            <div class="point-icon">3</div>
-                            <div class="point-text">
-                                <div class="point-title">Robert Koch (1843-1910)</div>
-                                <p>Established Koch's postulates to prove germ theory. Discovered causative agents of tuberculosis and cholera.</p>
-                            </div>
-                        </div>
+                
+                <div class="question-text" id="question-text">
+                    <!-- Question will be loaded here -->
+                </div>
+                
+                <div class="options-container" id="options-container">
+                    <!-- Options will be loaded here -->
+                </div>
+                
+                <button class="btn btn-primary" id="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Submit Answer
+                </button>
+                
+                <button class="btn btn-success" id="next-btn" style="display: none;">
+                    <i class="fas fa-arrow-right"></i> Next Question
+                </button>
+                
+                <div class="feedback-section" id="feedback-section">
+                    <h3 class="feedback-title"><i class="fas fa-info-circle"></i> Answer Explanation</h3>
+                    <div class="explanation" id="explanation-text">
+                        <!-- Explanation will be loaded here -->
                     </div>
-                    
-                    <div class="memory-tips">
-                        <h3 class="section-title"><i class="fas fa-lightbulb"></i> Funny Memory Tips</h3>
-                        <div class="tip-item">
-                            <div class="tip-title"><i class="fas fa-fish"></i> Remembering Spontaneous Generation</div>
-                            <div class="tip-content">"Aristotle thought fish appeared from mud like magic. He should have taken a microbiology class!"</div>
-                        </div>
-                        <div class="tip-item">
-                            <div class="tip-title"><i class="fas fa-flask"></i> Pasteur's Swan-Neck Flask</div>
-                            <div class="tip-content">"Think of Pasteur's flask as a fancy wine glass that kept out unwanted bacterial guests. No microbes crashing this party!"</div>
-                        </div>
-                        <div class="tip-item">
-                            <div class="tip-title"><i class="fas fa-stethoscope"></i> Koch's Postulates</div>
-                            <div class="tip-content">"Koch's 4-step postulates: 1) Find it, 2) Grow it, 3) Give it, 4) Get it back. Like borrowing a book from the library!"</div>
-                        </div>
-                    </div>
-                    
-                    <div class="mnemonic-box">
-                        <div class="mnemonic-title"><i class="fas fa-brain"></i> Memory Acronym</div>
-                        <div class="mnemonic-text">"Please Let Bacteria Stay" for the order of historical discoveries:</div>
-                        <div class="mnemonic-explanation">
-                            <strong>P</strong>asteur (disproved spontaneous generation) → 
-                            <strong>L</strong>eeuwenhoek (first saw bacteria) → 
-                            <strong>B</strong>iogenesis theory proven → 
-                            <strong>S</strong>wan-neck flask experiment
-                        </div>
+                    <div class="tips" id="tips-text">
+                        <!-- Tips will be loaded here -->
                     </div>
                 </div>
             </div>
             
-            <!-- Topic 2: Classification -->
-            <div class="topic-card" id="classification-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-sitemap"></i>
+            <div class="sidebar">
+                <div class="progress-container">
+                    <h3 class="progress-title"><i class="fas fa-chart-line"></i> Quiz Progress</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
                     </div>
-                    <div>
-                        <h2 class="card-title">Classification of Microbes</h2>
-                        <p class="card-subtitle">Organizing the tiny world</p>
+                    <div class="progress-text">
+                        <span id="questions-completed">0</span> of <span id="total-questions-sidebar">65</span> completed
                     </div>
                 </div>
-                <div class="card-content">
-                    <div class="key-points">
-                        <h3 class="section-title"><i class="fas fa-key"></i> Key Points</h3>
-                        <div class="point-item">
-                            <div class="point-icon">1</div>
-                            <div class="point-text">
-                                <div class="point-title">Prokaryotes vs Eukaryotes</div>
-                                <p>Prokaryotes (bacteria) lack nucleus and membrane-bound organelles. Eukaryotes (fungi, protozoa) have them.</p>
-                            </div>
-                        </div>
-                        <div class="point-item">
-                            <div class="point-icon">2</div>
-                            <div class="point-text">
-                                <div class="point-title">Four Major Groups</div>
-                                <p>Bacteria (prokaryotic), Fungi (eukaryotic), Viruses (non-living particles), Parasites (eukaryotic, unicellular/multicellular).</p>
-                            </div>
-                        </div>
-                        <div class="point-item">
-                            <div class="point-icon">3</div>
-                            <div class="point-text">
-                                <div class="point-title">Bacterial Shapes</div>
-                                <p>Cocci (spherical), Bacilli (rod-shaped), Spirilla (spiral-shaped). Arrangements: chains, clusters, pairs.</p>
-                            </div>
+                
+                <div class="question-navigation">
+                    <h3 class="nav-title"><i class="fas fa-compass"></i> Question Navigation</h3>
+                    <div class="nav-buttons" id="nav-buttons">
+                        <!-- Navigation buttons will be generated here -->
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <button class="btn btn-secondary" id="restart-btn">
+                        <i class="fas fa-redo"></i> Restart Quiz
+                    </button>
+                    <button class="btn btn-secondary" id="review-btn">
+                        <i class="fas fa-eye"></i> Review Answers
+                    </button>
+                </div>
+                
+                <div class="score-summary" id="score-summary">
+                    <h3>Quiz Completed!</h3>
+                    <div class="score-circle" id="score-circle">
+                        <div class="score-inner">
+                            <div class="score-percent" id="final-score">0%</div>
+                            <div class="score-text">Your Score</div>
                         </div>
                     </div>
-                    
-                    <div class="memory-tips">
-                        <h3 class="section-title"><i class="fas fa-lightbulb"></i> Funny Memory Tips</h3>
-                        <div class="tip-item">
-                            <div class="tip-title"><i class="fas fa-cookie-bite"></i> Remembering Cocci Shapes</div>
-                            <div class="tip-content">"Cocci are like M&Ms - they come in singles (micrococcus), pairs (diplococci), chains (streptococci), and clusters (staphylococci). But don't eat them!"</div>
+                    <div class="score-details">
+                        <div class="score-detail">
+                            <div class="value" id="final-correct">0</div>
+                            <div class="label">Correct</div>
                         </div>
-                        <div class="tip-item">
-                            <div class="tip-title"><i class="fas fa-hotdog"></i> Bacilli are like Hot Dogs</div>
-                            <div class="tip-content">"Bacilli are rod-shaped like hot dogs. Some stand alone, some line up in chains. Still not edible!"</div>
+                        <div class="score-detail">
+                            <div class="value" id="final-incorrect">0</div>
+                            <div class="label">Incorrect</div>
                         </div>
-                        <div class="tip-item">
-                            <div class="tip-title"><i class="fas fa-slither"></i> Spirilla are Party Spirals</div>
-                            <div class="tip-content">"Spirilla are the party bacteria - they twist and shout! Think of them as tiny corkscrews trying to open a microscopic wine bottle."</div>
-                        </div>
-                    </div>
-                    
-                    <div class="visual-aid">
-                        <div class="visual-title"><i class="fas fa-eye"></i> Visual Comparison</div>
-                        <div class="visual-content">
-                            <div class="visual-icon">🦠</div>
-                            <div class="visual-text">
-                                <table class="comparison-table">
-                                    <tr>
-                                        <th>Type</th>
-                                        <th>Size</th>
-                                        <th>Memory Hook</th>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Viruses</strong></td>
-                                        <td>18-300 nm</td>
-                                        <td>Smallest - "Tiny vampires that need a host cell"</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Bacteria</strong></td>
-                                        <td>0.2-10 μm</td>
-                                        <td>Prokaryotic - "Simple but mighty single-cells"</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Fungi</strong></td>
-                                        <td>Varies widely</td>
-                                        <td>Eukaryotic - "Mushrooms' tiny cousins"</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Parasites</strong></td>
-                                        <td>Varies widely</td>
-                                        <td>Most complex - "Unwanted microscopic roommates"</td>
-                                    </tr>
-                                </table>
-                            </div>
+                        <div class="score-detail">
+                            <div class="value" id="final-skipped">0</div>
+                            <div class="label">Skipped</div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Topic 3: Bacterial Cell Structure -->
-            <div class="topic-card" id="cell-structure-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-bacterium"></i>
-                    </div>
-                    <div>
-                        <h2 class="card-title">Bacterial Cell Structure</h2>
-                        <p class="card-subtitle">What's inside those tiny organisms</p>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <div class="key-points">
-                        <h3 class="section-title"><i class="fas fa-key"></i> Key Points</h3>
-                        <div class="point-item">
-                            <div class="point-icon">1</div>
-                            <div class="point-text">
-                                <div class="point-title">Cell Wall</div>
-                                <p>Made of peptidoglycan. Gram-positive: thick layer. Gram-negative: thin layer + outer membrane with LPS (endotoxin).</p>
-                            </div>
-                        </div>
-                        <div class="point-item">
-                            <div class="point-icon">2</div>
-                            <div class="point-text">
-                                <div class="point-title">Capsule</div>
-                                <p>Polysaccharide layer outside cell wall. Protects from phagocytosis and helps adhesion. Like a bacterial "invisibility cloak".</p>
-                            </div>
-                        </div>
-                        <div class="point-item">
-                            <div class="point-icon">3</div>
-                            <div class="point-text">
-                                <div class="point-title">Flagella & Pili</div>
-                                <p>Flagella for movement (like bacterial motors). Pili for attachment and genetic exchange (bacterial "dating app").</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="memory-tips">
-                        <h3 class="section-title"><i class="fas fa-lightbulb"></i> Funny Memory Tips</h3>
-                        <div class="tip-item">
-                            <div class="tip-title"><i class="fas fa-layer-group"></i> Gram-Positive vs Gram-Negative</div>
-                            <div class="tip-content">"Gram-positive bacteria wear thick purple sweaters (peptidoglycan). Gram-negatives wear thin purple T-shirts under a toxic raincoat (LPS outer membrane)!"</div>
-                        </div>
-                        <div class="tip-item">
-                            <div class="tip-title"><i class="fas fa-crown"></i> Capsule = Royal Cloak</div>
-                            <div class="tip-content">"Think of capsule as a king's royal cloak that protects from enemy attacks (phagocytes). No cloak = easier to catch!"</div>
-                        </div>
-                        <div class="tip-item">
-                            <div class="tip-title"><i class="fas fa-flag"></i> Flagella are Bacterial Motors</div>
-                            <div class="tip-content">"Flagella are like tiny outboard motors. Monotrichous = one motorboat, Lophotrichous = speedboat with many motors, Peritrichous = all-terrain vehicle with motors everywhere!"</div>
-                        </div>
-                    </div>
-                    
-                    <div class="interactive-element">
-                        <div class="interactive-title"><i class="fas fa-gamepad"></i> Quick Quiz: Gram Staining</div>
-                        <div class="quiz-question">
-                            <p>What color do Gram-positive bacteria appear after Gram staining?</p>
-                            <div class="quiz-options">
-                                <div class="quiz-option" data-correct="true">Purple/Violet</div>
-                                <div class="quiz-option" data-correct="false">Pink/Red</div>
-                                <div class="quiz-option" data-correct="false">Green</div>
-                                <div class="quiz-option" data-correct="false">Blue</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mnemonic-box">
-                        <div class="mnemonic-title"><i class="fas fa-brain"></i> Memory Acronym</div>
-                        <div class="mnemonic-text">"Very Purple People" for Gram-positive characteristics:</div>
-                        <div class="mnemonic-explanation">
-                            <strong>V</strong>ery thick peptidoglycan → 
-                            <strong>P</strong>urple after Gram stain → 
-                            <strong>P</strong>eptidoglycan and teichoic acids
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Topic 4: Bacterial Growth & Nutrition -->
-            <div class="topic-card" id="growth-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div>
-                        <h2 class="card-title">Bacterial Growth & Nutrition</h2>
-                        <p class="card-subtitle">How bacteria eat, breathe, and multiply</p>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <div class="key-points">
-                        <h3 class="section-title"><i class="fas fa-key"></i> Key Points</h3>
-                        <div class="point-item">
-                            <div class="point-icon">1</div>
-                            <div class="point-text">
-                                <div class="point-title">Growth Phases</div>
-                                <p>Lag (adapting), Log (exponential growth), Stationary (balance), Death (decline). Bacteria divide by binary fission.</p>
-                            </div>
-                        </div>
-                        <div class="point-item">
-                            <div class="point-icon">2</div>
-                            <div class="point-text">
-                                <div class="point-title">Oxygen Requirements</div>
-                                <p>Obligate aerobes (need O₂), Obligate anaerobes (die with O₂), Facultative anaerobes (flexible), Microaerophiles (need low O₂).</p>
-                            </div>
-                        </div>
-                        <div class="point-item">
-                            <div class="point-icon">3</div>
-                            <div class="point-text">
-                                <div class="point-title">Temperature Requirements</div>
-                                <p>Psychrophiles (cold lovers), Mesophiles (middle lovers like pathogens), Thermophiles (heat lovers), Hyperthermophiles (extreme heat).</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="memory-tips">
-                        <h3 class="section-title"><i class="fas fa-lightbulb"></i> Funny Memory Tips</h3>
-                        <div class="tip-item">
-                            <div class="tip-title"><i class="fas fa-baby"></i> Bacterial Growth Phases</div>
-                            <div class="tip-content">"Think of bacterial growth like a party: 1) Lag phase = awkwardly looking for friends, 2) Log phase = party is lit and everyone is multiplying, 3) Stationary = too crowded, 4) Death = police shut down the party!"</div>
-                        </div>
-                        <div class="tip-item">
-                            <div class="tip-title"><i class="fas fa-wind"></i> Oxygen Requirements</div>
-                            <div class="tip-content">"Obligate aerobes are like marathon runners (need oxygen). Obligate anaerobes are like vampires (die in sunlight/oxygen). Facultative anaerobes are like weekend warriors (adapt to any situation)!"</div>
-                        </div>
-                        <div class="tip-item">
-                            <div class="tip-title"><i class="fas fa-temperature-high"></i> Temperature Preferences</div>
-                            <div class="tip-content">"Psychrophiles = Eskimo bacteria, Mesophiles = Goldilocks bacteria (just right at 37°C), Thermophiles = sauna-loving bacteria, Hyperthermophiles = lava-dwelling extreme bacteria!"</div>
-                        </div>
-                    </div>
-                    
-                    <div class="visual-aid">
-                        <div class="visual-title"><i class="fas fa-eye"></i> Visual Growth Curve</div>
-                        <div class="visual-content">
-                            <div class="visual-icon">📈</div>
-                            <div class="visual-text">
-                                <p><strong>Lag Phase:</strong> "Getting ready to party" - Bacteria adapting to environment</p>
-                                <p><strong>Log Phase:</strong> "Exponential rave" - Rapid division, antibiotics work best here</p>
-                                <p><strong>Stationary Phase:</strong> "Crowded dance floor" - Nutrients running out, waste accumulating</p>
-                                <p><strong>Death Phase:</strong> "Party's over" - More bacteria dying than dividing</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mnemonic-box">
-                        <div class="mnemonic-title"><i class="fas fa-brain"></i> Memory Acronym</div>
-                        <div class="mnemonic-text">"LSD" for bacterial growth phases (but the safe version!):</div>
-                        <div class="mnemonic-explanation">
-                            <strong>L</strong>ag → 
-                            <strong>S</strong>tationary → 
-                            <strong>D</strong>eath (Log phase is in the middle, making it LSD)
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Topic 5: Pathogenesis -->
-            <div class="topic-card" id="pathogenesis-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-user-injured"></i>
-                    </div>
-                    <div>
-                        <h2 class="card-title">Bacterial Pathogenesis</h2>
-                        <p class="card-subtitle">How bacteria cause disease</p>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <div class="key-points">
-                        <h3 class="section-title"><i class="fas fa-key"></i> Key Points</h3>
-                        <div class="point-item">
-                            <div class="point-icon">1</div>
-                            <div class="point-text">
-                                <div class="point-title">Virulence Factors</div>
-                                <p>Features that help bacteria cause disease: adhesins (stick to host), capsules (avoid phagocytosis), toxins (damage host).</p>
-                            </div>
-                        </div>
-                        <div class="point-item">
-                            <div class="point-icon">2</div>
-                            <div class="point-text">
-                                <div class="point-title">Exotoxins vs Endotoxins</div>
-                                <p>Exotoxins: proteins secreted by bacteria (both Gram+ and Gram-). Endotoxins: LPS in Gram-negative cell walls (released when bacteria die).</p>
-                            </div>
-                        </div>
-                        <div class="point-item">
-                            <div class="point-icon">3</div>
-                            <div class="point-text">
-                                <div class="point-title">Portals of Entry</div>
-                                <p>Mucous membranes (respiratory, GI, GU tracts), skin (through cuts), parenteral (direct deposition into tissues).</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="memory-tips">
-                        <h3 class="section-title"><i class="fas fa-lightbulb"></i> Funny Memory Tips</h3>
-                        <div class="tip-item">
-                            <div class="tip-title"><i class="fas fa-gift"></i> Exotoxins vs Endotoxins</div>
-                            <div class="tip-content">"Exotoxins are like poisonous presents bacteria actively give you. Endotoxins are like toxic confetti that spills out when you smash a Gram-negative piñata!"</div>
-                        </div>
-                        <div class="tip-item">
-                            <div class="tip-title"><i class="fas fa-door-open"></i> Portals of Entry</div>
-                            <div class="tip-content">"Think of your body as a house with 3 doors: 1) Front door = respiratory tract, 2) Back door = GI tract, 3) Secret trap door = breaks in skin. Bacteria are sneaky burglars!"</div>
-                        </div>
-                        <div class="tip-item">
-                            <div class="tip-title"><i class="fas fa-mask"></i> Virulence Factors</div>
-                            <div class="tip-content">"Virulence factors are bacteria's superpowers: Adhesins = sticky hands, Capsules = invisibility cloak, Toxins = poisonous weapons. Together they make bacterial supervillains!"</div>
-                        </div>
-                    </div>
-                    
-                    <div class="interactive-element">
-                        <div class="interactive-title"><i class="fas fa-gamepad"></i> Quick Quiz: Toxins</div>
-                        <div class="quiz-question">
-                            <p>Which type of toxin is part of the Gram-negative bacterial cell wall?</p>
-                            <div class="quiz-options">
-                                <div class="quiz-option" data-correct="false">Exotoxin</div>
-                                <div class="quiz-option" data-correct="true">Endotoxin</div>
-                                <div class="quiz-option" data-correct="false">Enterotoxin</div>
-                                <div class="quiz-option" data-correct="false">Neurotoxin</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="visual-aid">
-                        <div class="visual-title"><i class="fas fa-eye"></i> Visual Comparison: Exotoxins vs Endotoxins</div>
-                        <div class="visual-content">
-                            <div class="visual-icon">🦠</div>
-                            <div class="visual-text">
-                                <table class="comparison-table">
-                                    <tr>
-                                        <th>Feature</th>
-                                        <th>Exotoxins</th>
-                                        <th>Endotoxins</th>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Source</strong></td>
-                                        <td>Secreted by living bacteria</td>
-                                        <td>Released when Gram-neg bacteria die</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Chemical</strong></td>
-                                        <td>Proteins</td>
-                                        <td>LPS (Lipid A)</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Heat Stability</strong></td>
-                                        <td>Destroyed by heat (except staph enterotoxin)</td>
-                                        <td>Heat stable</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Memory Hook</strong></td>
-                                        <td>"Active poison gifts"</td>
-                                        <td>"Toxic confetti from smashed piñata"</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- More topics would continue here... Due to length constraints, I've shown 5 topics -->
-            
         </div>
         
-        <div class="study-timer">
-            <i class="fas fa-clock"></i>
-            <span class="timer-text">Time Spent Studying:</span>
-            <span class="timer-value" id="timer">00:00</span>
-        </div>
-        
-        <div class="footer">
-            <p><i class="fas fa-graduation-cap"></i> Medical Microbiology Visual Study Guide | Created for Pharmacy Students</p>
-            <p>Remember: "Study hard, but don't forget to laugh! Even bacteria have a funny side."</p>
-        </div>
+        <footer>
+            <p>Medical Microbiology Quiz &copy; 2023 | Based on Lecture Materials for Pharmacy Students</p>
+        </footer>
     </div>
 
     <script>
-        // Timer functionality
-        let startTime = Date.now();
-        let timerInterval;
-        
-        function updateTimer() {
-            const now = Date.now();
-            const diff = now - startTime;
-            
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            const timerStr = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            document.getElementById('timer').textContent = timerStr;
+        // Quiz data - 65 questions about Gram-Positive Cocci
+        const quizData = [
+            {
+                question: "Which of the following is a characteristic of Staphylococcus species?",
+                options: [
+                    "They are gram-negative cocci",
+                    "They grow in clusters resembling grapes",
+                    "They are always pathogenic to humans",
+                    "They are exclusively anaerobic"
+                ],
+                correctAnswer: 1,
+                explanation: "Staphylococci are gram-positive cocci that typically grow in clusters resembling grapes, which is why they are named Staphylococcus (staphyle meaning 'bunch of grapes' in Greek).",
+                tips: "Remember: Staphylococci = clusters; Streptococci = chains"
+            },
+            {
+                question: "What is the primary virulence factor of Staphylococcus aureus that differentiates it from other staphylococci?",
+                options: [
+                    "Catalase production",
+                    "Coagulase production",
+                    "Beta-hemolysis on blood agar",
+                    "Ability to grow in high salt concentration"
+                ],
+                correctAnswer: 1,
+                explanation: "Coagulase production is the key test that differentiates S. aureus (coagulase-positive) from other staphylococci like S. epidermidis and S. saprophyticus (coagulase-negative).",
+                tips: "Coagulase converts fibrinogen to fibrin, creating a protective fibrin clot around the bacteria."
+            },
+            {
+                question: "Which Staphylococcus species is most commonly associated with urinary tract infections in sexually active young women?",
+                options: [
+                    "Staphylococcus aureus",
+                    "Staphylococcus epidermidis",
+                    "Staphylococcus saprophyticus",
+                    "Staphylococcus haemolyticus"
+                ],
+                correctAnswer: 2,
+                explanation: "S. saprophyticus is the second most common cause of UTIs in young women after E. coli. It's resistant to novobiocin, which helps differentiate it from S. epidermidis.",
+                tips: "Remember: 'Saprophyticus' for 'sexually active' women's UTIs"
+            },
+            {
+                question: "What type of toxin is responsible for Staphylococcal Scalded Skin Syndrome (SSSS)?",
+                options: [
+                    "Enterotoxin",
+                    "Toxic Shock Syndrome Toxin (TSST-1)",
+                    "Exfoliative toxin",
+                    "Alpha toxin"
+                ],
+                correctAnswer: 2,
+                explanation: "SSSS is caused by exfoliative toxins (also known as epidermolytic toxins) that cleave desmoglein-1, a protein in desmosomes, leading to separation of skin layers.",
+                tips: "SSSS primarily affects neonates and young children with immature renal function."
+            },
+            {
+                question: "Which of the following enzymes produced by S. aureus is known as 'spreading factor'?",
+                options: [
+                    "Coagulase",
+                    "Hyaluronidase",
+                    "Catalase",
+                    "Beta-lactamase"
+                ],
+                correctAnswer: 1,
+                explanation: "Hyaluronidase degrades hyaluronic acid in connective tissue, allowing the bacteria to spread through tissues, hence called 'spreading factor'.",
+                tips: "Other spreading factors include streptokinase and collagenase produced by various pathogens."
+            },
+            {
+                question: "What is the mechanism of action of Toxic Shock Syndrome Toxin (TSST-1)?",
+                options: [
+                    "Inhibits protein synthesis",
+                    "Acts as a superantigen",
+                    "Disrupts cell membranes",
+                    "Inhibits neurotransmitter release"
+                ],
+                correctAnswer: 1,
+                explanation: "TSST-1 acts as a superantigen that binds directly to MHC class II molecules on antigen-presenting cells and T-cell receptors, causing massive cytokine release.",
+                tips: "Superantigens bypass normal antigen processing and presentation, activating up to 20% of T-cells."
+            },
+            {
+                question: "Which antibiotic is commonly used to treat MRSA infections?",
+                options: [
+                    "Penicillin",
+                    "Methicillin",
+                    "Vancomycin",
+                    "Erythromycin"
+                ],
+                correctAnswer: 2,
+                explanation: "Vancomycin is often the drug of choice for serious MRSA infections. MRSA stands for Methicillin-Resistant Staphylococcus aureus, so methicillin and other beta-lactams are ineffective.",
+                tips: "Alternative treatments for MRSA include linezolid, daptomycin, and clindamycin for susceptible strains."
+            },
+            {
+                question: "What is the characteristic appearance of Streptococcus pyogenes on blood agar?",
+                options: [
+                    "Alpha-hemolytic with greenish discoloration",
+                    "Beta-hemolytic with clear zones",
+                    "Gamma-hemolytic with no change",
+                    "Double zone of hemolysis"
+                ],
+                correctAnswer: 1,
+                explanation: "S. pyogenes (Group A Streptococcus) produces beta-hemolysis, characterized by complete clearing of red blood cells around colonies due to streptolysin O and S toxins.",
+                tips: "Beta-hemolysis = complete clearing; Alpha-hemolysis = partial clearing with green discoloration"
+            },
+            {
+                question: "Which post-streptococcal complication is characterized by inflammation of the heart valves and joints?",
+                options: [
+                    "Acute glomerulonephritis",
+                    "Rheumatic fever",
+                    "Scarlet fever",
+                    "Erysipelas"
+                ],
+                correctAnswer: 1,
+                explanation: "Rheumatic fever is an autoimmune complication that follows untreated S. pyogenes pharyngitis, causing inflammation of heart valves (carditis), joints (arthritis), and other tissues.",
+                tips: "Rheumatic fever typically occurs 2-3 weeks after streptococcal pharyngitis."
+            },
+            {
+                question: "What is the mechanism of Streptococcus pneumoniae's capsule as a virulence factor?",
+                options: [
+                    "Produces toxins that damage host cells",
+                    "Prevents phagocytosis by host immune cells",
+                    "Enhances adherence to host tissues",
+                    "Degrades host antibodies"
+                ],
+                correctAnswer: 1,
+                explanation: "The polysaccharide capsule of S. pneumoniae is its primary virulence factor, preventing phagocytosis by masking bacterial surface components recognized by immune cells.",
+                tips: "There are over 90 serotypes of S. pneumoniae based on capsular polysaccharide differences."
+            },
+            {
+                question: "Which test is used to differentiate Streptococcus pneumoniae from other alpha-hemolytic streptococci?",
+                options: [
+                    "Catalase test",
+                    "Coagulase test",
+                    "Optochin sensitivity",
+                    "Bacitracin sensitivity"
+                ],
+                correctAnswer: 2,
+                explanation: "Optochin (ethylhydrocupreine hydrochloride) sensitivity test: S. pneumoniae is sensitive (zone of inhibition ≥14mm), while other alpha-hemolytic streptococci (viridans group) are resistant.",
+                tips: "Bacitracin test is for Group A Streptococcus (S. pyogenes), while optochin is for S. pneumoniae."
+            },
+            {
+                question: "What is the characteristic shape of Streptococcus pneumoniae when viewed under microscope?",
+                options: [
+                    "Clusters of cocci",
+                    "Chains of cocci",
+                    "Pairs of lancet-shaped cocci",
+                    "Tetrads of cocci"
+                ],
+                correctAnswer: 2,
+                explanation: "S. pneumoniae typically appears as pairs of lancet-shaped (elongated with pointed ends) cocci, often referred to as diplococci.",
+                tips: "The characteristic shape is often described as 'lancet-shaped diplococci'."
+            },
+            {
+                question: "Which Streptococcus species is a leading cause of neonatal meningitis and sepsis?",
+                options: [
+                    "Streptococcus pyogenes (Group A)",
+                    "Streptococcus agalactiae (Group B)",
+                    "Streptococcus pneumoniae",
+                    "Enterococcus faecalis"
+                ],
+                correctAnswer: 1,
+                explanation: "S. agalactiae (Group B Streptococcus, GBS) is a leading cause of early-onset neonatal disease (within first week of life), including meningitis, pneumonia, and sepsis.",
+                tips: "GBS screening of pregnant women at 35-37 weeks gestation is recommended to prevent neonatal transmission."
+            },
+            {
+                question: "What is the primary reservoir for Streptococcus agalactiae (Group B Streptococcus)?",
+                options: [
+                    "Soil and water",
+                    "Gastrointestinal and genitourinary tracts",
+                    "Respiratory tract",
+                    "Skin surface"
+                ],
+                correctAnswer: 1,
+                explanation: "GBS colonizes the gastrointestinal and genitourinary tracts of 10-30% of pregnant women, serving as a reservoir for neonatal transmission during delivery.",
+                tips: "Vertical transmission occurs during passage through the birth canal."
+            },
+            {
+                question: "Which Lancefield group do Enterococci belong to?",
+                options: [
+                    "Group A",
+                    "Group B",
+                    "Group D",
+                    "Group G"
+                ],
+                correctAnswer: 2,
+                explanation: "Enterococci were originally classified as Group D streptococci but were reclassified into their own genus (Enterococcus) in 1984 due to genetic differences.",
+                tips: "Enterococci are often vancomycin-resistant (VRE), posing significant treatment challenges."
+            },
+            {
+                question: "What is the most common clinical manifestation of Enterococcus faecalis infections?",
+                options: [
+                    "Skin infections",
+                    "Urinary tract infections",
+                    "Meningitis",
+                    "Pneumonia"
+                ],
+                correctAnswer: 1,
+                explanation: "Enterococci, particularly E. faecalis, are common causes of urinary tract infections, especially in hospitalized patients with urinary catheters.",
+                tips: "Enterococci are part of normal intestinal flora but can cause opportunistic infections."
+            },
+            {
+                question: "Which test is used to differentiate Staphylococcus from Streptococcus?",
+                options: [
+                    "Coagulase test",
+                    "Catalase test",
+                    "Optochin test",
+                    "Bacitracin test"
+                ],
+                correctAnswer: 1,
+                explanation: "Catalase test: Staphylococci are catalase-positive (produce bubbles when hydrogen peroxide is added), while streptococci are catalase-negative.",
+                tips: "The catalase test is a quick way to differentiate between these two important gram-positive cocci genera."
+            },
+            {
+                question: "What type of hemolysis is produced by Staphylococcus aureus on blood agar?",
+                options: [
+                    "Alpha-hemolysis",
+                    "Beta-hemolysis",
+                    "Gamma-hemolysis",
+                    "Double zone hemolysis"
+                ],
+                correctAnswer: 1,
+                explanation: "Most strains of S. aureus produce beta-hemolysis (complete clearing) on blood agar due to production of hemolysins (alpha, beta, gamma, and delta toxins).",
+                tips: "Some strains may show double zones of hemolysis due to different hemolysins diffusing at different rates."
+            },
+            {
+                question: "Which Staphylococcus species is most commonly associated with infections of prosthetic devices?",
+                options: [
+                    "Staphylococcus aureus",
+                    "Staphylococcus epidermidis",
+                    "Staphylococcus saprophyticus",
+                    "Staphylococcus haemolyticus"
+                ],
+                correctAnswer: 1,
+                explanation: "S. epidermidis is a common cause of infections involving prosthetic devices (heart valves, joints, catheters) due to its ability to form biofilms on foreign material.",
+                tips: "S. epidermidis produces a slime layer (polysaccharide capsule) that enhances biofilm formation."
+            },
+            {
+                question: "What is the mechanism of penicillin resistance in Staphylococcus aureus?",
+                options: [
+                    "Altered penicillin-binding proteins",
+                    "Beta-lactamase production",
+                    "Efflux pumps",
+                    "Target site modification"
+                ],
+                correctAnswer: 1,
+                explanation: "Most S. aureus strains produce beta-lactamase (penicillinase) that hydrolyzes the beta-lactam ring of penicillin, rendering it ineffective.",
+                tips: "MRSA has additional resistance via altered penicillin-binding proteins (PBP2a encoded by mecA gene)."
+            },
+            {
+                question: "Which toxin is responsible for Staphylococcal food poisoning?",
+                options: [
+                    "Exfoliative toxin",
+                    "Enterotoxin",
+                    "Toxic Shock Syndrome Toxin",
+                    "Alpha toxin"
+                ],
+                correctAnswer: 1,
+                explanation: "Staphylococcal enterotoxins (A-E, G-I) are heat-stable toxins that cause rapid-onset food poisoning (2-6 hours after ingestion) characterized by vomiting and diarrhea.",
+                tips: "These toxins are preformed in food, so symptoms appear quickly after ingestion."
+            },
+            {
+                question: "What is the Quellung reaction used to identify?",
+                options: [
+                    "Staphylococcus aureus",
+                    "Streptococcus pneumoniae",
+                    "Streptococcus pyogenes",
+                    "Enterococcus faecalis"
+                ],
+                correctAnswer: 1,
+                explanation: "The Quellung reaction (capsular swelling) occurs when S. pneumoniae capsules bind with type-specific antisera, causing apparent capsule swelling visible under microscope.",
+                tips: "This reaction is used for serotyping S. pneumoniae."
+            },
+            {
+                question: "Which antibiotic is commonly used in the bacitracin test to identify Group A Streptococcus?",
+                options: [
+                    "0.04 unit bacitracin disk",
+                    "5 mcg bacitracin disk",
+                    "10 unit bacitracin disk",
+                    "50 mcg bacitracin disk"
+                ],
+                correctAnswer: 0,
+                explanation: "The bacitracin test uses a low-concentration disk (0.04 units) to differentiate S. pyogenes (Group A, sensitive) from other beta-hemolytic streptococci (resistant).",
+                tips: "A zone of inhibition around the disk indicates sensitivity and presumptive identification as Group A Streptococcus."
+            },
+            {
+                question: "What is the primary mode of transmission for Streptococcus pyogenes?",
+                options: [
+                    "Foodborne",
+                    "Respiratory droplets",
+                    "Sexual contact",
+                    "Vector-borne"
+                ],
+                correctAnswer: 1,
+                explanation: "S. pyogenes is primarily transmitted through respiratory droplets from infected individuals, especially in crowded conditions like schools and military barracks.",
+                tips: "Good respiratory hygiene and handwashing are important preventive measures."
+            },
+            {
+                question: "Which complication of Streptococcus pyogenes infection is characterized by inflammation of the glomeruli?",
+                options: [
+                    "Rheumatic fever",
+                    "Acute glomerulonephritis",
+                    "Scarlet fever",
+                    "Erysipelas"
+                ],
+                correctAnswer: 1,
+                explanation: "Post-streptococcal glomerulonephritis is an immune complex-mediated inflammation of glomeruli that can follow skin or throat infections with nephritogenic strains.",
+                tips: "Unlike rheumatic fever, glomerulonephritis can recur with subsequent streptococcal infections."
+            },
+            {
+                question: "What is the characteristic clinical feature of scarlet fever?",
+                options: [
+                    "Peeling of skin on palms and soles",
+                    "Strawberry tongue",
+                    "Bullous skin lesions",
+                    "Black necrotic eschar"
+                ],
+                correctAnswer: 1,
+                explanation: "Scarlet fever, caused by erythrogenic toxin-producing S. pyogenes, features a 'strawberry tongue' (red, swollen papillae) and a sandpaper-like rash.",
+                tips: "The rash typically begins on the chest and spreads, sparing the palms and soles."
+            },
+            {
+                question: "Which Streptococcus species is bile-esculin positive?",
+                options: [
+                    "Streptococcus pyogenes",
+                    "Streptococcus agalactiae",
+                    "Enterococcus faecalis",
+                    "Streptococcus pneumoniae"
+                ],
+                correctAnswer: 2,
+                explanation: "Enterococci and Group D streptococci are bile-esculin positive, meaning they can hydrolyze esculin to esculetin in the presence of bile, forming a black complex.",
+                tips: "The bile-esculin test is used to differentiate enterococci and Group D streptococci from other streptococci."
+            },
+            {
+                question: "What is the mechanism of vancomycin resistance in Enterococcus faecium?",
+                options: [
+                    "Beta-lactamase production",
+                    "Altered peptidoglycan precursors",
+                    "Efflux pumps",
+                    "Target site modification"
+                ],
+                correctAnswer: 1,
+                explanation: "Vancomycin-resistant enterococci (VRE) alter their peptidoglycan precursors from D-alanyl-D-alanine to D-alanyl-D-lactate or D-alanyl-D-serine, reducing vancomycin binding affinity.",
+                tips: "VanA and VanB are the most common resistance phenotypes in VRE."
+            },
+            {
+                question: "Which of the following is NOT a common site for Staphylococcus aureus colonization?",
+                options: [
+                    "Anterior nares",
+                    "Skin (axillae, perineum)",
+                    "Oropharynx",
+                    "Small intestine"
+                ],
+                correctAnswer: 3,
+                explanation: "S. aureus commonly colonizes the anterior nares (30% of population), skin (axillae, perineum), and oropharynx, but not typically the small intestine.",
+                tips: "Nasal carriage is a risk factor for S. aureus infections, especially in healthcare settings."
+            },
+            {
+                question: "What is the primary treatment for uncomplicated Group A Streptococcus pharyngitis?",
+                options: [
+                    "Vancomycin",
+                    "Penicillin or amoxicillin",
+                    "Ciprofloxacin",
+                    "Clindamycin"
+                ],
+                correctAnswer: 1,
+                explanation: "Penicillin (or amoxicillin) remains the first-line treatment for Group A Streptococcus pharyngitis to prevent rheumatic fever and other complications.",
+                tips: "10 days of treatment is typically required to eradicate the bacteria and prevent complications."
+            },
+            {
+                question: "Which test is used to detect recent Streptococcus pyogenes infection?",
+                options: [
+                    "Anti-DNAse B test",
+                    "Cold agglutinin test",
+                    "Monospot test",
+                    "Widal test"
+                ],
+                correctAnswer: 0,
+                explanation: "Anti-DNAse B and ASO (anti-streptolysin O) tests detect antibodies against streptococcal enzymes, indicating recent S. pyogenes infection.",
+                tips: "These tests are useful for diagnosing post-streptococcal complications when cultures may be negative."
+            },
+            {
+                question: "What is the characteristic colony morphology of Streptococcus pneumoniae?",
+                options: [
+                    "Large, creamy, beta-hemolytic",
+                    "Small, mucoid, alpha-hemolytic",
+                    "Dry, wrinkled, non-hemolytic",
+                    "Golden-yellow, beta-hemolytic"
+                ],
+                correctAnswer: 1,
+                explanation: "S. pneumoniae produces small, mucoid (due to capsule), alpha-hemolytic colonies that are often described as draughtsman-shaped due to central depression.",
+                tips: "The mucoid appearance is due to the polysaccharide capsule."
+            },
+            {
+                question: "Which of the following is a common cause of subacute bacterial endocarditis?",
+                options: [
+                    "Staphylococcus aureus",
+                    "Streptococcus pyogenes",
+                    "Viridans group streptococci",
+                    "Streptococcus agalactiae"
+                ],
+                correctAnswer: 2,
+                explanation: "Viridans group streptococci (like S. sanguis, S. mutans) are common causes of subacute bacterial endocarditis, often following dental procedures.",
+                tips: "These bacteria are normal oral flora that can enter the bloodstream during dental manipulation."
+            },
+            {
+                question: "What is the primary mechanism of Streptococcus pneumoniae's pathogenicity in pneumonia?",
+                options: [
+                    "Toxin production",
+                    "Intracellular replication",
+                    "Inflammation and alveolar filling",
+                    "Vascular invasion"
+                ],
+                correctAnswer: 2,
+                explanation: "S. pneumoniae causes lobar pneumonia by inciting an inflammatory response that leads to alveolar filling with fluid, neutrophils, and bacteria.",
+                tips: "The classic presentation is 'rusty' sputum due to alveolar hemorrhage."
+            },
+            {
+                question: "Which Staphylococcus species is coagulase-negative and novobiocin-resistant?",
+                options: [
+                    "Staphylococcus aureus",
+                    "Staphylococcus epidermidis",
+                    "Staphylococcus saprophyticus",
+                    "Staphylococcus haemolyticus"
+                ],
+                correctAnswer: 2,
+                explanation: "S. saprophyticus is coagulase-negative and resistant to novobiocin, which helps differentiate it from S. epidermidis (novobiocin-sensitive).",
+                tips: "Novobiocin resistance is a key test for identifying S. saprophyticus."
+            },
+            {
+                question: "What is the function of Protein A in Staphylococcus aureus?",
+                options: [
+                    "Degrades penicillin",
+                    "Binds to Fc portion of IgG",
+                    "Causes hemolysis",
+                    "Promotes adherence"
+                ],
+                correctAnswer: 1,
+                explanation: "Protein A binds to the Fc portion of IgG, preventing opsonization and phagocytosis by masking the bacteria from immune recognition.",
+                tips: "Protein A is also used in laboratory tests like the coagglutination test."
+            },
+            {
+                question: "Which Streptococcus species is associated with dental caries?",
+                options: [
+                    "Streptococcus pyogenes",
+                    "Streptococcus agalactiae",
+                    "Streptococcus mutans",
+                    "Streptococcus pneumoniae"
+                ],
+                correctAnswer: 2,
+                explanation: "S. mutans, a viridans group streptococcus, is a primary cause of dental caries due to its ability to metabolize sucrose to lactic acid and form dental plaque.",
+                tips: "S. mutans produces glucosyltransferases that convert sucrose to extracellular glucans for plaque formation."
+            },
+            {
+                question: "What is the typical incubation period for Streptococcal pharyngitis?",
+                options: [
+                    "6-12 hours",
+                    "1-2 days",
+                    "2-4 days",
+                    "7-10 days"
+                ],
+                correctAnswer: 2,
+                explanation: "The incubation period for Streptococcal pharyngitis is typically 2-4 days after exposure to the bacteria.",
+                tips: "Rapid antigen tests can provide quick diagnosis, but culture remains the gold standard."
+            },
+            {
+                question: "Which of the following is NOT a characteristic of Enterococcus species?",
+                options: [
+                    "Grow in 6.5% NaCl",
+                    "Bile-esculin positive",
+                    "Catalase positive",
+                    "Can be vancomycin-resistant"
+                ],
+                correctAnswer: 2,
+                explanation: "Enterococci are catalase-negative, like all streptococci. They are differentiated by their ability to grow in 6.5% NaCl and hydrolyze esculin in bile.",
+                tips: "Enterococci are hardy organisms that can survive harsh conditions, making them problematic in healthcare settings."
+            },
+            {
+                question: "What is the mechanism of Toxic Shock Syndrome caused by Staphylococcus aureus?",
+                options: [
+                    "Endotoxin release",
+                    "Superantigen activity",
+                    "Direct tissue invasion",
+                    "Neurotoxin activity"
+                ],
+                correctAnswer: 1,
+                explanation: "Toxic Shock Syndrome is caused by TSST-1 (and sometimes enterotoxins) acting as superantigens that trigger massive cytokine release leading to shock.",
+                tips: "Tampon use was historically associated with TSS, but it can occur with any S. aureus infection producing TSST-1."
+            },
+            {
+                question: "Which test is used to differentiate Streptococcus pneumoniae from other alpha-hemolytic streptococci?",
+                options: [
+                    "Bile solubility test",
+                    "Catalase test",
+                    "Coagulase test",
+                    "DNase test"
+                ],
+                correctAnswer: 0,
+                explanation: "The bile solubility test: S. pneumoniae is bile-soluble (lyses when exposed to bile salts), while other alpha-hemolytic streptococci are not.",
+                tips: "Optochin sensitivity and bile solubility are both used to identify S. pneumoniae."
+            },
+            {
+                question: "What is the primary treatment for MRSA skin and soft tissue infections?",
+                options: [
+                    "Penicillin",
+                    "Vancomycin",
+                    "Tetracycline",
+                    "Cephalexin"
+                ],
+                correctAnswer: 1,
+                explanation: "Vancomycin is often used for serious MRSA infections, while oral options like trimethoprim-sulfamethoxazole, doxycycline, or clindamycin may be used for less severe infections.",
+                tips: "MRSA stands for Methicillin-Resistant Staphylococcus aureus, resistant to all beta-lactam antibiotics."
+            },
+            {
+                question: "Which Streptococcus species is associated with bovine mastitis and human neonatal infections?",
+                options: [
+                    "Streptococcus pyogenes",
+                    "Streptococcus agalactiae",
+                    "Streptococcus pneumoniae",
+                    "Streptococcus equi"
+                ],
+                correctAnswer: 1,
+                explanation: "S. agalactiae (Group B Streptococcus) causes bovine mastitis and is a major cause of neonatal meningitis, pneumonia, and sepsis in humans.",
+                tips: "The name 'agalactiae' refers to its association with mastitis in cattle (a = without, galactia = milk)."
+            },
+            {
+                question: "What is the characteristic hemolysis pattern of Enterococcus species on blood agar?",
+                options: [
+                    "Alpha-hemolysis",
+                    "Beta-hemolysis",
+                    "Gamma-hemolysis",
+                    "Variable hemolysis"
+                ],
+                correctAnswer: 3,
+                explanation: "Enterococci can show alpha-, beta-, or gamma-hemolysis depending on the strain, though they are often non-hemolytic (gamma).",
+                tips: "Hemolysis pattern is not reliable for identifying enterococci; biochemical tests are needed."
+            },
+            {
+                question: "Which antibiotic class is typically ineffective against Enterococci?",
+                options: [
+                    "Aminoglycosides alone",
+                    "Glycopeptides",
+                    "Oxazolidinones",
+                    "Lipopeptides"
+                ],
+                correctAnswer: 0,
+                explanation: "Aminoglycosides alone are ineffective against enterococci due to poor penetration, but they are synergistic with cell wall-active agents like penicillins.",
+                tips: "Combination therapy (aminoglycoside + penicillin/vancomycin) is often used for serious enterococcal infections."
+            },
+            {
+                question: "What is the function of streptokinase produced by Streptococcus pyogenes?",
+                options: [
+                    "Hemolyzes red blood cells",
+                    "Digests fibrin clots",
+                    "Breaks down hyaluronic acid",
+                    "Causes fever and rash"
+                ],
+                correctAnswer: 1,
+                explanation: "Streptokinase activates plasminogen to plasmin, which digests fibrin clots, allowing the bacteria to spread through tissues.",
+                tips: "Streptokinase is used therapeutically as a thrombolytic agent for myocardial infarction."
+            },
+            {
+                question: "Which Staphylococcus species is most commonly isolated from blood cultures?",
+                options: [
+                    "Staphylococcus aureus",
+                    "Staphylococcus epidermidis",
+                    "Staphylococcus saprophyticus",
+                    "Staphylococcus haemolyticus"
+                ],
+                correctAnswer: 1,
+                explanation: "S. epidermidis is frequently isolated from blood cultures, often representing contamination from skin flora, but can cause true infections in immunocompromised patients or those with medical devices.",
+                tips: "Multiple positive blood cultures or clinical signs are needed to distinguish true infection from contamination."
+            },
+            {
+                question: "What is the characteristic appearance of Streptococcus pyogenes under microscope?",
+                options: [
+                    "Clusters of cocci",
+                    "Pairs of lancet-shaped cocci",
+                    "Chains of cocci",
+                    "Tetrads of cocci"
+                ],
+                correctAnswer: 2,
+                explanation: "S. pyogenes typically appears as chains of cocci (strepto = chain), especially in liquid media, though chains may be short in clinical specimens.",
+                tips: "Chain formation is more pronounced in liquid culture than on solid media."
+            },
+            {
+                question: "Which of the following is a common cause of bacterial conjunctivitis in children?",
+                options: [
+                    "Staphylococcus aureus",
+                    "Streptococcus pneumoniae",
+                    "Haemophilus influenzae",
+                    "All of the above"
+                ],
+                correctAnswer: 3,
+                explanation: "S. aureus, S. pneumoniae, and H. influenzae are all common causes of bacterial conjunctivitis in children.",
+                tips: "The most common causes vary by age group: H. influenzae in young children, S. aureus in older children and adults."
+            },
+            {
+                question: "What is the primary reservoir for Streptococcus pneumoniae?",
+                options: [
+                    "Soil and water",
+                    "Animals",
+                    "Human nasopharynx",
+                    "Contaminated food"
+                ],
+                correctAnswer: 2,
+                explanation: "S. pneumoniae colonizes the human nasopharynx, especially in children, with carriage rates up to 60% in some populations.",
+                tips: "Carriage is usually asymptomatic but can progress to disease when host defenses are compromised."
+            },
+            {
+                question: "Which virulence factor of Streptococcus pyogenes is responsible for the rash in scarlet fever?",
+                options: [
+                    "Streptolysin O",
+                    "Erythrogenic toxin",
+                    "Streptokinase",
+                    "Hyaluronidase"
+                ],
+                correctAnswer: 1,
+                explanation: "Erythrogenic toxins (pyrogenic exotoxins A, B, C) cause the characteristic rash of scarlet fever by inducing cutaneous inflammation.",
+                tips: "Only toxin-producing strains cause scarlet fever; immunity to one toxin does not protect against others."
+            },
+            {
+                question: "What is the mechanism of penicillin resistance in Streptococcus pneumoniae?",
+                options: [
+                    "Beta-lactamase production",
+                    "Altered penicillin-binding proteins",
+                    "Efflux pumps",
+                    "Porin changes"
+                ],
+                correctAnswer: 1,
+                explanation: "Penicillin-resistant S. pneumoniae (PRSP) have altered penicillin-binding proteins (PBPs) with reduced affinity for beta-lactam antibiotics.",
+                tips: "PRSP rates vary geographically and influence empirical antibiotic choices for pneumonia and meningitis."
+            },
+            {
+                question: "Which test is used to identify Group B Streptococcus (S. agalactiae) in pregnant women?",
+                options: [
+                    "Gram stain of vaginal swab",
+                    "Culture on chromogenic agar",
+                    "PCR for specific genes",
+                    "All of the above"
+                ],
+                correctAnswer: 3,
+                explanation: "GBS screening can involve Gram stain (less sensitive), culture (gold standard, often on selective media like chromogenic agar), or PCR (rapid and sensitive).",
+                tips: "Screening at 35-37 weeks gestation allows for intrapartum antibiotic prophylaxis if positive."
+            },
+            {
+                question: "What is the characteristic colony color of Staphylococcus aureus on Mannitol Salt Agar?",
+                options: [
+                    "Colorless",
+                    "Yellow",
+                    "Pink",
+                    "Blue"
+                ],
+                correctAnswer: 1,
+                explanation: "S. aureus ferments mannitol, producing acid that turns the phenol red indicator yellow, while most other staphylococci do not ferment mannitol and colonies remain pink.",
+                tips: "MSA is both selective (high salt) and differential (mannitol fermentation)."
+            },
+            {
+                question: "Which Streptococcus species is optochin-resistant?",
+                options: [
+                    "Streptococcus pneumoniae",
+                    "Streptococcus pyogenes",
+                    "Viridans group streptococci",
+                    "Streptococcus agalactiae"
+                ],
+                correctAnswer: 2,
+                explanation: "Viridans group streptococci are optochin-resistant, while S. pneumoniae is optochin-sensitive.",
+                tips: "Optochin test is a key differentiator between S. pneumoniae and other alpha-hemolytic streptococci."
+            },
+            {
+                question: "What is the primary treatment for vancomycin-resistant Enterococcus faecium?",
+                options: [
+                    "Linezolid",
+                    "Daptomycin",
+                    "Tigecycline",
+                    "All of the above"
+                ],
+                correctAnswer: 3,
+                explanation: "VRE infections may be treated with linezolid, daptomycin, tigecycline, or quinupristin-dalfopristin, depending on susceptibility testing.",
+                tips: "Treatment choice depends on infection site, severity, and local resistance patterns."
+            },
+            {
+                question: "Which Staphylococcus species produces a heat-stable nuclease?",
+                options: [
+                    "Staphylococcus aureus only",
+                    "All Staphylococcus species",
+                    "Coagulase-positive staphylococci",
+                    "None of the above"
+                ],
+                correctAnswer: 0,
+                explanation: "Heat-stable nuclease (DNase) production is characteristic of S. aureus and helps differentiate it from other staphylococci.",
+                tips: "The DNase test with toluidine blue agar is used to detect S. aureus."
+            },
+            {
+                question: "What is the typical treatment duration for Staphylococcus aureus bacteremia?",
+                options: [
+                    "3-5 days",
+                    "7-10 days",
+                    "2-4 weeks",
+                    "6-8 weeks"
+                ],
+                correctAnswer: 2,
+                explanation: "Uncomplicated S. aureus bacteremia typically requires 2 weeks of appropriate antibiotics, while complicated cases (endocarditis, osteomyelitis) may require 4-6 weeks or longer.",
+                tips: "Blood cultures should be repeated to document clearance in S. aureus bacteremia."
+            },
+            {
+                question: "Which Streptococcus species is bacitracin-resistant?",
+                options: [
+                    "Streptococcus pyogenes (Group A)",
+                    "Streptococcus agalactiae (Group B)",
+                    "Streptococcus pneumoniae",
+                    "Enterococcus faecalis"
+                ],
+                correctAnswer: 1,
+                explanation: "Group B Streptococcus (S. agalactiae) is bacitracin-resistant, while Group A (S. pyogenes) is sensitive.",
+                tips: "Bacitracin test helps differentiate Group A from other beta-hemolytic streptococci."
+            },
+            {
+                question: "What is the characteristic feature of necrotizing fasciitis caused by Streptococcus pyogenes?",
+                options: [
+                    "Bullae formation",
+                    "Extensive tissue necrosis",
+                    "Gas production",
+                    "All of the above"
+                ],
+                correctAnswer: 3,
+                explanation: "Streptococcal necrotizing fasciitis (flesh-eating disease) features bullae, extensive tissue necrosis, and sometimes gas production, requiring urgent surgical debridement.",
+                tips: "Prompt diagnosis and aggressive treatment are critical for survival."
+            },
+            {
+                question: "Which antibiotic is contraindicated in patients with a history of penicillin allergy for treating Streptococcus pyogenes?",
+                options: [
+                    "Vancomycin",
+                    "Clindamycin",
+                    "Cephalexin",
+                    "Azithromycin"
+                ],
+                correctAnswer: 2,
+                explanation: "Cephalosporins have approximately 10% cross-reactivity with penicillins and should be avoided in patients with severe penicillin allergy (anaphylaxis).",
+                tips: "Macrolides (azithromycin, clarithromycin) or clindamycin are alternatives for penicillin-allergic patients."
+            },
+            {
+                question: "What is the primary mechanism of Streptococcus pneumoniae's pathogenicity in otitis media?",
+                options: [
+                    "Toxin production",
+                    "Direct invasion of middle ear mucosa",
+                    "Inflammatory response to bacterial components",
+                    "All of the above"
+                ],
+                correctAnswer: 3,
+                explanation: "S. pneumoniae causes otitis media through direct invasion, inflammatory response to cell wall components, and possibly toxin production.",
+                tips: "S. pneumoniae is the most common bacterial cause of otitis media in children."
+            },
+            {
+                question: "Which Staphylococcus species is most commonly associated with toxic shock syndrome?",
+                options: [
+                    "Staphylococcus aureus",
+                    "Staphylococcus epidermidis",
+                    "Staphylococcus saprophyticus",
+                    "All can cause TSS"
+                ],
+                correctAnswer: 0,
+                explanation: "Toxic Shock Syndrome is primarily associated with S. aureus strains producing TSST-1 or enterotoxins.",
+                tips: "Menstrual TSS is classically associated with tampon use, but non-menstrual TSS can occur with any S. aureus infection producing appropriate toxins."
+            },
+            {
+                question: "What is the characteristic hemolysis pattern of Streptococcus agalactiae?",
+                options: [
+                    "Alpha-hemolysis",
+                    "Beta-hemolysis",
+                    "Gamma-hemolysis",
+                    "Double zone hemolysis"
+                ],
+                correctAnswer: 1,
+                explanation: "S. agalactiae (Group B Streptococcus) is beta-hemolytic, though hemolysis may be less pronounced than with S. pyogenes.",
+                tips: "GBS produces a pigment that can give colonies a orange/red color on some media."
+            },
+            {
+                question: "Which test is used to detect penicillinase production in Staphylococcus aureus?",
+                options: [
+                    "Coagulase test",
+                    "Catalase test",
+                    "Beta-lactamase test",
+                    "Oxidase test"
+                ],
+                correctAnswer: 2,
+                explanation: "Beta-lactamase (penicillinase) production can be detected using chromogenic cephalosporin tests (nitrocefin) or acidimetric methods.",
+                tips: "Most community S. aureus isolates (>90%) are penicillin-resistant due to beta-lactamase production."
+            },
+            {
+                question: "What is the primary treatment for Streptococcus pneumoniae meningitis?",
+                options: [
+                    "Penicillin G",
+                    "Ceftriaxone + vancomycin",
+                    "Ampicillin",
+                    "Ciprofloxacin"
+                ],
+                correctAnswer: 1,
+                explanation: "Empirical treatment for bacterial meningitis often includes ceftriaxone plus vancomycin due to increasing penicillin and cephalosporin resistance in S. pneumoniae.",
+                tips: "Dexamethasone is often added to reduce inflammation and neurological sequelae."
+            },
+            {
+                question: "Which of the following is NOT a common site for Streptococcus pneumoniae infection?",
+                options: [
+                    "Middle ear",
+                    "Lungs",
+                    "Meninges",
+                    "Urinary tract"
+                ],
+                correctAnswer: 3,
+                explanation: "S. pneumoniae commonly causes otitis media, pneumonia, and meningitis but rarely causes urinary tract infections.",
+                tips: "S. pneumoniae is an encapsulated organism that typically causes infections in sites with reduced clearance mechanisms."
+            },
+            {
+                question: "What is the function of hyaluronidase produced by Staphylococcus aureus?",
+                options: [
+                    "Hemolyzes red blood cells",
+                    "Digests connective tissue",
+                    "Coagulates plasma",
+                    "Inactivates penicillin"
+                ],
+                correctAnswer: 1,
+                explanation: "Hyaluronidase digests hyaluronic acid in connective tissue, facilitating spread of infection through tissue planes.",
+                tips: "Hyaluronidase is sometimes called 'spreading factor'."
+            },
+            {
+                question: "Which Streptococcus species is associated with greenish discoloration on blood agar?",
+                options: [
+                    "Streptococcus pyogenes",
+                    "Streptococcus agalactiae",
+                    "Streptococcus pneumoniae",
+                    "Enterococcus faecalis"
+                ],
+                correctAnswer: 2,
+                explanation: "S. pneumoniae and other alpha-hemolytic streptococci produce partial hemolysis with greenish discoloration due to hydrogen peroxide production.",
+                tips: "Alpha-hemolysis is also called 'green hemolysis'."
+            },
+            {
+                question: "What is the primary mechanism of Streptococcus pneumoniae transmission?",
+                options: [
+                    "Fecal-oral",
+                    "Respiratory droplets",
+                    "Vector-borne",
+                    "Sexual contact"
+                ],
+                correctAnswer: 1,
+                explanation: "S. pneumoniae is spread through respiratory droplets from infected individuals or asymptomatic carriers.",
+                tips: "Crowded conditions like daycare centers and nursing homes increase transmission risk."
+            },
+            {
+                question: "Which of the following is a common cause of prosthetic valve endocarditis?",
+                options: [
+                    "Staphylococcus aureus",
+                    "Staphylococcus epidermidis",
+                    "Streptococcus pyogenes",
+                    "Streptococcus pneumoniae"
+                ],
+                correctAnswer: 1,
+                explanation: "S. epidermidis is a common cause of prosthetic valve endocarditis due to its ability to adhere to and form biofilms on prosthetic material.",
+                tips: "Early-onset prosthetic valve endocarditis (<60 days post-op) is often caused by S. epidermidis."
+            },
+            {
+                question: "What is the characteristic smell of Staphylococcus aureus colonies?",
+                options: [
+                    "Fruity",
+                    "Grape-like",
+                    "Bleach-like",
+                    "No distinctive smell"
+                ],
+                correctAnswer: 1,
+                explanation: "S. aureus colonies often have a distinctive grape-like or sweet smell due to metabolic byproducts.",
+                tips: "The characteristic smell can be a clue to S. aureus identification in the laboratory."
+            }
+        ];
+
+        // Shuffle function to randomize array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
         }
-        
-        // Start timer
-        timerInterval = setInterval(updateTimer, 1000);
-        
-        // Topic navigation
-        document.querySelectorAll('.nav-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                // Remove active class from all buttons
-                document.querySelectorAll('.nav-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                
-                // Add active class to clicked button
-                this.classList.add('active');
-                
-                // Get topic ID
-                const topic = this.getAttribute('data-topic');
-                
-                // Hide all cards
-                document.querySelectorAll('.topic-card').forEach(card => {
-                    card.classList.remove('active');
-                });
-                
-                // Show selected card
-                document.getElementById(`${topic}-card`).classList.add('active');
-                
-                // Add animation
-                document.getElementById(`${topic}-card`).style.animation = 'none';
-                setTimeout(() => {
-                    document.getElementById(`${topic}-card`).style.animation = 'fadeIn 0.5s ease';
-                }, 10);
-            });
+
+        // Shuffle the correct answer positions for each question
+        quizData.forEach(question => {
+            // Store the correct answer text
+            const correctAnswerText = question.options[question.correctAnswer];
+            
+            // Shuffle all options
+            const shuffledOptions = shuffleArray([...question.options]);
+            
+            // Find the new index of the correct answer
+            const newCorrectIndex = shuffledOptions.indexOf(correctAnswerText);
+            
+            // Update the question object
+            question.options = shuffledOptions;
+            question.correctAnswer = newCorrectIndex;
         });
-        
-        // Quiz functionality
-        document.querySelectorAll('.quiz-option').forEach(option => {
-            option.addEventListener('click', function() {
-                // Remove previous results
-                this.parentElement.querySelectorAll('.quiz-option').forEach(opt => {
-                    opt.classList.remove('correct', 'incorrect');
+
+        // Initialize variables
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+        let answeredQuestions = 0;
+
+        // DOM elements
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const submitBtn = document.getElementById('submit-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const feedbackSection = document.getElementById('feedback-section');
+        const explanationText = document.getElementById('explanation-text');
+        const tipsText = document.getElementById('tips-text');
+        const currentQuestionElement = document.getElementById('current-question');
+        const correctCountElement = document.getElementById('correct-count');
+        const currentScoreElement = document.getElementById('current-score');
+        const progressFill = document.getElementById('progress-fill');
+        const questionsCompletedElement = document.getElementById('questions-completed');
+        const navButtonsContainer = document.getElementById('nav-buttons');
+        const scoreSummary = document.getElementById('score-summary');
+        const finalScoreElement = document.getElementById('final-score');
+        const finalCorrectElement = document.getElementById('final-correct');
+        const finalIncorrectElement = document.getElementById('final-incorrect');
+        const finalSkippedElement = document.getElementById('final-skipped');
+        const scoreCircle = document.getElementById('score-circle');
+        const restartBtn = document.getElementById('restart-btn');
+        const reviewBtn = document.getElementById('review-btn');
+        const totalQuestionsElement = document.getElementById('total-questions');
+        const totalQuestionsDisplay = document.getElementById('total-questions-display');
+        const totalQuestionsSidebar = document.getElementById('total-questions-sidebar');
+
+        // Set total questions
+        const totalQuestions = quizData.length;
+        totalQuestionsElement.textContent = totalQuestions;
+        totalQuestionsDisplay.textContent = totalQuestions;
+        totalQuestionsSidebar.textContent = totalQuestions;
+
+        // Initialize navigation buttons
+        function initializeNavigationButtons() {
+            navButtonsContainer.innerHTML = '';
+            for (let i = 0; i < quizData.length; i++) {
+                const button = document.createElement('div');
+                button.className = 'nav-btn';
+                if (i === currentQuestionIndex) {
+                    button.classList.add('active');
+                }
+                button.textContent = i + 1;
+                button.addEventListener('click', () => {
+                    navigateToQuestion(i);
                 });
+                navButtonsContainer.appendChild(button);
+            }
+        }
+
+        // Update navigation buttons
+        function updateNavigationButtons() {
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach((button, index) => {
+                button.classList.remove('active', 'answered', 'incorrect-answered');
                 
-                // Mark correct/incorrect
-                if (this.getAttribute('data-correct') === 'true') {
-                    this.classList.add('correct');
-                } else {
-                    this.classList.add('incorrect');
-                    // Also show correct answer
-                    this.parentElement.querySelector('.quiz-option[data-correct="true"]').classList.add('correct');
+                if (index === currentQuestionIndex) {
+                    button.classList.add('active');
+                }
+                
+                if (userAnswers[index] !== null) {
+                    if (userAnswers[index] === quizData[index].correctAnswer) {
+                        button.classList.add('answered');
+                    } else {
+                        button.classList.add('incorrect-answered');
+                    }
                 }
             });
-        });
-        
-        // Add hover effects to cards
-        document.querySelectorAll('.topic-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px)';
+        }
+
+        // Load question
+        function loadQuestion() {
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionText.textContent = currentQuestion.question;
+            
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+            
+            // Create new options
+            currentQuestion.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                
+                const optionLabel = document.createElement('div');
+                optionLabel.className = 'option-label';
+                optionLabel.textContent = String.fromCharCode(65 + index); // A, B, C, D
+                
+                const optionText = document.createElement('div');
+                optionText.className = 'option-text';
+                optionText.textContent = option;
+                
+                optionElement.appendChild(optionLabel);
+                optionElement.appendChild(optionText);
+                
+                // If user has already answered this question, show their selection
+                if (userAnswers[currentQuestionIndex] === index) {
+                    optionElement.classList.add('selected');
+                }
+                
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
             });
             
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
+            // Update UI
+            currentQuestionElement.textContent = currentQuestionIndex + 1;
+            updateNavigationButtons();
+            updateProgress();
+            
+            // Hide feedback and show submit button
+            feedbackSection.style.display = 'none';
+            submitBtn.style.display = 'flex';
+            nextBtn.style.display = 'none';
+            
+            // Enable/disable submit button based on whether an option is selected
+            submitBtn.disabled = userAnswers[currentQuestionIndex] === null;
+        }
+
+        // Select option
+        function selectOption(optionIndex) {
+            // Remove selected class from all options
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => {
+                option.classList.remove('selected');
             });
-        });
-        
-        // Initialize with first card active
-        document.getElementById('history-card').classList.add('active');
+            
+            // Add selected class to clicked option
+            options[optionIndex].classList.add('selected');
+            
+            // Store user's answer
+            userAnswers[currentQuestionIndex] = optionIndex;
+            
+            // Enable submit button
+            submitBtn.disabled = false;
+        }
+
+        // Submit answer
+        function submitAnswer() {
+            const selectedOptionIndex = userAnswers[currentQuestionIndex];
+            const correctAnswerIndex = quizData[currentQuestionIndex].correctAnswer;
+            const options = document.querySelectorAll('.option');
+            
+            // Disable all options
+            options.forEach(option => {
+                option.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct and incorrect answers
+            options.forEach((option, index) => {
+                if (index === correctAnswerIndex) {
+                    option.classList.add('correct');
+                } else if (index === selectedOptionIndex && index !== correctAnswerIndex) {
+                    option.classList.add('incorrect');
+                }
+            });
+            
+            // Update score if answer is correct
+            if (selectedOptionIndex === correctAnswerIndex) {
+                score++;
+                correctCountElement.textContent = score;
+            }
+            
+            // Update answered questions count
+            if (userAnswers[currentQuestionIndex] !== null) {
+                answeredQuestions++;
+            }
+            
+            // Update score percentage
+            const scorePercentage = Math.round((score / answeredQuestions) * 100) || 0;
+            currentScoreElement.textContent = `${scorePercentage}%`;
+            
+            // Show feedback
+            explanationText.textContent = quizData[currentQuestionIndex].explanation;
+            tipsText.innerHTML = `<h4><i class="fas fa-lightbulb"></i> Tip</h4><p>${quizData[currentQuestionIndex].tips}</p>`;
+            feedbackSection.style.display = 'block';
+            
+            // Show next button, hide submit button
+            submitBtn.style.display = 'none';
+            nextBtn.style.display = 'flex';
+            
+            // Update navigation buttons
+            updateNavigationButtons();
+        }
+
+        // Next question
+        function nextQuestion() {
+            // Move to next question
+            currentQuestionIndex++;
+            
+            // If we've reached the end, show score summary
+            if (currentQuestionIndex >= quizData.length) {
+                showScoreSummary();
+                return;
+            }
+            
+            // Load next question
+            loadQuestion();
+        }
+
+        // Navigate to specific question
+        function navigateToQuestion(index) {
+            currentQuestionIndex = index;
+            loadQuestion();
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const progressPercentage = (answeredQuestions / quizData.length) * 100;
+            progressFill.style.width = `${progressPercentage}%`;
+            questionsCompletedElement.textContent = answeredQuestions;
+        }
+
+        // Show score summary
+        function showScoreSummary() {
+            // Calculate final score
+            const finalScore = Math.round((score / quizData.length) * 100);
+            
+            // Update final score elements
+            finalScoreElement.textContent = `${finalScore}%`;
+            finalCorrectElement.textContent = score;
+            finalIncorrectElement.textContent = answeredQuestions - score;
+            finalSkippedElement.textContent = quizData.length - answeredQuestions;
+            
+            // Update score circle
+            scoreCircle.style.background = `conic-gradient(#27ae60 0% ${finalScore}%, #e0e0e0 ${finalScore}% 100%)`;
+            
+            // Show score summary, hide question section
+            document.querySelector('.question-section').style.display = 'none';
+            scoreSummary.style.display = 'block';
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            // Reset variables
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            answeredQuestions = 0;
+            
+            // Update UI
+            correctCountElement.textContent = '0';
+            currentScoreElement.textContent = '0%';
+            
+            // Show question section, hide score summary
+            document.querySelector('.question-section').style.display = 'block';
+            scoreSummary.style.display = 'none';
+            
+            // Reload first question
+            loadQuestion();
+        }
+
+        // Review answers
+        function reviewAnswers() {
+            // Go to first question
+            currentQuestionIndex = 0;
+            
+            // Show question section, hide score summary
+            document.querySelector('.question-section').style.display = 'block';
+            scoreSummary.style.display = 'none';
+            
+            // Load first question
+            loadQuestion();
+        }
+
+        // Event listeners
+        submitBtn.addEventListener('click', submitAnswer);
+        nextBtn.addEventListener('click', nextQuestion);
+        restartBtn.addEventListener('click', restartQuiz);
+        reviewBtn.addEventListener('click', reviewAnswers);
+
+        // Initialize quiz
+        initializeNavigationButtons();
+        loadQuestion();
     </script>
 </body>
     </html>
