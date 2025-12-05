@@ -3,1436 +3,1296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medical Microbiology Study Notes: Gram-Positive Cocci</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Chapter 1: Basics of Economics Quiz | Introduction to Economics</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #1abc9c;
-            --danger-color: #e74c3c;
-            --success-color: #27ae60;
-            --warning-color: #f39c12;
-            --light-color: #f8f9fa;
-            --dark-color: #343a40;
-            --border-radius: 10px;
-            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: var(--dark-color);
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
-            padding: 20px;
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        header {
-            text-align: center;
-            padding: 30px 20px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-radius: var(--border-radius);
-            margin-bottom: 30px;
-            box-shadow: var(--box-shadow);
-        }
-        
-        header h1 {
-            font-family: 'Roboto Slab', serif;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-        
-        header p {
-            font-size: 1.1rem;
-            max-width: 800px;
-            margin: 0 auto;
-            opacity: 0.9;
-        }
-        
-        .main-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .sidebar {
-            flex: 1;
-            min-width: 300px;
-            background-color: white;
-            border-radius: var(--border-radius);
-            padding: 25px;
-            box-shadow: var(--box-shadow);
-            height: fit-content;
-        }
-        
-        .content {
-            flex: 2;
-            min-width: 300px;
-            background-color: white;
-            border-radius: var(--border-radius);
-            padding: 30px;
-            box-shadow: var(--box-shadow);
-        }
-        
-        .sidebar h2, .content h2 {
-            font-family: 'Roboto Slab', serif;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid var(--accent-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .sidebar h2 i, .content h2 i {
-            color: var(--accent-color);
-        }
-        
-        .topic-list {
-            list-style: none;
-        }
-        
-        .topic-list li {
-            margin-bottom: 15px;
-        }
-        
-        .topic-list a {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            background-color: var(--light-color);
-            border-radius: var(--border-radius);
-            text-decoration: none;
-            color: var(--dark-color);
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border-left: 4px solid transparent;
-        }
-        
-        .topic-list a:hover {
-            background-color: #e9f7fe;
-            border-left-color: var(--secondary-color);
-            transform: translateX(5px);
-        }
-        
-        .topic-list a.active {
-            background-color: #e1f0ff;
-            border-left-color: var(--secondary-color);
-            color: var(--secondary-color);
-            font-weight: 600;
-        }
-        
-        .topic-list i {
-            margin-right: 10px;
-            width: 20px;
-            text-align: center;
-        }
-        
-        .memory-tips {
-            margin-top: 30px;
-            background-color: #fff8e1;
-            padding: 20px;
-            border-radius: var(--border-radius);
-            border-left: 5px solid var(--warning-color);
-        }
-        
-        .memory-tips h3 {
-            color: var(--warning-color);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .memory-tips ul {
-            padding-left: 20px;
-        }
-        
-        .memory-tips li {
-            margin-bottom: 10px;
-        }
-        
-        .content-section {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .content-section.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .bacteria-card {
-            background-color: var(--light-color);
-            border-radius: var(--border-radius);
-            padding: 25px;
-            margin-bottom: 30px;
-            border-left: 5px solid var(--secondary-color);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-        }
-        
-        .bacteria-card h3 {
-            color: var(--secondary-color);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .bacteria-card h3 i {
-            color: var(--primary-color);
-        }
-        
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .info-item {
-            background-color: white;
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-            border-top: 3px solid var(--accent-color);
-        }
-        
-        .info-item h4 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .mnemonic-box {
-            background-color: #e8f5e9;
-            padding: 20px;
-            border-radius: var(--border-radius);
-            margin: 20px 0;
-            border-left: 5px solid var(--success-color);
-        }
-        
-        .mnemonic-box h4 {
-            color: var(--success-color);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .visual-aid {
-            background-color: #f0f8ff;
-            padding: 20px;
-            border-radius: var(--border-radius);
-            margin: 20px 0;
-            border: 2px dashed var(--secondary-color);
-            text-align: center;
-        }
-        
-        .visual-aid h4 {
-            color: var(--secondary-color);
-            margin-bottom: 15px;
-        }
-        
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-        }
-        
-        .comparison-table th {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px;
-            text-align: left;
-        }
-        
-        .comparison-table td {
-            padding: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .comparison-table tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-        
-        .comparison-table tr:hover {
-            background-color: #e9f7fe;
-        }
-        
-        .badge {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-right: 5px;
-            margin-bottom: 5px;
-        }
-        
-        .badge-gram-positive {
-            background-color: #d4edda;
-            color: #155724;
-        }
-        
-        .badge-gram-negative {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-        
-        .badge-cocci {
-            background-color: #e7f3ff;
-            color: #004085;
-        }
-        
-        .badge-bacilli {
-            background-color: #fff3cd;
-            color: #856404;
-        }
-        
-        .badge-aerobic {
-            background-color: #d1ecf1;
-            color: #0c5460;
-        }
-        
-        .badge-anaerobic {
-            background-color: #d6d8d9;
-            color: #383d41;
-        }
-        
-        .color-code {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        .color-code-item {
-            display: flex;
-            align-items: center;
-            font-size: 0.9rem;
-        }
-        
-        .color-box {
-            width: 15px;
-            height: 15px;
-            border-radius: 3px;
-            margin-right: 8px;
-        }
-        
-        .memory-palace {
-            background-color: #f9f0ff;
-            padding: 25px;
-            border-radius: var(--border-radius);
-            margin: 25px 0;
-            border: 2px solid #9b4dca;
-        }
-        
-        .memory-palace h4 {
-            color: #9b4dca;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .flowchart {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 25px 0;
-        }
-        
-        .flowchart-step {
-            background-color: white;
-            padding: 20px;
-            border-radius: var(--border-radius);
-            margin: 15px 0;
-            width: 80%;
-            text-align: center;
-            box-shadow: var(--box-shadow);
-            position: relative;
-            border: 2px solid var(--secondary-color);
-        }
-        
-        .flowchart-step:not(:last-child):after {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 20px;
-            background-color: var(--secondary-color);
-        }
-        
-        .flowchart-step h5 {
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-        }
-        
-        .exam-tips {
-            background-color: #ffeaa7;
-            padding: 25px;
-            border-radius: var(--border-radius);
-            margin-top: 30px;
-            border-left: 5px solid #fdcb6e;
-        }
-        
-        .exam-tips h3 {
-            color: #e17055;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .quick-review {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 30px;
-        }
-        
-        .review-card {
-            flex: 1;
-            min-width: 250px;
-            background-color: white;
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            border-top: 5px solid var(--accent-color);
-        }
-        
-        .review-card h4 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .review-card ul {
-            padding-left: 20px;
-        }
-        
-        .review-card li {
-            margin-bottom: 8px;
-        }
-        
-        .visual-memory {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 25px 0;
-        }
-        
-        .visual-item {
-            flex: 1;
-            min-width: 250px;
-            background-color: white;
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            text-align: center;
-        }
-        
-        .visual-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            color: var(--secondary-color);
-        }
-        
-        .visual-item h5 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #6c757d;
-            font-size: 0.9rem;
-            margin-top: 40px;
-        }
-        
-        @media (max-width: 768px) {
-            .main-content {
-                flex-direction: column;
-            }
-            
-            header h1 {
-                font-size: 2rem;
-            }
-            
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .flowchart-step {
-                width: 100%;
-            }
-        }
+        /* style.css - Universal quiz styling */
+:root {
+    --primary: #2c3e50;
+    --secondary: #3498db;
+    --success: #27ae60;
+    --danger: #c0392b;
+    --warning: #f39c12;
+    --light: #ecf0f1;
+    --dark: #2c3e50;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+    color: var(--dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.quiz-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 25px;
+    background-color: var(--light);
+    border-bottom: 1px solid #ddd;
+}
+
+.timer {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--danger);
+}
+
+.progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress-bar {
+    width: 200px;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--secondary);
+    width: 0%;
+    transition: var(--transition);
+}
+
+.quiz-container {
+    padding: 30px;
+}
+
+.question-container {
+    margin-bottom: 30px;
+}
+
+.question-number {
+    font-size: 1.1rem;
+    color: var(--secondary);
+    margin-bottom: 5px;
+}
+
+.question-text {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.options-container {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.option {
+    padding: 15px;
+    background-color: var(--light);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.option:hover {
+    background-color: #e0e7ee;
+    transform: translateY(-2px);
+}
+
+.option.selected {
+    border-color: var(--secondary);
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.option.correct {
+    border-color: var(--success);
+    background-color: rgba(39, 174, 96, 0.1);
+}
+
+.option.incorrect {
+    border-color: var(--danger);
+    background-color: rgba(192, 57, 43, 0.1);
+}
+
+.explanation-container {
+    padding: 20px;
+    background-color: rgba(52, 152, 219, 0.05);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.explanation-title {
+    font-weight: 600;
+    color: var(--secondary);
+    margin-bottom: 10px;
+}
+
+.memory-tip {
+    background-color: rgba(243, 156, 18, 0.1);
+    padding: 15px;
+    border-left: 4px solid var(--warning);
+    margin-top: 15px;
+    border-radius: 0 8px 8px 0;
+}
+
+.memory-tip-title {
+    font-weight: 600;
+    color: var(--warning);
+    margin-bottom: 5px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-prev {
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+.btn-next {
+    background-color: var(--secondary);
+    color: white;
+}
+
+.btn-submit {
+    background-color: var(--success);
+    color: white;
+    display: none;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.results-container {
+    padding: 30px;
+    text-align: center;
+    display: none;
+}
+
+.results-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+.score {
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 20px 0;
+}
+
+.score-text {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+}
+
+.summary {
+    text-align: left;
+    background-color: var(--light);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.summary-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--primary);
+}
+
+.restart-btn {
+    background-color: var(--secondary);
+    color: white;
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+}
+
+.question-review {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.review-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.review-question {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.review-answer {
+    margin-bottom: 5px;
+}
+
+.correct-answer {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.user-answer {
+    color: var(--danger);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .quiz-info {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .progress-bar {
+        width: 100%;
+    }
+
+    .question-text {
+        font-size: 1.2rem;
+    }
+
+    .navigation {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-brain"></i> Gram-Positive Cocci Study Guide</h1>
-            <p>Master medical microbiology with visual memory aids, mnemonics, and exam-focused notes</p>
+            <h1>Chapter 1: Basics of Economics Quiz</h1>
+            <p>Introduction to Economics | Haramaya University</p>
         </header>
-        
-        <div class="main-content">
-            <div class="sidebar">
-                <h2><i class="fas fa-book-open"></i> Study Topics</h2>
-                <ul class="topic-list">
-                    <li><a href="#" class="active" data-target="staph"><i class="fas fa-gem"></i> Staphylococcus</a></li>
-                    <li><a href="#" data-target="strep"><i class="fas fa-link"></i> Streptococcus</a></li>
-                    <li><a href="#" data-target="entero"><i class="fas fa-arrows-alt-h"></i> Enterococcus</a></li>
-                    <li><a href="#" data-target="comparison"><i class="fas fa-balance-scale"></i> Bacteria Comparison</a></li>
-                    <li><a href="#" data-target="labtests"><i class="fas fa-vial"></i> Laboratory Tests</a></li>
-                    <li><a href="#" data-target="clinical"><i class="fas fa-stethoscope"></i> Clinical Manifestations</a></li>
-                    <li><a href="#" data-target="treatment"><i class="fas fa-pills"></i> Treatment & Resistance</a></li>
-                    <li><a href="#" data-target="memory"><i class="fas fa-lightbulb"></i> Memory Techniques</a></li>
-                </ul>
-                
-                <div class="memory-tips">
-                    <h3><i class="fas fa-trophy"></i> Top Memory Tips</h3>
-                    <ul>
-                        <li><strong>Visualize</strong> bacteria shapes and colors</li>
-                        <li>Create <strong>stories</strong> for each bacteria's characteristics</li>
-                        <li>Use <strong>mnemonics</strong> for lists and classifications</li>
-                        <li>Draw <strong>mind maps</strong> connecting related concepts</li>
-                        <li>Practice with <strong>spaced repetition</strong></li>
-                    </ul>
+
+        <div class="quiz-info">
+            <div class="timer">Time: <span id="time">60:00</span></div>
+            <div class="progress">
+                <span>Progress:</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
                 </div>
-                
-                <div class="color-code">
-                    <div class="color-code-item">
-                        <div class="color-box" style="background-color: #d4edda;"></div>
-                        <span>Gram-Positive</span>
-                    </div>
-                    <div class="color-code-item">
-                        <div class="color-box" style="background-color: #e7f3ff;"></div>
-                        <span>Cocci Shape</span>
-                    </div>
-                    <div class="color-code-item">
-                        <div class="color-box" style="background-color: #d1ecf1;"></div>
-                        <span>Aerobic</span>
-                    </div>
-                    <div class="color-code-item">
-                        <div class="color-box" style="background-color: #f8d7da;"></div>
-                        <span>Pathogenic</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="content">
-                <!-- Staphylococcus Section -->
-                <div id="staph" class="content-section active">
-                    <h2><i class="fas fa-gem"></i> Staphylococcus</h2>
-                    
-                    <div class="visual-aid">
-                        <h4><i class="fas fa-eye"></i> Visual Memory Aid</h4>
-                        <p>Imagine a <strong>bunch of purple grapes</strong> (clusters) with <strong>golden jewelry</strong> (aureus = golden). The grapes are sticky (adherence) and have protective wax coating (coagulase).</p>
-                    </div>
-                    
-                    <div class="bacteria-card">
-                        <h3><i class="fas fa-bacteria"></i> Staphylococcus aureus</h3>
-                        <p><span class="badge badge-gram-positive">Gram-Positive</span> <span class="badge badge-cocci">Cocci in Clusters</span> <span class="badge badge-aerobic">Facultative Anaerobe</span></p>
-                        
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <h4><i class="fas fa-dna"></i> Key Identification</h4>
-                                <p><strong>Coagulase-positive</strong>, catalase-positive, golden-yellow colonies, beta-hemolytic on blood agar</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-skull-crossbones"></i> Virulence Factors</h4>
-                                <p>Protein A (binds IgG Fc), coagulase, hyaluronidase, toxins (TSST-1, enterotoxins, exfoliative toxins)</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-clinic-medical"></i> Diseases</h4>
-                                <p>Skin infections (boils, cellulitis), pneumonia, endocarditis, osteomyelitis, TSS, food poisoning</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-syringe"></i> Treatment</h4>
-                                <p>Beta-lactams (if sensitive), MRSA: vancomycin, linezolid, daptomycin</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mnemonic-box">
-                            <h4><i class="fas fa-brain"></i> Memory Mnemonic</h4>
-                            <p><strong>"AUREUS Attacks Usually Require Effective Understanding of Sources"</strong></p>
-                            <ul>
-                                <li><strong>A</strong> - Abscesses, Adherence factors</li>
-                                <li><strong>U</strong> - UTI (rare), Universal colonizer (nares)</li>
-                                <li><strong>R</strong> - Resistance (MRSA, penicillinase)</li>
-                                <li><strong>E</strong> - Enterotoxins (food poisoning)</li>
-                                <li><strong>U</strong> - Unusual toxins (TSST-1, exfoliative)</li>
-                                <li><strong>S</strong> - Skin infections (most common)</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="bacteria-card">
-                        <h3><i class="fas fa-bacteria"></i> Coagulase-Negative Staphylococci (CoNS)</h3>
-                        <p><span class="badge badge-gram-positive">Gram-Positive</span> <span class="badge badge-cocci">Cocci in Clusters</span> <span class="badge badge-aerobic">Facultative Anaerobe</span></p>
-                        
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <h4><i class="fas fa-dna"></i> Key Species</h4>
-                                <p><strong>S. epidermidis</strong> (most common), S. saprophyticus (UTI in young women), S. haemolyticus</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-skull-crossbones"></i> Virulence Factors</h4>
-                                <p>Biofilm formation (slime layer), adherence to prosthetic materials, novobiocin resistance (S. saprophyticus)</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-clinic-medical"></i> Diseases</h4>
-                                <p>Device-related infections, UTI (S. saprophyticus), endocarditis (prosthetic valves), bacteremia</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-syringe"></i> Treatment</h4>
-                                <p>Vancomycin for serious infections, removal of infected device often required</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mnemonic-box">
-                            <h4><i class="fas fa-brain"></i> Memory Mnemonic</h4>
-                            <p><strong>"CoNS Can't Open New Safes"</strong></p>
-                            <ul>
-                                <li><strong>C</strong> - Coagulase-Negative</li>
-                                <li><strong>O</strong> - Opportunistic pathogens</li>
-                                <li><strong>N</strong> - Novobiocin test (S. sapro resistant)</li>
-                                <li><strong>S</strong> - Skin normal flora</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Streptococcus Section -->
-                <div id="strep" class="content-section">
-                    <h2><i class="fas fa-link"></i> Streptococcus</h2>
-                    
-                    <div class="visual-aid">
-                        <h4><i class="fas fa-eye"></i> Visual Memory Aid</h4>
-                        <p>Imagine a <strong>chain of red beads</strong> (strepto = chain) with different colored clasps: <strong>Group A has an A+ grade</strong>, <strong>Group B has a baby rattle</strong>, <strong>Pneumococcus has a helmet</strong> (capsule).</p>
-                    </div>
-                    
-                    <div class="bacteria-card">
-                        <h3><i class="fas fa-bacteria"></i> Streptococcus pyogenes (Group A)</h3>
-                        <p><span class="badge badge-gram-positive">Gram-Positive</span> <span class="badge badge-cocci">Cocci in Chains</span> <span class="badge badge-aerobic">Facultative Anaerobe</span></p>
-                        
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <h4><i class="fas fa-dna"></i> Key Identification</h4>
-                                <p>Beta-hemolytic, bacitracin-sensitive, ASO antibodies in serum, catalase-negative</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-skull-crossbones"></i> Virulence Factors</h4>
-                                <p>M protein (anti-phagocytic), hyaluronic acid capsule, streptolysins, pyrogenic exotoxins, streptokinase</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-clinic-medical"></i> Diseases</h4>
-                                <p>Pharyngitis, impetigo, cellulitis, necrotizing fasciitis, scarlet fever, rheumatic fever, glomerulonephritis</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-syringe"></i> Treatment</h4>
-                                <p>Penicillin (drug of choice), macrolides if allergic, 10-day course to prevent rheumatic fever</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mnemonic-box">
-                            <h4><i class="fas fa-brain"></i> Memory Mnemonic</h4>
-                            <p><strong>"PYOGENES Produces Your Ordinary Germs Except Notable Serious sequelae"</strong></p>
-                            <ul>
-                                <li><strong>P</strong> - Pharyngitis (strep throat)</li>
-                                <li><strong>Y</strong> - Yellow pus (pyogenic)</li>
-                                <li><strong>O</strong> - Otitis media (less common)</li>
-                                <li><strong>G</strong> - Glomerulonephritis (post-strep)</li>
-                                <li><strong>E</strong> - Erysipelas (skin infection)</li>
-                                <li><strong>N</strong> - Necrotizing fasciitis</li>
-                                <li><strong>E</strong> - Erythrogenic toxin (scarlet fever)</li>
-                                <li><strong>S</strong> - Sequelae (rheumatic fever, glomerulonephritis)</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="bacteria-card">
-                        <h3><i class="fas fa-bacteria"></i> Streptococcus agalactiae (Group B)</h3>
-                        <p><span class="badge badge-gram-positive">Gram-Positive</span> <span class="badge badge-cocci">Cocci in Chains</span> <span class="badge badge-aerobic">Facultative Anaerobe</span></p>
-                        
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <h4><i class="fas fa-dna"></i> Key Identification</h4>
-                                <p>Beta-hemolytic, bacitracin-resistant, CAMP test positive, hippurate hydrolysis positive</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-skull-crossbones"></i> Virulence Factors</h4>
-                                <p>Polysaccharide capsule (sialic acid), hemolysin, CAMP factor, adherence proteins</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-clinic-medical"></i> Diseases</h4>
-                                <p>Neonatal meningitis/sepsis, UTI in pregnant women, chorioamnionitis, bacteremia in elderly</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-syringe"></i> Treatment</h4>
-                                <p>Penicillin or ampicillin, intrapartum prophylaxis for colonized mothers</p>
-                            </div>
-                        </div>
-                        
-                        <div class="memory-palace">
-                            <h4><i class="fas fa-landmark"></i> Memory Palace Technique</h4>
-                            <p>Imagine a <strong>baby's nursery</strong> with "GBS" on the wall. The baby has:</p>
-                            <ul>
-                                <li>A <strong>blue blanket</strong> (beta-hemolytic but weaker than Group A)</li>
-                                <li>A <strong>resistant pacifier</strong> (bacitracin-resistant)</li>
-                                <li>A <strong>CAMPing bag</strong> (CAMP test positive)</li>
-                                <li>A <strong>mother's vaginal swab</strong> on the table (screening at 35-37 weeks)</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="bacteria-card">
-                        <h3><i class="fas fa-bacteria"></i> Streptococcus pneumoniae (Pneumococcus)</h3>
-                        <p><span class="badge badge-gram-positive">Gram-Positive</span> <span class="badge badge-cocci">Lancet-shaped Diplococci</span> <span class="badge badge-aerobic">Facultative Anaerobe</span></p>
-                        
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <h4><i class="fas fa-dna"></i> Key Identification</h4>
-                                <p>Alpha-hemolytic, optochin-sensitive, bile-soluble, Quellung reaction positive</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-skull-crossbones"></i> Virulence Factors</h4>
-                                <p>Polysaccharide capsule (90+ serotypes), pneumolysin, IgA protease, autolysin</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-clinic-medical"></i> Diseases</h4>
-                                <p>Pneumonia (lobar), otitis media, meningitis, sinusitis, bacteremia</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-syringe"></i> Treatment</h4>
-                                <p>Penicillin (if sensitive), 3rd gen cephalosporins, vancomycin for meningitis, PCV13/PPSV23 vaccines</p>
-                            </div>
-                        </div>
-                        
-                        <div class="visual-memory">
-                            <div class="visual-item">
-                                <div class="visual-icon"><i class="fas fa-lungs"></i></div>
-                                <h5>Lobar Pneumonia</h5>
-                                <p>Think of a <strong>lung filled with rusty sputum</strong> (classic sign)</p>
-                            </div>
-                            <div class="visual-item">
-                                <div class="visual-icon"><i class="fas fa-ear"></i></div>
-                                <h5>Otitis Media</h5>
-                                <p>Imagine a <strong>child pulling ear</strong> with pneumococcus inside</p>
-                            </div>
-                            <div class="visual-item">
-                                <div class="visual-icon"><i class="fas fa-brain"></i></div>
-                                <h5>Meningitis</h5>
-                                <p>Picture <strong>lancet-shaped bacteria in CSF</strong> with neutrophils</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Enterococcus Section -->
-                <div id="entero" class="content-section">
-                    <h2><i class="fas fa-arrows-alt-h"></i> Enterococcus</h2>
-                    
-                    <div class="visual-aid">
-                        <h4><i class="fas fa-eye"></i> Visual Memory Aid</h4>
-                        <p>Imagine <strong>tough survivors in a harsh environment</strong> (bowel) wearing <strong>bulletproof vests</strong> (antibiotic resistance). They're moving from the <strong>intestine (entero) to the urinary tract</strong> via catheters.</p>
-                    </div>
-                    
-                    <div class="bacteria-card">
-                        <h3><i class="fas fa-bacteria"></i> Enterococcus faecalis & E. faecium</h3>
-                        <p><span class="badge badge-gram-positive">Gram-Positive</span> <span class="badge badge-cocci">Cocci in Pairs/Chains</span> <span class="badge badge-aerobic">Facultative Anaerobe</span></p>
-                        
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <h4><i class="fas fa-dna"></i> Key Identification</h4>
-                                <p>Gamma-hemolytic, PYR positive, bile-esculin positive, growth in 6.5% NaCl, Group D antigen</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-skull-crossbones"></i> Virulence Factors</h4>
-                                <p>Intrinsic antibiotic resistance, biofilm formation, cytolysin, aggregation substance</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-clinic-medical"></i> Diseases</h4>
-                                <p>UTI (catheter-associated), biliary tract infections, endocarditis (subacute), wound infections</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-syringe"></i> Treatment</h4>
-                                <p>Ampicillin + aminoglycoside (synergy), vancomycin, VRE: linezolid, daptomycin, tigecycline</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mnemonic-box">
-                            <h4><i class="fas fa-brain"></i> Memory Mnemonic</h4>
-                            <p><strong>"ENTERO: Extremely Nasty Tough Resistant Organisms"</strong></p>
-                            <ul>
-                                <li><strong>E</strong> - Endocarditis (subacute)</li>
-                                <li><strong>N</strong> - Nosocomial (hospital-acquired)</li>
-                                <li><strong>T</strong> - Tough (survives harsh conditions)</li>
-                                <li><strong>E</strong> - Enteric origin (normal gut flora)</li>
-                                <li><strong>R</strong> - Resistant (VRE, intrinsic resistance)</li>
-                                <li><strong>O</strong> - Opportunistic pathogens</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="flowchart">
-                            <div class="flowchart-step">
-                                <h5>Step 1: Normal Flora</h5>
-                                <p>Enterococci are normal inhabitants of the GI tract</p>
-                            </div>
-                            <div class="flowchart-step">
-                                <h5>Step 2: Translocation</h5>
-                                <p>Move to urinary tract via catheters or to blood via procedures</p>
-                            </div>
-                            <div class="flowchart-step">
-                                <h5>Step 3: Infection</h5>
-                                <p>Cause UTI, bacteremia, or endocarditis (often on damaged valves)</p>
-                            </div>
-                            <div class="flowchart-step">
-                                <h5>Step 4: Treatment Challenge</h5>
-                                <p>Intrinsic resistance makes treatment difficult (VRE concerns)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Bacteria Comparison Section -->
-                <div id="comparison" class="content-section">
-                    <h2><i class="fas fa-balance-scale"></i> Bacteria Comparison</h2>
-                    
-                    <table class="comparison-table">
-                        <thead>
-                            <tr>
-                                <th>Feature</th>
-                                <th>Staph aureus</th>
-                                <th>Strep pyogenes</th>
-                                <th>Strep pneumo</th>
-                                <th>Enterococcus</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Gram Stain</strong></td>
-                                <td>G+ cocci in clusters</td>
-                                <td>G+ cocci in chains</td>
-                                <td>G+ lancet-shaped diplococci</td>
-                                <td>G+ cocci in pairs/chains</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Catalase</strong></td>
-                                <td><span class="badge badge-success">Positive</span></td>
-                                <td><span class="badge badge-danger">Negative</span></td>
-                                <td><span class="badge badge-danger">Negative</span></td>
-                                <td><span class="badge badge-danger">Negative</span></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Hemolysis</strong></td>
-                                <td>Beta</td>
-                                <td>Beta</td>
-                                <td>Alpha</td>
-                                <td>Gamma (usually)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Key Test</strong></td>
-                                <td>Coagulase +</td>
-                                <td>Bacitracin S</td>
-                                <td>Optochin S, Bile soluble</td>
-                                <td>PYR +, Bile-esculin +</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Common Diseases</strong></td>
-                                <td>Skin infections, abscesses</td>
-                                <td>Pharyngitis, cellulitis</td>
-                                <td>Pneumonia, otitis media</td>
-                                <td>UTI, endocarditis</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Treatment</strong></td>
-                                <td>Beta-lactams, vanco for MRSA</td>
-                                <td>Penicillin</td>
-                                <td>Penicillin, cephalosporins</td>
-                                <td>Ampicillin + AG, vanco</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Memory Hook</strong></td>
-                                <td>Golden grapes with clotting factor</td>
-                                <td>Chains with A+ grade for pharyngitis</td>
-                                <td>Helmet-wearing diplococci in lungs</td>
-                                <td>Tough survivors from gut with resistance</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                    <div class="visual-memory">
-                        <div class="visual-item">
-                            <div class="visual-icon"><i class="fas fa-shapes"></i></div>
-                            <h5>Shape Memory</h5>
-                            <p><strong>Clusters</strong> = Staph (like grapes)<br>
-                               <strong>Chains</strong> = Strep (like beads)<br>
-                               <strong>Diplococci</strong> = Pneumo (lancet-shaped pairs)</p>
-                        </div>
-                        <div class="visual-item">
-                            <div class="visual-icon"><i class="fas fa-flask"></i></div>
-                            <h5>Test Memory</h5>
-                            <p><strong>Catalase +</strong> = Staph only<br>
-                               <strong>Coagulase +</strong> = S. aureus only<br>
-                               <strong>Optochin S</strong> = Pneumo only</p>
-                        </div>
-                        <div class="visual-item">
-                            <div class="visual-icon"><i class="fas fa-palette"></i></div>
-                            <h5>Color Memory</h5>
-                            <p><strong>Golden</strong> = S. aureus<br>
-                               <strong>Green</strong> = Alpha-hemolytic<br>
-                               <strong>Clear</strong> = Beta-hemolytic<br>
-                               <strong>No change</strong> = Gamma</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Laboratory Tests Section -->
-                <div id="labtests" class="content-section">
-                    <h2><i class="fas fa-vial"></i> Laboratory Tests</h2>
-                    
-                    <div class="bacteria-card">
-                        <h3><i class="fas fa-microscope"></i> Key Diagnostic Tests</h3>
-                        
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <h4><i class="fas fa-vial"></i> Catalase Test</h4>
-                                <p><strong>Differentiates Staphylococcus (+) from Streptococcus (-)</strong><br>
-                                Add H₂O₂ to bacterial colony → bubbles = positive (Staph)</p>
-                                <div class="mnemonic-box" style="margin-top: 10px; padding: 10px; background-color: #e8f4f8;">
-                                    <p><strong>Memory:</strong> "CATalase for CATS (Staph)" or "Staph has CATs"</p>
-                                </div>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-tint"></i> Coagulase Test</h4>
-                                <p><strong>Differentiates S. aureus (+) from other Staph (-)</strong><br>
-                                Mix bacteria with plasma → clot formation = positive</p>
-                                <div class="mnemonic-box" style="margin-top: 10px; padding: 10px; background-color: #e8f4f8;">
-                                    <p><strong>Memory:</strong> "AUREUS CLOTS" or "Golden clots"</p>
-                                </div>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-pills"></i> Bacitracin Test</h4>
-                                <p><strong>Identifies Group A Strep (S. pyogenes) - sensitive</strong><br>
-                                0.04 unit disk → zone of inhibition = Group A</p>
-                                <div class="mnemonic-box" style="margin-top: 10px; padding: 10px; background-color: #e8f4f8;">
-                                    <p><strong>Memory:</strong> "A for Antibiotic (bacitracin)"</p>
-                                </div>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-prescription-bottle"></i> Optochin Test</h4>
-                                <p><strong>Identifies S. pneumoniae - sensitive</strong><br>
-                                Ethylhydrocupreine disk → zone ≥14mm = pneumococcus</p>
-                                <div class="mnemonic-box" style="margin-top: 10px; padding: 10px; background-color: #e8f4f8;">
-                                    <p><strong>Memory:</strong> "Pneumo is OPTimistic (optochin sensitive)"</p>
-                                </div>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-leaf"></i> Bile Solubility Test</h4>
-                                <p><strong>Confirms S. pneumoniae - soluble in bile</strong><br>
-                                Add sodium deoxycholate → colony lysis = pneumococcus</p>
-                                <div class="mnemonic-box" style="margin-top: 10px; padding: 10px; background-color: #e8f4f8;">
-                                    <p><strong>Memory:</strong> "Pneumo dissolves in bile like soap"</p>
-                                </div>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-dna"></i> CAMP Test</h4>
-                                <p><strong>Identifies Group B Strep (S. agalactiae) - positive</strong><br>
-                                Streak perpendicular to S. aureus → arrowhead hemolysis = Group B</p>
-                                <div class="mnemonic-box" style="margin-top: 10px; padding: 10px; background-color: #e8f4f8;">
-                                    <p><strong>Memory:</strong> "B for Baby, CAMP for babies"</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="memory-palace">
-                            <h4><i class="fas fa-landmark"></i> Test Memory Palace</h4>
-                            <p>Imagine walking through a <strong>microbiology lab</strong>:</p>
-                            <ul>
-                                <li><strong>Entrance</strong>: CAT greeting you (Catalase test - Staph vs Strep)</li>
-                                <li><strong>First station</strong>: Golden statue with blood clots (Coagulase test - S. aureus)</li>
-                                <li><strong>Second station</strong>: Letter A with antibiotic bottle (Bacitracin test - Group A)</li>
-                                <li><strong>Third station</strong>: Lung-shaped bubble bath (Bile solubility - Pneumo)</li>
-                                <li><strong>Fourth station</strong>: Baby with arrowhead (CAMP test - Group B)</li>
-                                <li><strong>Fifth station</strong>: Tough survivor in saltwater (6.5% NaCl - Enterococcus)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Clinical Manifestations Section -->
-                <div id="clinical" class="content-section">
-                    <h2><i class="fas fa-stethoscope"></i> Clinical Manifestations</h2>
-                    
-                    <div class="bacteria-card">
-                        <h3><i class="fas fa-lungs"></i> Respiratory Infections</h3>
-                        
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <h4><i class="fas fa-throat"></i> Pharyngitis</h4>
-                                <p><strong>S. pyogenes (Group A Strep)</strong><br>
-                                Exudative tonsils, fever, cervical LAD, NO cough</p>
-                                <p class="badge badge-gram-positive">Treat: Penicillin x10 days</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-lungs"></i> Pneumonia</h4>
-                                <p><strong>S. pneumoniae (most common)</strong><br>
-                                Rusty sputum, high fever, pleuritic pain, lobar consolidation</p>
-                                <p class="badge badge-gram-positive">Treat: PCN or cephalosporins</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-head-side-cough"></i> Pneumonia (other)</h4>
-                                <p><strong>S. aureus (post-influenza)</strong><br>
-                                Rapid progression, cavitary lesions, empyema</p>
-                                <p class="badge badge-gram-positive">Treat: Anti-staphylococcal PCN</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="bacteria-card">
-                        <h3><i class="fas fa-skin"></i> Skin & Soft Tissue Infections</h3>
-                        
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <h4><i class="fas fa-hand-sparkles"></i> Impetigo</h4>
-                                <p><strong>S. aureus OR S. pyogenes</strong><br>
-                                Honey-colored crusts, non-bullous (Strep) or bullous (Staph)</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-allergies"></i> Cellulitis/Erysipelas</h4>
-                                <p><strong>S. pyogenes (raised borders)</strong><br>
-                                Bright red, warm, tender, well-demarcated (erysipelas)</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-fire"></i> Abscess/Furuncle</h4>
-                                <p><strong>S. aureus (most common)</strong><br>
-                                Purulent collection, fluctuant, needs drainage</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-user-injured"></i> Necrotizing Fasciitis</h4>
-                                <p><strong>S. pyogenes (Type II)</strong><br>
-                                Severe pain out of proportion, bullae, crepitus, sepsis</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="bacteria-card">
-                        <h3><i class="fas fa-procedures"></i> Systemic Infections</h3>
-                        
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <h4><i class="fas fa-heart"></i> Endocarditis</h4>
-                                <p><strong>Acute: S. aureus</strong> (destructive, normal valves)<br>
-                                <strong>Subacute: Viridans Strep, Enterococcus</strong> (damaged valves)</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-brain"></i> Meningitis</h4>
-                                <p><strong>Neonates: S. agalactiae (GBS)</strong><br>
-                                <strong>Adults: S. pneumoniae</strong> (most common)<br>
-                                <strong>Post-neurosurgery: S. aureus</strong></p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-bone"></i> Osteomyelitis</h4>
-                                <p><strong>Children: S. aureus</strong> (hematogenous, metaphysis)<br>
-                                <strong>Vertebral: S. aureus</strong> (adults, IV drug use)</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-tint"></i> Toxic Shock Syndrome</h4>
-                                <p><strong>S. aureus (TSST-1)</strong><br>
-                                Fever, rash, hypotension, multi-organ involvement</p>
-                            </div>
-                        </div>
-                        
-                        <div class="visual-aid">
-                            <h4><i class="fas fa-eye"></i> Clinical Visual Memory Hooks</h4>
-                            <p><strong>Strep throat</strong>: Imagine red tonsils with white spots and a big letter "A"<br>
-                            <strong>Staph abscess</strong>: Picture a golden pus-filled ball with a coagulase shield<br>
-                            <strong>Pneumonia</strong>: Visualize a lung lobe completely filled with diplococci<br>
-                            <strong>GBS meningitis</strong>: See a baby with Group B strep in cerebrospinal fluid</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Treatment & Resistance Section -->
-                <div id="treatment" class="content-section">
-                    <h2><i class="fas fa-pills"></i> Treatment & Resistance</h2>
-                    
-                    <div class="bacteria-card">
-                        <h3><i class="fas fa-prescription-bottle-alt"></i> Antibiotic Choices</h3>
-                        
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <h4><i class="fas fa-prescription"></i> S. aureus (MSSA)</h4>
-                                <p><strong>1st line</strong>: Anti-staphylococcal penicillin (nafcillin, oxacillin)<br>
-                                <strong>Alternatives</strong>: 1st gen cephalosporin (cefazolin), clindamycin, vancomycin</p>
-                                <p class="badge badge-warning">Resistance: Penicillinase in 90% (use penicillinase-resistant drugs)</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-prescription"></i> S. aureus (MRSA)</h4>
-                                <p><strong>1st line</strong>: Vancomycin<br>
-                                <strong>Alternatives</strong>: Linezolid, daptomycin, TMP-SMX, doxycycline, ceftaroline</p>
-                                <p class="badge badge-danger">Resistance: mecA gene → altered PBP2a</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-prescription"></i> S. pyogenes</h4>
-                                <p><strong>1st line</strong>: Penicillin V or amoxicillin x10 days<br>
-                                <strong>If PCN allergic</strong>: Macrolide (azithromycin), clindamycin, cephalexin (if non-anaphylactic)</p>
-                                <p class="badge badge-success">Always sensitive to penicillin!</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-prescription"></i> S. pneumoniae</h4>
-                                <p><strong>Non-meningeal</strong>: Penicillin (if sensitive), amoxicillin, ceftriaxone<br>
-                                <strong>Meningitis</strong>: Ceftriaxone + vancomycin + dexamethasone</p>
-                                <p class="badge badge-warning">Resistance: Altered PBPs → PRSP</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="bacteria-card">
-                        <h3><i class="fas fa-biohazard"></i> Key Resistance Mechanisms</h3>
-                        
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <h4><i class="fas fa-shield-alt"></i> Beta-lactamase</h4>
-                                <p><strong>Organisms</strong>: S. aureus (penicillinase), some Enterococcus<br>
-                                <strong>Mechanism</strong>: Enzyme hydrolyzes beta-lactam ring<br>
-                                <strong>Overcome by</strong>: Beta-lactamase inhibitors (clavulanate, sulbactam)</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-dna"></i> Altered PBPs</h4>
-                                <p><strong>Organisms</strong>: MRSA (PBP2a), PRSP<br>
-                                <strong>Mechanism</strong>: PBPs have low affinity for beta-lactams<br>
-                                <strong>Overcome by</strong>: Vancomycin, linezolid, daptomycin</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-exchange-alt"></i> Vancomycin Resistance</h4>
-                                <p><strong>Organisms</strong>: VRE (E. faecium > E. faecalis), VRSA (rare)<br>
-                                <strong>Mechanism</strong>: Change D-ala-D-ala to D-ala-D-lactate<br>
-                                <strong>Overcome by</strong>: Linezolid, daptomycin, tigecycline</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-tachometer-alt"></i> Efflux Pumps</h4>
-                                <p><strong>Organisms</strong>: Some S. aureus, S. pneumoniae<br>
-                                <strong>Mechanism</strong>: Actively pump antibiotic out of cell<br>
-                                <strong>Overcome by</strong>: Higher doses, combination therapy</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mnemonic-box">
-                            <h4><i class="fas fa-brain"></i> Resistance Memory Hook</h4>
-                            <p><strong>"MRSA Makes Really Serious Admissions"</strong></p>
-                            <ul>
-                                <li><strong>M</strong> - mecA gene</li>
-                                <li><strong>R</strong> - Resistance to all beta-lactams</li>
-                                <li><strong>S</strong> - S. aureus</li>
-                                <li><strong>A</strong> - Altered PBP2a</li>
-                            </ul>
-                            <p><strong>"VRE: Very Resistant Enterococci"</strong> - remember they're from the gut (entero) and very tough</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Memory Techniques Section -->
-                <div id="memory" class="content-section">
-                    <h2><i class="fas fa-lightbulb"></i> Memory Techniques</h2>
-                    
-                    <div class="bacteria-card">
-                        <h3><i class="fas fa-brain"></i> Advanced Memorization Strategies</h3>
-                        
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <h4><i class="fas fa-palette"></i> Color Coding</h4>
-                                <p>Assign colors to bacteria groups:<br>
-                                <span style="color: #d35400;">• Staphylococcus = Orange (golden)</span><br>
-                                <span style="color: #2980b9;">• Streptococcus = Blue (chains like water)</span><br>
-                                <span style="color: #27ae60;">• Enterococcus = Green (from GI tract)</span></p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-route"></i> The Memory Palace</h4>
-                                <p>Place bacteria in rooms of your house:<br>
-                                • <strong>Kitchen</strong>: Food poisoning (Staph enterotoxin)<br>
-                                • <strong>Bathroom</strong>: UTI (Enterococcus, Staph sapro)<br>
-                                • <strong>Bedroom</strong>: TSS (Staph on tampons)<br>
-                                • <strong>Nursery</strong>: GBS meningitis in babies</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-book"></i> Story Method</h4>
-                                <p>Create a story: "Golden S. aureus (king) with his coagulase shield attacks the skin, while Strep pyogenes (chain gang) invades the throat. Pneumococcus (lancet knight) attacks the lungs, and tough Enterococcus (survivor) comes from the gut."</p>
-                            </div>
-                            <div class="info-item">
-                                <h4><i class="fas fa-music"></i> Acronyms & Rhymes</h4>
-                                <p><strong>Staph vs Strep</strong>: "Staph has CATs" (Catalase +)<br>
-                                <strong>Group A Strep</strong>: "A is for Antibiotic (bacitracin sensitive)"<br>
-                                <strong>Pneumococcus</strong>: "Optochin OPTimistic"<br>
-                                <strong>Enterococcus</strong>: "PYRamid in the gut"</p>
-                            </div>
-                        </div>
-                        
-                        <div class="memory-palace">
-                            <h4><i class="fas fa-landmark"></i> Complete Memory Palace Walkthrough</h4>
-                            <p>Imagine walking through a <strong>hospital</strong>:</p>
-                            <ol>
-                                <li><strong>Emergency Room</strong>: S. aureus with golden pus draining from abscess</li>
-                                <li><strong>Pediatrics Ward</strong>: Child with strep throat (Group A) and scarlet fever rash</li>
-                                <li><strong>Nursery</strong>: Newborn with GBS meningitis (Group B with arrowhead sign)</li>
-                                <li><strong>ICU</strong>: Patient on ventilator with pneumococcal pneumonia</li>
-                                <li><strong>Urology Ward</strong>: Catheterized patient with Enterococcus UTI</li>
-                                <li><strong>Microbiology Lab</strong>: Tests: CAT at door, golden clots, A+ bacitracin, etc.</li>
-                            </ol>
-                        </div>
-                        
-                        <div class="visual-aid">
-                            <h4><i class="fas fa-eye"></i> Visual Memory Sheet for Exam</h4>
-                            <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 15px;">
-                                <div style="text-align: center;">
-                                    <div style="width: 80px; height: 80px; background-color: #d4edda; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; border: 3px solid #27ae60;">
-                                        <i class="fas fa-gem" style="color: #d35400; font-size: 2rem;"></i>
-                                    </div>
-                                    <p><strong>Staph aureus</strong><br>Golden clusters<br>Coagulase +</p>
-                                </div>
-                                <div style="text-align: center;">
-                                    <div style="width: 80px; height: 80px; background-color: #d4edda; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; border: 3px solid #27ae60;">
-                                        <i class="fas fa-link" style="color: #2980b9; font-size: 2rem;"></i>
-                                    </div>
-                                    <p><strong>Strep pyogenes</strong><br>Beta-hemolytic chains<br>Bacitracin S</p>
-                                </div>
-                                <div style="text-align: center;">
-                                    <div style="width: 80px; height: 80px; background-color: #d4edda; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; border: 3px solid #27ae60;">
-                                        <i class="fas fa-lungs" style="color: #8e44ad; font-size: 2rem;"></i>
-                                    </div>
-                                    <p><strong>Strep pneumo</strong><br>Alpha-hemolytic<br>Optochin S</p>
-                                </div>
-                                <div style="text-align: center;">
-                                    <div style="width: 80px; height: 80px; background-color: #d4edda; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; border: 3px solid #27ae60;">
-                                        <i class="fas fa-arrows-alt-h" style="color: #27ae60; font-size: 2rem;"></i>
-                                    </div>
-                                    <p><strong>Enterococcus</strong><br>Gut origin<br>PYR +, Salt tolerant</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="exam-tips">
-                        <h3><i class="fas fa-graduation-cap"></i> Exam Strategy</h3>
-                        <ul>
-                            <li><strong>First, identify Gram stain and morphology</strong> (clusters vs chains)</li>
-                            <li><strong>Second, think about catalase</strong> (Staph vs Strep)</li>
-                            <li><strong>Third, consider hemolysis pattern</strong> (alpha, beta, gamma)</li>
-                            <li><strong>Fourth, recall key tests</strong> (coagulase, bacitracin, optochin, etc.)</li>
-                            <li><strong>Fifth, associate with clinical presentation</strong></li>
-                            <li><strong>Finally, determine treatment considering resistance patterns</strong></li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="quick-review">
-                    <div class="review-card">
-                        <h4><i class="fas fa-bolt"></i> Must-Know Facts</h4>
-                        <ul>
-                            <li>Catalase: Staph +, Strep -</li>
-                            <li>Coagulase: Only S. aureus +</li>
-                            <li>Bacitracin S: Group A Strep</li>
-                            <li>Optochin S: S. pneumoniae</li>
-                            <li>PYR +: Enterococcus & Group A Strep</li>
-                            <li>Always treat Strep pyogenes x10 days</li>
-                            <li>MRSA = Vancomycin</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="review-card">
-                        <h4><i class="fas fa-exclamation-triangle"></i> Common Pitfalls</h4>
-                        <ul>
-                            <li>Don't confuse S. aureus with CoNS</li>
-                            <li>Remember: S. pneumo is alpha-hemolytic (green)</li>
-                            <li>GBS is bacitracin-resistant (not sensitive)</li>
-                            <li>Enterococcus is PYR + (like Group A Strep)</li>
-                            <li>Novobiocin R = S. saprophyticus (UTI in women)</li>
-                            <li>VRE is most commonly E. faecium</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="review-card">
-                        <h4><i class="fas fa-star"></i> High-Yield Topics</h4>
-                        <ul>
-                            <li>MRSA treatment & resistance</li>
-                            <li>Post-strep sequelae (RF, GN)</li>
-                            <li>GBS screening in pregnancy</li>
-                            <li>Pneumococcal vaccines</li>
-                            <li>VRE and treatment options</li>
-                            <li>Toxic Shock Syndrome</li>
-                            <li>Lab test algorithms</li>
-                        </ul>
-                    </div>
-                </div>
+                <span id="progress-text">0/50</span>
             </div>
         </div>
-        
-        <footer>
-            <p>Medical Microbiology Study Guide | Gram-Positive Cocci | Created for Pharmacy Students</p>
-            <p>Use these visual memory techniques and mnemonics for effective exam preparation</p>
-        </footer>
+
+        <div class="quiz-container" id="quiz-container">
+            <div class="question-container">
+                <div class="question-number" id="question-number">Question 1 of 50</div>
+                <div class="question-text" id="question-text"></div>
+                <div class="options-container" id="options-container"></div>
+            </div>
+
+            <div class="explanation-container" id="explanation-container">
+                <div class="explanation-title">Explanation</div>
+                <div id="explanation-text"></div>
+                <div class="memory-tip" id="memory-tip">
+                    <div class="memory-tip-title">Memory Tip</div>
+                    <div id="memory-tip-text"></div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn-prev" id="prev-btn" disabled>Previous</button>
+                <button class="btn-next" id="next-btn">Next Question</button>
+                <button class="btn-submit" id="submit-btn">Submit Quiz</button>
+            </div>
+        </div>
+
+        <div class="results-container" id="results-container">
+            <h2 class="results-title">Quiz Results</h2>
+            <div class="score" id="score">0/50</div>
+            <div class="score-text" id="score-text"></div>
+
+            <div class="summary">
+                <div class="summary-title">Performance Summary</div>
+                <p>Total Questions: <span id="total-questions">50</span></p>
+                <p>Correct Answers: <span id="correct-answers">0</span></p>
+                <p>Incorrect Answers: <span id="incorrect-answers">0</span></p>
+                <p>Percentage: <span id="percentage">0%</span></p>
+                <p>Time Taken: <span id="time-taken">60:00</span></p>
+            </div>
+
+            <div class="question-review" id="question-review">
+                <h3>Question Review</h3>
+                <!-- Review content will be generated by JavaScript -->
+            </div>
+
+            <button class="restart-btn" id="restart-btn">Restart Quiz</button>
+        </div>
     </div>
 
     <script>
-        // Navigation between sections
-        document.querySelectorAll('.topic-list a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
+        // Chapter 1: Basics of Economics Quiz Questions (50 questions)
+        const questions = [
+            {
+                question: "Which of the following is the most commonly accepted definition of economics?",
+                options: [
+                    "Economics is the study of wealth accumulation",
+                    "Economics is the study of efficient allocation of scarce resources to satisfy unlimited wants",
+                    "Economics is the study of how to maximize welfare through government intervention",
+                    "Economics is the study of economic growth and development"
+                ],
+                correct: 1,
+                explanation: "The scarcity definition is the most widely accepted: economics studies how to efficiently allocate scarce resources to satisfy unlimited human wants.",
+                memoryTip: "Scarcity + Choice = Economics"
+            },
+            {
+                question: "Who is generally considered the 'father of economics'?",
+                options: [
+                    "John Maynard Keynes",
+                    "Adam Smith",
+                    "Karl Marx",
+                    "David Ricardo"
+                ],
+                correct: 1,
+                explanation: "Adam Smith published 'The Wealth of Nations' in 1776, which established economics as a distinct discipline.",
+                memoryTip: "Adam Smith = Wealth of Nations (1776) = Father of Economics"
+            },
+            {
+                question: "Which of the following is NOT one of the four categories of economic resources?",
+                options: [
+                    "Land",
+                    "Labor",
+                    "Capital",
+                    "Government"
+                ],
+                correct: 3,
+                explanation: "The four categories of economic resources (factors of production) are: Land, Labor, Capital, and Entrepreneurship. Government is not a factor of production.",
+                memoryTip: "Factors of production: Land, Labor, Capital, Entrepreneurship (LLCE)"
+            },
+            {
+                question: "What is the fundamental economic problem that all societies face?",
+                options: [
+                    "Unemployment",
+                    "Inflation",
+                    "Scarcity",
+                    "Income inequality"
+                ],
+                correct: 2,
+                explanation: "Scarcity is the fundamental economic problem - unlimited wants but limited resources to satisfy them.",
+                memoryTip: "Fundamental problem = SCARCITY (limited resources, unlimited wants)"
+            },
+            {
+                question: "Which branch of economics studies individual decision-making units like households and firms?",
+                options: [
+                    "Macroeconomics",
+                    "Microeconomics",
+                    "Development economics",
+                    "International economics"
+                ],
+                correct: 1,
+                explanation: "Microeconomics studies individual economic units (households, firms, markets), while macroeconomics studies the economy as a whole.",
+                memoryTip: "MICROeconomics = individual units (MICRO = small); MACROeconomics = whole economy (MACRO = large)"
+            },
+            {
+                question: "What does the production possibilities frontier (PPF) illustrate?",
+                options: [
+                    "The relationship between inflation and unemployment",
+                    "Maximum possible combinations of two goods an economy can produce",
+                    "The distribution of income in an economy",
+                    "How prices are determined in a market"
+                ],
+                correct: 1,
+                explanation: "The PPF shows all possible combinations of two goods that can be produced with given resources and technology.",
+                memoryTip: "PPF = Production Possibilities Frontier = shows trade-offs between two goods"
+            },
+            {
+                question: "What does a point inside the PPF represent?",
+                options: [
+                    "Efficient production with full employment",
+                    "Inefficient production with unemployment of resources",
+                    "Unattainable production with current resources",
+                    "Optimal production mix"
+                ],
+                correct: 1,
+                explanation: "Points inside the PPF represent inefficient production where resources are unemployed or underutilized.",
+                memoryTip: "Inside PPF = inefficiency; On PPF = efficiency; Outside PPF = unattainable"
+            },
+            {
+                question: "Which economic system is characterized by private ownership of resources and profit motive?",
+                options: [
+                    "Command economy",
+                    "Mixed economy",
+                    "Capitalist economy",
+                    "Traditional economy"
+                ],
+                correct: 2,
+                explanation: "Capitalist (market) economy features private property, profit motive, and minimal government intervention.",
+                memoryTip: "Capitalism = private property + profit motive + competition"
+            },
+            {
+                question: "What is opportunity cost?",
+                options: [
+                    "The monetary cost of producing a good",
+                    "The cost of the next best alternative foregone",
+                    "The total cost of all alternatives",
+                    "The cost of resources used in production"
+                ],
+                correct: 1,
+                explanation: "Opportunity cost is the value of the next best alternative that must be sacrificed when a choice is made.",
+                memoryTip: "Opportunity cost = what you give up to get something else"
+            },
+            {
+                question: "Which of the following is a positive economic statement?",
+                options: [
+                    "The government should reduce taxes",
+                    "Unemployment is too high in Ethiopia",
+                    "The inflation rate in Ethiopia is 12%",
+                    "We need more social welfare programs"
+                ],
+                correct: 2,
+                explanation: "Positive statements describe what 'is' (facts), while normative statements describe what 'ought to be' (value judgments).",
+                memoryTip: "Positive = facts (what is); Normative = opinions (what should be)"
+            },
+            {
+                question: "In a circular flow model, what do households provide to firms?",
+                options: [
+                    "Goods and services",
+                    "Factors of production",
+                    "Tax payments",
+                    "Government services"
+                ],
+                correct: 1,
+                explanation: "Households provide factors of production (land, labor, capital) to firms in exchange for income.",
+                memoryTip: "Households → Firms: Factors of production; Firms → Households: Goods and services"
+            },
+            {
+                question: "What is the law of increasing opportunity cost?",
+                options: [
+                    "As production of a good increases, opportunity cost decreases",
+                    "As production of a good increases, opportunity cost increases",
+                    "Opportunity cost remains constant regardless of production level",
+                    "Opportunity cost is zero at maximum production"
+                ],
+                correct: 1,
+                explanation: "The law states that as production of one good increases, the opportunity cost of producing additional units rises because resources are not perfectly adaptable.",
+                memoryTip: "Increasing opportunity cost = PPF is concave (bowed outward)"
+            },
+            {
+                question: "Which economic question addresses the distribution of output?",
+                options: [
+                    "What to produce?",
+                    "How to produce?",
+                    "For whom to produce?",
+                    "When to produce?"
+                ],
+                correct: 2,
+                explanation: "'For whom to produce?' addresses how the national product is distributed among members of society.",
+                memoryTip: "3 Basic Questions: WHAT, HOW, FOR WHOM"
+            },
+            {
+                question: "What does a rightward shift of the PPF represent?",
+                options: [
+                    "Economic decline",
+                    "Economic growth",
+                    "Unemployment",
+                    "Inflation"
+                ],
+                correct: 1,
+                explanation: "A rightward (outward) shift of the PPF represents economic growth - the economy can produce more of both goods.",
+                memoryTip: "PPF shifts right = economic growth; PPF shifts left = economic decline"
+            },
+            {
+                question: "Which of the following is NOT a characteristic of a command economy?",
+                options: [
+                    "Central planning",
+                    "Private ownership of resources",
+                    "Government control of production",
+                    "Collective ownership"
+                ],
+                correct: 1,
+                explanation: "Command economies feature collective/government ownership, not private ownership of resources.",
+                memoryTip: "Command economy = government control + central planning + collective ownership"
+            },
+            {
+                question: "What is the difference between scarcity and shortage?",
+                options: [
+                    "Scarcity is temporary, shortage is permanent",
+                    "Scarcity is universal, shortage is specific to price",
+                    "Shortage is about resources, scarcity is about goods",
+                    "They are the same concept"
+                ],
+                correct: 1,
+                explanation: "Scarcity is the fundamental condition of limited resources vs unlimited wants. Shortage occurs when quantity demanded exceeds quantity supplied at a particular price.",
+                memoryTip: "Scarcity = always exists; Shortage = temporary at a given price"
+            },
+            {
+                question: "Which of the following is an example of capital as a factor of production?",
+                options: [
+                    "A farmer's land",
+                    "A factory worker",
+                    "A machine in a factory",
+                    "An entrepreneur's idea"
+                ],
+                correct: 2,
+                explanation: "Capital refers to manufactured inputs used to produce other goods (machines, tools, buildings).",
+                memoryTip: "Capital = manufactured means of production (not money!)"
+            },
+            {
+                question: "What is the reward for entrepreneurship?",
+                options: [
+                    "Wage",
+                    "Rent",
+                    "Interest",
+                    "Profit"
+                ],
+                correct: 3,
+                explanation: "Entrepreneurs receive profit as reward for organizing production and taking risks.",
+                memoryTip: "Land → Rent; Labor → Wages; Capital → Interest; Entrepreneurship → Profit"
+            },
+            {
+                question: "Which economic system combines features of both capitalism and command economy?",
+                options: [
+                    "Pure capitalism",
+                    "Traditional economy",
+                    "Mixed economy",
+                    "Socialist economy"
+                ],
+                correct: 2,
+                explanation: "Mixed economy combines private enterprise with government intervention and public sector.",
+                memoryTip: "Mixed economy = Capitalism + Government intervention"
+            },
+            {
+                question: "What does 'ceteris paribus' mean in economics?",
+                options: [
+                    "All things being equal",
+                    "Let the buyer beware",
+                    "Invisible hand",
+                    "Supply creates its own demand"
+                ],
+                correct: 0,
+                explanation: "Ceteris paribus means 'other things being equal' - analyzing the effect of one variable while holding others constant.",
+                memoryTip: "Ceteris paribus = 'other things equal' (important for economic models)"
+            },
+            {
+                question: "Which of the following is a disadvantage of capitalism?",
+                options: [
+                    "Income inequality",
+                    "Lack of consumer choice",
+                    "Slow economic growth",
+                    "Government bureaucracy"
+                ],
+                correct: 0,
+                explanation: "Capitalism tends to produce income inequality due to differences in skills, inheritance, and market power.",
+                memoryTip: "Capitalism disadvantages: inequality, business cycles, externalities"
+            },
+            {
+                question: "What is deductive reasoning in economics?",
+                options: [
+                    "Moving from specific facts to general theories",
+                    "Moving from general theories to specific conclusions",
+                    "Using statistical analysis only",
+                    "Relying on historical data"
+                ],
+                correct: 1,
+                explanation: "Deductive reasoning starts with general theories/assumptions and derives specific conclusions.",
+                memoryTip: "Deductive = general → specific; Inductive = specific → general"
+            },
+            {
+                question: "In the circular flow model, what do firms receive from the product market?",
+                options: [
+                    "Factors of production",
+                    "Revenue from sales",
+                    "Labor services",
+                    "Government subsidies"
+                ],
+                correct: 1,
+                explanation: "Firms receive revenue from selling goods and services in the product market.",
+                memoryTip: "Firms sell goods → receive revenue; Households sell factors → receive income"
+            },
+            {
+                question: "Which of the following is a free resource?",
+                options: [
+                    "Clean water in a city",
+                    "Sunshine",
+                    "Fertile agricultural land",
+                    "Skilled labor"
+                ],
+                correct: 1,
+                explanation: "Free resources are available in abundance at zero price (like sunshine, air).",
+                memoryTip: "Free resource = abundant at zero price; Economic resource = scarce"
+            },
+            {
+                question: "What is the main coordinating mechanism in a capitalist economy?",
+                options: [
+                    "Central planning",
+                    "Price system/market mechanism",
+                    "Government directives",
+                    "Traditional customs"
+                ],
+                correct: 1,
+                explanation: "The price system (market mechanism) coordinates economic activity in capitalism through supply and demand.",
+                memoryTip: "Capitalism = price mechanism coordinates decisions"
+            },
+            {
+                question: "Which of the following best describes the 'how to produce' question?",
+                options: [
+                    "Choosing between consumption and investment goods",
+                    "Deciding on labor-intensive vs capital-intensive techniques",
+                    "Determining who gets the output",
+                    "Selecting which goods to produce"
+                ],
+                correct: 1,
+                explanation: "'How to produce' involves choosing production techniques (labor-intensive vs capital-intensive).",
+                memoryTip: "HOW = production methods/techniques"
+            },
+            {
+                question: "What does a straight-line PPF indicate?",
+                options: [
+                    "Increasing opportunity cost",
+                    "Constant opportunity cost",
+                    "Decreasing opportunity cost",
+                    "Zero opportunity cost"
+                ],
+                correct: 1,
+                explanation: "A straight-line PPF indicates constant opportunity cost - resources are perfectly adaptable between uses.",
+                memoryTip: "Straight PPF = constant opportunity cost; Curved PPF = increasing opportunity cost"
+            },
+            {
+                question: "Which of the following is an advantage of a mixed economy?",
+                options: [
+                    "Complete economic equality",
+                    "No government intervention",
+                    "Combines efficiency with social welfare",
+                    "Eliminates all competition"
+                ],
+                correct: 2,
+                explanation: "Mixed economies combine market efficiency with government intervention for social welfare.",
+                memoryTip: "Mixed economy advantages: efficiency + equity, private + public sectors"
+            },
+            {
+                question: "What is the role of government in a capitalist economy?",
+                options: [
+                    "Complete control of all economic activities",
+                    "Limited to defense and law enforcement",
+                    "Ownership of all major industries",
+                    "Central planning of production"
+                ],
+                correct: 1,
+                explanation: "In pure capitalism, government's role is minimal - mainly defense, law, and protecting property rights.",
+                memoryTip: "Capitalism: government as 'night watchman' (minimal role)"
+            },
+            {
+                question: "Which of the following is NOT a decision-making unit in a closed economy?",
+                options: [
+                    "Households",
+                    "Firms",
+                    "Government",
+                    "Foreign sector"
+                ],
+                correct: 3,
+                explanation: "In a closed economy, the three decision-making units are households, firms, and government. The foreign sector is included in an open economy.",
+                memoryTip: "Closed economy: Households + Firms + Government; Open economy: adds Foreign Sector"
+            },
+            {
+                question: "What is the basic economic problem that arises from scarcity?",
+                options: [
+                    "Unemployment",
+                    "Choice",
+                    "Inflation",
+                    "Budget deficit"
+                ],
+                correct: 1,
+                explanation: "Scarcity forces choice - we must choose which wants to satisfy with limited resources.",
+                memoryTip: "Scarcity → Limited resources → Choice → Opportunity cost"
+            },
+            {
+                question: "Which economic definition focuses on material welfare?",
+                options: [
+                    "Wealth definition",
+                    "Welfare definition",
+                    "Scarcity definition",
+                    "Growth definition"
+                ],
+                correct: 1,
+                explanation: "The welfare definition (Alfred Marshall) focuses on material welfare and well-being.",
+                memoryTip: "Wealth (Smith), Welfare (Marshall), Scarcity (Robbins), Growth (modern)"
+            },
+            {
+                question: "In economics, what does 'rational behavior' mean?",
+                options: [
+                    "Always choosing the cheapest option",
+                    "Maximizing satisfaction given constraints",
+                    "Following traditional customs",
+                    "Avoiding all risks"
+                ],
+                correct: 1,
+                explanation: "Rational behavior means making choices that maximize satisfaction/utility given limited resources.",
+                memoryTip: "Rational = maximizing benefits given constraints"
+            },
+            {
+                question: "Which market do households participate in as sellers?",
+                options: [
+                    "Product market",
+                    "Factor market",
+                    "Financial market",
+                    "International market"
+                ],
+                correct: 1,
+                explanation: "Households sell factors of production (labor, land, capital) in the factor market.",
+                memoryTip: "Households: sellers in factor market, buyers in product market"
+            },
+            {
+                question: "What causes economic growth in terms of the PPF?",
+                options: [
+                    "Movement along the PPF",
+                    "Shift of the PPF outward",
+                    "Shift of the PPF inward",
+                    "Point inside the PPF moving to the PPF"
+                ],
+                correct: 1,
+                explanation: "Economic growth is shown by an outward shift of the PPF (more resources or better technology).",
+                memoryTip: "Economic growth = PPF shifts outward"
+            },
+            {
+                question: "Which of the following is a normative economic statement?",
+                options: [
+                    "Unemployment rate is 5%",
+                    "GDP grew by 3% last year",
+                    "Government should provide free healthcare",
+                    "Inflation reduces purchasing power"
+                ],
+                correct: 2,
+                explanation: "Normative statements express value judgments about what should be (opinions).",
+                memoryTip: "Normative = 'should', 'ought', 'better' (value judgments)"
+            },
+            {
+                question: "What does the slope of the PPF represent?",
+                options: [
+                    "Average cost",
+                    "Marginal cost",
+                    "Opportunity cost",
+                    "Fixed cost"
+                ],
+                correct: 2,
+                explanation: "The slope of the PPF represents the opportunity cost of producing one more unit of a good.",
+                memoryTip: "PPF slope = opportunity cost"
+            },
+            {
+                question: "Which economic system aims at maximizing social welfare?",
+                options: [
+                    "Capitalism",
+                    "Command economy",
+                    "Mixed economy",
+                    "Traditional economy"
+                ],
+                correct: 1,
+                explanation: "Command (socialist) economies aim to maximize social welfare rather than individual profit.",
+                memoryTip: "Command economy goal = social welfare; Capitalism goal = individual profit"
+            },
+            {
+                question: "What is the main source of government revenue in the circular flow model?",
+                options: [
+                    "Sales of goods and services",
+                    "Taxes from households and firms",
+                    "Foreign aid",
+                    "Printing money"
+                ],
+                correct: 1,
+                explanation: "Government collects taxes from households and firms to finance its expenditures.",
+                memoryTip: "Government revenue mainly from taxes"
+            },
+            {
+                question: "Which of the following would cause the PPF to shift inward?",
+                options: [
+                    "Technological improvement",
+                    "Increase in labor force",
+                    "Natural disaster destroying resources",
+                    "Better education"
+                ],
+                correct: 2,
+                explanation: "An inward shift of PPF indicates economic decline (fewer resources or worse technology).",
+                memoryTip: "PPF inward shift = economic decline (war, disaster, resource depletion)"
+            },
+            {
+                question: "What does 'laissez-faire' mean?",
+                options: [
+                    "Government control",
+                    "Let it be/leave alone",
+                    "Central planning",
+                    "Mixed economy"
+                ],
+                correct: 1,
+                explanation: "Laissez-faire means minimal government intervention in the economy (let the market work).",
+                memoryTip: "Laissez-faire = 'let do' (minimal government intervention)"
+            },
+            {
+                question: "In a two-sector circular flow model, what flows from households to firms?",
+                options: [
+                    "Goods and services",
+                    "Money payments",
+                    "Factors of production",
+                    "Tax payments"
+                ],
+                correct: 2,
+                explanation: "Households provide factors of production to firms; firms provide goods and services to households.",
+                memoryTip: "Real flow: Households → Firms: Factors; Firms → Households: Goods"
+            },
+            {
+                question: "Which of the following is NOT a feature of perfect competition?",
+                options: [
+                    "Many buyers and sellers",
+                    "Homogeneous products",
+                    "Barriers to entry",
+                    "Perfect information"
+                ],
+                correct: 2,
+                explanation: "Perfect competition requires free entry and exit, not barriers to entry.",
+                memoryTip: "Perfect competition: many firms, homogeneous product, free entry, perfect info"
+            },
+            {
+                question: "What is the economic term for 'gifts of nature'?",
+                options: [
+                    "Capital",
+                    "Labor",
+                    "Land",
+                    "Entrepreneurship"
+                ],
+                correct: 2,
+                explanation: "Land includes all natural resources (gifts of nature) usable in production.",
+                memoryTip: "Land = natural resources (free gifts of nature)"
+            },
+            {
+                question: "Which of the following best describes microeconomics?",
+                options: [
+                    "Studies national income",
+                    "Studies individual consumer behavior",
+                    "Studies inflation rates",
+                    "Studies international trade"
+                ],
+                correct: 1,
+                explanation: "Microeconomics studies individual units: consumers, firms, specific markets.",
+                memoryTip: "Micro = individual units; Macro = whole economy"
+            },
+            {
+                question: "What is the primary goal of studying economics?",
+                options: [
+                    "To become wealthy",
+                    "To understand how societies allocate scarce resources",
+                    "To predict stock prices",
+                    "To eliminate all economic problems"
+                ],
+                correct: 1,
+                explanation: "Economics helps us understand how societies make choices about allocating scarce resources.",
+                memoryTip: "Economics = study of choice under scarcity"
+            },
+            {
+                question: "Which of these is an example of economic resource scarcity?",
+                options: [
+                    "Shortage of bread due to price controls",
+                    "Limited oil reserves worldwide",
+                    "Temporary lack of rain",
+                    "Seasonal unemployment"
+                ],
+                correct: 1,
+                explanation: "Oil reserves are limited (scarce) relative to unlimited wants for energy.",
+                memoryTip: "Scarcity = fundamental limitation; Shortage = temporary at a price"
+            },
+            {
+                question: "What does the 'invisible hand' refer to in economics?",
+                options: [
+                    "Government intervention",
+                    "Market forces guiding self-interest to social good",
+                    "Central planning",
+                    "International trade"
+                ],
+                correct: 1,
+                explanation: "Adam Smith's 'invisible hand' describes how market forces channel self-interest toward social benefit.",
+                memoryTip: "Invisible hand = market mechanism coordinating individual actions"
+            },
+            {
+                question: "Which economic question deals with resource allocation?",
+                options: [
+                    "What to produce?",
+                    "How to produce?",
+                    "For whom to produce?",
+                    "Why to produce?"
+                ],
+                correct: 0,
+                explanation: "'What to produce?' deals with allocating resources among different goods.",
+                memoryTip: "WHAT = resource allocation among different goods"
+            },
+            {
+                question: "In economics, what does 'utility' mean?",
+                options: [
+                    "Usefulness of a product",
+                    "Satisfaction from consumption",
+                    "Production efficiency",
+                    "Resource availability"
+                ],
+                correct: 1,
+                explanation: "Utility refers to the satisfaction or pleasure derived from consuming goods/services.",
+                memoryTip: "Utility = satisfaction (not the same as usefulness)"
+            },
+            {
+                question: "Which of the following is a characteristic of economic resources?",
+                options: [
+                    "Unlimited availability",
+                    "Zero price",
+                    "Alternative uses",
+                    "Non-renewable only"
+                ],
+                correct: 2,
+                explanation: "Economic resources are scarce and have alternative uses (can be used to produce different goods).",
+                memoryTip: "Economic resources: scarce + have alternative uses"
+            }
+        ];
+
+        // DOM elements
+        const quizContainer = document.getElementById('quiz-container');
+        const resultsContainer = document.getElementById('results-container');
+        const questionNumber = document.getElementById('question-number');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const explanationText = document.getElementById('explanation-text');
+        const memoryTipText = document.getElementById('memory-tip-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
+        const timeDisplay = document.getElementById('time');
+        const scoreDisplay = document.getElementById('score');
+        const scoreText = document.getElementById('score-text');
+        const totalQuestions = document.getElementById('total-questions');
+        const correctAnswers = document.getElementById('correct-answers');
+        const incorrectAnswers = document.getElementById('incorrect-answers');
+        const percentage = document.getElementById('percentage');
+        const timeTaken = document.getElementById('time-taken');
+        const questionReview = document.getElementById('question-review');
+        const restartBtn = document.getElementById('restart-btn');
+
+        // Quiz state
+        let currentQuestion = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let shuffledOptions = new Array(questions.length).fill(null);
+        let shuffledCorrectIndex = new Array(questions.length).fill(null);
+        let score = 0;
+        let timer;
+        let timeLeft = 60 * 60; // 60 minutes in seconds
+        let quizCompleted = false;
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        // Get shuffled options for a question
+        function getShuffledOptions(questionIndex) {
+            if (!shuffledOptions[questionIndex]) {
+                const question = questions[questionIndex];
+                // Create array of indices [0, 1, 2, 3]
+                const indices = [0, 1, 2, 3];
+                // Shuffle the indices
+                const shuffledIndices = shuffleArray(indices);
                 
-                // Remove active class from all links
-                document.querySelectorAll('.topic-list a').forEach(item => {
-                    item.classList.remove('active');
-                });
+                // Store shuffled options
+                shuffledOptions[questionIndex] = shuffledIndices.map(idx => question.options[idx]);
                 
-                // Add active class to clicked link
-                this.classList.add('active');
+                // Find where the correct answer ended up after shuffling
+                shuffledCorrectIndex[questionIndex] = shuffledIndices.indexOf(question.correct);
+            }
+            
+            return {
+                options: shuffledOptions[questionIndex],
+                correctIndex: shuffledCorrectIndex[questionIndex]
+            };
+        }
+
+        // Initialize quiz
+        function initQuiz() {
+            displayQuestion();
+            startTimer();
+            updateProgress();
+        }
+
+        // Display current question
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            const shuffled = getShuffledOptions(currentQuestion);
+            
+            questionNumber.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            questionText.textContent = question.question;
+            
+            optionsContainer.innerHTML = '';
+            shuffled.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.dataset.index = index; // Store the shuffled index
                 
-                // Hide all content sections
-                document.querySelectorAll('.content-section').forEach(section => {
-                    section.classList.remove('active');
-                });
+                if (userAnswers[currentQuestion] === index) {
+                    optionElement.classList.add('selected');
+                }
                 
-                // Show the target section
-                const targetId = this.getAttribute('data-target');
-                document.getElementById(targetId).classList.add('active');
-                
-                // Scroll to top of content
-                document.querySelector('.content').scrollTop = 0;
+                optionElement.textContent = option;
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
             });
-        });
-        
-        // Add some interactive elements for better learning
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add hover effects to badges
-            const badges = document.querySelectorAll('.badge');
-            badges.forEach(badge => {
-                badge.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-3px)';
-                    this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-                });
+            
+            // Show/hide explanation
+            if (userAnswers[currentQuestion] !== null) {
+                showExplanation();
+            } else {
+                explanationContainer.style.display = 'none';
+            }
+            
+            // Update button states
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.disabled = false;
+            submitBtn.style.display = currentQuestion === questions.length - 1 ? 'block' : 'none';
+        }
+
+        // Select an option
+        function selectOption(shuffledIndex) {
+            if (quizCompleted) return;
+            
+            userAnswers[currentQuestion] = shuffledIndex;
+            
+            // Update UI
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[shuffledIndex].classList.add('selected');
+            
+            showExplanation();
+        }
+
+        // Show explanation for current question
+        function showExplanation() {
+            const question = questions[currentQuestion];
+            const shuffled = getShuffledOptions(currentQuestion);
+            
+            explanationText.textContent = question.explanation;
+            memoryTipText.textContent = question.memoryTip;
+            explanationContainer.style.display = 'block';
+            
+            // Highlight correct/incorrect answers
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, index) => {
+                option.classList.remove('correct', 'incorrect');
+                if (index === shuffled.correctIndex) {
+                    option.classList.add('correct');
+                } else if (index === userAnswers[currentQuestion] && index !== shuffled.correctIndex) {
+                    option.classList.add('incorrect');
+                }
+            });
+        }
+
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+                updateProgress();
+            }
+        }
+
+        // Navigate to previous question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+                updateProgress();
+            }
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = `${currentQuestion + 1}/${questions.length}`;
+        }
+
+        // Start timer
+        function startTimer() {
+            timer = setInterval(() => {
+                timeLeft--;
                 
-                badge.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                    this.style.boxShadow = 'none';
-                });
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        // Submit quiz
+        function submitQuiz() {
+            clearInterval(timer);
+            quizCompleted = true;
+            
+            // Calculate score
+            score = 0;
+            for (let i = 0; i < questions.length; i++) {
+                if (userAnswers[i] !== null) {
+                    const shuffled = getShuffledOptions(i);
+                    if (userAnswers[i] === shuffled.correctIndex) {
+                        score++;
+                    }
+                }
+            }
+            
+            // Display results
+            quizContainer.style.display = 'none';
+            resultsContainer.style.display = 'block';
+            
+            scoreDisplay.textContent = `${score}/${questions.length}`;
+            totalQuestions.textContent = questions.length;
+            correctAnswers.textContent = score;
+            incorrectAnswers.textContent = questions.length - score;
+            percentage.textContent = `${((score / questions.length) * 100).toFixed(1)}%`;
+            
+            const minutesTaken = Math.floor((60 * 60 - timeLeft) / 60);
+            const secondsTaken = (60 * 60 - timeLeft) % 60;
+            timeTaken.textContent = `${minutesTaken.toString().padStart(2, '0')}:${secondsTaken.toString().padStart(2, '0')}`;
+            
+            // Set score text
+            if (score >= questions.length * 0.8) {
+                scoreText.textContent = "Excellent! You have mastered Chapter 1: Basics of Economics.";
+            } else if (score >= questions.length * 0.6) {
+                scoreText.textContent = "Good job! You have a solid understanding of basic economics concepts.";
+            } else if (score >= questions.length * 0.5) {
+                scoreText.textContent = "You passed! Review the explanations to strengthen your knowledge.";
+            } else {
+                scoreText.textContent = "You need more study. Review Chapter 1 material and try again.";
+            }
+            
+            // Generate question review
+            generateQuestionReview();
+        }
+
+        // Generate question review
+        function generateQuestionReview() {
+            questionReview.innerHTML = '<h3>Question Review</h3>';
+            
+            questions.forEach((question, index) => {
+                const shuffled = getShuffledOptions(index);
+                const reviewItem = document.createElement('div');
+                reviewItem.className = 'review-item';
+                
+                const reviewQuestion = document.createElement('div');
+                reviewQuestion.className = 'review-question';
+                reviewQuestion.textContent = `${index + 1}. ${question.question}`;
+                
+                const userAnswer = document.createElement('div');
+                userAnswer.className = 'review-answer';
+                if (userAnswers[index] !== null) {
+                    userAnswer.innerHTML = `Your answer: <span class="user-answer">${shuffled.options[userAnswers[index]]}</span>`;
+                } else {
+                    userAnswer.innerHTML = `Your answer: <span class="user-answer">Not answered</span>`;
+                }
+                
+                const correctAnswer = document.createElement('div');
+                correctAnswer.className = 'review-answer';
+                correctAnswer.innerHTML = `Correct answer: <span class="correct-answer">${shuffled.options[shuffled.correctIndex]}</span>`;
+                
+                reviewItem.appendChild(reviewQuestion);
+                reviewItem.appendChild(userAnswer);
+                reviewItem.appendChild(correctAnswer);
+                
+                questionReview.appendChild(reviewItem);
             });
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            shuffledOptions = new Array(questions.length).fill(null);
+            shuffledCorrectIndex = new Array(questions.length).fill(null);
+            score = 0;
+            timeLeft = 60 * 60;
+            quizCompleted = false;
             
-            // Add click to highlight important terms
-            const importantTerms = document.querySelectorAll('.bacteria-card h3, .mnemonic-box h4, .visual-aid h4');
-            importantTerms.forEach(term => {
-                term.addEventListener('click', function() {
-                    this.style.color = this.style.color === 'rgb(231, 76, 60)' ? '' : '#e74c3c';
-                });
-            });
+            quizContainer.style.display = 'block';
+            resultsContainer.style.display = 'none';
             
-            // Create a simple flashcard system
-            const flashcards = [
-                { front: "Catalase test distinguishes:", back: "Staphylococcus (+) from Streptococcus (-)" },
-                { front: "Coagulase test identifies:", back: "Staphylococcus aureus (coagulase +)" },
-                { front: "Bacitracin sensitivity indicates:", back: "Group A Streptococcus (S. pyogenes)" },
-                { front: "Optochin sensitivity indicates:", back: "Streptococcus pneumoniae" },
-                { front: "PYR test positive organisms:", back: "Enterococcus and Group A Streptococcus" },
-                { front: "CAMP test positive indicates:", back: "Group B Streptococcus (S. agalactiae)" },
-                { front: "Novobiocin resistant species:", back: "Staphylococcus saprophyticus" },
-                { front: "Always treat Strep pharyngitis for:", back: "10 days to prevent rheumatic fever" },
-                { front: "Drug of choice for MRSA:", back: "Vancomycin" },
-                { front: "Drug of choice for Group A Strep:", back: "Penicillin" }
-            ];
-            
-            // Add flashcard button
-            const flashcardBtn = document.createElement('button');
-            flashcardBtn.innerHTML = '<i class="fas fa-layer-group"></i> Quick Flashcards';
-            flashcardBtn.style.cssText = `
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                background: linear-gradient(to right, var(--secondary-color), var(--accent-color));
-                color: white;
-                border: none;
-                padding: 12px 20px;
-                border-radius: 30px;
-                cursor: pointer;
-                font-weight: 600;
-                box-shadow: var(--box-shadow);
-                z-index: 100;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-            `;
-            
-            document.body.appendChild(flashcardBtn);
-            
-            flashcardBtn.addEventListener('click', function() {
-                const randomCard = flashcards[Math.floor(Math.random() * flashcards.length)];
-                alert(`FLASHCARD\n\nFRONT: ${randomCard.front}\n\n(Click OK to see answer)\n\nBACK: ${randomCard.back}`);
-            });
-            
-            // Add print button
-            const printBtn = document.createElement('button');
-            printBtn.innerHTML = '<i class="fas fa-print"></i> Print Notes';
-            printBtn.style.cssText = `
-                position: fixed;
-                bottom: 70px;
-                right: 20px;
-                background: linear-gradient(to right, var(--primary-color), #34495e);
-                color: white;
-                border: none;
-                padding: 12px 20px;
-                border-radius: 30px;
-                cursor: pointer;
-                font-weight: 600;
-                box-shadow: var(--box-shadow);
-                z-index: 100;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-            `;
-            
-            document.body.appendChild(printBtn);
-            
-            printBtn.addEventListener('click', function() {
-                window.print();
-            });
-        });
+            initQuiz();
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        submitBtn.addEventListener('click', submitQuiz);
+        restartBtn.addEventListener('click', restartQuiz);
+
+        // Start the quiz
+        initQuiz();
     </script>
 </body>
     </html>
