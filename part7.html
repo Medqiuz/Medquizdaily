@@ -3,241 +3,319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>General Pathology Mid-Exam</title>
+    <title>Economics Quiz | Haramaya University</title>
     <style>
         :root {
             --primary: #2c3e50;
             --secondary: #3498db;
-            --accent: #e74c3c;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --warning: #f39c12;
             --light: #ecf0f1;
             --dark: #2c3e50;
-            --success: #27ae60;
-            --warning: #f39c12;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
-        
+
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            background-color: #f5f7fa;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             color: var(--dark);
             line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
         }
-        
+
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
-        }
-        
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        
-        .exam-title {
-            text-align: center;
-            margin: 20px 0;
-            color: var(--primary);
-        }
-        
-        .exam-info {
             background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .instructions {
-            background-color: var(--light);
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        
-        .exam-form {
-            background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .question {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .question-number {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-        
-        .question-text {
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-        
-        .options {
-            margin-left: 20px;
-        }
-        
-        .option {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: flex-start;
-        }
-        
-        .option input {
-            margin-right: 10px;
-            margin-top: 5px;
-        }
-        
-        .explanation {
-            background-color: var(--light);
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 15px;
-            display: none;
-        }
-        
-        .correct {
-            color: var(--success);
-            font-weight: bold;
-        }
-        
-        .incorrect {
-            color: var(--accent);
-            font-weight: bold;
-        }
-        
-        .buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-        
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary {
-            background-color: var(--secondary);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background-color: #2980b9;
-        }
-        
-        .btn-success {
-            background-color: var(--success);
-            color: white;
-        }
-        
-        .btn-success:hover {
-            background-color: #219955;
-        }
-        
-        .btn-warning {
-            background-color: var(--warning);
-            color: white;
-        }
-        
-        .btn-warning:hover {
-            background-color: #e67e22;
-        }
-        
-        .user-info {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .user-info input {
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            flex: 1;
-        }
-        
-        .progress-bar {
-            height: 10px;
-            background-color: #eee;
-            border-radius: 5px;
-            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
             overflow: hidden;
         }
-        
+
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 25px;
+            background-color: var(--light);
+            border-bottom: 1px solid #ddd;
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--danger);
+        }
+
         .progress {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
             height: 100%;
             background-color: var(--secondary);
             width: 0%;
-            transition: width 0.3s ease;
+            transition: var(--transition);
         }
-        
-        .results {
-            display: none;
-            background-color: white;
+
+        .quiz-container {
+            padding: 30px;
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+        }
+
+        .question-number {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .option {
+            padding: 15px;
+            background-color: var(--light);
             border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background-color: #e0e7ee;
+            transform: translateY(-2px);
+        }
+
+        .option.selected {
+            border-color: var(--secondary);
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .option.correct {
+            border-color: var(--success);
+            background-color: rgba(39, 174, 96, 0.1);
+        }
+
+        .option.incorrect {
+            border-color: var(--danger);
+            background-color: rgba(231, 76, 60, 0.1);
+        }
+
+        .explanation-container {
             padding: 20px;
+            background-color: rgba(52, 152, 219, 0.05);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .explanation-title {
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .memory-tip {
+            background-color: rgba(243, 156, 18, 0.1);
+            padding: 15px;
+            border-left: 4px solid var(--warning);
+            margin-top: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .memory-tip-title {
+            font-weight: 600;
+            color: var(--warning);
+            margin-bottom: 5px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
             margin-top: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-prev {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+
+        .btn-next {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-submit {
+            background-color: var(--success);
+            color: white;
+            display: none;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .results-container {
+            padding: 30px;
+            text-align: center;
+            display: none;
+        }
+
+        .results-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
         .score {
-            text-align: center;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-        
-        .retake-btn {
-            display: block;
-            margin: 20px auto;
-        }
-        
-        .timer {
-            text-align: center;
-            font-size: 1.2rem;
-            margin-bottom: 20px;
+            font-size: 4rem;
             font-weight: bold;
+            color: var(--secondary);
+            margin: 20px 0;
         }
-        
+
+        .score-text {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+        }
+
+        .summary {
+            text-align: left;
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .summary-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .restart-btn {
+            background-color: var(--secondary);
+            color: white;
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+        }
+
+        .question-review {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .review-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .review-question {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .review-answer {
+            margin-bottom: 5px;
+        }
+
+        .correct-answer {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .user-answer {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
         @media (max-width: 768px) {
-            .header-content {
+            .quiz-info {
                 flex-direction: column;
+                gap: 15px;
                 text-align: center;
             }
-            
-            .buttons {
+
+            .progress-bar {
+                width: 100%;
+            }
+
+            .question-text {
+                font-size: 1.2rem;
+            }
+
+            .navigation {
                 flex-direction: column;
                 gap: 10px;
             }
-            
+
             button {
                 width: 100%;
             }
@@ -245,1539 +323,951 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="https://t.me/yerotechno"><h1 style="color:pink;">MedQuiz</h1></a>
-                <div class="logo">General Pathology Exam</div>
-                <div>Mid-Examination</div>
-            </div>
-        </div>
-    </header>
-    
     <div class="container">
-        <h1 class="exam-title">General Pathology Mid-Term Examination</h1>
-        
-        <div class="exam-info">
-            <div class="instructions">
-                <h3>Instructions:</h3>
-                <ul>
-                    <li>This exam consists of 100 multiple-choice questions.</li>
-                    <li>Select the best answer for each question.</li>
-                    <li>You can only submit your answers once.</li>
-                    <li>After submission, you will see your score and can review the correct answers with explanations.</li>
-                    <li>The exam has a time limit of 120 minutes.</li>
-                </ul>
-            </div>
-            
-            <div class="user-info">
-                <input type="text" id="student-name" placeholder="Enter your name" required>
-                <input type="email" id="student-email" placeholder="Enter your email" required>
-            </div>
-            
-            <div class="timer" id="timer">Time Remaining: 120:00</div>
-            
-            <div class="progress-bar">
-                <div class="progress" id="progress"></div>
+        <header>            <a href="https://t.me/yerotechno"><h1 style=" color: white">MedQuiz</h1></a>
+            <h1>Economics Quiz</h1>
+            <p>Introduction to Economics | Haramaya University</p>
+        </header>
+
+        <div class="quiz-info">
+            <div class="timer">Time: <span id="time">60:00</span></div>
+            <div class="progress">
+                <span>Progress:</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <span id="progress-text">0/50</span>
             </div>
         </div>
-        
-        <form id="exam-form" class="exam-form">
-            <!-- Questions will be inserted here by JavaScript -->
-        </form>
-        
-        <div class="buttons">
-            <button type="button" id="prev-btn" class="btn-primary">Previous</button>
-            <button type="button" id="next-btn" class="btn-primary">Next</button>
-            <button type="button" id="submit-btn" class="btn-success">Submit Exam</button>
-        </div>
-        
-        <div id="results" class="results">
-            <h2 class="score">Your Score: <span id="score-value">0</span>/100</h2>
-            <div id="results-content">
-                <!-- Results will be inserted here by JavaScript -->
+
+        <div class="quiz-container" id="quiz-container">
+            <div class="question-container">
+                <div class="question-number" id="question-number">Question 1 of 50</div>
+                <div class="question-text" id="question-text"></div>
+                <div class="options-container" id="options-container"></div>
             </div>
-            <button type="button" id="retake-btn" class="btn-warning retake-btn">Retake Exam (Practice Mode)</button>
+
+            <div class="explanation-container" id="explanation-container">
+                <div class="explanation-title">Explanation</div>
+                <div id="explanation-text"></div>
+                <div class="memory-tip" id="memory-tip">
+                    <div class="memory-tip-title">Memory Tip</div>
+                    <div id="memory-tip-text"></div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn-prev" id="prev-btn" disabled>Previous</button>
+                <button class="btn-next" id="next-btn">Next Question</button>
+                <button class="btn-submit" id="submit-btn">Submit Quiz</button>
+            </div>
+        </div>
+
+        <div class="results-container" id="results-container">
+            <h2 class="results-title">Quiz Results</h2>
+            <div class="score" id="score">0/50</div>
+            <div class="score-text" id="score-text"></div>
+
+            <div class="summary">
+                <div class="summary-title">Performance Summary</div>
+                <p>Total Questions: <span id="total-questions">50</span></p>
+                <p>Correct Answers: <span id="correct-answers">0</span></p>
+                <p>Incorrect Answers: <span id="incorrect-answers">0</span></p>
+                <p>Percentage: <span id="percentage">0%</span></p>
+                <p>Time Taken: <span id="time-taken">60:00</span></p>
+            </div>
+
+            <div class="question-review" id="question-review">
+                <h3>Question Review</h3>
+            </div>
+
+            <button class="restart-btn" id="restart-btn">Restart Quiz</button>
         </div>
     </div>
 
     <script>
-        // Questions array - 100 questions covering all pathology topics from the provided materials
+        // Economics Quiz Questions (50 questions from the exam files and textbook)
         const questions = [
-            // Hemodynamic Disorders (20 questions)
             {
-                question: "Which of the following best describes the role of capillary hydrostatic pressure in Starling forces?",
+                question: "One of the following is false about opportunity cost?",
                 options: [
-                    "A. Draws fluid inward from interstitium",
-                    "B. Forces fluid outward from capillaries to interstitium",
-                    "C. Forces fluid from interstitium to capillaries",
-                    "D. Draws fluid outward to interstitium"
+                    "The second-best alternative is forgone in order to get the first",
+                    "It's measured in terms of goods and services",
+                    "It can be measured by monetary unit",
+                    "The per unit cost of output increase as more of that output is produced"
                 ],
-                correctAnswer: 1,
-                explanation: "Capillary hydrostatic pressure (Pc) forces fluid outward from capillaries to interstitium. This is one of the four primary Starling forces that govern fluid balance across capillary membranes."
+                correct: 3,
+                explanation: "Opportunity cost is the value of the next best alternative forgone when making a decision. It is measured in terms of goods and services, not necessarily in monetary units. The statement about per unit cost increasing refers to the law of diminishing returns, not opportunity cost.",
+                memoryTip: "Opportunity cost = Next best alternative sacrificed. Not about increasing per unit costs."
             },
             {
-                question: "Which condition is characterized by a passive process with impaired blood outflow from tissue?",
+                question: "The most fundamental economic problem is:",
                 options: [
-                    "A. Active hyperemia",
-                    "B. Congestion",
-                    "C. Hemorrhage",
-                    "D. Thrombosis"
+                    "Scarcity",
+                    "Resource abundance",
+                    "Shortage",
+                    "Opportunity cost"
                 ],
-                correctAnswer: 1,
-                explanation: "Congestion is a passive process with impaired blood outflow from tissue, resulting in accumulation of deoxygenated blood. This contrasts with active hyperemia, which involves increased blood inflow due to arteriolar dilation."
+                correct: 0,
+                explanation: "Scarcity is the fundamental economic problem because resources are limited while human wants are unlimited. This forces societies to make choices about how to allocate scarce resources.",
+                memoryTip: "Scarcity → Choice → Opportunity Cost. Scarcity is the root problem."
             },
             {
-                question: "A patient presents with minute 1-2 mm hemorrhages in the skin. This is best described as:",
+                question: "In broad terms the difference between microeconomics and macroeconomics is that:",
                 options: [
-                    "A. Petechiae",
-                    "B. Purpura",
-                    "C. Ecchymosis",
-                    "D. Hematoma"
+                    "Microeconomics studies the effects of government taxes on the national unemployment rate",
+                    "Macroeconomics studies the effects of government regulation and taxes on the price of individual goods and services",
+                    "They use similar sets of tools and ideas",
+                    "Microeconomics studies decisions of individual people and firms and macroeconomics studies the entire national economy"
                 ],
-                correctAnswer: 0,
-                explanation: "Petechiae are minute 1-2 mm hemorrhages in skin, mucosa, or serosal surfaces. Purpura are slightly larger (3mm), ecchymosis are larger than 1-2cm subcutaneous hematomas, and hematoma refers to hemorrhage enclosed within tissue or cavity."
+                correct: 3,
+                explanation: "Microeconomics focuses on individual units like households and firms, while macroeconomics looks at the economy as a whole, studying aggregates like national income, unemployment, and inflation.",
+                memoryTip: "Micro = individual units, Macro = whole economy. Micro → trees, Macro → forest."
             },
             {
-                question: "Which component of Virchow's triad is considered the most important factor in arterial thrombosis?",
+                question: "Which of the following is a feature of a socialist economy?",
                 options: [
-                    "A. Turbulence or stasis",
-                    "B. Hypercoagulability",
-                    "C. Endothelial injury",
-                    "D. Platelet aggregation"
+                    "Right to private property",
+                    "Maximum social welfare",
+                    "Freedom of consumers",
+                    "Inequality of income distribution"
                 ],
-                correctAnswer: 2,
-                explanation: "Endothelial injury is the most important factor in Virchow's triad, particularly in heart and arterial circulation. It exposes thrombogenic subendothelial matrix (collagen, tissue factors) that initiate thrombosis."
+                correct: 1,
+                explanation: "Socialist economies (command economies) aim for maximum social welfare and collective ownership of resources, unlike capitalist economies which emphasize private property and individual freedom.",
+                memoryTip: "Socialism = social welfare, state ownership. Capitalism = private property, profit motive."
             },
             {
-                question: "A 65-year-old patient develops sudden dyspnea and chest pain. Imaging reveals a saddle embolus in the pulmonary arteries. What is the most likely source?",
+                question: "All of the followings are positive economic analysis, except:",
                 options: [
-                    "A. Deep vein thrombosis",
-                    "B. Atrial fibrillation",
-                    "C. Aortic dissection",
-                    "D. Pulmonary hypertension"
+                    "The current inflation rate in our country is 12%",
+                    "Unemployment is the fundamental problem in Ethiopia",
+                    "The government should intervene in the economy",
+                    "The life expectancy is rising in Ethiopia"
                 ],
-                correctAnswer: 0,
-                explanation: "95% of pulmonary thromboembolisms arise from deep leg vein thrombi. These travel to the right heart and then to pulmonary arteries, where a large saddle embolus can cause sudden death by blocking the outflow tract or bifurcation."
+                correct: 2,
+                explanation: "Positive economics describes 'what is' based on facts, while normative economics prescribes 'what ought to be' based on value judgments. 'The government should intervene' is a normative statement.",
+                memoryTip: "Positive = facts (what is). Normative = opinions (what should be)."
             },
             {
-                question: "Which type of infarct typically occurs in solid organs with single blood supply?",
+                question: "One of the following is not the determinant of demand curve to shift up or downward:",
                 options: [
-                    "A. Red (hemorrhagic) infarct",
-                    "B. White (anemic) infarct",
-                    "C. Septic infarct",
-                    "D. Bland infarct"
+                    "Taste and preferences",
+                    "Price of own good",
+                    "Income of the consumer",
+                    "Number of buyers in the market"
                 ],
-                correctAnswer: 1,
-                explanation: "White (anemic) infarcts occur with arterial occlusion in organs with single blood supply, such as the heart, spleen, and kidney. Red infarcts occur in venous occlusions, loose tissues, or tissues with dual circulation."
+                correct: 1,
+                explanation: "A change in the price of a good causes movement along the demand curve, not a shift of the entire curve. Other factors like tastes, income, and number of buyers shift the demand curve.",
+                memoryTip: "Price changes cause movement along the curve. Other factors shift the entire curve."
             },
             {
-                question: "A patient with extensive burns develops widespread bleeding from multiple sites. Laboratory tests show thrombocytopenia, prolonged PT/PTT, and reduced fibrinogen. What is the most likely diagnosis?",
+                question: "From the following alternative which one is incorrect about the Production Possibility Curve or Frontier (PPC/PPF)?",
                 options: [
-                    "A. Hemophilia",
-                    "B. Vitamin K deficiency",
-                    "C. Disseminated intravascular coagulation (DIC)",
-                    "D. Immune thrombocytopenic purpura"
+                    "The PPC/F describes concepts of scarcity, choice and opportunity cost",
+                    "The PPC/F is convex to the origin",
+                    "The PPC/F is downward sloping",
+                    "The points found inside or below the PPC/F are inefficient, but attainable"
                 ],
-                correctAnswer: 2,
-                explanation: "This presentation is classic for DIC, which is characterized by consumption coagulopathy with paradoxical bleeding and thrombosis. In burn patients, autoinfusion of thromboplastin from tissues triggers the coagulation cascade, leading to consumption of clotting factors and platelets."
+                correct: 1,
+                explanation: "The PPC is concave to the origin (bowed outward), not convex, due to increasing opportunity costs as resources are reallocated between different types of production.",
+                memoryTip: "PPC is concave (bowed outward) due to increasing opportunity costs."
             },
             {
-                question: "Which type of shock is characterized by profound peripheral vasodilation despite normal or high cardiac output?",
+                question: "A percentage change in quantity demanded for one commodity divided by a percentage change in price of another commodity is called:",
                 options: [
-                    "A. Hypovolemic shock",
-                    "B. Cardiogenic shock",
-                    "C. Distributive shock",
-                    "D. Obstructive shock"
+                    "Income elasticity of demand",
+                    "Price elasticity of demand",
+                    "Price elasticity of supply",
+                    "Cross price elasticity of demand"
                 ],
-                correctAnswer: 2,
-                explanation: "Distributive shock involves profound peripheral vasodilation despite normal or high cardiac output. This includes septic shock (most common), neurogenic shock, anaphylactic shock, and endocrine shock."
+                correct: 3,
+                explanation: "Cross price elasticity measures how the quantity demanded of one good responds to a price change of another good. It's positive for substitutes and negative for complements.",
+                memoryTip: "Cross elasticity = between two different goods. Price elasticity = same good's price and quantity."
             },
             {
-                question: "A patient with myocardial infarction develops severe hypotension, pulmonary edema, and requires inotropic support. Which stage of shock is this patient most likely in?",
+                question: "The 'law of demand' implies that:",
                 options: [
-                    "A. Initial nonprogressive phase",
-                    "B. Progressive stage",
-                    "C. Irreversible stage",
-                    "D. Compensated stage"
+                    "As prices decrease, quantity demanded rises",
+                    "As prices rise, demand falls",
+                    "As prices rise, quantity demanded rises",
+                    "As prices decrease, demand rises"
                 ],
-                correctAnswer: 1,
-                explanation: "This describes the progressive stage of shock, characterized by tissue hypoperfusion with worsening circulatory and metabolic imbalances. Widespread tissue hypoxia leads to anaerobic glycolysis, lactic acidosis, and cellular swelling."
+                correct: 0,
+                explanation: "The law of demand states an inverse relationship between price and quantity demanded, ceteris paribus. When price decreases, quantity demanded increases.",
+                memoryTip: "Law of Demand: Price ↓ → Quantity Demanded ↑ (inverse relationship)."
             },
             {
-                question: "Which of the following is a feature of transudate rather than exudate?",
+                question: "Any point lying above a production possibility curve indicates:",
                 options: [
-                    "A. Protein-rich fluid",
-                    "B. Specific gravity > 1.012",
-                    "C. Due to inflammation",
-                    "D. Protein-poor fluid"
+                    "Unattainable combination of goods",
+                    "Inefficient use of resources",
+                    "Full employment of resources",
+                    "Economic growth"
                 ],
-                correctAnswer: 3,
-                explanation: "Transudate is protein-poor fluid with specific gravity < 1.012, resulting from hemodynamic derangements (increased hydrostatic pressure or decreased oncotic pressure). Exudate is protein-rich with specific gravity > 1.012, resulting from inflammation-induced increased permeability."
+                correct: 0,
+                explanation: "Points above the PPC are unattainable with current resources and technology. Points on the curve are efficient, points inside are inefficient but attainable.",
+                memoryTip: "Above PPC = unattainable. On PPC = efficient. Inside PPC = inefficient but attainable."
             },
             {
-                question: "A patient with congestive heart failure develops pitting edema in the lower extremities. Which mechanism is primarily responsible?",
+                question: "The less substitutes are available for a product, the less elastic will be the price elasticity of demand.",
                 options: [
-                    "A. Decreased plasma oncotic pressure",
-                    "B. Increased capillary hydrostatic pressure",
-                    "C. Lymphatic obstruction",
-                    "D. Increased vascular permeability"
+                    "True",
+                    "False"
                 ],
-                correctAnswer: 1,
-                explanation: "In congestive heart failure, reduced cardiac output leads to decreased renal perfusion, activation of the renin-angiotensin-aldosterone system, sodium and water retention, increased plasma volume, and ultimately increased capillary hydrostatic pressure causing edema."
+                correct: 0,
+                explanation: "When few substitutes exist, consumers have fewer alternatives, so they are less responsive to price changes, making demand less elastic.",
+                memoryTip: "Few substitutes = inelastic demand. Many substitutes = elastic demand."
             },
             {
-                question: "Which of the following is a primary (genetic) hypercoagulable state?",
+                question: "Inductive reasoning is a logical method of reaching a correct specific statement based on general theory.",
                 options: [
-                    "A. Prolonged bed rest",
-                    "B. Factor V Leiden mutation",
-                    "C. Cancer",
-                    "D. Oral contraceptive use"
+                    "True",
+                    "False"
                 ],
-                correctAnswer: 1,
-                explanation: "Factor V Leiden mutation is a primary (genetic) hypercoagulable state. Other primary disorders include antithrombin III deficiency and protein C or S deficiency. Secondary (acquired) states include prolonged bed rest, cancer, and oral contraceptive use."
+                correct: 1,
+                explanation: "Inductive reasoning moves from specific observations to general theories. Deductive reasoning moves from general theories to specific predictions.",
+                memoryTip: "Inductive: Specific → General. Deductive: General → Specific."
             },
             {
-                question: "A patient presents with sudden onset of dyspnea, cyanosis, and shock 1 day after a femoral shaft fracture. What is the most likely cause?",
+                question: "Closed economy does not allow export and import of goods and services.",
                 options: [
-                    "A. Pulmonary thromboembolism",
-                    "B. Fat embolism",
-                    "C. Air embolism",
-                    "D. Amniotic fluid embolism"
+                    "True",
+                    "False"
                 ],
-                correctAnswer: 1,
-                explanation: "Fat embolism syndrome typically occurs 1-3 days after fractures or severe tissue injury. It presents with dyspnea, petechiae, and neurological symptoms due to fat globules entering the circulation."
+                correct: 0,
+                explanation: "A closed economy is one that does not engage in international trade - no exports or imports. Most modern economies are open economies.",
+                memoryTip: "Closed economy = no international trade. Open economy = engages in trade."
             },
             {
-                question: "Which organ typically shows 'nutmeg liver' appearance in chronic congestion?",
+                question: "Scarcity exists in every society because there are?",
                 options: [
-                    "A. Lung",
-                    "B. Liver",
-                    "C. Spleen",
-                    "D. Kidney"
+                    "Limited wants and abundant resources",
+                    "Limited resources and unlimited production capabilities",
+                    "Limited resources and unlimited wants",
+                    "Limited production capabilities and an unlimited quantity of economic resources"
                 ],
-                correctAnswer: 1,
-                explanation: "Chronic hepatic congestion results in 'nutmeg liver' appearance, with central lobules depressed and red-brown due to centrilobular necrosis and hemorrhage. This is characteristic of right-sided heart failure."
+                correct: 2,
+                explanation: "Scarcity exists because human wants are unlimited while resources to satisfy those wants are limited. This is the fundamental economic problem.",
+                memoryTip: "Scarcity = Unlimited wants + Limited resources."
             },
             {
-                question: "Which of the following best describes the difference between arterial and venous thrombi?",
+                question: "The production possibility frontier depicts:",
                 options: [
-                    "A. Venous thrombi grow retrograde against flow",
-                    "B. Arterial thrombi originate from areas of stasis",
-                    "C. Venous thrombi are almost invariably occlusive",
-                    "D. Arterial thrombi have loose attachment"
+                    "The maximum amount of alternative combinations of two goods that an economy can produce at a point in time",
+                    "The limited amount of resources that an economy has at a point in time",
+                    "The alternative combination of capital and labor inputs used in producing goods and services over time",
+                    "The economy's employment level at a point in time"
                 ],
-                correctAnswer: 2,
-                explanation: "Venous thrombi are almost invariably occlusive, while arterial thrombi are usually occlusive. Arterial thrombi originate from sites of endothelial injury and grow retrograde against flow, while venous thrombi originate from areas of stasis and grow in the direction of blood flow."
+                correct: 0,
+                explanation: "The PPF shows the maximum possible output combinations of two goods or services an economy can achieve when all resources are fully and efficiently employed.",
+                memoryTip: "PPF = maximum possible output combinations with given resources and technology."
             },
             {
-                question: "A patient with severe gram-negative sepsis develops hypotension unresponsive to fluid administration. This is best described as:",
+                question: "A movement along a demand curve can be caused by a change in:",
                 options: [
-                    "A. Bacteremia",
-                    "B. Septicemia",
-                    "C. Sepsis",
-                    "D. Septic shock"
+                    "Income",
+                    "The price of a substitute or complement",
+                    "Expectation about future prices",
+                    "The price of the good in question"
                 ],
-                correctAnswer: 3,
-                explanation: "Septic shock is defined as sepsis with hypotension (BP < 90mmHg or 40mmHg less than patient's normal), organ dysfunction, and unresponsiveness to fluid administration. It has mortality >50% and is commonly caused by endotoxin-producing gram-negative bacilli."
+                correct: 3,
+                explanation: "A change in the price of the good itself causes movement along the demand curve. Changes in other factors shift the entire demand curve.",
+                memoryTip: "Price change = movement along curve. Other factors change = shift of curve."
             },
             {
-                question: "Which laboratory finding is a cardinal manifestation of DIC?",
+                question: "Which of the following is not a feature of a capitalistic economy?",
                 options: [
-                    "A. Elevated fibrinogen",
-                    "B. Low plasma fibrinogen level",
-                    "C. Increased platelet count",
-                    "D. Shortened PT and PTT"
+                    "Right to private property",
+                    "Maximum social welfare",
+                    "Freedom of enterprise",
+                    "Inequality of income"
                 ],
-                correctAnswer: 1,
-                explanation: "Low plasma fibrinogen level is a cardinal manifestation of DIC and correlates with bleeding. Other findings include thrombocytopenia, schistocytes, prolonged PT/PTT/thrombin time, and increased fibrin degradation products."
+                correct: 1,
+                explanation: "Maximum social welfare is a goal of socialist/command economies. Capitalist economies feature private property, freedom of enterprise, and often income inequality.",
+                memoryTip: "Capitalism: private property, profit motive, competition, inequality. Socialism: social welfare, equality, state ownership."
             },
             {
-                question: "Which of the following is a characteristic of red (hemorrhagic) infarcts?",
+                question: "Which of the following statements about factors of production is false?",
                 options: [
-                    "A. Occur in solid organs with single blood supply",
-                    "B. Result from arterial occlusion",
-                    "C. Occur in venous occlusions or loose tissues",
-                    "D. Are always septic"
+                    "The term factors of production is another term for resources",
+                    "The factor of production termed labour means human resources",
+                    "The factor of production termed land means natural resources",
+                    "The factor of production termed capital means the money which the owners of firms need in order to set their firms up"
                 ],
-                correctAnswer: 2,
-                explanation: "Red (hemorrhagic) infarcts occur in venous occlusions, loose tissues (lungs), tissues with dual circulation, previously congested tissues, or after reestablished blood flow. White (anemic) infarcts occur with arterial occlusion in organs with single blood supply."
+                correct: 3,
+                explanation: "In economics, capital refers to manufactured goods used to produce other goods and services (machinery, tools, buildings), not money. Money is financial capital, not economic capital.",
+                memoryTip: "Economic capital = physical assets (machines, tools). Not money!"
             },
             {
-                question: "A patient with multiple trauma develops tachycardia, tachypnea, and cool clammy skin. What type of shock is most likely?",
+                question: "Studying macroeconomics is to answer the following questions except:",
                 options: [
-                    "A. Septic shock",
-                    "B. Cardiogenic shock",
-                    "C. Hypovolemic shock",
-                    "D. Neurogenic shock"
+                    "How does a country experience rapid economic growth overtime?",
+                    "How does a country attain full employment of resources in the economy?",
+                    "Why do countries experience higher inflation?",
+                    "How does a consumer maximize its utility?"
                 ],
-                correctAnswer: 2,
-                explanation: "Hypovolemic shock presents with weak rapid pulse, tachypnea, and cool clammy cyanotic skin. This contrasts with septic shock, which may initially present with warm, flushed skin due to peripheral vasodilation."
+                correct: 3,
+                explanation: "How a consumer maximizes utility is a microeconomic question. Macroeconomics deals with economy-wide issues like growth, unemployment, and inflation.",
+                memoryTip: "Macro = whole economy (growth, inflation, unemployment). Micro = individual decisions (consumer choice, firm behavior)."
             },
             {
-                question: "Which of the following is NOT part of Virchow's triad?",
+                question: "The only factor that can cause a change in quantity demand is its own price of the product",
                 options: [
-                    "A. Endothelial injury",
-                    "B. Turbulence or stasis",
-                    "C. Hypercoagulability",
-                    "D. Platelet dysfunction"
+                    "True",
+                    "False"
                 ],
-                correctAnswer: 3,
-                explanation: "Virchow's triad consists of three factors that predispose to thrombus formation: endothelial injury (most important), turbulence or stasis (alterations in blood flow), and hypercoagulability. Platelet dysfunction is not part of the classic triad."
+                correct: 0,
+                explanation: "By definition, 'quantity demanded' refers to the amount of a good that consumers are willing and able to purchase at a specific price. Changes in other factors affect 'demand' (the entire relationship).",
+                memoryTip: "Quantity demanded changes only with price. Demand changes with other factors (income, tastes, etc.)."
             },
-            // Cell Injury, Death & Adaptation (20 questions)
             {
-                question: "Which cellular adaptation is characterized by an increase in cell size?",
+                question: "Along a down-ward sloping straight line demand curve, price elasticity is constant",
                 options: [
-                    "A. Hyperplasia",
-                    "B. Hypertrophy",
-                    "C. Atrophy",
-                    "D. Metaplasia"
+                    "True",
+                    "False"
                 ],
-                correctAnswer: 1,
-                explanation: "Hypertrophy is an increase in cell size, while hyperplasia is an increase in cell number. Atrophy is a decrease in cell size and number, and metaplasia is a change in cell type."
+                correct: 1,
+                explanation: "Price elasticity varies along a straight-line demand curve. It is elastic at high prices (top portion) and inelastic at low prices (bottom portion).",
+                memoryTip: "Elasticity varies along a straight-line demand curve. Top = elastic, middle = unit elastic, bottom = inelastic."
             },
             {
-                question: "Which of the following tissues has the highest capacity for regeneration?",
+                question: "A resource is said to be scarce or economic resource when the amount available to a society is less than what people want to have at a given price",
                 options: [
-                    "A. Neurons",
-                    "B. Cardiac muscle",
-                    "C. Skin epithelium",
-                    "D. Skeletal muscle"
+                    "True",
+                    "False"
                 ],
-                correctAnswer: 2,
-                explanation: "Skin epithelium is a labile tissue with high capacity for regeneration due to stem cells and continuous cell turnover. Neurons and cardiac muscle are permanent tissues with limited regenerative capacity, relying on scar formation."
+                correct: 0,
+                explanation: "Scarcity means that at zero price, the quantity demanded exceeds the quantity supplied. Economic resources are scarce by definition.",
+                memoryTip: "Scarce resource = limited supply relative to wants at zero price."
             },
             {
-                question: "A patient with chronic gastroesophageal reflux disease develops a change from squamous to columnar epithelium in the lower esophagus. This is an example of:",
+                question: "One of the following is a normative statement?",
                 options: [
-                    "A. Hyperplasia",
-                    "B. Hypertrophy",
-                    "C. Metaplasia",
-                    "D. Dysplasia"
+                    "The price of Teff is Br 45 per kg",
+                    "The cause of unemployment is high rural urban migration",
+                    "Government should reduce tax to the private sectors to increase investment",
+                    "High fertility rate is the cause for high population growth"
                 ],
-                correctAnswer: 2,
-                explanation: "This describes Barrett esophagus, which is a metaplastic change from squamous to columnar epithelium due to chronic acid reflux. If persistent, it can progress to dysplasia and adenocarcinoma."
+                correct: 2,
+                explanation: "Normative statements express value judgments about what ought to be. 'Government should reduce tax' is a policy recommendation based on values, not just facts.",
+                memoryTip: "Normative = 'should', 'ought to'. Positive = factual statements about 'what is'."
             },
             {
-                question: "Which nuclear change is characterized by fragmentation into small particles?",
+                question: "When Abebe builds a dam using few machines and a great deal of labour, he is answering the ______ question.",
                 options: [
-                    "A. Pyknosis",
-                    "B. Karyorrhexis",
-                    "C. Karyolysis",
-                    "D. Karyomegaly"
+                    "For whom to produce",
+                    "What to produce",
+                    "How to produce",
+                    "Where to produce"
                 ],
-                correctAnswer: 1,
-                explanation: "Karyorrhexis is nuclear fragmentation into small particles. Pyknosis is nuclear condensation and shrinkage, karyolysis is nuclear fading and dissolution, and karyomegaly is abnormal enlargement of the nucleus."
+                correct: 2,
+                explanation: "The 'how to produce' question refers to the choice of production technique - whether to use more labor (labor-intensive) or more capital (capital-intensive).",
+                memoryTip: "How to produce = choice of technique (labor-intensive vs capital-intensive)."
             },
             {
-                question: "Which type of necrosis is characterized by preservation of tissue architecture and is typically seen in myocardial infarction?",
+                question: "You decide to take a vacation and the trip costs you 2,000birr. While you are on vacation, you do not report to work where you could have earned 750birr. The opportunity cost of the vacation is:",
                 options: [
-                    "A. Coagulative necrosis",
-                    "B. Liquefactive necrosis",
-                    "C. Caseous necrosis",
-                    "D. Fat necrosis"
+                    "750birr",
+                    "1,250birr",
+                    "2,000birr",
+                    "2,750birr"
                 ],
-                correctAnswer: 0,
-                explanation: "Coagulative necrosis preserves tissue architecture with eosinophilic cells and loss of nuclei. It's characteristic of ischemic infarction in all solid organs except the brain. Myocardial infarction shows coagulative necrosis."
+                correct: 3,
+                explanation: "Opportunity cost includes both explicit costs (2,000 birr) and implicit costs (750 birr forgone income) = 2,750 birr total.",
+                memoryTip: "Opportunity cost = explicit costs + implicit costs (forgone benefits)."
             },
             {
-                question: "Which of the following is a feature of apoptosis but not necrosis?",
+                question: "Which one of the following statements is true?",
                 options: [
-                    "A. Cell swelling",
-                    "B. Inflammation",
-                    "C. Energy-dependent process",
-                    "D. Plasma membrane disruption"
+                    "Ceteris paribus change in price results in movement along a demand curve",
+                    "Ceteris paribus, change in price results in shift of a supply curve",
+                    "Ceteris paribus, change in technology results in movement along a supply curve",
+                    "Ceteris paribus, increase in income shifts the demand curve for inferior goods to the right (outward)"
                 ],
-                correctAnswer: 2,
-                explanation: "Apoptosis is an energy (ATP)-dependent, genetically programmed process without inflammation. Necrosis involves cell swelling, plasma membrane disruption, and always triggers inflammation."
+                correct: 0,
+                explanation: "Ceteris paribus (other things equal), a price change causes movement along the demand curve. Technology changes shift the supply curve, and income increases shift demand for inferior goods leftward.",
+                memoryTip: "Price change = movement along curve. Technology/input price change = shift of supply curve."
             },
             {
-                question: "A patient with carbon monoxide poisoning presents with cherry-red skin. What is the mechanism of tissue injury?",
+                question: "Which one of the following statements is not true about economics?",
                 options: [
-                    "A. Free radical formation",
-                    "B. Hypoxia",
-                    "C. Direct chemical toxicity",
-                    "D. Immune-mediated damage"
+                    "Different economists define economics from different perspectives. Thus, there is no mutual consensus about its definition",
+                    "Adam Smith is known as the father of economics",
+                    "Economics is a social science which deals with efficient allocation of scarce resources to satisfy unlimited human want",
+                    "Microeconomics deals with the aggregative behaviours of all decision-making units in certain economy"
                 ],
-                correctAnswer: 1,
-                explanation: "Carbon monoxide causes hypoxia by binding hemoglobin more avidly than oxygen, reducing oxygen-carrying capacity. The cherry-red skin is due to carboxyhemoglobin formation."
+                correct: 3,
+                explanation: "Microeconomics studies individual decision-making units (households, firms), not aggregate behavior. Macroeconomics studies the economy as a whole.",
+                memoryTip: "Micro = individual units. Macro = aggregate/whole economy."
             },
             {
-                question: "Which of the following is an oxygen-dependent mechanism of microbial killing in phagocytes?",
+                question: "Which of the following will not cause the demand for product K to change?",
                 options: [
-                    "A. Lysozymes",
-                    "B. Defensins",
-                    "C. Lactoferrin",
-                    "D. Myeloperoxidase system"
+                    "a change in the price of close-substitute product X",
+                    "an increase in consumer incomes",
+                    "a change in the price of K",
+                    "a change in consumer tastes"
                 ],
-                correctAnswer: 3,
-                explanation: "The myeloperoxidase system (H₂O₂ + halide → hypochlorous acid) is an oxygen-dependent mechanism. Lysozymes, defensins, and lactoferrin are oxygen-independent bactericidal mechanisms."
+                correct: 2,
+                explanation: "A change in the price of product K causes movement along the demand curve for K, not a shift of the entire demand curve. Other factors shift the demand curve.",
+                memoryTip: "Own price change = movement along demand curve. Other factors = shift of demand curve."
             },
             {
-                question: "A patient with tuberculosis develops soft, friable, white material resembling cottage cheese in the lungs. This is characteristic of:",
+                question: "Identify the correct statement about market equilibrium:",
                 options: [
-                    "A. Coagulative necrosis",
-                    "B. Liquefactive necrosis",
-                    "C. Caseous necrosis",
-                    "D. Fibrinoid necrosis"
+                    "Given a constant supply, when demand decreases equilibrium price increases",
+                    "Given a constant demand, when supply increases both equilibrium price and quantity increases",
+                    "Given a constant supply, when demand increases both equilibrium quantity and price increases",
+                    "When supply increases, given a constant demand, price also increases"
                 ],
-                correctAnswer: 2,
-                explanation: "Caseous necrosis is characterized by soft, friable, white material resembling cottage cheese. It's a combination of coagulative and liquefactive necrosis seen in tuberculosis and fungal infections."
+                correct: 2,
+                explanation: "When demand increases (curve shifts right) with constant supply, both equilibrium price and quantity increase. Supply increases lower price but increase quantity.",
+                memoryTip: "Demand ↑ → Price ↑ & Quantity ↑. Supply ↑ → Price ↓ & Quantity ↑."
             },
             {
-                question: "Which of the following intracellular accumulations is associated with α1-antitrypsin deficiency?",
+                question: "What is shortage?",
                 options: [
-                    "A. Triglycerides",
-                    "B. Glycogen",
-                    "C. Abnormal proteins",
-                    "D. Lipofuscin"
+                    "When quantity demanded exceeds quantity supplied at the current price",
+                    "When resources are limited relative to wants",
+                    "The value of the next best alternative forgone",
+                    "A situation where price is above equilibrium"
                 ],
-                correctAnswer: 2,
-                explanation: "α1-antitrypsin deficiency leads to accumulation of abnormal proteins in the rough endoplasmic reticulum of hepatocytes. This can cause liver damage and emphysema."
+                correct: 0,
+                explanation: "Shortage occurs when quantity demanded exceeds quantity supplied at a given price, usually below the equilibrium price. This is different from scarcity, which is the fundamental condition of limited resources.",
+                memoryTip: "Shortage = Qd > Qs at current price (usually below equilibrium)."
             },
             {
-                question: "A patient with hyperparathyroidism develops calcium deposition in normal lung tissue. This is an example of:",
+                question: "What do you understand by positive economics?",
                 options: [
-                    "A. Dystrophic calcification",
-                    "B. Metastatic calcification",
-                    "C. Heterotopic ossification",
-                    "D. Psammoma bodies"
+                    "The study of what ought to be",
+                    "The study of economic facts without value judgments",
+                    "Economic analysis based on ethical considerations",
+                    "Policy recommendations for economic problems"
                 ],
-                correctAnswer: 1,
-                explanation: "Metastatic calcification occurs in normal tissues with elevated serum calcium (hypercalcemia), as seen in hyperparathyroidism. Dystrophic calcification occurs in dead or dying tissues with normal serum calcium."
+                correct: 1,
+                explanation: "Positive economics deals with factual statements about the economy that can be tested and verified. It describes 'what is' rather than 'what ought to be'.",
+                memoryTip: "Positive economics = facts, testable statements. 'What is' not 'what should be'."
             },
             {
-                question: "Which cellular change is the earliest manifestation of reversible cell injury?",
+                question: "A percentage change in quantity supplied divided by percentage change in price measures:",
                 options: [
-                    "A. Fatty change",
-                    "B. Cellular swelling",
-                    "C. Nuclear pyknosis",
-                    "D. Mitochondrial damage"
+                    "Price elasticity of demand",
+                    "Income elasticity of demand",
+                    "Cross elasticity of demand",
+                    "Price elasticity of supply"
                 ],
-                correctAnswer: 1,
-                explanation: "Cellular swelling (hydropic change) is the earliest manifestation of reversible cell injury, resulting from failure of Na-K ATPase pump due to ATP depletion."
+                correct: 3,
+                explanation: "Price elasticity of supply measures the responsiveness of quantity supplied to changes in price. Formula: %ΔQs / %ΔP.",
+                memoryTip: "Price elasticity of supply = responsiveness of quantity supplied to price changes."
             },
             {
-                question: "Which of the following is a characteristic of irreversible cell injury?",
+                question: "Which economic system aims at maximum social welfare?",
                 options: [
-                    "A. Cellular swelling",
-                    "B. Fatty change",
-                    "C. Severe membrane damage",
-                    "D. Ribosomal dissociation"
+                    "Capitalist economy",
+                    "Socialist economy",
+                    "Mixed economy",
+                    "Traditional economy"
                 ],
-                correctAnswer: 2,
-                explanation: "Severe membrane damage is the hallmark of irreversible injury and represents the 'point of no return'. Cellular swelling, fatty change, and ribosomal dissociation can occur in reversible injury."
+                correct: 1,
+                explanation: "Socialist (command) economies prioritize maximum social welfare and equality, while capitalist economies emphasize individual freedom and private property.",
+                memoryTip: "Socialism = social welfare, equality. Capitalism = individual freedom, private property."
             },
             {
-                question: "A patient with chronic alcohol use develops hepatocytes filled with lipid vacuoles. This is an example of:",
+                question: "In a market economy, the question 'What to produce?' is primarily answered by:",
                 options: [
-                    "A. Hydropic change",
-                    "B. Fatty change (steatosis)",
-                    "C. Protein accumulation",
-                    "D. Glycogen storage"
+                    "Government planners",
+                    "Consumer sovereignty",
+                    "Tradition and customs",
+                    "International markets"
                 ],
-                correctAnswer: 1,
-                explanation: "Fatty change (steatosis) in the liver results from imbalance in triglyceride uptake, utilization, and secretion. Alcohol, diabetes, malnutrition, obesity, and toxins can cause this reversible accumulation."
+                correct: 1,
+                explanation: "In market economies, consumer sovereignty determines what is produced through their spending decisions. Producers respond to consumer preferences signaled through the price mechanism.",
+                memoryTip: "Market economy = consumer sovereignty determines what to produce."
             },
             {
-                question: "Which type of cell death is characterized by cell shrinkage, chromatin condensation, and formation of apoptotic bodies without inflammation?",
+                question: "The law of increasing opportunity cost explains why the PPC is:",
                 options: [
-                    "A. Necrosis",
-                    "B. Apoptosis",
-                    "C. Necroptosis",
-                    "D. Pyroptosis"
+                    "Concave to the origin",
+                    "Convex to the origin",
+                    "A straight line",
+                    "Vertical"
                 ],
-                correctAnswer: 1,
-                explanation: "Apoptosis is characterized by cell shrinkage, chromatin condensation, and formation of apoptotic bodies without inflammation. It's an energy-dependent, genetically programmed process."
+                correct: 0,
+                explanation: "The PPC is concave (bowed outward) because resources are not perfectly adaptable between uses, so opportunity costs increase as production of one good expands.",
+                memoryTip: "Increasing opportunity cost → concave PPC (bowed outward)."
             },
             {
-                question: "Which of the following is a common cause of hypoxic cell injury?",
+                question: "If the income elasticity of demand for a good is negative, the good is:",
                 options: [
-                    "A. Carbon tetrachloride poisoning",
-                    "B. Cyanide poisoning",
-                    "C. Mercury toxicity",
-                    "D. Acetaminophen overdose"
+                    "A normal good",
+                    "A luxury good",
+                    "An inferior good",
+                    "A necessity good"
                 ],
-                correctAnswer: 1,
-                explanation: "Cyanide causes histotoxic hypoxia by inhibiting cytochrome oxidase (complex IV) in the mitochondrial electron transport chain. This prevents cellular utilization of oxygen despite adequate delivery."
+                correct: 2,
+                explanation: "Negative income elasticity means demand decreases as income increases, which characterizes inferior goods. Normal goods have positive income elasticity.",
+                memoryTip: "Income elasticity negative = inferior good. Positive = normal good (>1 = luxury, <1 = necessity)."
             },
             {
-                question: "A patient with severe burns develops calcification in the damaged tissues. This is an example of:",
+                question: "A perfectly elastic demand curve is:",
                 options: [
-                    "A. Dystrophic calcification",
-                    "B. Metastatic calcification",
-                    "C. Heterotopic ossification",
-                    "D. Psammoma bodies"
+                    "Vertical",
+                    "Horizontal",
+                    "Downward sloping",
+                    "Upward sloping"
                 ],
-                correctAnswer: 0,
-                explanation: "Dystrophic calcification occurs in dead or dying tissues with normal serum calcium. Burned tissues provide a nidus for calcium deposition through saponification of necrotic fat cells."
+                correct: 1,
+                explanation: "Perfectly elastic demand is represented by a horizontal line, where consumers will buy any quantity at a specific price but none at a higher price.",
+                memoryTip: "Perfectly elastic = horizontal line. Perfectly inelastic = vertical line."
             },
             {
-                question: "Which of the following antioxidants is primarily located in mitochondria?",
+                question: "When both demand and supply increase, what happens to equilibrium price?",
                 options: [
-                    "A. Catalase",
-                    "B. Superoxide dismutase",
-                    "C. Glutathione peroxidase",
-                    "D. Vitamin E"
+                    "Definitely increases",
+                    "Definitely decreases",
+                    "May increase, decrease, or stay the same",
+                    "Always stays the same"
                 ],
-                correctAnswer: 1,
-                explanation: "Superoxide dismutase is located in mitochondria and converts superoxide to hydrogen peroxide. Catalase is in peroxisomes, glutathione peroxidase is in mitochondria and cytosol, and vitamin E is a lipid-soluble antioxidant."
+                correct: 2,
+                explanation: "When both curves shift right, quantity definitely increases, but price change depends on relative magnitudes of the shifts. Price could rise, fall, or remain unchanged.",
+                memoryTip: "Both D and S increase → Q ↑ definitely, P change depends on relative shift magnitudes."
             },
             {
-                question: "A patient with myocardial infarction shows continued rise in cardiac enzymes after reperfusion. This phenomenon is known as:",
+                question: "The reward for entrepreneurship is called:",
                 options: [
-                    "A. Free radical injury",
-                    "B. Reperfusion injury",
-                    "C. Calcium-mediated injury",
-                    "D. Ischemic preconditioning"
+                    "Wage",
+                    "Rent",
+                    "Interest",
+                    "Profit"
                 ],
-                correctAnswer: 1,
-                explanation: "Reperfusion injury occurs when blood flow returns to previously ischemic tissue, causing oxidative stress, calcium overload, inflammatory response, and worsening mitochondrial damage."
+                correct: 3,
+                explanation: "Entrepreneurs receive profit as reward for organizing production and bearing risk. Labor receives wages, land receives rent, and capital receives interest.",
+                memoryTip: "Factors of production rewards: Land→Rent, Labor→Wage, Capital→Interest, Entrepreneurship→Profit."
             },
             {
-                question: "Which of the following is a feature of cellular aging?",
+                question: "Which of the following is a characteristic of perfect competition?",
                 options: [
-                    "A. Increased telomere length",
-                    "B. Accumulation of lipofuscin",
-                    "C. Enhanced DNA repair",
-                    "D. Increased stem cell proliferation"
+                    "Few sellers",
+                    "Product differentiation",
+                    "Price takers",
+                    "Barriers to entry"
                 ],
-                correctAnswer: 1,
-                explanation: "Cellular aging is characterized by accumulation of lipofuscin ('wear and tear' pigment), telomere shortening, decreased DNA repair capacity, and stem cell exhaustion."
+                correct: 2,
+                explanation: "In perfect competition, firms are price takers - they accept the market price determined by supply and demand. Other features include many sellers, homogeneous products, and free entry/exit.",
+                memoryTip: "Perfect competition: many sellers, homogeneous product, price takers, free entry/exit."
             },
-            // Healing, Repair & Regeneration (20 questions)
             {
-                question: "Which of the following cell types has the highest regenerative capacity?",
+                question: "GDP measures:",
                 options: [
-                    "A. Permanent cells",
-                    "B. Stable cells",
-                    "C. Labile cells",
-                    "D. Fibroblasts"
+                    "Total value of intermediate and final goods produced domestically",
+                    "Total value of final goods and services produced domestically",
+                    "Total income received by citizens regardless of location",
+                    "Total wealth of a nation"
                 ],
-                correctAnswer: 2,
-                explanation: "Labile cells have continuous turnover by programmed division of stem cells and excellent regenerative capacity. Examples include surface epithelium of GI tract, urinary tract, skin, and hematopoietic systems."
+                correct: 1,
+                explanation: "GDP is the total market value of all final goods and services produced within a country's borders in a given period, usually one year.",
+                memoryTip: "GDP = value of FINAL goods and services produced DOMESTICALLY in a period."
             },
             {
-                question: "Which of the following is a characteristic of healing by first intention (primary union)?",
+                question: "The consumer price index (CPI) measures:",
                 options: [
-                    "A. Copious granulation tissue",
-                    "B. Marked wound contraction",
-                    "C. Minimal inflammation",
-                    "D. Longer healing time"
+                    "The cost of a fixed basket of goods over time",
+                    "The cost of all goods produced in the economy",
+                    "The average price level of exports",
+                    "The ratio of nominal to real GDP"
                 ],
-                correctAnswer: 2,
-                explanation: "Healing by first intention occurs in clean surgical incisions with approximated edges and features minimal inflammation, thin granulation tissue, minimal wound contraction, and shorter healing time."
+                correct: 0,
+                explanation: "CPI measures changes in the price level of a fixed basket of consumer goods and services purchased by households. It's used to calculate inflation.",
+                memoryTip: "CPI = cost of fixed basket of consumer goods. GDP deflator = all goods produced."
             },
             {
-                question: "Which growth factor is primarily responsible for driving angiogenesis during wound healing?",
+                question: "Frictional unemployment results from:",
                 options: [
-                    "A. PDGF",
-                    "B. TGF-β",
-                    "C. VEGF",
-                    "D. EGF"
+                    "Mismatch between worker skills and job requirements",
+                    "Cyclical downturns in the economy",
+                    "Normal turnover in the labor market",
+                    "Technological change making jobs obsolete"
                 ],
-                correctAnswer: 2,
-                explanation: "VEGF (Vascular Endothelial Growth Factor) drives angiogenesis, essential for new blood vessel formation during wound healing. PDGF stimulates fibroblast chemotaxis, TGF-β stimulates collagen synthesis, and EGF promotes epithelial proliferation."
+                correct: 2,
+                explanation: "Frictional unemployment occurs due to normal labor market turnover - people changing jobs, new entrants searching for work, etc. It's temporary and often considered healthy for the economy.",
+                memoryTip: "Frictional unemployment = normal job search/turnover. Structural = skills mismatch. Cyclical = recession."
             },
             {
-                question: "A patient develops a raised scar that extends beyond original margins and recurs after excision. This is characteristic of:",
+                question: "Cost-push inflation is caused by:",
                 options: [
-                    "A. Hypertrophic scar",
-                    "B. Keloid",
-                    "C. Contracture",
-                    "D. Proud flesh"
+                    "Excessive aggregate demand",
+                    "Rising production costs",
+                    "Government budget deficits",
+                    "Rapid money supply growth"
                 ],
-                correctAnswer: 1,
-                explanation: "Keloids are excessive scar formations that extend beyond original margins, invade adjacent dermis, and recur after excision. Hypertrophic scars remain within wound borders and may regress spontaneously."
+                correct: 1,
+                explanation: "Cost-push inflation occurs when production costs rise (wages, raw materials, energy), pushing up prices. Demand-pull inflation is caused by excessive aggregate demand.",
+                memoryTip: "Cost-push = rising production costs. Demand-pull = too much spending chasing too few goods."
             },
             {
-                question: "Which vitamin deficiency impairs wound healing by preventing hydroxylation of proline and lysine in collagen synthesis?",
+                question: "A progressive tax system means:",
                 options: [
-                    "A. Vitamin A",
-                    "B. Vitamin C",
-                    "C. Vitamin D",
-                    "D. Vitamin K"
+                    "Everyone pays the same tax rate",
+                    "The tax rate decreases as income increases",
+                    "The tax rate increases as income increases",
+                    "Only the rich pay taxes"
                 ],
-                correctAnswer: 1,
-                explanation: "Vitamin C deficiency results in scurvy and impairs wound healing by preventing hydroxylation of proline and lysine in collagen synthesis, leading to defective collagen formation."
+                correct: 2,
+                explanation: "In a progressive tax system, the tax rate increases as taxable income increases. This is designed to reduce income inequality (e.g., income tax brackets).",
+                memoryTip: "Progressive = tax rate ↑ as income ↑. Regressive = tax rate ↓ as income ↑. Proportional = flat rate."
             },
             {
-                question: "During which phase of fracture healing does callus formation occur?",
+                question: "Monetary policy is primarily concerned with:",
                 options: [
-                    "A. Hematoma formation",
-                    "B. Inflammation",
-                    "C. Demolition",
-                    "D. Woven bone and cartilage formation"
+                    "Government spending and taxation",
+                    "Regulation of international trade",
+                    "Control of money supply and interest rates",
+                    "Income redistribution programs"
                 ],
-                correctAnswer: 3,
-                explanation: "Callus formation occurs during the stage of woven bone and cartilage formation, where mesenchymal 'osteoblasts' differentiate to form either woven bone or cartilage that unites the fracture ends."
+                correct: 2,
+                explanation: "Monetary policy involves controlling the money supply and interest rates to influence economic activity, typically implemented by a central bank.",
+                memoryTip: "Monetary policy = money supply & interest rates (central bank). Fiscal policy = government spending & taxes."
             },
             {
-                question: "Which cell type is primarily responsible for wound contraction?",
+                question: "A budget deficit occurs when:",
                 options: [
-                    "A. Fibroblasts",
-                    "B. Myofibroblasts",
-                    "C. Macrophages",
-                    "D. Endothelial cells"
+                    "Government spending equals tax revenue",
+                    "Government spending exceeds tax revenue",
+                    "Tax revenue exceeds government spending",
+                    "The economy is at full employment"
                 ],
-                correctAnswer: 1,
-                explanation: "Myofibroblasts have features intermediate between fibroblasts and smooth muscle cells and are responsible for wound contraction, reducing wound size by approximately 70-80% of its original size."
+                correct: 1,
+                explanation: "Budget deficit = government spending > tax revenue. Budget surplus = tax revenue > spending. Balanced budget = spending = revenue.",
+                memoryTip: "Budget deficit = G > T. Budget surplus = T > G."
             },
             {
-                question: "A patient with diabetes mellitus has a non-healing foot ulcer. Which systemic factor is primarily responsible for delayed healing?",
+                question: "Comparative advantage refers to:",
                 options: [
-                    "A. Age",
-                    "B. Malnutrition",
-                    "C. Infection",
-                    "D. Impaired circulation and neuropathy"
+                    "Producing at lower absolute cost",
+                    "Producing at lower opportunity cost",
+                    "Having more resources than other countries",
+                    "Having advanced technology"
                 ],
-                correctAnswer: 3,
-                explanation: "In diabetes mellitus, impaired circulation (microangiopathy) and neuropathy (leading to unnoticed trauma) are primary factors in delayed wound healing and non-healing ulcers."
+                correct: 1,
+                explanation: "Comparative advantage means being able to produce a good at a lower opportunity cost than trading partners. Even without absolute advantage, countries can benefit from trade based on comparative advantage.",
+                memoryTip: "Comparative advantage = lower opportunity cost. Absolute advantage = fewer resources used."
             },
             {
-                question: "Which of the following is a local factor that impairs wound healing?",
+                question: "The circular flow model shows:",
                 options: [
-                    "A. Corticosteroid use",
-                    "B. Vitamin C deficiency",
-                    "C. Infection",
-                    "D. Diabetes mellitus"
+                    "How money flows between households and firms",
+                    "The production possibilities of an economy",
+                    "Income distribution in a society",
+                    "International trade patterns"
                 ],
-                correctAnswer: 2,
-                explanation: "Infection is a local factor that prolongs inflammation, diverts energy to immune defense, and releases collagenases that degrade matrix. Corticosteroids, vitamin C deficiency, and diabetes are systemic factors."
+                correct: 0,
+                explanation: "The circular flow model illustrates how money, goods, and resources flow between households and firms through product and factor markets in a closed economy.",
+                memoryTip: "Circular flow: Households → resources → Firms → goods/services → Households (with money flowing opposite)."
             },
             {
-                question: "During which phase of wound healing does collagen transition from type III to type I occur?",
+                question: "If demand is elastic, a price increase will:",
                 options: [
-                    "A. Inflammatory phase",
-                    "B. Phase of demolition",
-                    "C. Ingrowth of granulation tissue",
-                    "D. Collagen remodeling"
+                    "Increase total revenue",
+                    "Decrease total revenue",
+                    "Not affect total revenue",
+                    "Cause a shortage"
                 ],
-                correctAnswer: 3,
-                explanation: "During collagen remodeling, type III collagen is cross-linked and gradually replaced by stronger type I collagen over weeks. This increases tensile strength and converts granulation tissue to a mature scar."
+                correct: 1,
+                explanation: "When demand is elastic (%ΔQd > %ΔP), a price increase reduces total revenue because the quantity drop is proportionally larger than the price increase.",
+                memoryTip: "Elastic demand: P ↑ → TR ↓. Inelastic demand: P ↑ → TR ↑. Unit elastic: P change → no TR change."
             },
             {
-                question: "Which of the following complications results from excessive wound contraction?",
+                question: "The marginal propensity to consume (MPC) is:",
                 options: [
-                    "A. Keloid",
-                    "B. Hypertrophic scar",
-                    "C. Contracture",
-                    "D. Dehiscence"
+                    "Total consumption divided by total income",
+                    "The change in consumption divided by the change in income",
+                    "The portion of income that is saved",
+                    "The average amount consumed per person"
                 ],
-                correctAnswer: 2,
-                explanation: "Contracture is an exaggeration of wound contraction processes resulting in severe deformity, particularly conspicuous in burn healing and can compromise joint movement or cause strictures in hollow viscera."
+                correct: 1,
+                explanation: "MPC = ΔC/ΔY, the fraction of additional income that is spent on consumption. MPS (marginal propensity to save) = ΔS/ΔY, and MPC + MPS = 1.",
+                memoryTip: "MPC = change in consumption / change in income. MPC + MPS = 1."
             },
             {
-                question: "A patient develops an incisional hernia after abdominal surgery. What is the most likely cause?",
+                question: "An example of an automatic stabilizer is:",
                 options: [
-                    "A. Keloid formation",
-                    "B. Wound dehiscence",
-                    "C. Hypertrophic scar",
-                    "D. Proud flesh"
+                    "Discretionary government spending",
+                    "The progressive income tax system",
+                    "Central bank interest rate changes",
+                    "Trade tariffs and quotas"
                 ],
-                correctAnswer: 1,
-                explanation: "Incisional hernia refers to a defect caused by poor wound healing following surgery into which intestines protrude. It results from wound dehiscence due to insufficient extracellular matrix deposition or inadequate cross-linking."
+                correct: 1,
+                explanation: "Automatic stabilizers are features of the tax and transfer system that automatically reduce the severity of economic fluctuations without explicit policy changes (e.g., progressive taxes, unemployment benefits).",
+                memoryTip: "Automatic stabilizers: progressive taxes, unemployment benefits (work automatically during recessions)."
             },
             {
-                question: "Which growth factor is derived from platelets and stimulates fibroblast chemotaxis and collagen synthesis?",
+                question: "The Lorenz curve measures:",
                 options: [
-                    "A. PDGF",
-                    "B. TGF-β",
-                    "C. VEGF",
-                    "D. EGF"
+                    "Economic growth over time",
+                    "Income inequality",
+                    "Unemployment rates",
+                    "Inflation levels"
                 ],
-                correctAnswer: 0,
-                explanation: "PDGF (Platelet-Derived Growth Factor) comes from platelets and macrophages and stimulates fibroblast chemotaxis and collagen synthesis. It's one of the key growth factors in wound healing."
+                correct: 1,
+                explanation: "The Lorenz curve graphs the cumulative distribution of income against the cumulative population. The Gini coefficient (0 = perfect equality, 1 = perfect inequality) is derived from it.",
+                memoryTip: "Lorenz curve = income inequality. Further from 45° line = more inequality."
             },
             {
-                question: "Which of the following is a characteristic of granulation tissue?",
+                question: "In the short run, a firm will continue production as long as:",
                 options: [
-                    "A. Pale, avascular tissue",
-                    "B. Rich in type I collagen",
-                    "C. Bright-red, moist tissue rich in type III collagen",
-                    "D. Composed mainly of inflammatory cells"
+                    "Price covers average total cost",
+                    "Price covers average variable cost",
+                    "Total revenue exceeds total cost",
+                    "Marginal revenue equals marginal cost"
                 ],
-                correctAnswer: 2,
-                explanation: "Granulation tissue is bright-red, moist tissue rich in type III collagen, fibronectin, and proteoglycans. It forms within 3-5 days after injury and provides initial tensile strength during early healing."
-            },
-            {
-                question: "Which cell type is primarily responsible for phagocytosis of debris during the inflammatory phase of wound healing?",
-                options: [
-                    "A. Neutrophils",
-                    "B. Macrophages",
-                    "C. Fibroblasts",
-                    "D. Platelets"
-                ],
-                correctAnswer: 1,
-                explanation: "Macrophages arrive after neutrophils and are responsible for debriding dead cells and releasing cytokines that recruit fibroblasts and endothelial cells. They play a crucial role in the transition from inflammation to repair."
-            },
-            {
-                question: "A patient with a large wound develops exuberant granulation tissue that protrudes and impedes re-epithelialization. This is known as:",
-                options: [
-                    "A. Keloid",
-                    "B. Hypertrophic scar",
-                    "C. Proud flesh",
-                    "D. Contracture"
-                ],
-                correctAnswer: 2,
-                explanation: "Proud flesh refers to exuberant granulation tissue that protrudes above the wound surface, impeding re-epithelialization. It may require surgical removal or chemical cautery to allow proper healing."
-            },
-            {
-                question: "Which of the following factors promotes wound healing?",
-                options: [
-                    "A. Corticosteroids",
-                    "B. Adequate protein nutrition",
-                    "C. Infection",
-                    "D. Mechanical stress"
-                ],
-                correctAnswer: 1,
-                explanation: "Adequate protein nutrition is essential for granulation tissue and collagen formation. Corticosteroids impair healing, infection delays it, and mechanical stress disrupts fragile new tissue."
-            },
-            {
-                question: "During fracture healing, which cells are responsible for removing dead bone fragments?",
-                options: [
-                    "A. Osteoblasts",
-                    "B. Osteocytes",
-                    "C. Osteoclasts",
-                    "D. Chondrocytes"
-                ],
-                correctAnswer: 2,
-                explanation: "Osteoclasts are responsible for removing dead bone fragments during the demolition phase of fracture healing. They work alongside macrophages to clear debris and prepare for new bone formation."
-            },
-            {
-                question: "Which of the following is a characteristic of healing by second intention (secondary union)?",
-                options: [
-                    "A. Minimal fibrin and necrotic debris",
-                    "B. Thin granulation tissue",
-                    "C. Marked wound contraction",
-                    "D. Shorter healing time"
-                ],
-                correctAnswer: 2,
-                explanation: "Healing by second intention in large wounds features more fibrin, necrotic debris and exudate, much larger amounts of granulation tissue, marked wound contraction, and longer healing time compared to primary union."
-            },
-            {
-                question: "Which growth factor acts as a growth inhibitor for epithelial and endothelial cells when tissue integrity is restored?",
-                options: [
-                    "A. PDGF",
-                    "B. TGF-β",
-                    "C. VEGF",
-                    "D. EGF"
-                ],
-                correctAnswer: 1,
-                explanation: "TGF-β (Transforming Growth Factor-Beta) switches to an inhibitory role for epithelial and endothelial cells when tissue integrity is restored, helping to stop the healing process appropriately."
-            },
-            // Inflammation and Repair (30 questions)
-            {
-                question: "Which of the following is the correct sequence of the 5-R's of inflammation?",
-                options: [
-                    "A. Recognition, Removal, Recruitment, Regulation, Repair",
-                    "B. Recognition, Recruitment, Removal, Regulation, Repair",
-                    "C. Recruitment, Recognition, Removal, Repair, Regulation",
-                    "D. Recognition, Regulation, Recruitment, Removal, Repair"
-                ],
-                correctAnswer: 1,
-                explanation: "The 5-R sequence of inflammation is: 1. Recognition of the injurious agent, 2. Recruitment of leukocytes and plasma proteins, 3. Removal of the inciting stimulus, 4. Regulation of the response, 5. Repair of damaged tissue."
-            },
-            {
-                question: "Which cardinal sign of inflammation is due to dilation of small blood vessels within damaged tissue?",
-                options: [
-                    "A. Tumor (swelling)",
-                    "B. Calor (heat)",
-                    "C. Rubor (redness)",
-                    "D. Dolor (pain)"
-                ],
-                correctAnswer: 2,
-                explanation: "Rubor (redness) is due to dilation of small blood vessels within damaged tissue (vasodilation). Calor (heat) results from increased blood flow, Tumor (swelling) from fluid accumulation, and Dolor (pain) from chemical mediators and pressure."
-            },
-            {
-                question: "Which of the following chemical mediators is primarily responsible for vasodilation and increased vascular permeability in acute inflammation?",
-                options: [
-                    "A. Histamine",
-                    "B. Prostaglandins",
-                    "C. Leukotrienes",
-                    "D. Cytokines"
-                ],
-                correctAnswer: 0,
-                explanation: "Histamine, released from mast cells, basophils, and platelets, is primarily responsible for early vasodilation and increased vascular permeability in acute inflammation."
-            },
-            {
-                question: "During the cellular response in inflammation, what is the process called when leukocytes tumble slowly along endothelium?",
-                options: [
-                    "A. Margination",
-                    "B. Rolling",
-                    "C. Pavementing",
-                    "D. Adhesion"
-                ],
-                correctAnswer: 1,
-                explanation: "Rolling is when leukocytes tumble slowly along endothelium via selectins. Margination is peripheral positioning, pavementing is endothelium lined by white cells, and adhesion is binding via adhesion molecules."
-            },
-            {
-                question: "Which of the following is a key chemotactic factor for neutrophils?",
-                options: [
-                    "A. C5a",
-                    "B. Histamine",
-                    "C. Prostaglandins",
-                    "D. Serotonin"
-                ],
-                correctAnswer: 0,
-                explanation: "C5a (complement component) is a powerful chemotactic factor that attracts neutrophils to the site of inflammation. Other chemotactic factors include bacterial products, leukotriene B4, and cytokines like IL-8."
-            },
-            {
-                question: "Which morphological pattern of acute inflammation is characterized by outpouring of thin fluid derived from blood serum?",
-                options: [
-                    "A. Serous inflammation",
-                    "B. Fibrinous inflammation",
-                    "C. Suppurative inflammation",
-                    "D. Catarrhal inflammation"
-                ],
-                correctAnswer: 0,
-                explanation: "Serous inflammation involves outpouring of thin fluid derived from blood serum or mesothelial cell secretions, as seen in skin blisters or pleural effusion."
-            },
-            {
-                question: "A patient with pericarditis develops a 'bread and butter' appearance. This is characteristic of:",
-                options: [
-                    "A. Serous inflammation",
-                    "B. Fibrinous inflammation",
-                    "C. Suppurative inflammation",
-                    "D. Pseudomenobranous inflammation"
-                ],
-                correctAnswer: 1,
-                explanation: "Fibrinous inflammation involves exudation of larger molecules like fibrinogen through vascular barrier, creating a 'bread and butter' appearance in pericarditis as fibrin strands create a shaggy surface."
-            },
-            {
-                question: "Which of the following is a characteristic of exudate compared to transudate?",
-                options: [
-                    "A. Clear, translucent appearance",
-                    "B. Specific gravity < 1.012",
-                    "C. Protein content > 3 gm%",
-                    "D. Few cellular elements"
-                ],
-                correctAnswer: 2,
-                explanation: "Exudate has protein content > 3 gm%, specific gravity > 1.020, colored/turbid appearance, spontaneous coagulation, and abundant WBC/RBC/cell debris. Transudate has opposite characteristics."
-            },
-            {
-                question: "Which of the following is a beneficial effect of acute inflammation?",
-                options: [
-                    "A. Tissue destruction",
-                    "B. Dilution of toxins",
-                    "C. Airway obstruction",
-                    "D. Hypersensitivity reactions"
-                ],
-                correctAnswer: 1,
-                explanation: "Beneficial effects of acute inflammation include dilution of toxins, delivery of protective antibodies, fibrin formation preventing bacterial spread, provision of plasma mediator systems, cell nutrition, and promotion of immunity."
-            },
-            {
-                question: "Which of the following is a common cause of chronic inflammation?",
-                options: [
-                    "A. Transient bacterial infection",
-                    "B. Minor trauma",
-                    "C. Persistent infections like tuberculosis",
-                    "D. Acute allergic reactions"
-                ],
-                correctAnswer: 2,
-                explanation: "Chronic inflammation is caused by persistent infections (tuberculosis, leprosy), prolonged exposure to nondegradable toxic substances, progression from acute inflammation, or autoimmunity."
-            },
-            {
-                question: "Which cell type is considered the 'prima donna' in chronic inflammation?",
-                options: [
-                    "A. Neutrophils",
-                    "B. Macrophages",
-                    "C. Lymphocytes",
-                    "D. Eosinophils"
-                ],
-                correctAnswer: 1,
-                explanation: "Macrophages are the 'prima donna' cells in chronic inflammation - they are scavenger cells derived from bone marrow precursors that play a central role in persistent inflammation."
-            },
-            {
-                question: "Which macrophage subtype is anti-inflammatory and promotes tissue repair?",
-                options: [
-                    "A. M1 macrophages",
-                    "B. M2 macrophages",
-                    "C. M3 macrophages",
-                    "D. M4 macrophages"
-                ],
-                correctAnswer: 1,
-                explanation: "M2 macrophages are activated by IL-4 and IL-13, secrete IL-10 and TGF-β, and have anti-inflammatory functions promoting tissue repair and fibrosis. M1 macrophages are pro-inflammatory."
-            },
-            {
-                question: "Which T helper cell subset is primarily responsible for activating M1 macrophages and cellular immunity?",
-                options: [
-                    "A. Th1 cells",
-                    "B. Th2 cells",
-                    "C. Th17 cells",
-                    "D. Treg cells"
-                ],
-                correctAnswer: 0,
-                explanation: "Th1 cells produce IFN-γ and IL-2, activating M1 macrophages and promoting cellular immunity. Th2 cells help B-cells and recruit eosinophils, Th17 cells recruit neutrophils, and Treg cells suppress immune responses."
-            },
-            {
-                question: "Which type of granuloma is initiated by inert foreign bodies like talc or sutures?",
-                options: [
-                    "A. Immune granuloma",
-                    "B. Foreign body granuloma",
-                    "C. Infectious granuloma",
-                    "D. Sarcoid granuloma"
-                ],
-                correctAnswer: 1,
-                explanation: "Foreign body granulomas are initiated by inert foreign bodies (talc, sutures, fibers) that are large enough to preclude phagocytosis by a single macrophage and do not incite an immune response."
-            },
-            {
-                question: "Which of the following is a characteristic of Langhans giant cells?",
-                options: [
-                    "A. Irregularly scattered nuclei",
-                    "B. Nuclei arranged peripherally in horse-shoe pattern",
-                    "C. Single large nucleus",
-                    "D. Multiple small nuclei throughout cytoplasm"
-                ],
-                correctAnswer: 1,
-                explanation: "Langhans giant cells have nuclei arranged peripherally in a horse-shoe pattern and are typical in tuberculosis. Foreign body-type giant cells have irregularly scattered nuclei."
-            },
-            {
-                question: "Which cytokine is primarily responsible for fever in systemic inflammation?",
-                options: [
-                    "A. IL-1",
-                    "B. IL-4",
-                    "C. IL-10",
-                    "D. TGF-β"
-                ],
-                correctAnswer: 0,
-                explanation: "IL-1, along with IL-6 and TNF-α, stimulates prostaglandin synthesis in the hypothalamus, raising the temperature set point and causing fever in systemic inflammation."
-            },
-            {
-                question: "A patient with bacterial infection shows increased white blood cell count to 18,000 cells/mm³. This is called:",
-                options: [
-                    "A. Leukopenia",
-                    "B. Neutrophilia",
-                    "C. Lymphocytosis",
-                    "D. Eosinophilia"
-                ],
-                correctAnswer: 1,
-                explanation: "Neutrophilia (15,000-20,000 cells/mm³) is seen in most bacterial infections. Lymphocytosis occurs in some viral infections, eosinophilia in parasitic/allergic conditions, and leukopenia in typhoid fever."
-            },
-            {
-                question: "Which of the following defines sepsis?",
-                options: [
-                    "A. Viable bacteria in blood",
-                    "B. Systemic infection due to microbes and their toxins in blood",
-                    "C. Systemic response to severe infection mediated via macrophage-derived cytokines",
-                    "D. Shock caused by systemic microbial infection"
-                ],
-                correctAnswer: 2,
-                explanation: "Sepsis is defined as systemic response to severe infection mediated via macrophage-derived cytokines (SIRS). Bacteremia is viable bacteria in blood, septicemia is systemic infection, and septic shock is sepsis with hypotension."
-            },
-            {
-                question: "Which of the following tissues has limited regenerative capacity and relies on scar formation?",
-                options: [
-                    "A. Skin epithelium",
-                    "B. Liver",
-                    "C. Neurons",
-                    "D. GI mucosa"
-                ],
-                correctAnswer: 2,
-                explanation: "Neurons are permanent tissues with limited regenerative capacity that rely on scar formation. Skin epithelium, GI mucosa (labile tissues), and liver (stable tissue) have good regenerative capacity."
-            },
-            {
-                question: "During liver regeneration, which phase involves cytokines priming hepatocytes to be receptive to growth factors?",
-                options: [
-                    "A. Priming phase",
-                    "B. Growth phase",
-                    "C. Termination phase",
-                    "D. Remodeling phase"
-                ],
-                correctAnswer: 0,
-                explanation: "The priming phase involves cytokines (IL-6) priming hepatocytes to be receptive to growth factor signals. The growth phase involves growth factors stimulating proliferation, and termination phase involves antiproliferative signals."
-            },
-            {
-                question: "Which of the following is a local factor that impairs tissue repair?",
-                options: [
-                    "A. Diabetes",
-                    "B. Malnutrition",
-                    "C. Infection",
-                    "D. Corticosteroids"
-                ],
-                correctAnswer: 2,
-                explanation: "Infection is a local factor that impairs tissue repair by prolonging inflammation, diverting energy to immune defense, and releasing collagenases. Diabetes, malnutrition, and corticosteroids are systemic factors."
-            },
-            {
-                question: "A patient develops raised scars that remain within wound boundaries and may regress over time. This is characteristic of:",
-                options: [
-                    "A. Keloids",
-                    "B. Hypertrophic scars",
-                    "C. Contractures",
-                    "D. Proud flesh"
-                ],
-                correctAnswer: 1,
-                explanation: "Hypertrophic scars are raised but remain within wound boundaries and may regress spontaneously. Unlike keloids, they never get worse after 6 months and do not recur after excision."
-            },
-            {
-                question: "Which drug class works by inhibiting cyclooxygenase and reducing prostaglandin synthesis?",
-                options: [
-                    "A. Antihistamines",
-                    "B. NSAIDs",
-                    "C. Corticosteroids",
-                    "D. Biologics"
-                ],
-                correctAnswer: 1,
-                explanation: "NSAIDs inhibit cyclooxygenase, reducing prostaglandin synthesis and thereby reducing pain, fever, and inflammation. They are commonly used for arthritis and other inflammatory conditions."
-            },
-            {
-                question: "Which of the following is a future therapeutic strategy for inflammation?",
-                options: [
-                    "A. Macrophage modulation to promote M2 activation",
-                    "B. Inhibition of all immune responses",
-                    "C. Complete suppression of inflammation",
-                    "D. Preventing all tissue repair"
-                ],
-                correctAnswer: 0,
-                explanation: "Future therapeutic strategies include macrophage modulation to promote M2 activation (enhancing tissue repair and reducing fibrosis), stem cell therapy, growth factor therapy, and gene therapy."
-            },
-            {
-                question: "Which of the following is a characteristic of chronic inflammation compared to acute inflammation?",
-                options: [
-                    "A. Short duration",
-                    "B. Predominantly neutrophils",
-                    "C. Marked tissue destruction",
-                    "D. Absent fibrosis"
-                ],
-                correctAnswer: 2,
-                explanation: "Chronic inflammation features long duration, predominantly macrophages/lymphocytes/plasma cells, marked tissue destruction, and presence of fibrosis. Acute inflammation has opposite characteristics."
-            },
-            {
-                question: "Which chemical mediator is derived from platelets and causes vascular leakage?",
-                options: [
-                    "A. Histamine",
-                    "B. Serotonin",
-                    "C. Prostaglandins",
-                    "D. Leukotrienes"
-                ],
-                correctAnswer: 1,
-                explanation: "Serotonin (5-hydroxytryptamine) is derived from platelets and causes vascular leakage. Histamine comes from mast cells/basophils/platelets, prostaglandins from all leukocytes, and leukotrienes from all leukocytes."
-            },
-            {
-                question: "Which of the following is an oxygen-independent mechanism of microbial killing in phagocytes?",
-                options: [
-                    "A. Myeloperoxidase system",
-                    "B. Reactive oxygen species",
-                    "C. Lysozymes",
-                    "D. Hypochlorous acid"
-                ],
-                correctAnswer: 2,
-                explanation: "Lysozymes are oxygen-independent bactericidal mechanisms. Other oxygen-independent mechanisms include bactericidal permeability increasing protein (BPI), lactoferrin, and defensins."
-            },
-            {
-                question: "A patient with rheumatoid arthritis develops granulomatous inflammation. Which cell type is primarily involved in forming granulomas?",
-                options: [
-                    "A. Neutrophils",
-                    "B. Epithelioid cells",
-                    "C. Eosinophils",
-                    "D. Mast cells"
-                ],
-                correctAnswer: 1,
-                explanation: "Granulomas are microscopic aggregates of epithelioid cells, which are activated macrophages with epithelial cell-like appearance. They are surrounded by lymphocytes and may contain multinucleated giant cells."
-            },
-            {
-                question: "Which of the following is a systemic effect of inflammation mediated by IL-1 and TNF-α?",
-                options: [
-                    "A. Weight gain",
-                    "B. Increased appetite",
-                    "C. Behavioral responses (anorexia, somnolence)",
-                    "D. Decreased pulse rate"
-                ],
-                correctAnswer: 2,
-                explanation: "IL-1 and TNF-α cause behavioral responses including rigor, chills, anorexia, somnolence, and malaise. They also cause weight loss, not gain, and increased pulse rate, not decreased."
-            },
-            // Introduction to Pathology (10 questions)
-            {
-                question: "What is the study of disease that examines structural, biochemical, and functional changes in cells, tissues, and organs?",
-                options: [
-                    "A. Physiology",
-                    "B. Pathology",
-                    "C. Histology",
-                    "D. Biochemistry"
-                ],
-                correctAnswer: 1,
-                explanation: "Pathology is derived from Greek words pathos (suffering) and logos (study). It is the scientific study of disease that examines structural, biochemical, and functional changes in cells, tissues, and organs."
-            },
-            {
-                question: "Which aspect of disease pathology refers to the sequence of cellular, biochemical, and molecular events from initial stimulus to ultimate expression?",
-                options: [
-                    "A. Etiology",
-                    "B. Pathogenesis",
-                    "C. Morphologic changes",
-                    "D. Functional derangements"
-                ],
-                correctAnswer: 1,
-                explanation: "Pathogenesis is the sequence of cellular, biochemical, and molecular events that occur from the initial stimulus to the ultimate expression of disease. It includes signal transduction derailment, gene expression alteration, protein misfolding, etc."
-            },
-            {
-                question: "When no cause is identified for a disease, it is termed:",
-                options: [
-                    "A. Iatrogenic",
-                    "B. Idiopathic",
-                    "C. Nosocomial",
-                    "D. Congenital"
-                ],
-                correctAnswer: 1,
-                explanation: "Idiopathic refers to diseases with no identified cause. Iatrogenic diseases are caused by medical treatment, nosocomial diseases are acquired in hospitals, and congenital diseases are present at birth."
-            },
-            {
-                question: "Which diagnostic technique is considered the gold standard for pathologic diagnosis?",
-                options: [
-                    "A. Cytopathology",
-                    "B. Histopathology",
-                    "C. Hematopathology",
-                    "D. Immunohistochemistry"
-                ],
-                correctAnswer: 1,
-                explanation: "Histopathology is the gold standard for pathologic diagnosis, involving examination of tissues under a microscope after fixation, processing, sectioning, and staining (typically H&E)."
-            },
-            {
-                question: "Which of the following is an example of a physical agent causing disease?",
-                options: [
-                    "A. Drugs",
-                    "B. Trauma",
-                    "C. Toxins",
-                    "D. Viruses"
-                ],
-                correctAnswer: 1,
-                explanation: "Trauma is a physical agent that causes disease by applying excess physical energy to the body. Drugs and toxins are chemical agents, and viruses are biologic agents."
-            },
-            {
-                question: "The period between biological onset (disease process begins) and clinical onset (symptoms appear) is crucial for:",
-                options: [
-                    "A. Palliative care",
-                    "B. Early detection and intervention",
-                    "C. Determining cause of death",
-                    "D. Genetic counseling"
-                ],
-                correctAnswer: 1,
-                explanation: "The period between biological onset (disease process begins without symptoms) and clinical onset (symptoms become apparent) is crucial for early detection and intervention, potentially preventing permanent damage."
-            },
-            {
-                question: "Permanent structural or functional defects remaining after disease resolution are called:",
-                options: [
-                    "A. Resolution",
-                    "B. Sequelae",
-                    "C. Complications",
-                    "D. Remissions"
-                ],
-                correctAnswer: 1,
-                explanation: "Sequelae are permanent structural or functional defects remaining after disease resolution, such as scarring after severe burns, joint deformities after rheumatoid arthritis, or neurological deficits after stroke."
-            },
-            {
-                question: "Which of the following post-mortem changes occurs 15-20 minutes after death?",
-                options: [
-                    "A. Livor mortis",
-                    "B. Algor mortis",
-                    "C. Pallor mortis",
-                    "D. Rigor mortis"
-                ],
-                correctAnswer: 2,
-                explanation: "Pallor mortis (paleness) occurs 15-20 minutes after death due to blood pooling and reduced oxygenation. Livor mortis occurs 30 minutes-4 hours, algor mortis is gradual cooling, and rigor mortis occurs 2-6 hours after death."
-            },
-            {
-                question: "A 60-year-old woman with neck lump, fever, and inguinal lymphadenopathy is diagnosed with follicular lymphoma confirmed by t(14;18) translocation. This illustrates the importance of:",
-                options: [
-                    "A. Gross examination",
-                    "B. Cytogenetics",
-                    "C. Microbiology",
-                    "D. Biochemistry"
-                ],
-                correctAnswer: 1,
-                explanation: "This case illustrates the importance of cytogenetics in pathology, as the t(14;18) translocation is characteristic of follicular lymphoma and confirms the diagnosis, guiding appropriate treatment."
-            },
-            {
-                question: "Which of the following best describes the role of pathology in medicine?",
-                options: [
-                    "A. It serves as a bridge between basic science and clinical medicine",
-                    "B. It focuses only on microscopic changes",
-                    "C. It is limited to autopsy findings",
-                    "D. It deals exclusively with genetic disorders"
-                ],
-                correctAnswer: 0,
-                explanation: "Pathology serves as a bridge between basic science and clinical medicine, helping in diagnosing diseases, understanding disease progression, guiding treatment options, and improving patient outcomes through integrated analysis."
+                correct: 1,
+                explanation: "In the short run, a firm should continue operating if price ≥ AVC (covers variable costs), even if P < ATC (not covering fixed costs). Shutdown point is where P = min AVC.",
+                memoryTip: "Short run: operate if P ≥ AVC. Shutdown if P < AVC."
             }
         ];
 
-        // Variables to track exam state
-        let currentQuestion = 0;
-        let userAnswers = new Array(questions.length).fill(null);
-        let examSubmitted = false;
-        let timerInterval;
-        let timeRemaining = 120 * 60; // 120 minutes in seconds
-        let hasSubmitted = localStorage.getItem('pathologyExamSubmitted') === 'true';
-
         // DOM elements
-        const examForm = document.getElementById('exam-form');
+        const quizContainer = document.getElementById('quiz-container');
+        const resultsContainer = document.getElementById('results-container');
+        const questionNumber = document.getElementById('question-number');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const explanationText = document.getElementById('explanation-text');
+        const memoryTipText = document.getElementById('memory-tip-text');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const submitBtn = document.getElementById('submit-btn');
-        const resultsDiv = document.getElementById('results');
-        const scoreValue = document.getElementById('score-value');
-        const resultsContent = document.getElementById('results-content');
-        const retakeBtn = document.getElementById('retake-btn');
-        const progressBar = document.getElementById('progress');
-        const timerDisplay = document.getElementById('timer');
-        const studentNameInput = document.getElementById('student-name');
-        const studentEmailInput = document.getElementById('student-email');
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
+        const timeDisplay = document.getElementById('time');
+        const scoreDisplay = document.getElementById('score');
+        const scoreText = document.getElementById('score-text');
+        const totalQuestions = document.getElementById('total-questions');
+        const correctAnswers = document.getElementById('correct-answers');
+        const incorrectAnswers = document.getElementById('incorrect-answers');
+        const percentage = document.getElementById('percentage');
+        const timeTaken = document.getElementById('time-taken');
+        const questionReview = document.getElementById('question-review');
+        const restartBtn = document.getElementById('restart-btn');
 
-        // Initialize the exam
-        function initExam() {
-            displayQuestion(currentQuestion);
-            updateProgressBar();
-            setupEventListeners();
+        // Quiz state
+        let currentQuestion = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let score = 0;
+        let timer;
+        let timeLeft = 60 * 60; // 60 minutes in seconds
+        let quizCompleted = false;
+
+        // Initialize quiz
+        function initQuiz() {
+            displayQuestion();
+            startTimer();
+            updateProgress();
+        }
+
+        // Display current question
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            questionNumber.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            questionText.textContent = question.question;
             
-            if (!hasSubmitted) {
-                startTimer();
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                if (userAnswers[currentQuestion] === index) {
+                    optionElement.classList.add('selected');
+                }
+                optionElement.textContent = option;
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Show/hide explanation
+            if (userAnswers[currentQuestion] !== null) {
+                showExplanation();
             } else {
-                // If already submitted, show results in practice mode
-                examSubmitted = true;
-                showResults();
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Already Submitted';
+                explanationContainer.style.display = 'none';
+            }
+            
+            // Update button states
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.disabled = false;
+            submitBtn.style.display = currentQuestion === questions.length - 1 ? 'block' : 'none';
+            nextBtn.style.display = currentQuestion === questions.length - 1 ? 'none' : 'block';
+        }
+
+        // Select an option
+        function selectOption(index) {
+            if (quizCompleted) return;
+            
+            userAnswers[currentQuestion] = index;
+            
+            // Update UI
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[index].classList.add('selected');
+            
+            showExplanation();
+        }
+
+        // Show explanation for current question
+        function showExplanation() {
+            const question = questions[currentQuestion];
+            explanationText.textContent = question.explanation;
+            memoryTipText.textContent = question.memoryTip;
+            explanationContainer.style.display = 'block';
+            
+            // Highlight correct/incorrect answers
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, index) => {
+                option.classList.remove('correct', 'incorrect');
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === userAnswers[currentQuestion] && index !== question.correct) {
+                    option.classList.add('incorrect');
+                }
+            });
+        }
+
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+                updateProgress();
             }
         }
 
-        // Display a specific question
-        function displayQuestion(index) {
-            examForm.innerHTML = '';
-            
-            const question = questions[index];
-            const questionDiv = document.createElement('div');
-            questionDiv.className = 'question';
-            
-            const questionNumber = document.createElement('div');
-            questionNumber.className = 'question-number';
-            questionNumber.textContent = `Question ${index + 1} of ${questions.length}`;
-            
-            const questionText = document.createElement('div');
-            questionText.className = 'question-text';
-            questionText.textContent = question.question;
-            
-            const optionsDiv = document.createElement('div');
-            optionsDiv.className = 'options';
-            
-            question.options.forEach((option, optionIndex) => {
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'option';
-                
-                const input = document.createElement('input');
-                input.type = 'radio';
-                input.name = 'answer';
-                input.value = optionIndex;
-                input.id = `option-${optionIndex}`;
-                
-                // Check if this option was previously selected
-                if (userAnswers[index] === optionIndex) {
-                    input.checked = true;
-                }
-                
-                const label = document.createElement('label');
-                label.htmlFor = `option-${optionIndex}`;
-                label.textContent = option;
-                
-                optionDiv.appendChild(input);
-                optionDiv.appendChild(label);
-                optionsDiv.appendChild(optionDiv);
-            });
-            
-            // If in review mode (after submission), show explanation
-            if (examSubmitted) {
-                const explanation = document.createElement('div');
-                explanation.className = 'explanation';
-                explanation.innerHTML = `<strong>Explanation:</strong> ${question.explanation}`;
-                explanation.style.display = 'block';
-                
-                // Highlight correct answer
-                const correctOption = document.querySelector(`input[value="${question.correctAnswer}"]`);
-                if (correctOption) {
-                    const correctLabel = correctOption.nextElementSibling;
-                    correctLabel.classList.add('correct');
-                }
-                
-                // Highlight user's answer if incorrect
-                if (userAnswers[index] !== null && userAnswers[index] !== question.correctAnswer) {
-                    const userOption = document.querySelector(`input[value="${userAnswers[index]}"]`);
-                    if (userOption) {
-                        const userLabel = userOption.nextElementSibling;
-                        userLabel.classList.add('incorrect');
-                    }
-                }
-                
-                questionDiv.appendChild(explanation);
-            }
-            
-            questionDiv.appendChild(questionNumber);
-            questionDiv.appendChild(questionText);
-            questionDiv.appendChild(optionsDiv);
-            examForm.appendChild(questionDiv);
-            
-            // Update button states
-            prevBtn.disabled = index === 0;
-            nextBtn.disabled = index === questions.length - 1;
-            
-            // If we're on the last question and not submitted, enable submit button
-            if (index === questions.length - 1 && !examSubmitted) {
-                submitBtn.style.display = 'block';
-            } else {
-                submitBtn.style.display = 'none';
+        // Navigate to previous question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+                updateProgress();
             }
         }
 
         // Update progress bar
-        function updateProgressBar() {
+        function updateProgress() {
             const progress = ((currentQuestion + 1) / questions.length) * 100;
-            progressBar.style.width = `${progress}%`;
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = `${currentQuestion + 1}/${questions.length}`;
         }
 
-        // Set up event listeners
-        function setupEventListeners() {
-            // Previous button
-            prevBtn.addEventListener('click', () => {
-                if (currentQuestion > 0) {
-                    saveAnswer();
-                    currentQuestion--;
-                    displayQuestion(currentQuestion);
-                    updateProgressBar();
-                }
-            });
-            
-            // Next button
-            nextBtn.addEventListener('click', () => {
-                if (currentQuestion < questions.length - 1) {
-                    saveAnswer();
-                    currentQuestion++;
-                    displayQuestion(currentQuestion);
-                    updateProgressBar();
-                }
-            });
-            
-            // Submit button
-            submitBtn.addEventListener('click', () => {
-                saveAnswer();
-                if (validateForm()) {
-                    if (confirm('Are you sure you want to submit your exam? You cannot change your answers after submission.')) {
-                        submitExam();
-                    }
-                }
-            });
-            
-            // Retake button (practice mode)
-            retakeBtn.addEventListener('click', () => {
-                resetExam();
-            });
-            
-            // Save answer when user selects an option
-            examForm.addEventListener('change', (e) => {
-                if (e.target.name === 'answer') {
-                    userAnswers[currentQuestion] = parseInt(e.target.value);
-                }
-            });
-        }
-
-        // Validate form before submission
-        function validateForm() {
-            if (!studentNameInput.value.trim()) {
-                alert('Please enter your name before submitting.');
-                studentNameInput.focus();
-                return false;
-            }
-            
-            if (!studentEmailInput.value.trim()) {
-                alert('Please enter your email before submitting.');
-                studentEmailInput.focus();
-                return false;
-            }
-            
-            // Check if all questions are answered
-            const unanswered = userAnswers.filter(answer => answer === null).length;
-            if (unanswered > 0) {
-                return confirm(`You have ${unanswered} unanswered questions. Are you sure you want to submit?`);
-            }
-            
-            return true;
-        }
-
-        // Save the current answer
-        function saveAnswer() {
-            const selectedOption = document.querySelector('input[name="answer"]:checked');
-            if (selectedOption) {
-                userAnswers[currentQuestion] = parseInt(selectedOption.value);
-            }
-        }
-
-        // Start the exam timer
+        // Start timer
         function startTimer() {
-            updateTimerDisplay();
-            
-            timerInterval = setInterval(() => {
-                timeRemaining--;
-                updateTimerDisplay();
+            timer = setInterval(() => {
+                timeLeft--;
                 
-                if (timeRemaining <= 0) {
-                    clearInterval(timerInterval);
-                    alert('Time is up! Your exam will be submitted automatically.');
-                    submitExam();
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    submitQuiz();
                 }
             }, 1000);
         }
 
-        // Update the timer display
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timeRemaining / 60);
-            const seconds = timeRemaining % 60;
-            timerDisplay.textContent = `Time Remaining: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            // Change color when time is running low
-            if (timeRemaining < 300) { // 5 minutes
-                timerDisplay.style.color = 'var(--accent)';
-            }
-        }
-
-        // Submit the exam
-        function submitExam() {
-            clearInterval(timerInterval);
-            examSubmitted = true;
+        // Submit quiz
+        function submitQuiz() {
+            clearInterval(timer);
+            quizCompleted = true;
             
             // Calculate score
-            let score = 0;
+            score = 0;
             for (let i = 0; i < questions.length; i++) {
-                if (userAnswers[i] === questions[i].correctAnswer) {
+                if (userAnswers[i] === questions[i].correct) {
                     score++;
                 }
             }
             
-            // Show results
-            showResults(score);
+            // Display results
+            quizContainer.style.display = 'none';
+            resultsContainer.style.display = 'block';
             
-            // Submit to Formspree if first time
-            if (!hasSubmitted) {
-                submitToFormspree(score);
-                localStorage.setItem('pathologyExamSubmitted', 'true');
-                hasSubmitted = true;
+            scoreDisplay.textContent = `${score}/${questions.length}`;
+            totalQuestions.textContent = questions.length;
+            correctAnswers.textContent = score;
+            incorrectAnswers.textContent = questions.length - score;
+            percentage.textContent = `${((score / questions.length) * 100).toFixed(1)}%`;
+            
+            const minutesTaken = Math.floor((60 * 60 - timeLeft) / 60);
+            const secondsTaken = (60 * 60 - timeLeft) % 60;
+            timeTaken.textContent = `${minutesTaken.toString().padStart(2, '0')}:${secondsTaken.toString().padStart(2, '0')}`;
+            
+            // Set score text
+            if (score >= questions.length * 0.8) {
+                scoreText.textContent = "Excellent! You have a strong understanding of economics fundamentals.";
+            } else if (score >= questions.length * 0.6) {
+                scoreText.textContent = "Good job! You have a solid grasp of basic economics concepts.";
+            } else if (score >= questions.length * 0.5) {
+                scoreText.textContent = "You passed! Review the explanations to strengthen your knowledge.";
+            } else {
+                scoreText.textContent = "You need more study. Review the textbook material and try again.";
             }
+            
+            // Generate question review
+            generateQuestionReview();
         }
 
-        // Show results
-        function showResults(score = null) {
-            if (score !== null) {
-                scoreValue.textContent = score;
-            }
-            
-            // Build results content
-            let resultsHTML = '<h3>Exam Results</h3>';
+        // Generate question review
+        function generateQuestionReview() {
+            questionReview.innerHTML = '<h3>Question Review</h3>';
             
             questions.forEach((question, index) => {
-                const userAnswer = userAnswers[index];
-                const isCorrect = userAnswer === question.correctAnswer;
+                const reviewItem = document.createElement('div');
+                reviewItem.className = 'review-item';
                 
-                resultsHTML += `
-                    <div class="question">
-                        <div class="question-number">Question ${index + 1}</div>
-                        <div class="question-text">${question.question}</div>
-                        <div class="options">
-                `;
+                const reviewQuestion = document.createElement('div');
+                reviewQuestion.className = 'review-question';
+                reviewQuestion.textContent = `${index + 1}. ${question.question}`;
                 
-                question.options.forEach((option, optionIndex) => {
-                    let optionClass = '';
-                    if (optionIndex === question.correctAnswer) {
-                        optionClass = 'correct';
-                    } else if (optionIndex === userAnswer && !isCorrect) {
-                        optionClass = 'incorrect';
-                    }
-                    
-                    resultsHTML += `
-                        <div class="option">
-                            <span class="${optionClass}">${option}</span>
-                        </div>
-                    `;
-                });
+                const userAnswer = document.createElement('div');
+                userAnswer.className = 'review-answer';
+                if (userAnswers[index] !== null) {
+                    userAnswer.innerHTML = `Your answer: <span class="user-answer">${question.options[userAnswers[index]]}</span>`;
+                } else {
+                    userAnswer.innerHTML = `Your answer: <span class="user-answer">Not answered</span>`;
+                }
                 
-                resultsHTML += `
-                        </div>
-                        <div class="explanation">
-                            <strong>Explanation:</strong> ${question.explanation}
-                        </div>
-                    </div>
-                `;
+                const correctAnswer = document.createElement('div');
+                correctAnswer.className = 'review-answer';
+                correctAnswer.innerHTML = `Correct answer: <span class="correct-answer">${question.options[question.correct]}</span>`;
+                
+                reviewItem.appendChild(reviewQuestion);
+                reviewItem.appendChild(userAnswer);
+                reviewItem.appendChild(correctAnswer);
+                
+                questionReview.appendChild(reviewItem);
             });
-            
-            resultsContent.innerHTML = resultsHTML;
-            resultsDiv.style.display = 'block';
-            
-            // Scroll to results
-            resultsDiv.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Reset exam for practice mode
-        function resetExam() {
+        // Restart quiz
+        function restartQuiz() {
             currentQuestion = 0;
             userAnswers = new Array(questions.length).fill(null);
-            examSubmitted = false;
-            timeRemaining = 120 * 60;
+            score = 0;
+            timeLeft = 60 * 60;
+            quizCompleted = false;
             
-            resultsDiv.style.display = 'none';
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Submit Exam';
+            quizContainer.style.display = 'block';
+            resultsContainer.style.display = 'none';
             
-            displayQuestion(currentQuestion);
-            updateProgressBar();
-            updateTimerDisplay();
-            timerDisplay.style.color = '';
-            
-            // Don't start the timer in practice mode
-            clearInterval(timerInterval);
+            initQuiz();
         }
 
-        // Submit to Formspree
-        function submitToFormspree(score) {
-            const studentName = studentNameInput.value || 'Anonymous';
-            const studentEmail = studentEmailInput.value || 'No email provided';
-            
-            // Prepare form data
-            const formData = new FormData();
-            formData.append('name', studentName);
-            formData.append('email', studentEmail);
-            formData.append('score', `${score}/${questions.length}`);
-            formData.append('percentage', `${((score/questions.length)*100).toFixed(2)}%`);
-            formData.append('timestamp', new Date().toISOString());
-            
-            // Add detailed results
-            let detailedResults = '';
-            questions.forEach((question, index) => {
-                const userAnswer = userAnswers[index];
-                const answerText = userAnswer !== null ? 
-                    question.options[userAnswer] : 'Not answered';
-                const isCorrect = userAnswer === question.correctAnswer;
-                
-                detailedResults += `Q${index + 1}: ${question.question} | Your Answer: ${answerText} | Correct: ${isCorrect ? 'Yes' : 'No'}\n\n`;
-            });
-            
-            formData.append('detailed_results', detailedResults);
-            
-            // Submit to Formspree
-            fetch('https://formspree.io/f/mwprvyal', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Exam submitted successfully to Formspree');
-                } else {
-                    console.error('Failed to submit exam to Formspree');
-                }
-            })
-            .catch(error => {
-                console.error('Error submitting exam to Formspree:', error);
-            });
-        }
+        // Event listeners
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        submitBtn.addEventListener('click', submitQuiz);
+        restartBtn.addEventListener('click', restartQuiz);
 
-        // Initialize the exam when the page loads
-        document.addEventListener('DOMContentLoaded', initExam);
+        // Start the quiz
+        initQuiz();
     </script>
 </body>
-  </html>
+    </html>
