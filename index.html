@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randomized MCQ Exam | Reproductive System & CNS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f8ff;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+        
+        .header .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .exam-info {
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 1000px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .exam-stats {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .stat-box {
+            background-color: #e8eaf6;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 120px;
+        }
+        
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1a237e;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .questions-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .question-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #3949ab;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .question-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        }
+        
+        .question-number {
+            display: inline-block;
+            background-color: #3949ab;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            display: inline-block;
+            width: calc(100% - 60px);
+            vertical-align: top;
+        }
+        
+        .options-container {
+            margin: 20px 0;
+        }
+        
+        .option {
+            background-color: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background-color: #edf2ff;
+            border-color: #b3c6ff;
+        }
+        
+        .option.selected {
+            background-color: #e3f2fd;
+            border-color: #2196f3;
+        }
+        
+        .option.correct {
+            background-color: #e8f5e9;
+            border-color: #4caf50;
+        }
+        
+        .option.incorrect {
+            background-color: #ffebee;
+            border-color: #f44336;
+        }
+        
+        .option-letter {
+            display: inline-block;
+            background-color: #e0e0e0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            margin-right: 15px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .selected .option-letter {
+            background-color: #2196f3;
+            color: white;
+        }
+        
+        .correct .option-letter {
+            background-color: #4caf50;
+            color: white;
+        }
+        
+        .incorrect .option-letter {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        .option-text {
+            font-size: 1.05rem;
+        }
+        
+        .feedback-container {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .feedback-container.show {
+            display: block;
+        }
+        
+        .feedback-correct {
+            background-color: #e8f5e9;
+            border-left: 5px solid #4caf50;
+        }
+        
+        .feedback-incorrect {
+            background-color: #ffebee;
+            border-left: 5px solid #f44336;
+        }
+        
+        .feedback-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .feedback-correct .feedback-title {
+            color: #2e7d32;
+        }
+        
+        .feedback-incorrect .feedback-title {
+            color: #c62828;
+        }
+        
+        .explanation {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        .explanation strong {
+            color: #1a237e;
+        }
+        
+        .topic-badge {
+            display: inline-block;
+            background-color: #e8eaf6;
+            color: #3949ab;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+        
+        .reproductive-badge {
+            background-color: #f3e5f5;
+            color: #7b1fa2;
+        }
+        
+        .cns-badge {
+            background-color: #e3f2fd;
+            color: #0277bd;
+        }
+        
+        .controls {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .reset-btn, .new-random-btn {
+            background-color: #3949ab;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 600;
+            margin: 0 10px;
+        }
+        
+        .reset-btn:hover, .new-random-btn:hover {
+            background-color: #283593;
+        }
+        
+        .new-random-btn {
+            background-color: #7b1fa2;
+        }
+        
+        .new-random-btn:hover {
+            background-color: #6a1b9a;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .exam-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .exam-stats {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .question-text {
+                width: 100%;
+                display: block;
+                margin-top: 15px;
+            }
+            
+            .controls {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+            
+            .reset-btn, .new-random-btn {
+                width: 80%;
+                margin: 5px 0;
+            }
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #4caf50;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .score-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1a237e;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .randomized-note {
+            background-color: #fff3e0;
+            border: 1px solid #ffb74d;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px auto;
+            max-width: 1000px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .correct-letter-display {
+            background-color: #e8f5e9;
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-weight: bold;
+            color: #2e7d32;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Randomized MCQ Exam</h1>
+        <div class="subtitle">Reproductive System & Central Nervous System | 50 Questions | Non-Repeating Correct Letters</div>
+    </div>
+
+    
+    <div class="exam-info">
+        <div>
+            <h3>Instructions</h3>
+            <p>Select your answer for each question. Immediate feedback with explanation will appear.</p>
+        </div>
+        
+        <div class="exam-stats">
+            <div class="stat-box">
+                <div class="stat-number" id="answered-count">0</div>
+                <div class="stat-label">Answered</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="correct-count">0</div>
+                <div class="stat-label">Correct</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">50</div>
+                <div class="stat-label">Total</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+    </div>
+    
+    <div class="score-display" id="score-display">Score: 0/50 (0%)</div>
+    
+    <div class="questions-container" id="questions-container">
+        <!-- Questions will be generated by JavaScript -->
+    </div>
+    
+    <div class="controls">
+        <button class="new-random-btn" id="new-random-btn">Generate New Random Order</button>
+        <button class="reset-btn" id="reset-btn">Reset Exam</button>
+    </div>
+    
+    <div class="footer">
+        <p>MedQuiz Exam Simulation | Based on Haramaya University CHMS Department of Internal Medicine Materials</p>
+        <p>For educational purposes only. Feedback explanations derived from standard physiology references.</p>
+    </div>
+
+    <script>
+        // Original questions data with correct answers
+        const originalQuestions = [
+            {
+                id: 1,
+                question: "Stimulation of testosterone synthesis in males occurs primarily due to activation of receptors for:",
+                options: [
+                    "FSH on Sertoli cells",
+                    "LH on Leydig cells",
+                    "GnRH on seminiferous tubules",
+                    "Inhibin on pituitary cells"
+                ],
+                correctOptionText: "LH on Leydig cells",
+                explanation: "LH (Luteinizing Hormone) acts on Leydig cells in the testes to stimulate testosterone synthesis. FSH acts on Sertoli cells for spermatogenesis support.",
+                topic: "reproductive"
+            },
+            {
+                id: 2,
+                question: "The site where meiosis occurs during sperm formation is the:",
+                options: [
+                    "Spermatogonia",
+                    "Primary spermatocytes",
+                    "Spermatids",
+                    "Mature spermatozoa"
+                ],
+                correctOptionText: "Primary spermatocytes",
+                explanation: "Meiosis occurs in primary spermatocytes (meiosis I) and secondary spermatocytes (meiosis II). Spermatogonia undergo mitosis, while spermatids undergo spermiogenesis (differentiation into spermatozoa).",
+                topic: "reproductive"
+            },
+            {
+                id: 3,
+                question: "A major physiological role of Sertoli cells is to:",
+                options: [
+                    "Produce androgens",
+                    "Regulate intratesticular environment for germ cells",
+                    "Store mature sperm",
+                    "Form seminal fluid"
+                ],
+                correctOptionText: "Regulate intratesticular environment for germ cells",
+                explanation: "Sertoli cells form the blood-testis barrier, provide nutrients to developing sperm, secrete androgen-binding protein, and create a protected microenvironment for spermatogenesis.",
+                topic: "reproductive"
+            },
+            {
+                id: 4,
+                question: "The biologically most active androgen at the target tissue level is:",
+                options: [
+                    "Testosterone",
+                    "Androstenedione",
+                    "Dihydrotestosterone",
+                    "Dehydroepiandrosterone"
+                ],
+                correctOptionText: "Dihydrotestosterone",
+                explanation: "Dihydrotestosterone (DHT) is 2-3 times more potent than testosterone. Testosterone is converted to DHT by 5α-reductase in target tissues like prostate and skin.",
+                topic: "reproductive"
+            },
+            {
+                id: 5,
+                question: "Functional maturation of sperm that enables fertilization occurs after:",
+                options: [
+                    "Spermiogenesis",
+                    "Ejaculation",
+                    "Capacitation in female tract",
+                    "Epididymal storage"
+                ],
+                correctOptionText: "Capacitation in female tract",
+                explanation: "Capacitation is the final maturation step that occurs in the female reproductive tract, involving removal of glycoprotein coat and increased motility, enabling sperm to fertilize the oocyte.",
+                topic: "reproductive"
+            },
+            {
+                id: 6,
+                question: "The immediate cause of follicular rupture during ovulation is:",
+                options: [
+                    "Falling progesterone levels",
+                    "LH-mediated proteolytic enzyme activation",
+                    "Rising FSH concentration",
+                    "Reduced estrogen synthesis"
+                ],
+                correctOptionText: "LH-mediated proteolytic enzyme activation",
+                explanation: "The LH surge activates proteolytic enzymes (collagenase, plasmin) that weaken the follicular wall, leading to rupture and release of the oocyte.",
+                topic: "reproductive"
+            },
+            {
+                id: 7,
+                question: "A normal ovulatory menstrual cycle is best described as:",
+                options: [
+                    "Fixed follicular & variable luteal phase",
+                    "Variable follicular & fixed luteal phase",
+                    "Hormone-independent cycle",
+                    "Equal follicular & luteal phases"
+                ],
+                correctOptionText: "Variable follicular & fixed luteal phase",
+                explanation: "The follicular phase (1-14 days) is variable, while the luteal phase (14 days) is relatively fixed due to corpus luteum's predictable lifespan.",
+                topic: "reproductive"
+            },
+            {
+                id: 8,
+                question: "Maintenance of endometrial receptivity during early pregnancy depends mainly on:",
+                options: [
+                    "Estrogen dominance",
+                    "Progesterone secretion",
+                    "Oxytocin release",
+                    "Prostaglandin synthesis"
+                ],
+                correctOptionText: "Progesterone secretion",
+                explanation: "Progesterone from the corpus luteum maintains the secretory endometrium, inhibits uterine contractions, and supports early pregnancy until placenta takes over.",
+                topic: "reproductive"
+            },
+            {
+                id: 9,
+                question: "The primary function of the corpus luteum is secretion of:",
+                options: [
+                    "Estrogen only",
+                    "Progesterone with some estrogen",
+                    "FSH and LH",
+                    "Prolactin"
+                ],
+                correctOptionText: "Progesterone with some estrogen",
+                explanation: "The corpus luteum secretes progesterone (primary) and some estrogen to prepare and maintain endometrium for possible implantation.",
+                topic: "reproductive"
+            },
+            {
+                id: 10,
+                question: "The most common anatomical site of fertilization is the:",
+                options: [
+                    "Isthmus of tube",
+                    "Ampulla of tube",
+                    "Uterine cavity",
+                    "Ovarian surface"
+                ],
+                correctOptionText: "Ampulla of tube",
+                explanation: "The ampulla (widest part) of the fallopian tube is the usual site of fertilization, where sperm meets the oocyte.",
+                topic: "reproductive"
+            },
+            {
+                id: 11,
+                question: "Follicular development in the ovary is mainly stimulated by:",
+                options: [
+                    "LH on theca cells",
+                    "FSH on granulosa cells",
+                    "Local estrogen",
+                    "Progesterone feedback"
+                ],
+                correctOptionText: "FSH on granulosa cells",
+                explanation: "FSH stimulates granulosa cell proliferation and aromatase activity for estrogen production, driving follicular growth during the follicular phase.",
+                topic: "reproductive"
+            },
+            {
+                id: 12,
+                question: "Milk expulsion from mammary glands occurs due to contraction of:",
+                options: [
+                    "Alveolar cells by prolactin",
+                    "Myoepithelial cells by oxytocin",
+                    "Smooth muscle by estrogen",
+                    "Ductal cells by progesterone"
+                ],
+                correctOptionText: "Myoepithelial cells by oxytocin",
+                explanation: "Oxytocin stimulates contraction of myoepithelial cells surrounding alveoli, causing milk ejection (let-down reflex). Prolactin stimulates milk production.",
+                topic: "reproductive"
+            },
+            {
+                id: 13,
+                question: "Physiological significance of menarche is:",
+                options: [
+                    "Completion of puberty",
+                    "Onset of reproductive capability",
+                    "Beginning of ovulatory cycles",
+                    "Pituitary maturation"
+                ],
+                correctOptionText: "Onset of reproductive capability",
+                explanation: "Menarche (first menstruation) marks the onset of reproductive capability, though initial cycles may be anovulatory.",
+                topic: "reproductive"
+            },
+            {
+                id: 14,
+                question: "Selective inhibition of FSH release in males is mediated by:",
+                options: [
+                    "Testosterone",
+                    "Estrogen",
+                    "Inhibin B",
+                    "Progesterone"
+                ],
+                correctOptionText: "Inhibin B",
+                explanation: "Inhibin B, secreted by Sertoli cells, selectively inhibits FSH secretion via negative feedback on anterior pituitary.",
+                topic: "reproductive"
+            },
+            {
+                id: 15,
+                question: "Ovarian estrogen synthesis mainly involves aromatization in:",
+                options: [
+                    "Theca interna cells",
+                    "Granulosa cells",
+                    "Corpus luteum",
+                    "Oocyte"
+                ],
+                correctOptionText: "Granulosa cells",
+                explanation: "Two-cell theory: Theca cells produce androstenedione under LH stimulation, which diffuses to granulosa cells where FSH-stimulated aromatase converts it to estrogen.",
+                topic: "reproductive"
+            },
+            {
+                id: 16,
+                question: "Detection of pregnancy hormone in urine is based on presence of:",
+                options: [
+                    "Progesterone",
+                    "Estrogen",
+                    "hCG",
+                    "Prolactin"
+                ],
+                correctOptionText: "hCG",
+                explanation: "Human chorionic gonadotropin (hCG) is secreted by syncytiotrophoblast and detected in urine pregnancy tests. It maintains corpus luteum in early pregnancy.",
+                topic: "reproductive"
+            },
+            {
+                id: 17,
+                question: "Progesterone predominance is seen during:",
+                options: [
+                    "Late follicular phase",
+                    "Ovulatory phase",
+                    "Luteal phase",
+                    "Menstrual phase"
+                ],
+                correctOptionText: "Luteal phase",
+                explanation: "Progesterone dominates the luteal phase, transforming endometrium to secretory phase and maintaining early pregnancy if fertilization occurs.",
+                topic: "reproductive"
+            },
+            {
+                id: 18,
+                question: "The organ producing female gametes is the:",
+                options: [
+                    "Uterus",
+                    "Ovary",
+                    "Cervix",
+                    "Fallopian tube"
+                ],
+                correctOptionText: "Ovary",
+                explanation: "Ovaries produce oocytes (female gametes) through oogenesis and also secrete estrogen and progesterone.",
+                topic: "reproductive"
+            },
+            {
+                id: 19,
+                question: "Testosterone secretion is directly regulated by:",
+                options: [
+                    "GnRH",
+                    "FSH",
+                    "LH",
+                    "Prolactin"
+                ],
+                correctOptionText: "LH",
+                explanation: "LH (ICSH in males) stimulates Leydig cells to synthesize and secrete testosterone. GnRH stimulates LH release from pituitary.",
+                topic: "reproductive"
+            },
+            {
+                id: 20,
+                question: "Secretory transformation of endometrium is induced by:",
+                options: [
+                    "Estrogen",
+                    "Progesterone",
+                    "FSH",
+                    "LH"
+                ],
+                correctOptionText: "Progesterone",
+                explanation: "Progesterone converts estrogen-primed proliferative endometrium to secretory endometrium with coiled glands and increased vascularity for implantation.",
+                topic: "reproductive"
+            },
+            {
+                id: 21,
+                question: "Immunological protection of developing germ cells is provided by:",
+                options: [
+                    "Leydig junctions",
+                    "Sertoli tight junctions",
+                    "Basement membrane",
+                    "Epididymal epithelium"
+                ],
+                correctOptionText: "Sertoli tight junctions",
+                explanation: "Sertoli cell tight junctions form the blood-testis barrier, preventing immune exposure to developing sperm antigens (which appear after immune tolerance establishment).",
+                topic: "reproductive"
+            },
+            {
+                id: 22,
+                question: "Female secondary sexual characteristics develop mainly due to:",
+                options: [
+                    "Progesterone",
+                    "Estrogen",
+                    "Prolactin",
+                    "LH"
+                ],
+                correctOptionText: "Estrogen",
+                explanation: "Estrogen stimulates breast development, fat distribution (hips), widening of pelvis, and female pattern hair growth during puberty.",
+                topic: "reproductive"
+            },
+            {
+                id: 23,
+                question: "During pregnancy, placenta functions importantly as a:",
+                options: [
+                    "Digestive organ",
+                    "Endocrine gland",
+                    "Excretory organ only",
+                    "Neural tissue"
+                ],
+                correctOptionText: "Endocrine gland",
+                explanation: "Placenta secretes hCG, estrogen, progesterone, hPL, and other hormones vital for maintaining pregnancy and fetal development.",
+                topic: "reproductive"
+            },
+            {
+                id: 24,
+                question: "Suppression of milk secretion during pregnancy is due to high levels of:",
+                options: [
+                    "Prolactin",
+                    "Oxytocin",
+                    "Estrogen and progesterone",
+                    "FSH"
+                ],
+                correctOptionText: "Estrogen and progesterone",
+                explanation: "High estrogen and progesterone during pregnancy inhibit prolactin's milk-producing effect on mammary glands. After delivery, their decline allows lactation.",
+                topic: "reproductive"
+            },
+            {
+                id: 25,
+                question: "Permanent cessation of menstruation occurs mainly due to:",
+                options: [
+                    "Pituitary failure",
+                    "Loss of ovarian follicles",
+                    "Uterine atrophy",
+                    "Hypothalamic suppression"
+                ],
+                correctOptionText: "Loss of ovarian follicles",
+                explanation: "Menopause results from ovarian follicle depletion, causing decreased estrogen and loss of negative feedback, leading to high FSH/LH levels.",
+                topic: "reproductive"
+            },
+            {
+                id: 26,
+                question: "Functional signaling cells of nervous system are:",
+                options: [
+                    "Glial cells",
+                    "Neurons",
+                    "Schwann cells",
+                    "Astrocytes"
+                ],
+                correctOptionText: "Neurons",
+                explanation: "Neurons are excitable cells that generate and conduct action potentials for communication. Glial cells provide support and maintenance.",
+                topic: "cns"
+            },
+            {
+                id: 27,
+                question: "Resting membrane potential is mainly due to:",
+                options: [
+                    "Equal ion distribution",
+                    "Sodium permeability",
+                    "Potassium permeability",
+                    "Calcium influx"
+                ],
+                correctOptionText: "Potassium permeability",
+                explanation: "Resting membrane potential (-70 mV) primarily results from high K+ permeability (K+ leak channels) and Na+/K+ ATPase maintaining ion gradients.",
+                topic: "cns"
+            },
+            {
+                id: 28,
+                question: "Rapid depolarization of action potential results from:",
+                options: [
+                    "Potassium efflux",
+                    "Chloride influx",
+                    "Sodium influx",
+                    "Calcium efflux"
+                ],
+                correctOptionText: "Sodium influx",
+                explanation: "Voltage-gated Na+ channels open rapidly during depolarization, causing Na+ influx and membrane potential shift toward +30 mV.",
+                topic: "cns"
+            },
+            {
+                id: 29,
+                question: "Myelinated fibers conduct faster because:",
+                options: [
+                    "Thicker axons",
+                    "Impulse jumps between nodes",
+                    "Absence of sodium channels",
+                    "Reduced potassium leakage"
+                ],
+                correctOptionText: "Impulse jumps between nodes",
+                explanation: "Saltatory conduction: Action potentials jump between nodes of Ranvier where voltage-gated Na+ channels are concentrated, increasing conduction velocity.",
+                topic: "cns"
+            },
+            {
+                id: 30,
+                question: "Myelin in CNS is formed by:",
+                options: [
+                    "Schwann cells",
+                    "Oligodendrocytes",
+                    "Astrocytes",
+                    "Microglia"
+                ],
+                correctOptionText: "Oligodendrocytes",
+                explanation: "Oligodendrocytes myelinate multiple axons in CNS. Schwann cells myelinate peripheral nerves (one cell per axon segment).",
+                topic: "cns"
+            },
+            {
+                id: 31,
+                question: "Neurotransmitter at neuromuscular junction is:",
+                options: [
+                    "Dopamine",
+                    "Acetylcholine",
+                    "Noradrenaline",
+                    "Glycine"
+                ],
+                correctOptionText: "Acetylcholine",
+                explanation: "Acetylcholine is released from motor neuron terminals, binds to nicotinic receptors on muscle endplate, causing depolarization and contraction.",
+                topic: "cns"
+            },
+            {
+                id: 32,
+                question: "Unidirectional synaptic transmission is due to:",
+                options: [
+                    "Electrical coupling",
+                    "Neurotransmitter diffusion",
+                    "Presynaptic vesicle release",
+                    "Postsynaptic receptors"
+                ],
+                correctOptionText: "Neurotransmitter diffusion",
+                explanation: "Neurotransmitters are only released from presynaptic terminals and receptors are only on postsynaptic membrane, ensuring one-way communication.",
+                topic: "cns"
+            },
+            {
+                id: 33,
+                question: "Repolarization of neuron occurs due to:",
+                options: [
+                    "Sodium channel closure",
+                    "Potassium channel opening",
+                    "Chloride movement",
+                    "Calcium influx"
+                ],
+                correctOptionText: "Potassium channel opening",
+                explanation: "Delayed voltage-gated K+ channels open, causing K+ efflux, returning membrane potential toward resting level after depolarization.",
+                topic: "cns"
+            },
+            {
+                id: 34,
+                question: "Absolute refractory period occurs because:",
+                options: [
+                    "Potassium channels open",
+                    "Sodium channels inactivated",
+                    "Calcium channels close",
+                    "Chloride channels open"
+                ],
+                correctOptionText: "Sodium channels inactivated",
+                explanation: "During and immediately after depolarization, voltage-gated Na+ channels are inactivated and cannot reopen, preventing another action potential.",
+                topic: "cns"
+            },
+            {
+                id: 35,
+                question: "Coordination of voluntary movements is controlled by:",
+                options: [
+                    "Cerebrum",
+                    "Medulla",
+                    "Cerebellum",
+                    "Pons"
+                ],
+                correctOptionText: "Cerebellum",
+                explanation: "Cerebellum coordinates timing, precision, and smoothness of movements, comparing intended with actual movements for error correction.",
+                topic: "cns"
+            },
+            {
+                id: 36,
+                question: "Autonomic nervous system uses:",
+                options: [
+                    "Single neuron pathway",
+                    "Two-neuron chain",
+                    "Three-neuron chain",
+                    "Direct innervation"
+                ],
+                correctOptionText: "Two-neuron chain",
+                explanation: "ANS has preganglionic neuron (CNS to ganglion) and postganglionic neuron (ganglion to effector). Somatic motor has single neuron.",
+                topic: "cns"
+            },
+            {
+                id: 37,
+                question: "All autonomic preganglionic fibers release:",
+                options: [
+                    "Noradrenaline",
+                    "Acetylcholine",
+                    "Dopamine",
+                    "Serotonin"
+                ],
+                correctOptionText: "Acetylcholine",
+                explanation: "All autonomic preganglionic neurons (sympathetic and parasympathetic) release acetylcholine acting on nicotinic receptors in ganglia.",
+                topic: "cns"
+            },
+            {
+                id: 38,
+                question: "Parasympathetic system primarily functions to:",
+                options: [
+                    "Mobilize energy",
+                    "Handle stress",
+                    "Conserve energy",
+                    "Emergency response"
+                ],
+                correctOptionText: "Conserve energy",
+                explanation: "Parasympathetic 'rest and digest' system conserves energy, promotes digestion, slows heart rate. Sympathetic is 'fight or flight'.",
+                topic: "cns"
+            },
+            {
+                id: 39,
+                question: "Major inhibitory neurotransmitter in CNS is:",
+                options: [
+                    "Glutamate",
+                    "Dopamine",
+                    "GABA",
+                    "Acetylcholine"
+                ],
+                correctOptionText: "GABA",
+                explanation: "Gamma-aminobutyric acid (GABA) is the main inhibitory neurotransmitter, hyperpolarizing neurons via Cl- influx through GABA-A receptors.",
+                topic: "cns"
+            },
+            {
+                id: 40,
+                question: "CSF is mainly produced by:",
+                options: [
+                    "Ventricular lining",
+                    "Choroid plexus",
+                    "Subarachnoid space",
+                    "Dura mater"
+                ],
+                correctOptionText: "Choroid plexus",
+                explanation: "Choroid plexus in ventricles produces CSF by filtration and secretion. Ependymal cells also contribute but choroid plexus is primary.",
+                topic: "cns"
+            },
+            {
+                id: 41,
+                question: "Voluntary motor activity begins in:",
+                options: [
+                    "Postcentral gyrus",
+                    "Precentral gyrus",
+                    "Temporal cortex",
+                    "Occipital cortex"
+                ],
+                correctOptionText: "Precentral gyrus",
+                explanation: "Primary motor cortex (precentral gyrus, Brodmann area 4) initiates voluntary movements with somatotopic organization (motor homunculus).",
+                topic: "cns"
+            },
+            {
+                id: 42,
+                question: "Visual impulses reach brain via:",
+                options: [
+                    "Oculomotor nerve",
+                    "Optic nerve",
+                    "Trochlear nerve",
+                    "Abducens nerve"
+                ],
+                correctOptionText: "Optic nerve",
+                explanation: "Optic nerve (CN II) carries visual information from retina to lateral geniculate nucleus, then to primary visual cortex.",
+                topic: "cns"
+            },
+            {
+                id: 43,
+                question: "Which is not required for spinal reflex?",
+                options: [
+                    "Sensory receptor",
+                    "Motor neuron",
+                    "Cerebral cortex",
+                    "Effector organ"
+                ],
+                correctOptionText: "Cerebral cortex",
+                explanation: "Spinal reflexes (e.g., stretch reflex) occur at spinal cord level without cerebral cortex involvement, though cortex can modulate them.",
+                topic: "cns"
+            },
+            {
+                id: 44,
+                question: "Neuronal support and metabolism are provided by:",
+                options: [
+                    "Microglia",
+                    "Astrocytes",
+                    "Oligodendrocytes",
+                    "Schwann cells"
+                ],
+                correctOptionText: "Astrocytes",
+                explanation: "Astrocytes maintain BBB, regulate extracellular ions/neurotransmitters, provide metabolic support via lactate shuttle, and structural support.",
+                topic: "cns"
+            },
+            {
+                id: 45,
+                question: "Dopamine neuron degeneration causes:",
+                options: [
+                    "Alzheimer disease",
+                    "Parkinson disease",
+                    "Epilepsy",
+                    "Multiple sclerosis"
+                ],
+                correctOptionText: "Parkinson disease",
+                explanation: "Parkinson's disease results from degeneration of dopaminergic neurons in substantia nigra pars compacta, leading to bradykinesia, rigidity, tremor.",
+                topic: "cns"
+            },
+            {
+                id: 46,
+                question: "Hearing center is located in:",
+                options: [
+                    "Frontal lobe",
+                    "Temporal lobe",
+                    "Parietal lobe",
+                    "Occipital lobe"
+                ],
+                correctOptionText: "Temporal lobe",
+                explanation: "Primary auditory cortex (transverse temporal gyri of Heschl) in superior temporal lobe processes auditory information.",
+                topic: "cns"
+            },
+            {
+                id: 47,
+                question: "Main excitatory neurotransmitter in CNS is:",
+                options: [
+                    "Glycine",
+                    "GABA",
+                    "Glutamate",
+                    "Serotonin"
+                ],
+                correctOptionText: "Glutamate",
+                explanation: "Glutamate is the primary excitatory neurotransmitter, acting on AMPA, NMDA, and kainate receptors to depolarize neurons.",
+                topic: "cns"
+            },
+            {
+                id: 48,
+                question: "Blood-brain barrier restricts:",
+                options: [
+                    "Oxygen",
+                    "Glucose",
+                    "Plasma proteins",
+                    "Lipid-soluble drugs"
+                ],
+                correctOptionText: "Plasma proteins",
+                explanation: "BBB formed by tight junctions between capillary endothelial cells restricts plasma proteins, large molecules, and hydrophilic substances. Lipid-soluble substances can cross.",
+                topic: "cns"
+            },
+            {
+                id: 49,
+                question: "Parasympathetic control of heart rate is via:",
+                options: [
+                    "Sympathetic fibers",
+                    "Vagus nerve",
+                    "Phrenic nerve",
+                    "Intercostal nerves"
+                ],
+                correctOptionText: "Vagus nerve",
+                explanation: "Vagus nerve (CN X) provides parasympathetic innervation to heart, releasing acetylcholine to slow heart rate via M2 receptors.",
+                topic: "cns"
+            },
+            {
+                id: 50,
+                question: "EEG primarily records activity of:",
+                options: [
+                    "Subcortical nuclei",
+                    "Cerebral cortex neurons",
+                    "Peripheral nerves",
+                    "Skeletal muscles"
+                ],
+                correctOptionText: "Cerebral cortex neurons",
+                explanation: "Electroencephalogram records summed postsynaptic potentials (mainly from pyramidal cells) in cerebral cortex, not action potentials.",
+                topic: "cns"
+            }
+        ];
+
+        // Custom randomizer that ensures non-consecutive same correct letters
+        function createNonRepeatingRandomOrder(questions) {
+            const letters = ['A', 'B', 'C', 'D'];
+            const result = [];
+            let previousLetter = null;
+            let attempts = 0;
+            const maxAttempts = 100; // Prevent infinite loop
+            
+            for (let i = 0; i < questions.length; i++) {
+                const question = { ...questions[i] };
+                const originalOptions = [...question.options];
+                const correctText = question.correctOptionText;
+                
+                // Start with the correct answer at a random position
+                let availableLetters = [...letters];
+                
+                // Remove the previous letter from available positions if we're trying to avoid repeats
+                if (previousLetter && attempts < maxAttempts / 2) {
+                    availableLetters = availableLetters.filter(l => l !== previousLetter);
+                }
+                
+                // Choose a random position for the correct answer
+                const randomLetter = availableLetters[Math.floor(Math.random() * availableLetters.length)];
+                const correctIndex = letters.indexOf(randomLetter);
+                
+                // Create a new options array
+                const newOptions = new Array(4);
+                newOptions[correctIndex] = correctText;
+                
+                // Fill remaining positions with wrong answers in random order
+                const wrongAnswers = originalOptions.filter(opt => opt !== correctText);
+                
+                // Simple shuffle for wrong answers
+                for (let j = wrongAnswers.length - 1; j > 0; j--) {
+                    const k = Math.floor(Math.random() * (j + 1));
+                    [wrongAnswers[j], wrongAnswers[k]] = [wrongAnswers[k], wrongAnswers[j]];
+                }
+                
+                // Place wrong answers in remaining positions
+                let wrongIndex = 0;
+                for (let j = 0; j < 4; j++) {
+                    if (j !== correctIndex) {
+                        newOptions[j] = wrongAnswers[wrongIndex];
+                        wrongIndex++;
+                    }
+                }
+                
+                // Check if this creates a repeat pattern
+                if (randomLetter === previousLetter) {
+                    attempts++;
+                    if (attempts < maxAttempts) {
+                        i--; // Try this question again
+                        continue;
+                    }
+                    // If we've tried too many times, accept the repeat
+                }
+                
+                // Store the result
+                result.push({
+                    ...question,
+                    options: newOptions,
+                    correctAnswer: correctIndex,
+                    correctLetter: randomLetter
+                });
+                
+                previousLetter = randomLetter;
+                attempts = 0; // Reset attempts for next question
+            }
+            
+            return result;
+        }
+
+        // Initialize exam state
+        let currentQuestions = [];
+        let userAnswers = [];
+        let examCompleted = false;
+        
+        // DOM elements
+        const questionsContainer = document.getElementById('questions-container');
+        const answeredCountElement = document.getElementById('answered-count');
+        const correctCountElement = document.getElementById('correct-count');
+        const progressFillElement = document.getElementById('progress-fill');
+        const scoreDisplayElement = document.getElementById('score-display');
+        const resetButton = document.getElementById('reset-btn');
+        const newRandomButton = document.getElementById('new-random-btn');
+        
+        // Initialize the exam
+        function initExam() {
+            // Create randomized questions with non-repeating correct letters
+            currentQuestions = createNonRepeatingRandomOrder(originalQuestions);
+            userAnswers = new Array(currentQuestions.length).fill(null);
+            examCompleted = false;
+            generateQuestions();
+        }
+        
+        // Generate questions HTML
+        function generateQuestions() {
+            questionsContainer.innerHTML = '';
+            
+            // Show the correct answer letters sequence
+            const correctLetters = currentQuestions.map(q => q.correctLetter).join(' ');
+            const letterDisplay = document.createElement('div');
+            letterDisplay.className = 'correct-letter-display';
+            letterDisplay.innerHTML = `<strong>Correct Answer Sequence:</strong> ${correctLetters}`;
+            questionsContainer.appendChild(letterDisplay);
+            
+            currentQuestions.forEach((q, index) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                questionCard.id = `question-${index}`;
+                
+                // Topic badge
+                const topicClass = q.topic === 'reproductive' ? 'reproductive-badge' : 'cns-badge';
+                const topicText = q.topic === 'reproductive' ? 'Reproductive System' : 'CNS';
+                
+                // Options HTML
+                let optionsHTML = '';
+                q.options.forEach((option, optIndex) => {
+                    const optionClass = userAnswers[index] === optIndex ? 'option selected' : 'option';
+                    const letter = String.fromCharCode(65 + optIndex); // A, B, C, D
+                    
+                    optionsHTML += `
+                        <div class="${optionClass}" data-question="${index}" data-option="${optIndex}">
+                            <div class="option-letter">${letter}</div>
+                            <div class="option-text">${option}</div>
+                        </div>
+                    `;
+                });
+                
+                // Feedback HTML (initially hidden)
+                let feedbackHTML = '';
+                if (userAnswers[index] !== null) {
+                    const isCorrect = userAnswers[index] === q.correctAnswer;
+                    const feedbackClass = isCorrect ? 'feedback-container feedback-correct show' : 'feedback-container feedback-incorrect show';
+                    const feedbackTitle = isCorrect ? '✓ Correct!' : '✗ Incorrect';
+                    
+                    feedbackHTML = `
+                        <div class="${feedbackClass}">
+                            <div class="feedback-title">${feedbackTitle}</div>
+                            <div class="explanation">${q.explanation}</div>
+                        </div>
+                    `;
+                } else {
+                    feedbackHTML = `<div class="feedback-container"></div>`;
+                }
+                
+                questionCard.innerHTML = `
+                    <div>
+                        <span class="question-number">${index + 1}</span>
+                        <span class="question-text">${q.question}</span>
+                    </div>
+                    <span class="topic-badge ${topicClass}">${topicText}</span>
+                    <div class="options-container">
+                        ${optionsHTML}
+                    </div>
+                    ${feedbackHTML}
+                `;
+                
+                questionsContainer.appendChild(questionCard);
+            });
+            
+            // Add event listeners to options
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', handleOptionClick);
+            });
+            
+            updateStats();
+        }
+        
+        // Handle option selection
+        function handleOptionClick(e) {
+            if (examCompleted) return;
+            
+            const questionIndex = parseInt(e.currentTarget.dataset.question);
+            const optionIndex = parseInt(e.currentTarget.dataset.option);
+            
+            // If already answered, don't allow change
+            if (userAnswers[questionIndex] !== null) return;
+            
+            // Record answer
+            userAnswers[questionIndex] = optionIndex;
+            
+            // Update UI for selected option
+            const questionCard = document.getElementById(`question-${questionIndex}`);
+            const allOptions = questionCard.querySelectorAll('.option');
+            
+            allOptions.forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            e.currentTarget.classList.add('selected');
+            
+            // Check if correct and update option styling
+            const isCorrect = optionIndex === currentQuestions[questionIndex].correctAnswer;
+            
+            if (isCorrect) {
+                e.currentTarget.classList.add('correct');
+            } else {
+                e.currentTarget.classList.add('incorrect');
+                
+                // Highlight correct answer
+                const correctOption = questionCard.querySelector(`.option[data-option="${currentQuestions[questionIndex].correctAnswer}"]`);
+                if (correctOption) {
+                    correctOption.classList.add('correct');
+                }
+            }
+            
+            // Show feedback
+            const feedbackContainer = questionCard.querySelector('.feedback-container');
+            feedbackContainer.innerHTML = `
+                <div class="feedback-title">${isCorrect ? '✓ Correct!' : '✗ Incorrect'}</div>
+                <div class="explanation">${currentQuestions[questionIndex].explanation}</div>
+            `;
+            feedbackContainer.className = isCorrect ? 
+                'feedback-container feedback-correct show' : 
+                'feedback-container feedback-incorrect show';
+            
+            updateStats();
+            
+            // Check if exam is complete
+            if (userAnswers.every(answer => answer !== null)) {
+                examCompleted = true;
+                showFinalResults();
+            }
+        }
+        
+        // Update statistics
+        function updateStats() {
+            const answered = userAnswers.filter(answer => answer !== null).length;
+            const correct = userAnswers.reduce((count, answer, index) => {
+                return count + (answer === currentQuestions[index].correctAnswer ? 1 : 0);
+            }, 0);
+            
+            answeredCountElement.textContent = answered;
+            correctCountElement.textContent = correct;
+            
+            const progressPercentage = (answered / currentQuestions.length) * 100;
+            progressFillElement.style.width = `${progressPercentage}%`;
+            
+            const scorePercentage = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+            scoreDisplayElement.textContent = `Score: ${correct}/${answered} (${scorePercentage}%)`;
+        }
+        
+        // Show final results
+        function showFinalResults() {
+            const correctCount = userAnswers.reduce((count, answer, index) => {
+                return count + (answer === currentQuestions[index].correctAnswer ? 1 : 0);
+            }, 0);
+            
+            const percentage = Math.round((correctCount / currentQuestions.length) * 100);
+            
+            // Create results modal
+            const resultsModal = document.createElement('div');
+            resultsModal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+            `;
+            
+            resultsModal.innerHTML = `
+                <div style="background-color: white; padding: 40px; border-radius: 15px; max-width: 600px; width: 90%; text-align: center;">
+                    <h2 style="color: #1a237e; margin-bottom: 20px;">Exam Complete!</h2>
+                    <div style="font-size: 1.2rem; margin-bottom: 30px;">
+                        You answered <strong>${correctCount} out of ${currentQuestions.length}</strong> questions correctly.
+                    </div>
+                    <div style="font-size: 2.5rem; font-weight: bold; color: ${percentage >= 70 ? '#4caf50' : '#f44336'}; margin-bottom: 30px;">
+                        ${percentage}%
+                    </div>
+                    <div style="margin-bottom: 30px;">
+                        ${percentage >= 70 ? 
+                            '🎉 Excellent work! You have a good understanding of the material.' : 
+                            '📚 Keep studying! Review the explanations to improve your understanding.'}
+                    </div>
+                    <button id="close-results" style="background-color: #3949ab; color: white; border: none; padding: 12px 30px; border-radius: 5px; font-size: 1rem; cursor: pointer;">
+                        Close Results
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(resultsModal);
+            
+            document.getElementById('close-results').addEventListener('click', () => {
+                document.body.removeChild(resultsModal);
+            });
+        }
+        
+        // Reset exam
+        function resetExam() {
+            initExam();
+        }
+        
+        // Generate new random order
+        function newRandomOrder() {
+            // Keep the same questions but re-randomize
+            currentQuestions = createNonRepeatingRandomOrder(originalQuestions);
+            userAnswers = new Array(currentQuestions.length).fill(null);
+            examCompleted = false;
+            generateQuestions();
+            
+            // Show notification
+            alert("New random order generated with non-repeating correct answer letters.");
+        }
+        
+        // Initialize the exam
+        initExam();
+        
+        // Event listeners
+        resetButton.addEventListener('click', resetExam);
+        newRandomButton.addEventListener('click', newRandomOrder);
+        
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && examCompleted) {
+                const modal = document.querySelector('div[style*="position: fixed; top: 0"]');
+                if (modal) modal.remove();
+            }
+            
+            // Number keys 1-4 for answer selection
+            if (e.key >= '1' && e.key <= '4') {
+                const optionIndex = parseInt(e.key) - 1;
+                const activeElement = document.activeElement;
+                
+                // Find the closest question card
+                let questionElement = activeElement.closest('.question-card');
+                if (!questionElement && document.querySelector('.question-card')) {
+                    questionElement = document.querySelector('.question-card');
+                }
+                
+                if (questionElement) {
+                    const questionIndex = parseInt(questionElement.id.split('-')[1]);
+                    const optionElement = questionElement.querySelector(`.option[data-option="${optionIndex}"]`);
+                    
+                    if (optionElement && userAnswers[questionIndex] === null) {
+                        optionElement.click();
+                    }
+                }
+            }
+            
+            // Arrow keys for navigation
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                const currentQuestion = document.activeElement.closest('.question-card');
+                let nextQuestion;
+                
+                if (e.key === 'ArrowDown') {
+                    nextQuestion = currentQuestion ? currentQuestion.nextElementSibling : document.querySelector('.question-card');
+                } else {
+                    nextQuestion = currentQuestion ? currentQuestion.previousElementSibling : document.querySelector('.question-card');
+                }
+                
+                if (nextQuestion) {
+                    nextQuestion.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+            
+            // R key to reset
+            if (e.key === 'r' || e.key === 'R') {
+                if (e.ctrlKey) {
+                    resetExam();
+                }
+            }
+            
+            // N key for new random order
+            if (e.key === 'n' || e.key === 'N') {
+                if (e.ctrlKey) {
+                    newRandomOrder();
+                }
+            }
+        });
+        
+        // Display current randomization info
+        console.log("Exam initialized with randomized answer options and non-repeating correct letters.");
+    </script>
+</body>
+</html>
